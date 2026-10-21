@@ -1,13 +1,14 @@
 # قالب اختصاصی ایمن تاش سپاهان (imentash)
 
 قالب کلاسیک وردپرس (PHP، نه بلاک‌تم) برای سایت ementash.com، با ووکامرس در حالت کاتالوگ.
-بدون قالب آماده، بدون پیج‌بیلدر برای صفحات اصلی، و **بدون افزونه ACF**.
+بدون قالب آماده و **بدون افزونه ACF**. صفحات پیش‌فرض با PHP خود قالب ساخته می‌شوند، ولی هر بخش و هر صفحه باید با Elementor / Elementor Pro قابل جایگزینی باشد (بخش «سازگاری با المنتور»).
 
 ## فایل‌های مرجع طراحی
-پوشه `design/` طراحی نهایی تأییدشده است. این فایل‌ها کد قابل استفاده نیستند. HTML مرجع هستند با سینتکس قالب‌سازی ابزار طراحی:
+پوشه `design/` **نسخه اولیه** تأییدشده است و ممکن است بعداً زیاد عوض شود؛ برای همین کد باید ماژولار باشد (بخش «ماژولار بودن»). این فایل‌ها کد قابل استفاده نیستند. HTML مرجع هستند با سینتکس قالب‌سازی ابزار طراحی:
 - `{{name}}` یعنی مقدار پویا، `<sc-for list=...>` یعنی حلقه، `<sc-if value=...>` یعنی شرط.
 - داده‌های نمونه در تگ `<script type="text/x-dc">` انتهای هر فایل است.
-- CSS داخل `<helmet><style>` منبع اصلی رنگ، فاصله و انیمیشن است. کلاس‌ها و مقادیر را تا حد ممکن همان‌طور منتقل کن.
+- CSS داخل `<helmet><style>` منبع اصلی رنگ، فاصله و انیمیشن است. مقادیر را منتقل کن، ولی به‌صورت CSS variable و با کلاس‌های پیشوند‌دار `em-`.
+- فونت IBM Plex Sans Arabic که در طراحی آمده **استفاده نشود**.
 
 | فایل طراحی | قالب وردپرس |
 |---|---|
@@ -26,7 +27,8 @@
 - **آدرس‌های فعلی سایت نباید عوض شوند**: `/product/...` و `/product-category/...` و آدرس نوشته‌ها و برگه‌ها همان بماند (سئو).
 - قالب متا تگ سئو و schema تولید نکند. این کار افزونه سئوی سایت است. فقط `title-tag` و HTML معنایی درست.
 - بدون jQuery در کد قالب. JS خالص، کوچک و با `defer`.
-- فونت‌ها self-host (`assets/fonts`)، نه Google Fonts، چون در ایران کند یا مسدود است. Vazirmatn برای متن، Readex Pro برای تیترها (هر دو OFL).
+- فونت‌ها **نهایی** هستند: Vazirmatn برای متن، Readex Pro برای تیترها (هر دو OFL، variable، woff2). self-host در `assets/fonts`، نه Google Fonts، چون در ایران کند یا مسدود است. IBM Plex استفاده نشود.
+- پیشوند همه کلاس‌ها، idها و data-attributeهای قالب در HTML/CSS/JS: `em-` (مثل `em-header`، `em-container`). پیشوند توابع PHP: `imentash_`.
 - `prefers-reduced-motion` برای همه انیمیشن‌ها رعایت شود (نمونه در CSS طراحی هست).
 - تصاویر با `wp_get_attachment_image()` با سایزهای ثبت‌شده و `loading="lazy"`، به‌جز تصویر هیرو.
 
@@ -50,6 +52,13 @@
 ```
 - پدینگ سکشن‌ها `64px 40px`، کانتینر `max-width:1320px`. موبایل: پدینگ کناری ۲۰ پیکسل.
 - بدون رنگ قرمز یا نارنجی در کل سایت.
+- توکن‌های تکمیلی (رنگ‌های روی زمینه تیره، خطوط، فونت‌ها، فاصله‌ها، گردی‌ها) همه در `:root` فایل `assets/css/main.css` تعریف می‌شوند.
+
+## ماژولار بودن (اجباری)
+طرح اولیه ممکن است زیاد عوض شود، پس:
+- هر بخش صفحه یک template-part جدا (`template-parts/...`). قالب‌های اصلی فقط بخش‌ها را صدا می‌زنند.
+- **همه رنگ‌ها، فونت‌ها و فاصله‌ها از CSS variable** خوانده شوند. هیچ رنگ hex/rgba خارج از `:root` نوشته نشود.
+- **هیچ متنی hardcode نشود.** محتوای مشتری از پنل (Customizer، CPT، ووکامرس، متاباکس) و برچسب‌های رابط کاربری با `__()`.
 
 ## ساختار قالب
 ```
@@ -57,8 +66,10 @@ imentash/
   style.css  functions.php  screenshot.png
   header.php  footer.php  front-page.php  page.php  page-about.php  page-contact.php
   single.php  archive.php  index.php  404.php  search.php
+  templates/full-width.php   // قالب برگه «تمام‌عرض»
   inc/
     setup.php          // theme supports, menus, image sizes
+    elementor.php      // ثبت locationها، تشخیص صفحه المنتوری
     enqueue.php        // css/js، فقط هرجا لازم است
     customizer.php     // تنظیمات عمومی و صفحه اصلی
     cpt.php            // پست‌تایپ‌ها
@@ -66,6 +77,7 @@ imentash/
     woocommerce.php    // حالت کاتالوگ و تب‌ها
     contact-form.php   // هندلر فرم
     template-tags.php  // توابع کمکی (اعداد فارسی، آیکون‌ها)
+  template-parts/  site-header.php  site-footer.php  mobile-menu.php  mobile-bar.php  page-head.php  entry-content.php  loop.php
   template-parts/home/  hero.php about.php industries.php clients.php services.php products.php production-line.php gallery.php textile.php blog.php
   woocommerce/  archive-product.php  single-product.php  content-product.php
   assets/  css/  js/  fonts/  img/  icons/ (SVG خطی)
@@ -101,11 +113,16 @@ imentash/
 
 **وبلاگ**: نوشته‌های بومی وردپرس، کارت‌های هم‌اندازه با نسبت 4/3.
 
-## سازگاری با المنتور
-صفحات اصلی قالب PHP هستند. برای برگه‌های جدیدی که کارفرما بخواهد با المنتور بسازد:
-- `add_theme_support` های لازم + قالب برگه «تمام‌عرض» (header و footer قالب + محتوای بدون کانتینر).
-- `the_content()` در page.php بدون محدودیت عرض اضافه.
-- استایل‌های قالب نباید ویجت‌های المنتور را بشکنند (selectorها محدود به کلاس‌های قالب).
+## سازگاری با المنتور (Elementor و Elementor Pro)
+- **Theme Builder:** locationهای اصلی (`header`، `footer`، `single`، `archive`) در `inc/elementor.php` ثبت می‌شوند. هر قالب اول `elementor_theme_do_location()` را صدا می‌زند (از طریق `imentash_elementor_location()`). فقط اگر Theme Builder آن location را نگرفته بود، خروجی خود قالب چاپ شود:
+  - `header.php` ← `header`، `footer.php` ← `footer`
+  - `single.php`، `page.php`، `404.php` ← `single`
+  - `archive.php`، `search.php` ← `archive`
+  - `woocommerce/single-product.php` ← `single`، `woocommerce/archive-product.php` ← `archive` (تا Woo Builder المنتور پرو بتواند جایگزین کند)
+- اگر هدر قالب با هدر المنتور جایگزین شد، منوی تمام‌صفحه موبایل قالب هم چاپ نشود. اگر فوتر جایگزین شد، نوار ثابت پایین موبایل هم چاپ نشود.
+- **هر صفحه‌ای که با المنتور ساخته شده** (حتی صفحه اصلی، نوشته، محصول) فقط `the_content()` را نشان بدهد، نه template-partهای قالب (حتی سربرگ صفحه). تشخیص با `imentash_is_elementor()` که `is_built_with_elementor()` سند المنتور را چک می‌کند. `front-page.php` هم باید همین چک را اول انجام بدهد.
+- قالب برگه «تمام‌عرض» (`templates/full-width.php`): header و footer قالب + محتوای بدون کانتینر.
+- استایل‌های قالب نباید ویجت‌های المنتور را بشکنند: selectorها محدود به کلاس‌های `em-`. استایل سراسری فقط برای `body` و موارد خیلی پایه.
 
 ## روش کار
 - هر بار فقط یک فاز. آخر هر فاز خلاصه بده چه فایل‌هایی ساخته یا عوض شد و چه چیزی باید دستی تست شود.
