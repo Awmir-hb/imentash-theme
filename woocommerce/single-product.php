@@ -2,18 +2,18 @@
 /**
  * صفحه محصول. location «single» برای Woo Builder المنتور پرو؛ طراحی کامل در فاز ۴.
  *
- * @package imentash
+ * @package ementash
  */
 
 defined( 'ABSPATH' ) || exit;
 
 get_header( null, array( 'variant' => 'plain' ) );
 
-if ( ! imentash_elementor_location( 'single' ) ) {
+if ( ! ementash_elementor_location( 'single' ) ) {
 	while ( have_posts() ) {
 		the_post();
 
-		if ( imentash_is_elementor() ) {
+		if ( ementash_is_elementor() ) {
 			the_content();
 			continue;
 		}

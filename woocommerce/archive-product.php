@@ -2,14 +2,14 @@
 /**
  * آرشیو و دسته محصولات. location «archive» برای Woo Builder المنتور پرو؛ طراحی کامل در فاز ۴.
  *
- * @package imentash
+ * @package ementash
  */
 
 defined( 'ABSPATH' ) || exit;
 
 get_header();
 
-if ( ! imentash_elementor_location( 'archive' ) ) {
+if ( ! ementash_elementor_location( 'archive' ) ) {
 	get_template_part( 'template-parts/page-head', null, array( 'title' => woocommerce_page_title( false ) ) );
 	?>
 	<div class="em-section">

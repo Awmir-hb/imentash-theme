@@ -2,14 +2,14 @@
 /**
  * قالب پشتیبان.
  *
- * @package imentash
+ * @package ementash
  */
 
 defined( 'ABSPATH' ) || exit;
 
 get_header();
 
-if ( ! imentash_elementor_location( is_singular() ? 'single' : 'archive' ) ) {
+if ( ! ementash_elementor_location( is_singular() ? 'single' : 'archive' ) ) {
 	get_template_part( 'template-parts/loop' );
 }
 

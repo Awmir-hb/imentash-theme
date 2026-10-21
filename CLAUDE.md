@@ -1,4 +1,4 @@
-# قالب اختصاصی ایمن تاش سپاهان (imentash)
+# قالب اختصاصی ایمن تاش سپاهان (ementash)
 
 قالب کلاسیک وردپرس (PHP، نه بلاک‌تم) برای سایت ementash.com، با ووکامرس در حالت کاتالوگ.
 بدون قالب آماده و **بدون افزونه ACF**. صفحات پیش‌فرض با PHP خود قالب ساخته می‌شوند، ولی هر بخش و هر صفحه باید با Elementor / Elementor Pro قابل جایگزینی باشد (بخش «سازگاری با المنتور»).
@@ -22,13 +22,13 @@
 اگر بین طراحی و این فایل تناقض بود، این فایل معتبر است. اگر چیزی در هیچ‌کدام نبود، **بپرس، حدس نزن.**
 
 ## قوانین ثابت
-- زبان سایت فارسی، `dir="rtl"`. همه رشته‌ها با `__()`/`esc_html__()` و text domain `imentash`، تا نسخه انگلیسی بعداً با Polylang اضافه شود.
+- زبان سایت فارسی، `dir="rtl"`. همه رشته‌ها با `__()`/`esc_html__()` و text domain `ementash`، تا نسخه انگلیسی بعداً با Polylang اضافه شود.
 - هیچ متن، عدد یا عکس مشتری hardcode نشود. همه از پنل (Customizer، CPT، ووکامرس، متاباکس) بیاید. مقدار پیش‌فرض فقط برای دمو.
 - **آدرس‌های فعلی سایت نباید عوض شوند**: `/product/...` و `/product-category/...` و آدرس نوشته‌ها و برگه‌ها همان بماند (سئو).
 - قالب متا تگ سئو و schema تولید نکند. این کار افزونه سئوی سایت است. فقط `title-tag` و HTML معنایی درست.
 - بدون jQuery در کد قالب. JS خالص، کوچک و با `defer`.
 - فونت‌ها **نهایی** هستند: Vazirmatn برای متن، Readex Pro برای تیترها (هر دو OFL، variable، woff2). self-host در `assets/fonts`، نه Google Fonts، چون در ایران کند یا مسدود است. IBM Plex استفاده نشود.
-- پیشوند همه کلاس‌ها، idها و data-attributeهای قالب در HTML/CSS/JS: `em-` (مثل `em-header`، `em-container`). پیشوند توابع PHP: `imentash_`.
+- پیشوند همه کلاس‌ها، idها و data-attributeهای قالب در HTML/CSS/JS: `em-` (مثل `em-header`، `em-container`). پیشوند توابع PHP: `ementash_`.
 - `prefers-reduced-motion` برای همه انیمیشن‌ها رعایت شود (نمونه در CSS طراحی هست).
 - تصاویر با `wp_get_attachment_image()` با سایزهای ثبت‌شده و `loading="lazy"`، به‌جز تصویر هیرو.
 
@@ -62,7 +62,7 @@
 
 ## ساختار قالب
 ```
-imentash/
+ementash/
   style.css  functions.php  screenshot.png
   header.php  footer.php  front-page.php  page.php  page-about.php  page-contact.php
   single.php  archive.php  index.php  404.php  search.php
@@ -114,13 +114,13 @@ imentash/
 **وبلاگ**: نوشته‌های بومی وردپرس، کارت‌های هم‌اندازه با نسبت 4/3.
 
 ## سازگاری با المنتور (Elementor و Elementor Pro)
-- **Theme Builder:** locationهای اصلی (`header`، `footer`، `single`، `archive`) در `inc/elementor.php` ثبت می‌شوند. هر قالب اول `elementor_theme_do_location()` را صدا می‌زند (از طریق `imentash_elementor_location()`). فقط اگر Theme Builder آن location را نگرفته بود، خروجی خود قالب چاپ شود:
+- **Theme Builder:** locationهای اصلی (`header`، `footer`، `single`، `archive`) در `inc/elementor.php` ثبت می‌شوند. هر قالب اول `elementor_theme_do_location()` را صدا می‌زند (از طریق `ementash_elementor_location()`). فقط اگر Theme Builder آن location را نگرفته بود، خروجی خود قالب چاپ شود:
   - `header.php` ← `header`، `footer.php` ← `footer`
   - `single.php`، `page.php`، `404.php` ← `single`
   - `archive.php`، `search.php` ← `archive`
   - `woocommerce/single-product.php` ← `single`، `woocommerce/archive-product.php` ← `archive` (تا Woo Builder المنتور پرو بتواند جایگزین کند)
 - اگر هدر قالب با هدر المنتور جایگزین شد، منوی تمام‌صفحه موبایل قالب هم چاپ نشود. اگر فوتر جایگزین شد، نوار ثابت پایین موبایل هم چاپ نشود.
-- **هر صفحه‌ای که با المنتور ساخته شده** (حتی صفحه اصلی، نوشته، محصول) فقط `the_content()` را نشان بدهد، نه template-partهای قالب (حتی سربرگ صفحه). تشخیص با `imentash_is_elementor()` که `is_built_with_elementor()` سند المنتور را چک می‌کند. `front-page.php` هم باید همین چک را اول انجام بدهد.
+- **هر صفحه‌ای که با المنتور ساخته شده** (حتی صفحه اصلی، نوشته، محصول) فقط `the_content()` را نشان بدهد، نه template-partهای قالب (حتی سربرگ صفحه). تشخیص با `ementash_is_elementor()` که `is_built_with_elementor()` سند المنتور را چک می‌کند. `front-page.php` هم باید همین چک را اول انجام بدهد.
 - قالب برگه «تمام‌عرض» (`templates/full-width.php`): header و footer قالب + محتوای بدون کانتینر.
 - استایل‌های قالب نباید ویجت‌های المنتور را بشکنند: selectorها محدود به کلاس‌های `em-`. استایل سراسری فقط برای `body` و موارد خیلی پایه.
 

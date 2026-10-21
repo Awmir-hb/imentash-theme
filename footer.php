@@ -2,7 +2,7 @@
 /**
  * فوتر سایت. اگر Theme Builder المنتور location فوتر را گرفته باشد، فوتر و نوار پایین موبایل قالب چاپ نمی‌شوند.
  *
- * @package imentash
+ * @package ementash
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -10,13 +10,13 @@ defined( 'ABSPATH' ) || exit;
 </main>
 
 <?php
-if ( ! imentash_elementor_location( 'footer' ) ) {
+if ( ! ementash_elementor_location( 'footer' ) ) {
 	get_template_part( 'template-parts/site-footer' );
 	get_template_part( 'template-parts/mobile-bar' );
 }
 
 // منوی موبایل فقط همراه هدر قالب معنا دارد.
-if ( imentash_own_header() ) {
+if ( ementash_own_header() ) {
 	get_template_part( 'template-parts/mobile-menu' );
 }
 

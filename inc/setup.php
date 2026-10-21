@@ -2,13 +2,13 @@
 /**
  * پشتیبانی‌های قالب، منوها و سایز تصاویر.
  *
- * @package imentash
+ * @package ementash
  */
 
 defined( 'ABSPATH' ) || exit;
 
-function imentash_setup() {
-	load_theme_textdomain( 'imentash', IMENTASH_DIR . '/languages' );
+function ementash_setup() {
+	load_theme_textdomain( 'ementash', EMENTASH_DIR . '/languages' );
 
 	add_theme_support( 'title-tag' );
 	add_theme_support( 'post-thumbnails' );
@@ -30,20 +30,20 @@ function imentash_setup() {
 
 	register_nav_menus(
 		array(
-			'primary' => __( 'منوی اصلی (هدر)', 'imentash' ),
-			'mobile'  => __( 'منوی موبایل (اگر خالی باشد منوی اصلی نمایش داده می‌شود)', 'imentash' ),
-			'footer'  => __( 'دسترسی سریع فوتر', 'imentash' ),
+			'primary' => __( 'منوی اصلی (هدر)', 'ementash' ),
+			'mobile'  => __( 'منوی موبایل (اگر خالی باشد منوی اصلی نمایش داده می‌شود)', 'ementash' ),
+			'footer'  => __( 'دسترسی سریع فوتر', 'ementash' ),
 		)
 	);
 
 	// نسبت‌ها مطابق طراحی: کارت ۴:۳، محصول ۱:۱، گواهینامه ۳:۴.
-	add_image_size( 'imentash-card', 640, 480, true );
-	add_image_size( 'imentash-square', 800, 800, true );
-	add_image_size( 'imentash-portrait', 480, 640, true );
+	add_image_size( 'ementash-card', 640, 480, true );
+	add_image_size( 'ementash-square', 800, 800, true );
+	add_image_size( 'ementash-portrait', 480, 640, true );
 }
-add_action( 'after_setup_theme', 'imentash_setup' );
+add_action( 'after_setup_theme', 'ementash_setup' );
 
-function imentash_content_width() {
+function ementash_content_width() {
 	$GLOBALS['content_width'] = 1320;
 }
-add_action( 'after_setup_theme', 'imentash_content_width', 0 );
+add_action( 'after_setup_theme', 'ementash_content_width', 0 );

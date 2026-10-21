@@ -2,15 +2,15 @@
 /**
  * بارگذاری ماژول‌های قالب ایمن تاش.
  *
- * @package imentash
+ * @package ementash
  */
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'IMENTASH_DIR', get_template_directory() );
-define( 'IMENTASH_URI', get_template_directory_uri() );
+define( 'EMENTASH_DIR', get_template_directory() );
+define( 'EMENTASH_URI', get_template_directory_uri() );
 
-require IMENTASH_DIR . '/inc/template-tags.php';
-require IMENTASH_DIR . '/inc/setup.php';
-require IMENTASH_DIR . '/inc/elementor.php';
-require IMENTASH_DIR . '/inc/enqueue.php';
+require EMENTASH_DIR . '/inc/template-tags.php';
+require EMENTASH_DIR . '/inc/setup.php';
+require EMENTASH_DIR . '/inc/elementor.php';
+require EMENTASH_DIR . '/inc/enqueue.php';

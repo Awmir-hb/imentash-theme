@@ -2,27 +2,27 @@
 /**
  * فوتر خود قالب: معرفی کوتاه، دسترسی سریع، دفاتر.
  *
- * @package imentash
+ * @package ementash
  */
 
 defined( 'ABSPATH' ) || exit;
 
-$imentash_about = (string) imentash_get( 'footer_text' );
-$imentash_copy  = (string) imentash_get( 'footer_copyright' );
+$ementash_about = (string) ementash_get( 'footer_text' );
+$ementash_copy  = (string) ementash_get( 'footer_copyright' );
 ?>
 <footer class="em-footer">
 	<div class="em-footer__in">
 		<div class="em-footer__brand">
-			<?php imentash_logo( 'em-logo--footer' ); ?>
-			<?php if ( '' !== $imentash_about ) : ?>
-				<p class="em-footer__about"><?php echo esc_html( $imentash_about ); ?></p>
+			<?php ementash_logo( 'em-logo--footer' ); ?>
+			<?php if ( '' !== $ementash_about ) : ?>
+				<p class="em-footer__about"><?php echo esc_html( $ementash_about ); ?></p>
 			<?php endif; ?>
-			<?php imentash_social_links( 'em-footer__soc' ); ?>
+			<?php ementash_social_links( 'em-footer__soc' ); ?>
 		</div>
 
 		<?php if ( has_nav_menu( 'footer' ) ) : ?>
 			<nav class="em-footer__links" aria-labelledby="em-footer-links-title">
-				<h2 class="em-footer__title" id="em-footer-links-title"><?php esc_html_e( 'دسترسی سریع', 'imentash' ); ?></h2>
+				<h2 class="em-footer__title" id="em-footer-links-title"><?php esc_html_e( 'دسترسی سریع', 'ementash' ); ?></h2>
 				<?php
 				wp_nav_menu(
 					array(
@@ -38,24 +38,24 @@ $imentash_copy  = (string) imentash_get( 'footer_copyright' );
 		<?php endif; ?>
 
 		<div class="em-footer__contact">
-			<h2 class="em-footer__title"><?php esc_html_e( 'تماس', 'imentash' ); ?></h2>
+			<h2 class="em-footer__title"><?php esc_html_e( 'تماس', 'ementash' ); ?></h2>
 			<?php
-			foreach ( array( 'isfahan', 'tehran' ) as $imentash_key ) :
-				$imentash_label   = (string) imentash_get( 'office_' . $imentash_key . '_label' );
-				$imentash_address = (string) imentash_get( 'office_' . $imentash_key . '_address' );
-				$imentash_phones  = imentash_phones( $imentash_key );
-				if ( '' === $imentash_address && ! $imentash_phones ) {
+			foreach ( array( 'isfahan', 'tehran' ) as $ementash_key ) :
+				$ementash_label   = (string) ementash_get( 'office_' . $ementash_key . '_label' );
+				$ementash_address = (string) ementash_get( 'office_' . $ementash_key . '_address' );
+				$ementash_phones  = ementash_phones( $ementash_key );
+				if ( '' === $ementash_address && ! $ementash_phones ) {
 					continue;
 				}
 				?>
 				<div class="em-footer__office">
-					<?php if ( '' !== $imentash_label ) : ?>
-						<span class="em-footer__label"><?php echo esc_html( $imentash_label ); ?>:</span>
+					<?php if ( '' !== $ementash_label ) : ?>
+						<span class="em-footer__label"><?php echo esc_html( $ementash_label ); ?>:</span>
 					<?php endif; ?>
-					<?php echo esc_html( $imentash_address ); ?><?php echo ( '' !== $imentash_address && $imentash_phones ) ? esc_html__( '، ', 'imentash' ) : ''; ?>
+					<?php echo esc_html( $ementash_address ); ?><?php echo ( '' !== $ementash_address && $ementash_phones ) ? esc_html__( '، ', 'ementash' ) : ''; ?>
 					<?php
-					if ( $imentash_phones ) {
-						imentash_phone_link( $imentash_phones[0] );
+					if ( $ementash_phones ) {
+						ementash_phone_link( $ementash_phones[0] );
 					}
 					?>
 				</div>
@@ -63,7 +63,7 @@ $imentash_copy  = (string) imentash_get( 'footer_copyright' );
 		</div>
 	</div>
 
-	<?php if ( '' !== $imentash_copy ) : ?>
-		<div class="em-footer__bottom"><?php echo esc_html( $imentash_copy ); ?></div>
+	<?php if ( '' !== $ementash_copy ) : ?>
+		<div class="em-footer__bottom"><?php echo esc_html( $ementash_copy ); ?></div>
 	<?php endif; ?>
 </footer>

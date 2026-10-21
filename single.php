@@ -2,18 +2,18 @@
 /**
  * نوشته تکی. طراحی کامل وبلاگ در فاز ۶.
  *
- * @package imentash
+ * @package ementash
  */
 
 defined( 'ABSPATH' ) || exit;
 
 get_header();
 
-if ( ! imentash_elementor_location( 'single' ) ) {
+if ( ! ementash_elementor_location( 'single' ) ) {
 	while ( have_posts() ) {
 		the_post();
 
-		if ( imentash_is_elementor() ) {
+		if ( ementash_is_elementor() ) {
 			the_content();
 			continue;
 		}
@@ -23,7 +23,7 @@ if ( ! imentash_elementor_location( 'single' ) ) {
 			null,
 			array(
 				'title'  => get_the_title(),
-				'crumbs' => imentash_page_crumbs(),
+				'crumbs' => ementash_page_crumbs(),
 			)
 		);
 		get_template_part( 'template-parts/entry-content' );

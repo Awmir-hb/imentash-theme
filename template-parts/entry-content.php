@@ -2,7 +2,7 @@
 /**
  * محتوای ویرایشگر داخل کانتینر قالب (برگه‌ها و نوشته‌هایی که با المنتور ساخته نشده‌اند).
  *
- * @package imentash
+ * @package ementash
  */
 
 defined( 'ABSPATH' ) || exit;

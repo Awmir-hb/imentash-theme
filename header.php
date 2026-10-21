@@ -5,12 +5,12 @@
  * نوع هدر قالب با get_header( null, array( 'variant' => ... ) ) تعیین می‌شود:
  * overlay (شفاف روی هیرو صفحه اصلی)، grid (پیش‌فرض، سرمه‌ای شطرنجی) یا plain (سرمه‌ای ساده).
  *
- * @package imentash
+ * @package ementash
  */
 
 defined( 'ABSPATH' ) || exit;
 
-$imentash_variant = isset( $args['variant'] ) && in_array( $args['variant'], array( 'overlay', 'grid', 'plain' ), true ) ? $args['variant'] : 'grid';
+$ementash_variant = isset( $args['variant'] ) && in_array( $args['variant'], array( 'overlay', 'grid', 'plain' ), true ) ? $args['variant'] : 'grid';
 ?><!doctype html>
 <html <?php language_attributes(); ?>>
 <head>
@@ -20,12 +20,12 @@ $imentash_variant = isset( $args['variant'] ) && in_array( $args['variant'], arr
 </head>
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
-<a class="em-skip" href="#em-main"><?php esc_html_e( 'رفتن به محتوای اصلی', 'imentash' ); ?></a>
+<a class="em-skip" href="#em-main"><?php esc_html_e( 'رفتن به محتوای اصلی', 'ementash' ); ?></a>
 
 <?php
-if ( ! imentash_elementor_location( 'header' ) ) {
-	imentash_own_header( true );
-	get_template_part( 'template-parts/site-header', null, array( 'variant' => $imentash_variant ) );
+if ( ! ementash_elementor_location( 'header' ) ) {
+	ementash_own_header( true );
+	get_template_part( 'template-parts/site-header', null, array( 'variant' => $ementash_variant ) );
 }
 ?>
 

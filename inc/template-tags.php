@@ -2,7 +2,7 @@
 /**
  * توابع کمکی: تنظیمات، اعداد فارسی، آیکون‌ها، لوگو، شبکه‌های اجتماعی و زبان.
  *
- * @package imentash
+ * @package ementash
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -10,16 +10,16 @@ defined( 'ABSPATH' ) || exit;
 /**
  * مقادیر پیش‌فرض تنظیمات قالب. فقط برای دمو؛ مقدار واقعی از Customizer می‌آید.
  */
-function imentash_option_defaults() {
+function ementash_option_defaults() {
 	return array(
-		'office_isfahan_label'   => __( 'اصفهان', 'imentash' ),
-		'office_tehran_label'    => __( 'تهران', 'imentash' ),
-		'office_factory_label'   => __( 'کارخانه', 'imentash' ),
-		'main_phone_label'       => __( 'دفتر مرکزی اصفهان', 'imentash' ),
-		'quote_label'            => __( 'استعلام قیمت', 'imentash' ),
-		'office_isfahan_address' => __( 'چهارباغ بالا، مجتمع پارک، پلاک ۵۳۸', 'imentash' ),
+		'office_isfahan_label'   => __( 'اصفهان', 'ementash' ),
+		'office_tehran_label'    => __( 'تهران', 'ementash' ),
+		'office_factory_label'   => __( 'کارخانه', 'ementash' ),
+		'main_phone_label'       => __( 'دفتر مرکزی اصفهان', 'ementash' ),
+		'quote_label'            => __( 'استعلام قیمت', 'ementash' ),
+		'office_isfahan_address' => __( 'چهارباغ بالا، مجتمع پارک، پلاک ۵۳۸', 'ementash' ),
 		'office_isfahan_phones'  => "031-36671919\n031-36673337",
-		'office_tehran_address'  => __( 'یوسف‌آباد، خیابان فتحی شقاقی، خیابان جهان‌مهر، پلاک ۹۴، طبقه ۳، واحد ۵', 'imentash' ),
+		'office_tehran_address'  => __( 'یوسف‌آباد، خیابان فتحی شقاقی، خیابان جهان‌مهر، پلاک ۹۴، طبقه ۳، واحد ۵', 'ementash' ),
 		'office_tehran_phones'   => "021-88350547\n021-88351762",
 		'office_factory_address' => '',
 		'office_factory_phones'  => '',
@@ -29,8 +29,8 @@ function imentash_option_defaults() {
 		'social_linkedin'        => '',
 		'social_telegram'        => '',
 		'social_whatsapp'        => '',
-		'footer_text'            => __( 'فعال در تولید مواد شیمیایی از سال ۱۳۶۷؛ پودر و فوم آتش‌نشانی، مواد حفاری و آنتی‌فوم.', 'imentash' ),
-		'footer_copyright'       => __( 'تمامی حقوق برای شرکت ایمن تاش سپاهان محفوظ است.', 'imentash' ),
+		'footer_text'            => __( 'فعال در تولید مواد شیمیایی از سال ۱۳۶۷؛ پودر و فوم آتش‌نشانی، مواد حفاری و آنتی‌فوم.', 'ementash' ),
+		'footer_copyright'       => __( 'تمامی حقوق برای شرکت ایمن تاش سپاهان محفوظ است.', 'ementash' ),
 		'contact_page'           => 0,
 	);
 }
@@ -38,17 +38,17 @@ function imentash_option_defaults() {
 /**
  * خواندن یک تنظیم قالب با مقدار پیش‌فرض.
  */
-function imentash_get( $key ) {
-	$defaults = imentash_option_defaults();
+function ementash_get( $key ) {
+	$defaults = ementash_option_defaults();
 	return get_theme_mod( $key, isset( $defaults[ $key ] ) ? $defaults[ $key ] : '' );
 }
 
 /**
  * تبدیل ارقام لاتین به فارسی؛ فقط وقتی زبان سایت فارسی است.
  */
-function imentash_fa_num( $value ) {
+function ementash_fa_num( $value ) {
 	$value = (string) $value;
-	if ( ! apply_filters( 'imentash_use_fa_digits', 0 === strpos( get_locale(), 'fa' ) ) ) {
+	if ( ! apply_filters( 'ementash_use_fa_digits', 0 === strpos( get_locale(), 'fa' ) ) ) {
 		return $value;
 	}
 	return strtr( $value, array_combine( range( 0, 9 ), array( '۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹' ) ) );
@@ -57,7 +57,7 @@ function imentash_fa_num( $value ) {
 /**
  * لینک tel: از شماره ذخیره‌شده (ارقام فارسی هم پذیرفته می‌شود).
  */
-function imentash_tel_href( $phone ) {
+function ementash_tel_href( $phone ) {
 	$phone = strtr( (string) $phone, array_combine( array( '۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹' ), range( 0, 9 ) ) );
 	return 'tel:' . preg_replace( '/[^0-9+]/', '', $phone );
 }
@@ -65,39 +65,39 @@ function imentash_tel_href( $phone ) {
 /**
  * شماره‌های یک دفتر (isfahan، tehran، factory)، هر خط یک شماره.
  */
-function imentash_phones( $office ) {
-	$raw = (string) imentash_get( 'office_' . $office . '_phones' );
+function ementash_phones( $office ) {
+	$raw = (string) ementash_get( 'office_' . $office . '_phones' );
 	return array_values( array_filter( array_map( 'trim', preg_split( '/\R/', $raw ) ) ) );
 }
 
 /**
  * شماره اصلی سایت = اولین شماره دفتر اصفهان.
  */
-function imentash_main_phone() {
-	$phones = imentash_phones( 'isfahan' );
+function ementash_main_phone() {
+	$phones = ementash_phones( 'isfahan' );
 	return $phones ? $phones[0] : '';
 }
 
 /**
  * چاپ لینک تلفن با ارقام فارسی.
  */
-function imentash_phone_link( $phone, $class = '' ) {
+function ementash_phone_link( $phone, $class = '' ) {
 	if ( '' === $phone ) {
 		return;
 	}
 	printf(
 		'<a href="%1$s"%2$s dir="ltr">%3$s</a>',
-		esc_url( imentash_tel_href( $phone ), array( 'tel' ) ),
+		esc_url( ementash_tel_href( $phone ), array( 'tel' ) ),
 		$class ? ' class="' . esc_attr( $class ) . '"' : '',
-		esc_html( imentash_fa_num( $phone ) )
+		esc_html( ementash_fa_num( $phone ) )
 	);
 }
 
 /**
  * آدرس صفحه تماس: برگه انتخاب‌شده در تنظیمات، وگرنه برگه با نامک contact.
  */
-function imentash_contact_url() {
-	$id = absint( imentash_get( 'contact_page' ) );
+function ementash_contact_url() {
+	$id = absint( ementash_get( 'contact_page' ) );
 	if ( $id && 'publish' === get_post_status( $id ) ) {
 		return get_permalink( $id );
 	}
@@ -108,15 +108,15 @@ function imentash_contact_url() {
 /**
  * آیکون SVG خطی از assets/icons، به‌صورت inline.
  */
-function imentash_icon( $name, $class = '' ) {
+function ementash_icon( $name, $class = '' ) {
 	static $cache = array();
 
 	$name = sanitize_key( $name );
 	if ( ! isset( $cache[ $name ] ) ) {
-		$file           = IMENTASH_DIR . '/assets/icons/' . $name . '.svg';
+		$file           = EMENTASH_DIR . '/assets/icons/' . $name . '.svg';
 		$svg            = is_readable( $file ) ? (string) file_get_contents( $file ) : ''; // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 		// kses نام ویژگی‌ها را کوچک می‌کند؛ viewBox برگردانده می‌شود.
-		$cache[ $name ] = str_replace( ' viewbox=', ' viewBox=', trim( wp_kses( $svg, imentash_svg_allowed() ) ) );
+		$cache[ $name ] = str_replace( ' viewbox=', ' viewBox=', trim( wp_kses( $svg, ementash_svg_allowed() ) ) );
 	}
 	if ( '' === $cache[ $name ] ) {
 		return '';
@@ -130,7 +130,7 @@ function imentash_icon( $name, $class = '' ) {
 	);
 }
 
-function imentash_svg_allowed() {
+function ementash_svg_allowed() {
 	$shape = array(
 		'd'         => true,
 		'x'         => true,
@@ -169,7 +169,7 @@ function imentash_svg_allowed() {
 /**
  * لوگوی سایت داخل قرص سفید؛ اگر لوگو تنظیم نشده باشد نام سایت نمایش داده می‌شود.
  */
-function imentash_logo( $class = '' ) {
+function ementash_logo( $class = '' ) {
 	$logo_id = absint( get_theme_mod( 'custom_logo' ) );
 	$name    = get_bloginfo( 'name' );
 
@@ -195,16 +195,16 @@ function imentash_logo( $class = '' ) {
 /**
  * شبکه‌های اجتماعی پرشده در تنظیمات.
  */
-function imentash_socials() {
+function ementash_socials() {
 	$labels = array(
-		'instagram' => __( 'اینستاگرام', 'imentash' ),
-		'linkedin'  => __( 'لینکدین', 'imentash' ),
-		'telegram'  => __( 'تلگرام', 'imentash' ),
-		'whatsapp'  => __( 'واتس‌اپ', 'imentash' ),
+		'instagram' => __( 'اینستاگرام', 'ementash' ),
+		'linkedin'  => __( 'لینکدین', 'ementash' ),
+		'telegram'  => __( 'تلگرام', 'ementash' ),
+		'whatsapp'  => __( 'واتس‌اپ', 'ementash' ),
 	);
 	$items  = array();
 	foreach ( $labels as $key => $label ) {
-		$url = (string) imentash_get( 'social_' . $key );
+		$url = (string) ementash_get( 'social_' . $key );
 		if ( '' !== $url ) {
 			$items[ $key ] = array(
 				'url'   => $url,
@@ -215,8 +215,8 @@ function imentash_socials() {
 	return $items;
 }
 
-function imentash_social_links( $class = '' ) {
-	$items = imentash_socials();
+function ementash_social_links( $class = '' ) {
+	$items = ementash_socials();
 	if ( ! $items ) {
 		return;
 	}
@@ -226,7 +226,7 @@ function imentash_social_links( $class = '' ) {
 			'<li><a href="%1$s" aria-label="%2$s" target="_blank" rel="noopener">%3$s</a></li>',
 			esc_url( $item['url'] ),
 			esc_attr( $item['label'] ),
-			imentash_icon( $key ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG با wp_kses پاک‌سازی شده.
+			ementash_icon( $key ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG با wp_kses پاک‌سازی شده.
 		);
 	}
 	echo '</ul>';
@@ -237,7 +237,7 @@ function imentash_social_links( $class = '' ) {
  *
  * @param string $style short (فا / EN) یا full (فارسی / English).
  */
-function imentash_lang_switcher( $style = 'short', $class = '' ) {
+function ementash_lang_switcher( $style = 'short', $class = '' ) {
 	if ( ! function_exists( 'pll_the_languages' ) ) {
 		return;
 	}
@@ -256,7 +256,7 @@ function imentash_lang_switcher( $style = 'short', $class = '' ) {
 		if ( 'full' === $style ) {
 			$label = $lang['name'];
 		} else {
-			$label = 'fa' === $lang['slug'] ? _x( 'فا', 'نام کوتاه زبان فارسی', 'imentash' ) : strtoupper( $lang['slug'] );
+			$label = 'fa' === $lang['slug'] ? _x( 'فا', 'نام کوتاه زبان فارسی', 'ementash' ) : strtoupper( $lang['slug'] );
 		}
 		printf(
 			'<a href="%1$s" lang="%2$s" hreflang="%2$s"%3$s>%4$s</a>',
@@ -272,11 +272,11 @@ function imentash_lang_switcher( $style = 'short', $class = '' ) {
 /**
  * مسیر صفحه (breadcrumb) برای برگه‌ها: صفحه اصلی / والدها / برگه فعلی.
  */
-function imentash_page_crumbs( $post_id = 0 ) {
+function ementash_page_crumbs( $post_id = 0 ) {
 	$post_id = $post_id ? $post_id : get_the_ID();
 	$crumbs  = array(
 		array(
-			'label' => __( 'صفحه اصلی', 'imentash' ),
+			'label' => __( 'صفحه اصلی', 'ementash' ),
 			'url'   => home_url( '/' ),
 		),
 	);
