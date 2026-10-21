@@ -1,0 +1,16 @@
+# سیستم‌عامل و ادیتور
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# وابستگی‌ها و خروجی build
+node_modules/
+vendor/
+*.log
+
+# اطلاعات محرمانه
+.env
+*.sql
+*.zip

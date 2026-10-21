@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="fa">
+<head>
+<meta charset="utf-8">
+<title>محصولات ایمن تاش</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&amp;family=Readex+Pro:wght@300;400;500;600;700&amp;family=Vazirmatn:wght@400;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FFFFFF}
+a{color:#2B4EFF;text-decoration:none}a:hover{color:#1D1180}
+.it *{box-sizing:border-box}
+.ic{fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.ph{position:absolute;inset:0;background-color:#14246E;background-image:linear-gradient(rgba(143,180,255,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(143,180,255,.09) 1px,transparent 1px),linear-gradient(160deg,#22389A 0%,#0B1550 100%);background-size:32px 32px,32px 32px,100% 100%}
+.chip{position:absolute;top:14px;left:14px;z-index:2;display:inline-flex;align-items:center;gap:8px;font-size:12px;line-height:1.5;color:#DCE3FF;background:rgba(8,17,63,.55);border:1px solid rgba(143,180,255,.4);border-radius:999px;padding:4px 10px}
+.nav{display:flex;gap:30px;font-size:15px;font-weight:500}
+.nav a{color:#DCE3FA}.nav a:hover{color:#FFFFFF}
+.nav a.on{color:#FFFFFF;box-shadow:inset 0 -2px 0 #2B4EFF;padding-bottom:4px}
+.mbtn{display:none}
+.soc{width:36px;height:36px;border-radius:50%;border:1px solid rgba(143,180,255,.35);display:inline-flex;align-items:center;justify-content:center;color:#DCE3FA}
+.soc:hover{background:#2B4EFF;color:#FFFFFF}
+.soc svg{width:18px;height:18px}
+.ar{transition:transform .25s ease}
+.shop{display:grid;grid-template-columns:280px minmax(0,1fr);gap:36px;align-items:start}
+.pgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.pc{display:flex;flex-direction:column;background:#FFFFFF;color:#0A1033;border:1px solid #E1E6F3;border-radius:14px;overflow:hidden;transition:border-color .25s ease,box-shadow .25s ease}
+.pc:hover{border-color:#2B4EFF;box-shadow:0 10px 30px rgba(43,78,255,.12)}
+.pc .pi{position:absolute;inset:0;transition:transform .8s cubic-bezier(.2,.7,.1,1)}
+.pc:hover .pi{transform:scale(1.05)}
+.pc:hover .ar{transform:translateX(-5px)}
+.fbtn{width:100%;font:inherit;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 14px;border:0;border-radius:10px;text-align:right}
+@media (max-width:1100px){.nav{display:none}.mbtn{display:inline-flex}}
+@media (max-width:1000px){.shop{grid-template-columns:minmax(0,1fr)}.pgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.pgrid{grid-template-columns:minmax(0,1fr)}}
+@media (prefers-reduced-motion: reduce){.pc .pi,.ar{transition:none!important}}
+</style>
+</helmet>
+<div class="it" dir="rtl" style="background:#FFFFFF;color:#0A1033;font-family:'IBM Plex Sans Arabic','Vazirmatn',sans-serif;font-size:16px;line-height:1.85;min-width:0;overflow-x:hidden">
+
+  <!-- ===== سربرگ صفحه ===== -->
+  <section style="background-color:#08113F;background-image:linear-gradient(rgba(143,180,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(143,180,255,.06) 1px,transparent 1px);background-size:44px 44px;color:#FFFFFF">
+    <header style="border-bottom:1px solid rgba(143,180,255,.18)">
+      <div style="max-width:1320px;margin:0 auto;padding:20px 40px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+        <a href="Industrial.dc.html" style="display:block;background:#FFFFFF;border-radius:999px;padding:8px 18px"><img src="/_blob/ed1ab3ae442cbe9427296e5df824a864" alt="شرکت ایمن تاش سپاهان" style="display:block;height:26px;width:auto"></a>
+        <nav class="nav" aria-label="منوی اصلی">
+          <a href="Products.dc.html" class="on">محصولات</a>
+          <a href="#">خدمات</a>
+          <a href="#">تست‌های آزمایشگاهی</a>
+          <a href="#">گواهینامه‌ها</a>
+          <a href="#">وبلاگ</a>
+          <a href="About.dc.html">درباره ما</a>
+          <a href="Contact.dc.html">تماس با ما</a>
+        </nav>
+        <div style="display:flex;gap:12px;align-items:center">
+          <div style="display:flex;border:1px solid rgba(255,255,255,.35);border-radius:999px;overflow:hidden">
+            <button type="button" style="font:inherit;font-size:13px;padding:5px 14px;border:0;background:#FFFFFF;color:#08113F;font-weight:600;cursor:pointer">فا</button>
+            <button type="button" style="font:inherit;font-size:13px;padding:5px 14px;border:0;background:transparent;color:#FFFFFF;cursor:pointer">EN</button>
+          </div>
+          <button type="button" class="mbtn" aria-label="باز کردن منو" style="width:44px;height:44px;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.35);border-radius:50%;background:transparent;color:#FFFFFF;cursor:pointer"><svg class="ic" viewBox="0 0 24 24" style="width:20px;height:20px" aria-hidden="true"><path d="M4 7 H20 M4 12 H20 M4 17 H20"></path></svg></button>
+        </div>
+      </div>
+    </header>
+    <div style="max-width:1320px;margin:0 auto;padding:52px 40px 60px">
+      <nav aria-label="مسیر صفحه" style="font-size:14px;color:#AFC4FF;margin-bottom:12px"><a href="Industrial.dc.html" style="color:#AFC4FF">صفحه اصلی</a><span style="margin:0 8px">/</span><span style="color:#FFFFFF">محصولات</span></nav>
+      <h1 style="margin:0 0 12px;font-family:'Readex Pro','Vazirmatn',sans-serif;font-weight:600;font-size:clamp(34px,3.6vw,52px);line-height:1.3">محصولات</h1>
+      <p style="margin:0;color:#C7CFEA;max-width:600px">پودر و فوم آتش‌نشانی، مواد حفاری، آنتی‌فوم و مواد شیمیایی صنعتی؛ تولید کارخانه ایمن تاش سپاهان با گواهینامه‌های ISO و TUV NORD.</p>
+    </div>
+  </section>
+
+  <!-- ===== فروشگاه ===== -->
+  <section style="padding:48px 40px 64px">
+    <div style="max-width:1320px;margin:0 auto" class="shop">
+
+      <!-- سایدبار -->
+      <aside style="display:flex;flex-direction:column;gap:20px">
+        <div style="background:#F4F6FB;border-radius:16px;padding:18px">
+          <div style="font-weight:600;font-size:17px;margin:4px 6px 10px">دسته‌بندی محصولات</div>
+          <div role="group" aria-label="فیلتر دسته" style="display:flex;flex-direction:column;gap:4px">
+            <sc-for list="{{cats}}" as="c" hint-placeholder-count="9">
+              <sc-if value="{{c.active}}" hint-placeholder-val="{{ false }}">
+                <button type="button" aria-pressed="true" onClick="{{c.pick}}" class="fbtn" style="background:#08113F;color:#FFFFFF;font-weight:600"><span>{{c.title}}</span><span style="font-size:13px;color:#AFC4FF">{{c.count}}</span></button>
+              </sc-if>
+              <sc-if value="{{c.inactive}}" hint-placeholder-val="{{ true }}">
+                <button type="button" aria-pressed="false" onClick="{{c.pick}}" class="fbtn" style="background:transparent;color:#0A1033"><span>{{c.title}}</span><span style="font-size:13px;color:#6B7393">{{c.count}}</span></button>
+              </sc-if>
+            </sc-for>
+          </div>
+        </div>
+        <div style="position:relative;overflow:hidden;border-radius:16px;background:#2B4EFF;color:#FFFFFF;padding:22px">
+          <svg class="ic" viewBox="0 0 24 24" style="width:30px;height:30px;margin-bottom:8px" aria-hidden="true"><path d="M6 3 H14 L19 8 V21 H6 Z M14 3 V8 H19"></path><path d="M12.5 11 V17 M9.8 14.5 L12.5 17 L15.2 14.5"></path></svg>
+          <div style="font-weight:600;font-size:18px;margin-bottom:4px">کاتالوگ محصولات</div>
+          <p style="margin:0 0 14px;font-size:14px;color:#E6EBFF">مشخصات فنی همه محصولات در یک فایل PDF.</p>
+          <a href="#" style="display:inline-block;background:#FFFFFF;color:#2B4EFF;font-weight:600;font-size:14px;padding:9px 18px;border-radius:999px">دریافت کاتالوگ</a>
+        </div>
+        <div style="border:1px solid #E1E6F3;border-radius:16px;padding:20px">
+          <div style="font-weight:600;margin-bottom:4px">به مشاوره نیاز دارید؟</div>
+          <p style="margin:0 0 10px;font-size:14px;color:#4E5878">کارشناس فنی در انتخاب محصول مناسب کمکتان می‌کند.</p>
+          <a href="tel:03136671919" style="font-family:'Readex Pro','Vazirmatn',sans-serif;font-weight:600;font-size:20px;color:#0A1033">۰۳۱-۳۶۶۷۱۹۱۹</a>
+        </div>
+      </aside>
+
+      <!-- فهرست محصولات -->
+      <div>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-bottom:20px">
+          <div>
+            <h2 style="margin:0;font-family:'Readex Pro','Vazirmatn',sans-serif;font-weight:600;font-size:26px;line-height:1.4">{{curTitle}}</h2>
+            <div style="font-size:14px;color:#6B7393">{{shown}} محصول</div>
+          </div>
+          <label style="display:flex;align-items:center;gap:10px;font-size:14px;color:#4E5878">مرتب‌سازی
+            <select style="font:inherit;font-size:14px;padding:8px 12px;border:1px solid #D3DAEC;border-radius:10px;background:#FFFFFF;color:#0A1033">
+              <option>پیش‌فرض</option>
+              <option>جدیدترین</option>
+              <option>نام محصول</option>
+            </select>
+          </label>
+        </div>
+        <div class="pgrid">
+          <sc-for list="{{items}}" as="p" hint-placeholder-count="9">
+            <a href="Product.dc.html" class="pc">
+              <div style="position:relative;overflow:hidden;aspect-ratio:4 / 3">
+                <div class="pi"><div class="ph"></div></div>
+                <span class="chip">عکس محصول</span>
+              </div>
+              <div style="padding:16px 18px 18px;display:flex;flex-direction:column;flex:1">
+                <div style="display:flex;justify-content:space-between;gap:10px;font-size:13px;color:#6B7393;margin-bottom:4px">
+                  <span>{{p.cat}}</span>
+                  <span dir="ltr" style="font-weight:600;color:#2B4EFF">{{p.code}}</span>
+                </div>
+                <h3 style="margin:0 0 14px;font-family:'Readex Pro','Vazirmatn',sans-serif;font-weight:600;font-size:19px;line-height:1.55">{{p.name}}</h3>
+                <span style="margin-top:auto;display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#2B4EFF">مشاهده محصول<svg class="ic ar" viewBox="0 0 24 24" style="width:16px;height:16px" aria-hidden="true"><path d="M19 12 H5 M11 6 L5 12 L11 18"></path></svg></span>
+              </div>
+            </a>
+          </sc-for>
+        </div>
+        <sc-if value="{{showPager}}" hint-placeholder-val="{{ true }}">
+          <nav aria-label="صفحه‌بندی" style="display:flex;justify-content:center;gap:8px;margin-top:32px">
+            <a href="#" aria-current="page" style="width:42px;height:42px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:#08113F;color:#FFFFFF;font-weight:600">۱</a>
+            <a href="#" style="width:42px;height:42px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;border:1px solid #D3DAEC;color:#0A1033">۲</a>
+            <a href="#" style="width:42px;height:42px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;border:1px solid #D3DAEC;color:#0A1033">۳</a>
+            <a href="#" style="width:42px;height:42px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;border:1px solid #D3DAEC;color:#0A1033">۴</a>
+          </nav>
+        </sc-if>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== فوتر ===== -->
+  <footer style="background:#08113F;color:#C7CFEA;padding:44px 40px 18px;font-size:14px;line-height:1.8">
+    <div style="max-width:1320px;margin:0 auto;display:flex;flex-wrap:wrap;gap:28px 48px">
+      <div style="flex:1.2 1 300px;min-width:0">
+        <div style="display:inline-block;background:#FFFFFF;border-radius:999px;padding:6px 16px;margin-bottom:12px"><img src="/_blob/ed1ab3ae442cbe9427296e5df824a864" alt="شرکت ایمن تاش سپاهان" style="display:block;height:22px;width:auto"></div>
+        <p style="margin:0 0 14px;max-width:360px">فعال در تولید مواد شیمیایی از سال ۱۳۶۷؛ پودر و فوم آتش‌نشانی، مواد حفاری و آنتی‌فوم.</p>
+        <div style="display:flex;gap:8px">
+          <a href="#" aria-label="اینستاگرام" class="soc"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="4.5"></rect><circle cx="12" cy="12" r="3.6"></circle><circle cx="16.8" cy="7.2" r=".6"></circle></svg></a>
+          <a href="#" aria-label="لینکدین" class="soc"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2.5"></rect><path d="M8.5 10.5 V16 M8.5 7.8 V8 M11.8 16 V10.5 M11.8 13 C11.8 11.4 15.6 10.6 15.6 13 V16"></path></svg></a>
+          <a href="#" aria-label="تلگرام" class="soc"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 4.5 L3.5 11.2 L9.5 13.2 L17 7.5 L11 14.5 L11.5 19.5 L14.5 15.8 L18 18.5 Z"></path></svg></a>
+          <a href="#" aria-label="واتس‌اپ" class="soc"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 19.5 L5.6 15.9 A8 8 0 1 1 8.2 18.4 Z"></path><path d="M9.3 9.2 C9.3 12 11.8 14.7 14.8 14.8 L15.4 13.6 L13.9 12.9 L13.2 13.6 C12.2 13.1 11 11.9 10.6 10.9 L11.3 10.2 L10.6 8.7 Z"></path></svg></a>
+        </div>
+      </div>
+      <div style="flex:0 1 180px;min-width:0">
+        <div style="font-weight:600;color:#FFFFFF;margin-bottom:8px">دسترسی سریع</div>
+        <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 20px">
+          <a href="Products.dc.html" style="color:#C7CFEA">محصولات</a>
+          <a href="#" style="color:#C7CFEA">خدمات</a>
+          <a href="#" style="color:#C7CFEA">گواهینامه‌ها</a>
+          <a href="#" style="color:#C7CFEA">وبلاگ</a>
+          <a href="About.dc.html" style="color:#C7CFEA">درباره ما</a>
+          <a href="Contact.dc.html" style="color:#C7CFEA">تماس با ما</a>
+        </div>
+      </div>
+      <div style="flex:1.6 1 380px;min-width:0">
+        <div style="font-weight:600;color:#FFFFFF;margin-bottom:8px">تماس</div>
+        <div style="margin-bottom:6px"><span style="color:#FFFFFF">اصفهان:</span> چهارباغ بالا، مجتمع پارک، پلاک ۵۳۸، ۰۳۱-۳۶۶۷۱۹۱۹</div>
+        <div><span style="color:#FFFFFF">تهران:</span> یوسف‌آباد، خیابان فتحی شقاقی، خیابان جهان‌مهر، پلاک ۹۴، طبقه ۳، واحد ۵، ۰۲۱-۸۸۳۵۰۵۴۷</div>
+      </div>
+    </div>
+    <div style="max-width:1320px;margin:28px auto 0;padding-top:14px;border-top:1px solid rgba(143,180,255,.2);font-size:13px;color:#8F9AC4">تمامی حقوق برای شرکت ایمن تاش سپاهان محفوظ است.</div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2400}}'>
+class Component extends DCLogic {
+  state = { cat: 'all' };
+
+  renderVals() {
+    const fa = (n) => Number(n).toLocaleString('fa-IR');
+    const catList = [
+      { id: 'foam', title: 'فوم آتش‌نشانی', n: 10 },
+      { id: 'chem', title: 'شیمیایی', n: 6 },
+      { id: 'anti', title: 'آنتی‌فوم و دیفومر', n: 5 },
+      { id: 'drill', title: 'مواد حفاری', n: 5 },
+      { id: 'powder', title: 'پودر آتش‌نشانی', n: 4 },
+      { id: 'prot', title: 'پروتئینی', n: 4 },
+      { id: 'conc', title: 'فوم بتن', n: 2 },
+      { id: 'tex', title: 'کمک‌نساجی', n: 1 }
+    ];
+    const real = {
+      powder: [
+        { code: 'PO-800', name: 'پودر مونوآمونیوم فسفات (گروه ABC)' },
+        { code: 'PO-700', name: 'پودر بی‌کربنات پتاسیم (گروه BC)' },
+        { code: 'PO-600A', name: 'پودر بی‌کربنات سدیم (گروه BC)' },
+        { code: 'PO-900B', name: 'پودر گروه فلزات (گروه D)' }
+      ],
+      tex: [{ code: 'KX-327', name: 'رطوبت‌دهنده سریع نساجی' }]
+    };
+    const byCat = {};
+    catList.forEach((c) => {
+      const list = (real[c.id] || []).map((p) => ({ ...p, cat: c.title }));
+      for (let i = list.length; i < Math.min(c.n, 6); i++) list.push({ code: '', name: '[نام محصول]', cat: c.title });
+      byCat[c.id] = list;
+    });
+    const total = catList.reduce((s, c) => s + c.n, 0);
+    const cur = this.state.cat;
+    const order = ['powder', 'foam', 'anti', 'drill', 'chem', 'prot', 'conc', 'tex'];
+    const items = cur === 'all'
+      ? order.reduce((a, id) => a.concat(byCat[id].slice(0, id === 'powder' ? 4 : 1)), []).slice(0, 9)
+      : byCat[cur];
+    const curCat = catList.find((c) => c.id === cur);
+    const mk = (id, title, n) => ({
+      title, count: fa(n), active: cur === id, inactive: cur !== id,
+      pick: () => this.setState({ cat: id })
+    });
+    const cats = [mk('all', 'همه محصولات', total)].concat(catList.map((c) => mk(c.id, c.title, c.n)));
+    return {
+      cats,
+      items,
+      curTitle: curCat ? curCat.title : 'همه محصولات',
+      shown: fa(curCat ? curCat.n : total),
+      showPager: cur === 'all' || (curCat && curCat.n > 6)
+    };
+  }
+}
+</script>
+</body>
+</html>
