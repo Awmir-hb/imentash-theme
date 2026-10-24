@@ -369,3 +369,24 @@ function ementash_shop_url() {
 function ementash_words( $text ) {
 	return array_values( array_filter( preg_split( '/\s+/u', trim( (string) $text ) ), 'strlen' ) );
 }
+
+/**
+ * موارد منتشرشده یک پست‌تایپ قالب به ترتیب menu_order (خدمات، صنایع، مشتریان و...).
+ *
+ * @return WP_Post[]
+ */
+function ementash_get_items( $post_type, $limit = -1 ) {
+	return get_posts(
+		array(
+			'post_type'        => $post_type,
+			'post_status'      => 'publish',
+			'posts_per_page'   => $limit,
+			'orderby'          => array(
+				'menu_order' => 'ASC',
+				'title'      => 'ASC',
+			),
+			'no_found_rows'    => true,
+			'suppress_filters' => false,
+		)
+	);
+}

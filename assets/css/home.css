@@ -72,9 +72,92 @@
   .em-frame::before{width:calc(100% - 14px);height:calc(100% - 14px)}
 }
 
+/* ---------- کارت تصویری (صنایع، خدمات) ---------- */
+.em-card{position:relative;overflow:hidden;display:flex;color:var(--white)}
+.em-card:hover{color:var(--white)}
+.em-card__img{position:absolute;inset:0;transition:transform .8s var(--ease-media)}
+.em-card__img img{display:block;width:100%;height:100%;object-fit:cover}
+a.em-card:hover .em-card__img{transform:scale(1.06)}
+a.em-card:hover .em-btn__icon{transform:translateX(-5px)}
+.em-card__shade{position:absolute;inset:0;background:var(--card-shade)}
+
+/* ---------- صنایع ---------- */
+.em-inds{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;list-style:none;margin:0;padding:0}
+.em-ind{height:100%;min-height:280px;flex-direction:column;justify-content:flex-end;padding:24px;border-radius:var(--radius-sm)}
+.em-ind__foot{position:relative;z-index:2;display:flex;align-items:flex-end;justify-content:space-between;gap:14px}
+.em-ind__title{margin:0;font-family:var(--font-head);font-weight:600;font-size:22px;line-height:1.45;color:var(--white)}
+.em-ind__arrow{flex:0 0 auto;width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--white-a60);border-radius:50%}
+.em-ind__arrow .em-btn__icon{width:16px;height:16px}
+.em-rail-hint{display:none}
+
+@media (max-width:900px){
+  .em-inds{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+/* موبایل: اسلایدر افقی با اسکرول بومی (MobileHome.dc.html) */
+@media (max-width:767px){
+  .em-inds{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:var(--gutter);margin:0 calc(var(--gutter) * -1);padding:0 var(--gutter) 6px;scrollbar-width:none}
+  .em-inds::-webkit-scrollbar{display:none}
+  .em-inds__item{flex:0 0 250px;scroll-snap-align:start}
+  .em-ind{height:300px;min-height:0;padding:18px;border-radius:var(--radius-card)}
+  .em-ind__title{font-size:19px;line-height:1.5}
+  .em-ind__arrow{display:none}
+  .em-rail-hint{display:block;margin:10px 0 0;font-size:var(--fs-xs);color:var(--muted)}
+}
+
+/* ---------- مشتریان ---------- */
+/* بعد از صنایع، در ادامه همان زمینه روشن و با فاصله کمتر */
+.em-industries + .em-clients{padding-top:0;margin-top:calc(var(--clients-gap) - var(--section-y))}
+.em-clients__title{margin:0 0 18px;font-family:var(--font-head);font-weight:600;font-size:22px;line-height:1.5}
+.em-clients__wrap{overflow:hidden;-webkit-mask-image:var(--mask-edges);mask-image:var(--mask-edges)}
+.em-clients__track{display:flex;width:max-content;animation:em-marquee 40s linear infinite}
+.em-clients__wrap:hover .em-clients__track{animation-play-state:paused}
+@keyframes em-marquee{from{transform:translateX(0)}to{transform:translateX(50%)}}
+.em-clients__list{display:flex;list-style:none;margin:0;padding:0}
+.em-client{flex:0 0 auto;width:210px;margin-left:16px;text-align:center}
+.em-client__logo{display:flex;align-items:center;justify-content:center;height:112px;padding:16px;background:var(--white);border:1px solid var(--line-client);border-radius:var(--radius-card)}
+.em-client__logo img{width:auto;height:auto;max-width:100%;max-height:100%;object-fit:contain}
+.em-client__name{display:block;margin-top:10px;font-size:var(--fs-sm);font-weight:500;line-height:1.6;color:var(--ink)}
+
+@media (max-width:767px){
+  .em-clients__title{margin-bottom:12px;font-size:19px}
+  .em-clients__wrap{margin:0 calc(var(--gutter) * -1);-webkit-mask-image:none;mask-image:none}
+  .em-clients__track{animation-duration:30s}
+  .em-client{width:150px;margin-left:12px}
+  .em-client__logo{height:84px;padding:12px;border-radius:12px}
+  .em-client__name{margin-top:6px;font-size:12px}
+}
+
+/* ---------- خدمات ---------- */
+.em-svcs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;list-style:none;margin:0;padding:0}
+.em-svc{height:100%;min-height:260px;flex-direction:column;align-items:flex-start;padding:30px 32px;border-radius:var(--radius-lg);background:var(--navy-800)}
+.em-svc .em-svc__img{right:auto;width:var(--svc-img-w)}
+.em-svc__shade{position:absolute;inset:0;background:var(--svc-shade)}
+.em-svc__icon{position:relative;z-index:2;width:54px;height:54px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line-on-dark-5);border-radius:50%;color:var(--blue-light)}
+.em-svc__icon svg{width:26px;height:26px}
+.em-svc__title{position:relative;z-index:2;max-width:52%;margin:22px 0 20px;font-family:var(--font-head);font-weight:600;font-size:24px;line-height:1.5;color:var(--white)}
+.em-svc__arrow{position:relative;z-index:2;width:44px;height:44px;margin-top:auto;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--white-a55);border-radius:50%;transition:background-color .25s ease,color .25s ease}
+a.em-svc:hover .em-svc__arrow{background:var(--white);color:var(--navy-800)}
+
+@media (max-width:900px){
+  .em-svcs{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:767px){
+  .em-svcs{gap:12px}
+  .em-svc{min-height:170px;padding:20px;border-radius:var(--radius-md)}
+  .em-svc__icon{width:44px;height:44px}
+  .em-svc__icon svg{width:22px;height:22px}
+  .em-svc__title{max-width:60%;margin:12px 0 0;font-size:18px;line-height:1.55}
+  .em-svc__arrow{display:none}
+}
+
 /* ---------- کاهش حرکت ---------- */
 @media (prefers-reduced-motion: reduce){
   .em-hero__media,.em-wi,.em-rise{animation:none!important;transform:none!important;opacity:1!important}
-  .em-hero__live,.em-hero__track,.em-btn__icon{transition:none!important}
+  .em-hero__live,.em-hero__track,.em-btn__icon,.em-card__img,.em-svc__arrow{transition:none!important}
   .em-mw{animation:none!important;color:var(--ink)!important}
+  /* نوار مشتریان ثابت و چندخطی؛ تکرارها پنهان */
+  .em-clients__wrap{-webkit-mask-image:none;mask-image:none}
+  .em-clients__track{width:auto;animation:none!important}
+  .em-clients__list{flex-wrap:wrap;row-gap:16px}
+  .em-clients__list[aria-hidden],.em-client[data-em-copy]{display:none}
 }
