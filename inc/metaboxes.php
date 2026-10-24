@@ -127,7 +127,7 @@ function ementash_meta_boxes() {
 				'about_cert_text'      => array(
 					'type'    => 'textarea',
 					'label'   => __( 'متن گواهینامه‌ها', 'ementash' ),
-					'default' => __( 'سیستم مدیریت یکپارچه (IMS) شرکت توسط TUV NORD آلمان تأیید شده است.', 'ementash' ),
+					'default' => __( 'سیستم مدیریت یکپارچه (IMS) شرکت توسط TÜV NORD آلمان تأیید شده است.', 'ementash' ),
 				),
 				'about_rd_title'       => array(
 					'type'    => 'text',

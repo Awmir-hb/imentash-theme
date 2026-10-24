@@ -143,7 +143,7 @@ function ementash_customizer_schema() {
 		array( '۱۳۶۷', __( 'سال تأسیس', 'ementash' ), 'calendar' ),
 		array( '۱۹٬۰۰۰', __( 'تن در سال', 'ementash' ), 'factory' ),
 		array( '۳۶', __( 'محصول در ۷ دسته', 'ementash' ), 'grid' ),
-		array( 'ISO', __( 'و TUV NORD، گواهینامه بین‌المللی', 'ementash' ), 'shield' ),
+		array( 'ISO', __( 'و TÜV NORD، گواهینامه بین‌المللی', 'ementash' ), 'shield' ),
 	);
 	$stats         = array();
 	foreach ( $stat_defaults as $i => $stat ) {
@@ -316,7 +316,7 @@ function ementash_customizer_schema() {
 				'hero_words_lead'   => array(
 					'type'    => 'text',
 					'label'   => __( 'متن پیش از کلمات چرخان', 'ementash' ),
-					'default' => __( 'تولیدکننده‌ی', 'ementash' ),
+					'default' => '',
 				),
 				'hero_words'        => array(
 					'type'        => 'lines',
