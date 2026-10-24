@@ -117,9 +117,9 @@ foreach ( $ementash_terms as $ementash_term ) {
 								?>
 							</span>
 							<span class="em-ppanel__shade" aria-hidden="true"></span>
-							<span class="em-ppanel__body">
+							<div class="em-ppanel__body">
 								<span class="em-ppanel__count"><?php echo ementash_bdi( $ementash_cat['count'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
-								<span class="em-ppanel__title"><?php echo ementash_bdi( $ementash_cat['name'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
+								<h3 class="em-ppanel__title"><?php echo ementash_bdi( $ementash_cat['name'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></h3>
 								<?php if ( '' !== $ementash_cat['desc'] ) : ?>
 									<span class="em-ppanel__desc"><?php echo ementash_bdi( $ementash_cat['desc'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
 								<?php endif; ?>
@@ -134,7 +134,7 @@ foreach ( $ementash_terms as $ementash_term ) {
 									<?php esc_html_e( 'مشاهده محصولات این دسته', 'ementash' ); ?>
 									<?php echo ementash_icon( 'arrow', 'em-btn__icon' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 								</span>
-							</span>
+							</div>
 						</a>
 					</div>
 				<?php endforeach; ?>
