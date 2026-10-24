@@ -150,6 +150,109 @@ a.em-svc:hover .em-svc__arrow{background:var(--white);color:var(--navy-800)}
   .em-svc__arrow{display:none}
 }
 
+/* ---------- محصولات: تب دسته‌ها + پنل تصویری ---------- */
+@keyframes em-pswap{from{opacity:0;transform:scale(1.06)}to{opacity:1;transform:scale(1)}}
+
+.em-prod{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:32px;align-items:stretch}
+.em-pcats{border-top:1px solid var(--line)}
+.em-pcat{width:100%;display:flex;align-items:center;gap:16px;padding:18px 20px;border:0;border-bottom:1px solid var(--line);border-radius:0;background:transparent;color:var(--muted);font:inherit;text-align:start;cursor:pointer;transition:background-color .25s ease,color .25s ease}
+.em-pcat:hover{color:var(--navy-900)}
+.em-pcat[aria-selected="true"]{border-radius:6px;background:var(--white);color:var(--navy-900)}
+.em-pcat__bar{flex:0 0 auto;width:6px;height:34px;border-radius:3px}
+.em-pcat[aria-selected="true"] .em-pcat__bar{background:var(--blue)}
+.em-pcat__thumb{position:relative;flex:0 0 auto;width:64px;height:48px;overflow:hidden;border-radius:8px;opacity:.55;filter:saturate(.6);transition:opacity .25s ease}
+.em-pcat__thumb img{display:block;width:100%;height:100%;object-fit:cover}
+.em-pcat__thumb .em-ph{background-size:12px 12px,12px 12px,100% 100%}
+.em-pcat[aria-selected="true"] .em-pcat__thumb,.em-pcat:hover .em-pcat__thumb{opacity:1;filter:none}
+.em-pcat__name{flex:1;min-width:0;font-family:var(--font-head);font-weight:400;font-size:28px;line-height:1.4}
+.em-pcat[aria-selected="true"] .em-pcat__name{font-weight:600}
+.em-pcat__count{font-size:var(--fs-nav)}
+.em-pcat[aria-selected="true"] .em-pcat__count{color:var(--blue);font-weight:600}
+
+.em-ppanel{height:100%}
+.em-ppanel__card{height:100%;min-height:500px;flex-direction:column;justify-content:flex-end;padding:40px;border-radius:12px}
+.em-ppanel:not([hidden]) .em-ppanel__img{animation:em-pswap .6s var(--ease-media)}
+.em-ppanel__shade{position:absolute;inset:0;background:var(--panel-shade)}
+.em-ppanel__body{position:relative;z-index:2;display:flex;flex-direction:column;align-items:flex-start}
+.em-ppanel__count{margin-bottom:6px;color:var(--on-dark-3);font-size:var(--fs-nav)}
+.em-ppanel__title{margin-bottom:12px;font-family:var(--font-head);font-weight:600;font-size:clamp(34px,3.4vw,52px);line-height:1.3}
+.em-ppanel__desc{max-width:520px;margin-bottom:22px;color:var(--on-dark);font-size:18px}
+.em-ppanel__codes{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px;margin-bottom:24px}
+.em-ppanel__codes span{padding:4px 14px;border:1px solid var(--white-a45);border-radius:var(--radius-pill);font-size:var(--fs-sm);font-weight:600}
+.em-ppanel__btn{padding:13px 26px}
+
+@media (max-width:900px){
+  .em-prod{grid-template-columns:minmax(0,1fr)}
+  .em-ppanel__card{min-height:440px}
+}
+/* موبایل: تب‌ها اسلایدر قرصی افقی، بدون تصویر کوچک و تعداد (MobileHome.dc.html) */
+@media (max-width:767px){
+  .em-products__all{display:none}
+  .em-prod{gap:14px}
+  .em-pcats{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:var(--gutter);margin:0 calc(var(--gutter) * -1);padding:0 var(--gutter) 6px;border-top:0;scrollbar-width:none}
+  .em-pcats::-webkit-scrollbar{display:none}
+  .em-pcat{flex:0 0 auto;width:auto;min-height:40px;padding:6px 16px;border:1px solid var(--line);border-radius:var(--radius-pill);background:var(--white);color:var(--ink);white-space:nowrap;scroll-snap-align:start}
+  .em-pcat[aria-selected="true"]{border-color:var(--navy-900);border-radius:var(--radius-pill);background:var(--navy-900);color:var(--white)}
+  .em-pcat__bar,.em-pcat__thumb,.em-pcat__count{display:none}
+  .em-pcat__name{font-family:var(--font-body);font-size:var(--fs-sm);line-height:1.6}
+  .em-ppanel__card{min-height:420px;padding:22px;border-radius:var(--radius-md)}
+  .em-ppanel__count{margin-bottom:0;font-size:var(--fs-xs)}
+  .em-ppanel__title{margin-bottom:6px;font-size:28px;line-height:1.35}
+  .em-ppanel__desc{margin-bottom:16px;font-size:var(--fs-sm)}
+  .em-ppanel__codes,.em-ppanel__btn .em-btn__icon{display:none}
+  .em-ppanel__btn{min-height:44px;padding:0 20px;font-size:var(--fs-sm)}
+}
+
+/* ---------- خط تولید: نقشه با انیمیشن ترسیم ---------- */
+@keyframes em-draw{to{stroke-dashoffset:0}}
+@keyframes em-flow{to{stroke-dashoffset:-40}}
+@keyframes em-needle{0%,100%{transform:rotate(-50deg)}50%{transform:rotate(40deg)}}
+@keyframes em-blink{0%,100%{opacity:1}50%{opacity:.15}}
+@keyframes em-fall{from{transform:translateY(0);opacity:1}to{transform:translateY(58px);opacity:0}}
+
+.em-pl{background-color:var(--navy-800);background-image:var(--grid-lines);background-size:var(--grid-size-pl) var(--grid-size-pl);color:var(--white)}
+.em-pl__h2{margin-bottom:14px}
+.em-pl__intro{max-width:600px;margin:0 0 32px;color:var(--on-dark-2)}
+.em-pl__grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:56px;align-items:center}
+/* برچسب‌ها از x به راست نوشته شوند؛ ویژگی dir روی svg درون‌خطی کافی نیست */
+.em-pl__map{display:block;width:100%;height:auto;direction:ltr}
+
+.em-pl__d,.em-pl__d2{fill:none;stroke-dasharray:1;stroke-dashoffset:1;animation:em-draw 2.2s cubic-bezier(.45,.05,.2,1) forwards}
+.em-pl__d{stroke:var(--blue-light);stroke-width:1.5;stroke-linejoin:round}
+.em-pl__d2{stroke:var(--line-on-dark-6);stroke-width:1}
+.em-pl__fl{fill:none;stroke:var(--white);stroke-width:2;stroke-linecap:round;stroke-dasharray:4 16;opacity:0;animation:em-fadein .6s ease 2.6s forwards,em-flow 1.4s linear infinite}
+.em-pl__fl--dim{stroke-opacity:.6}
+.em-pl__lb{fill:var(--blue-light);font-family:var(--font-body);font-size:13px;letter-spacing:.08em;opacity:0;animation:em-fadein .8s ease forwards}
+.em-pl__fi{opacity:0;animation:em-fadein .8s ease forwards}
+.em-pl__nd{fill:none;stroke:var(--white);stroke-width:2;stroke-linecap:round;transform-box:view-box;transform-origin:330px 210px;animation:em-needle 5s ease-in-out infinite}
+.em-pl__bl{fill:var(--white);animation:em-blink 1.4s ease-in-out infinite}
+.em-pl__pd{fill:var(--white);animation:em-fall 1.6s ease-in infinite}
+/* تا وقتی سکشن دیده نشده (home.js) */
+.em-pl[data-em-pl="wait"] :is(.em-pl__d,.em-pl__d2,.em-pl__fl,.em-pl__lb,.em-pl__fi,.em-pl__nd,.em-pl__bl,.em-pl__pd){animation-play-state:paused}
+
+.em-pl__steps{list-style:none;margin:0;padding:0;border-top:1px solid var(--line-on-dark-4)}
+.em-pl__step{display:flex;gap:20px;padding:24px 0;border-bottom:1px solid var(--line-on-dark-2)}
+.em-pl__code{flex:0 0 96px;padding-top:4px;color:var(--blue-light);font-size:var(--fs-nav);font-weight:600}
+.em-pl__title{margin:0 0 4px;font-family:var(--font-head);font-weight:600;font-size:21px;line-height:1.5}
+.em-pl__text{margin:0;color:var(--on-dark-2);font-size:var(--fs-nav)}
+
+@media (max-width:900px){
+  .em-pl__grid{grid-template-columns:minmax(0,1fr);gap:32px}
+}
+@media (max-width:767px){
+  .em-pl__h2{margin-bottom:6px}
+  .em-pl__intro{margin-bottom:18px;font-size:var(--fs-sm)}
+  .em-pl__grid{gap:10px}
+  .em-pl__d{stroke-width:1.6}
+  .em-pl__d2{stroke-width:1.1}
+  .em-pl__fl{stroke-width:2.2}
+  .em-pl__lb{font-size:22px;letter-spacing:.06em}
+  .em-pl__step{gap:14px;padding:16px 0}
+  .em-pl__code{flex-basis:74px;padding-top:3px;font-size:var(--fs-xs)}
+  .em-pl__title{font-family:var(--font-body);font-size:16px}
+  .em-pl__text{font-size:var(--fs-xs)}
+}
+
 /* ---------- کاهش حرکت ---------- */
 @media (prefers-reduced-motion: reduce){
   .em-hero__media,.em-wi,.em-rise{animation:none!important;transform:none!important;opacity:1!important}
@@ -160,4 +263,10 @@ a.em-svc:hover .em-svc__arrow{background:var(--white);color:var(--navy-800)}
   .em-clients__track{width:auto;animation:none!important}
   .em-clients__list{flex-wrap:wrap;row-gap:16px}
   .em-clients__list[aria-hidden],.em-client[data-em-copy]{display:none}
+  /* محصولات و خط تولید: بدون جابه‌جایی؛ نقشه کامل و ثابت */
+  .em-ppanel__img{animation:none!important}
+  .em-pcat,.em-pcat__thumb{transition:none!important}
+  .em-pl__d,.em-pl__d2,.em-pl__lb,.em-pl__fi{animation:none!important;stroke-dashoffset:0!important;opacity:1!important}
+  .em-pl__fl{animation:none!important;opacity:1!important}
+  .em-pl__nd,.em-pl__bl,.em-pl__pd{animation:none!important}
 }

@@ -108,6 +108,11 @@
   /* محو شدن دو لبه نوار مشتریان (رنگ ماسک فقط شفافیت را تعیین می‌کند) */
   --mask-edges:linear-gradient(to left,transparent 0,#000 6%,#000 94%,transparent 100%);
   --clients-gap:44px;
+  --white-a45:rgba(255,255,255,.45);
+  --line-on-dark-6:rgba(143,180,255,.5);
+  /* پنل تصویری دسته محصولات */
+  --panel-shade:linear-gradient(to top,rgba(8,17,63,.95) 0%,rgba(8,17,63,.5) 50%,rgba(8,17,63,.05) 100%);
+  --grid-size-pl:44px;
 }
 @media (max-width:767px){
   :root{
@@ -127,6 +132,7 @@
     --svc-shade:linear-gradient(to left,#0B1550 42%,rgba(11,21,80,.7) 62%,rgba(11,21,80,.1) 100%);
     --svc-img-w:55%;
     --clients-gap:32px;
+    --grid-size-pl:32px;
   }
 }
 
@@ -324,8 +330,15 @@ a:hover{color:var(--blue-hover)}
   .em-head__text{margin-top:4px;font-size:var(--fs-sm)}
 }
 
+/* لینک کنار تیتر سکشن (مثل «فهرست کامل محصولات») */
+.em-link{font-weight:600;border-bottom:1.5px solid currentColor;padding-bottom:2px}
+
 /* تیتر سکشن‌ها */
 .em-h2{margin:0;font-family:var(--font-head);font-weight:var(--fw-display);font-size:clamp(30px,3vw,44px);line-height:1.3;color:inherit}
+/* زیر 1067px اندازه به حداقل ۳۰ پیکسل می‌رسد (3vw < 32px)؛ در موبایل ۲۸ پیکسل */
+@media (max-width:1066px){
+  .em-h2{font-weight:var(--fw-display-sm)}
+}
 @media (max-width:767px){
   .em-h2{font-size:28px;line-height:1.35}
 }

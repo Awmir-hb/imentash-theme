@@ -429,9 +429,11 @@ function ementash_customizer_schema() {
 					'default' => __( 'محصولات', 'ementash' ),
 				),
 				'products_link_label' => array(
-					'type'    => 'text',
-					'label'   => __( 'متن لینک فهرست کامل', 'ementash' ),
-					'default' => __( 'فهرست کامل محصولات', 'ementash' ),
+					'type'        => 'text',
+					'label'       => __( 'متن لینک فهرست کامل', 'ementash' ),
+					'description' => __( '{count} با تعداد محصولات منتشرشده جایگزین می‌شود.', 'ementash' ),
+					// %s در پیش‌فرض‌ها مجاز نیست: get_theme_mod() آن را با sprintf و آدرس قالب پر می‌کند.
+					'default'     => __( 'فهرست کامل {count} محصول', 'ementash' ),
 				),
 			),
 		),
