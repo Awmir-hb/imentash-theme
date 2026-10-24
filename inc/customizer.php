@@ -16,7 +16,6 @@ defined( 'ABSPATH' ) || exit;
 function ementash_home_sections() {
 	return array(
 		'hero'            => __( 'هیرو', 'ementash' ),
-		'marquee'         => __( 'نوار صنایع', 'ementash' ),
 		'about'           => __( 'درباره ما و آمار', 'ementash' ),
 		'industries'      => __( 'صنایع', 'ementash' ),
 		'clients'         => __( 'مشتریان', 'ementash' ),
@@ -345,11 +344,6 @@ function ementash_customizer_schema() {
 					'default'     => '',
 				),
 			),
-		),
-		'home_marquee'            => array(
-			'title'       => __( 'صفحه اصلی: نوار صنایع', 'ementash' ),
-			'description' => __( 'نام‌ها از عنوان «صنایع» خوانده می‌شوند.', 'ementash' ),
-			'fields'      => ementash_toggle_field( 'marquee' ),
 		),
 		'home_about'              => array(
 			'title'  => __( 'صفحه اصلی: درباره ما', 'ementash' ),

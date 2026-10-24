@@ -45,3 +45,10 @@ function ementash_own_header( $value = null ) {
 	}
 	return $own;
 }
+
+/**
+ * آیا صفحه اصلی یک برگه ساخته‌شده با المنتور است؟ (در این حالت سکشن‌های قالب چاپ نمی‌شوند)
+ */
+function ementash_home_is_elementor() {
+	return is_front_page() && is_page() && ementash_is_elementor( get_queried_object_id() );
+}

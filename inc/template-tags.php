@@ -344,3 +344,28 @@ function ementash_page_crumbs( $post_id = 0 ) {
 	);
 	return $crumbs;
 }
+
+/**
+ * نوع یک پیوست رسانه: image، video یا رشته خالی.
+ */
+function ementash_media_kind( $attachment_id ) {
+	$mime = (string) get_post_mime_type( absint( $attachment_id ) );
+	if ( 0 === strpos( $mime, 'video/' ) ) {
+		return 'video';
+	}
+	return 0 === strpos( $mime, 'image/' ) ? 'image' : '';
+}
+
+/**
+ * آدرس فهرست محصولات (فروشگاه ووکامرس)؛ اگر ووکامرس نبود صفحه اصلی.
+ */
+function ementash_shop_url() {
+	return function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 'shop' ) : home_url( '/' );
+}
+
+/**
+ * کلمات یک متن (جداشده با فاصله)، برای انیمیشن کلمه‌به‌کلمه.
+ */
+function ementash_words( $text ) {
+	return array_values( array_filter( preg_split( '/\s+/u', trim( (string) $text ) ), 'strlen' ) );
+}

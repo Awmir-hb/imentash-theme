@@ -28,6 +28,21 @@ function ementash_enqueue_assets() {
 			'strategy'  => 'defer',
 		)
 	);
+
+	// صفحه اصلی خود قالب (نه برگه المنتوری).
+	if ( is_front_page() && ! ementash_home_is_elementor() ) {
+		wp_enqueue_style( 'ementash-home', EMENTASH_URI . '/assets/css/home.css', array( 'ementash-main' ), ementash_asset_ver( 'assets/css/home.css' ) );
+		wp_enqueue_script(
+			'ementash-home',
+			EMENTASH_URI . '/assets/js/home.js',
+			array(),
+			ementash_asset_ver( 'assets/js/home.js' ),
+			array(
+				'in_footer' => true,
+				'strategy'  => 'defer',
+			)
+		);
+	}
 }
 add_action( 'wp_enqueue_scripts', 'ementash_enqueue_assets' );
 

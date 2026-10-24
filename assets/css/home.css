@@ -1,0 +1,80 @@
+/* =========================================================
+   قالب ایمن تاش — صفحه اصلی (Industrial.dc.html و MobileHome.dc.html)
+   فقط در صفحه اصلی بارگذاری می‌شود. توکن‌ها در :root فایل main.css.
+   ========================================================= */
+
+@keyframes em-up{from{transform:translateY(115%)}to{transform:translateY(0)}}
+@keyframes em-kb{from{transform:scale(1.08)}to{transform:scale(1)}}
+@keyframes em-ink{to{color:var(--ink)}}
+
+/* ورود با محو شدن؛ تأخیر هر جزء جدا تعریف می‌شود */
+.em-rise{opacity:0;animation:em-fade 1s var(--ease-out) forwards}
+
+/* ---------- هیرو ---------- */
+.em-hero{position:relative;overflow:hidden;height:min(100vh,920px);min-height:700px;background:var(--navy-900);color:var(--white)}
+.em-hero__media{position:absolute;inset:0;z-index:0;background-color:var(--ph-bg-color);background-image:var(--ph-bg);background-size:var(--ph-size) var(--ph-size),var(--ph-size) var(--ph-size),100% 100%;animation:em-kb 2.4s var(--ease-media) both}
+.em-hero__media > img,.em-hero__media > video{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover}
+.em-hero__live{opacity:0;transition:opacity .6s ease}
+.em-hero__live--on{opacity:1}
+.em-hero__shade{position:absolute;inset:0;z-index:1;background:var(--hero-shade-y) left bottom/100% 45% no-repeat,var(--hero-shade-x)}
+
+.em-hero__in{position:relative;z-index:2;height:100%;max-width:var(--container);margin:0 auto;padding:110px var(--gutter) 40px;display:flex;flex-direction:column;justify-content:center}
+.em-hero__body{max-width:680px}
+
+.em-hero__title{margin:0 0 30px;font-family:var(--font-head);font-weight:600;font-size:clamp(46px,6.2vw,92px);line-height:1.28}
+.em-hero__line{display:block}
+.em-w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.12em;margin-bottom:-.12em}
+.em-wi{display:inline-block;transform:translateY(115%);animation:em-up 1s var(--ease-out) var(--em-d,0s) forwards}
+
+.em-hero__words{display:flex;flex-wrap:wrap;align-items:baseline;gap:.45em;margin:0 0 22px;font-size:22px;line-height:1.6;animation-delay:1.35s}
+.em-hero__lead{color:var(--on-dark-2)}
+.em-hero__rot{display:inline-block;height:1.6em;overflow:hidden;border-bottom:2px solid var(--blue-light)}
+.em-hero__track{display:flex;flex-direction:column;font-weight:600;transition:transform .55s var(--ease-swap)}
+.em-hero__track > span{height:1.6em;line-height:1.6em;white-space:nowrap}
+
+.em-hero__text{max-width:540px;margin:0 0 38px;font-size:18px;color:var(--on-dark);animation-delay:1.55s}
+.em-hero__actions{display:flex;flex-wrap:wrap;gap:14px;animation-delay:1.75s}
+
+@media (max-width:767px){
+  .em-hero{height:100svh;min-height:620px}
+  .em-hero__shade{background:var(--hero-shade-mobile)}
+  /* متن پایین هیرو؛ فاصله پایین شامل نوار ثابت تماس هم هست */
+  .em-hero__in{justify-content:flex-end;padding:0 var(--gutter) calc(40px + var(--mbar-space))}
+  .em-hero__title{margin-bottom:14px;font-size:32px;line-height:1.35}
+  .em-hero__words{gap:.4em;margin-bottom:10px;font-size:15px}
+  .em-hero__text{margin-bottom:20px;font-size:var(--fs-xs);line-height:1.85}
+  .em-hero__actions{flex-direction:column;gap:10px}
+  .em-hero__actions .em-btn{justify-content:center;min-height:46px;padding:0 20px;font-size:var(--fs-sm)}
+  .em-hero__actions .em-btn__icon{display:none}
+}
+
+/* ---------- درباره ما ---------- */
+.em-about__grid{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:64px;align-items:center;margin-bottom:44px}
+.em-about__text{margin:0 0 28px;font-family:var(--font-head);font-weight:500;font-size:clamp(19px,1.7vw,25px);line-height:1.8;color:var(--ink)}
+.em-mw{color:var(--ink)}
+@supports (animation-timeline: view()){
+  .em-mw{color:var(--line);animation:em-ink linear both;animation-timeline:view();animation-range:entry 100% cover 45%}
+}
+
+.em-frame{position:relative;padding:0 0 22px 22px}
+.em-frame::before{content:"";position:absolute;left:0;bottom:0;width:calc(100% - 22px);height:calc(100% - 22px);border:2px solid var(--blue);border-radius:var(--radius-md)}
+.em-frame__img{position:relative;aspect-ratio:4/3;overflow:hidden;border-radius:var(--radius-md);box-shadow:var(--shadow-photo)}
+.em-frame__img img{display:block;width:100%;height:100%;object-fit:cover}
+
+@media (max-width:900px){
+  .em-about__grid{grid-template-columns:minmax(0,1fr);gap:36px}
+}
+@media (max-width:767px){
+  .em-about__grid{gap:28px;margin-bottom:28px}
+  .em-about__text{font-size:22px;line-height:1.7}
+  .em-about .em-btn{display:flex;justify-content:center;width:100%}
+  .em-frame{padding:0 0 14px 14px}
+  .em-frame::before{width:calc(100% - 14px);height:calc(100% - 14px)}
+}
+
+/* ---------- کاهش حرکت ---------- */
+@media (prefers-reduced-motion: reduce){
+  .em-hero__media,.em-wi,.em-rise{animation:none!important;transform:none!important;opacity:1!important}
+  .em-hero__live,.em-hero__track,.em-btn__icon{transition:none!important}
+  .em-mw{animation:none!important;color:var(--ink)!important}
+}
