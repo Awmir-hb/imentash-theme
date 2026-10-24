@@ -11,12 +11,14 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * سکشن‌های صفحه اصلی به ترتیب نمایش. کلید = نام template-part در template-parts/home.
+ * سکشن‌های صفحه اصلی برای کلیدهای روشن/خاموش Customizer. کلید = نام template-part در template-parts/home.
+ * ترتیب نمایش در front-page.php تعیین می‌شود.
  */
 function ementash_home_sections() {
 	return array(
 		'hero'            => __( 'هیرو', 'ementash' ),
 		'about'           => __( 'درباره ما و آمار', 'ementash' ),
+		'honors'          => __( 'افتخارات', 'ementash' ),
 		'industries'      => __( 'صنایع', 'ementash' ),
 		'clients'         => __( 'مشتریان', 'ementash' ),
 		'services'        => __( 'خدمات', 'ementash' ),
@@ -380,6 +382,22 @@ function ementash_customizer_schema() {
 			'title'       => __( 'آمار', 'ementash' ),
 			'description' => __( 'در صفحه اصلی و صفحه درباره ما نمایش داده می‌شود. آیتم بدون عدد نمایش داده نمی‌شود.', 'ementash' ),
 			'fields'      => $stats,
+		),
+		'home_honors'             => array(
+			'title'       => __( 'صفحه اصلی: افتخارات', 'ementash' ),
+			'description' => __( 'کارت‌ها از «گواهینامه‌ها»یی خوانده می‌شوند که نوعشان «افتخار» است. در المنتور با شورت‌کد [ementash_honors].', 'ementash' ),
+			'fields'      => ementash_toggle_field( 'honors' ) + array(
+				'honors_title' => array(
+					'type'    => 'text',
+					'label'   => __( 'تیتر', 'ementash' ),
+					'default' => __( 'افتخارات', 'ementash' ),
+				),
+				'honors_text'  => array(
+					'type'    => 'textarea',
+					'label'   => __( 'متن (اختیاری)', 'ementash' ),
+					'default' => '',
+				),
+			),
 		),
 		'home_industries'         => array(
 			'title'       => __( 'صفحه اصلی: صنایع', 'ementash' ),

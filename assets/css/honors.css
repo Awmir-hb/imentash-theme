@@ -1,0 +1,55 @@
+/* =========================================================
+   قالب ایمن تاش — نوار افتخارات (صفحه اصلی و شورت‌کد [ementash_honors])
+   هم‌خانواده نوار مشتریان، روی زمینه سرمه‌ای. توکن‌ها در :root فایل main.css.
+   ========================================================= */
+
+.em-honors{background-color:var(--navy-900);background-image:var(--grid-lines);background-size:var(--grid-size) var(--grid-size);color:var(--white)}
+.em-honors .em-head__text{color:var(--on-dark-2)}
+
+/* دکمه‌ها مثل فلش کارت خدمات */
+.em-honors__nav{display:flex;gap:10px}
+.em-honors__nav[hidden]{display:none}
+.em-honors__btn{width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;padding:0;border:1px solid var(--white-a55);border-radius:50%;background:transparent;color:var(--white);font:inherit;cursor:pointer;transition:background-color .25s ease,color .25s ease,opacity .25s ease}
+.em-honors__btn:hover{background:var(--white);color:var(--navy-900)}
+.em-honors__btn[aria-disabled="true"]{opacity:.35;cursor:default}
+.em-honors__btn[aria-disabled="true"]:hover{background:transparent;color:var(--white)}
+.em-honors__btn[hidden]{display:none}
+.em-honors__btn svg{width:18px;height:18px}
+.em-honors__prev svg{transform:scaleX(-1)}
+.em-honors__ic-play,.em-honors__pause[data-em-paused] .em-honors__ic-pause{display:none}
+.em-honors__pause[data-em-paused] .em-honors__ic-play{display:block}
+
+/* ناحیه اسکرول: کشیدن با لمس و توقف روی هر کارت */
+.em-honors__view{overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none;border-radius:var(--radius-card)}
+.em-honors__view::-webkit-scrollbar{display:none}
+.em-honors__list{display:flex;gap:var(--honor-gap);list-style:none;margin:0;padding:0}
+
+/* تعداد کارت در دید: ۵، ۴، ۳ و در موبایل یکی و نیم */
+.em-honor{--per-view:5;flex:0 0 calc((100% - (var(--per-view) - 1) * var(--honor-gap)) / var(--per-view));min-width:0;display:flex;flex-direction:column;align-items:center;padding:20px 18px 18px;border:1px solid var(--line-on-dark-3);border-radius:var(--radius-card);background:var(--white-a04);text-align:center;scroll-snap-align:start}
+.em-honor__img{width:100%;height:var(--honor-img-h);margin-bottom:16px}
+/* تندیس با پس‌زمینه شفاف: کامل دیده شود، بدون برش */
+.em-honor__img img{display:block;width:100%;height:100%;object-fit:contain}
+.em-honor__title{margin:auto 0 4px;font-family:var(--font-head);font-weight:600;font-size:17px;line-height:1.5;color:var(--white)}
+.em-honor__year{margin:0;color:var(--blue-light);font-size:var(--fs-sm);font-weight:600}
+/* بدون تصویر: کارت متنی ساده با همان ارتفاع */
+.em-honor--text{justify-content:center;min-height:calc(var(--honor-img-h) + 110px)}
+.em-honor--text .em-honor__title{margin-top:0}
+
+@media (max-width:1100px){
+  .em-honor{--per-view:4}
+}
+@media (max-width:900px){
+  .em-honor{--per-view:3}
+}
+@media (max-width:767px){
+  .em-honors__head{display:flex;align-items:flex-end}
+  .em-honors__btn{width:40px;height:40px}
+  .em-honors__view{margin:0 calc(var(--gutter) * -1);padding:0 var(--gutter);scroll-padding-inline:var(--gutter);border-radius:0}
+  .em-honor{--per-view:1.5;padding:16px 14px 14px}
+  .em-honor__title{font-size:16px}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .em-honors__view{scroll-behavior:auto}
+  .em-honors__btn{transition:none!important}
+}

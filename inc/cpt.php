@@ -138,6 +138,43 @@ function ementash_register_post_types() {
 add_action( 'init', 'ementash_register_post_types' );
 
 /**
+ * نوع موارد em_certificate: گواهینامه (صفحه درباره ما) یا افتخار (نوار افتخارات).
+ */
+function ementash_certificate_kinds() {
+	return array(
+		'certificate' => __( 'گواهینامه', 'ementash' ),
+		'honor'       => __( 'افتخار', 'ementash' ),
+	);
+}
+
+/**
+ * ستون «نوع» در فهرست گواهینامه‌ها.
+ */
+function ementash_certificate_columns( $columns ) {
+	$out = array();
+	foreach ( $columns as $key => $label ) {
+		$out[ $key ] = $label;
+		if ( 'title' === $key ) {
+			$out['em_kind'] = __( 'نوع', 'ementash' );
+			$out['em_year'] = __( 'سال', 'ementash' );
+		}
+	}
+	return $out;
+}
+add_filter( 'manage_em_certificate_posts_columns', 'ementash_certificate_columns', 20 );
+
+function ementash_certificate_column_content( $column, $post_id ) {
+	if ( 'em_kind' === $column ) {
+		$kinds = ementash_certificate_kinds();
+		$kind  = (string) ementash_meta( $post_id, 'kind' );
+		echo esc_html( isset( $kinds[ $kind ] ) ? $kinds[ $kind ] : '' );
+	} elseif ( 'em_year' === $column ) {
+		echo esc_html( ementash_fa_num( (string) ementash_meta( $post_id, 'year' ) ) );
+	}
+}
+add_action( 'manage_em_certificate_posts_custom_column', 'ementash_certificate_column_content', 10, 2 );
+
+/**
  * انواع درخواست فرم تماس.
  */
 function ementash_inquiry_types() {

@@ -113,6 +113,9 @@
   /* پنل تصویری دسته محصولات */
   --panel-shade:linear-gradient(to top,rgba(8,17,63,.95) 0%,rgba(8,17,63,.5) 50%,rgba(8,17,63,.05) 100%);
   --grid-size-pl:44px;
+  --white-a04:rgba(255,255,255,.04);
+  --honor-img-h:180px;      /* ارتفاع ثابت تصویر تندیس */
+  --honor-gap:16px;
 }
 @media (max-width:767px){
   :root{
@@ -133,6 +136,8 @@
     --svc-img-w:55%;
     --clients-gap:32px;
     --grid-size-pl:32px;
+    --honor-img-h:150px;
+    --honor-gap:12px;
   }
 }
 
@@ -145,7 +150,7 @@ img{max-width:100%;height:auto}
 a{color:var(--blue);text-decoration:none}
 a:hover{color:var(--blue-hover)}
 :focus-visible{outline:2px solid var(--blue);outline-offset:2px}
-.em-header :focus-visible,.em-mmenu :focus-visible,.em-footer :focus-visible,.em-pagehead :focus-visible,.em-hero :focus-visible{outline-color:var(--blue-light)}
+.em-header :focus-visible,.em-mmenu :focus-visible,.em-footer :focus-visible,.em-pagehead :focus-visible,.em-hero :focus-visible,.em-honors :focus-visible{outline-color:var(--blue-light)}
 .em-main:focus{outline:0}
 .ic{fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto}
 

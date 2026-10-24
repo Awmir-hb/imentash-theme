@@ -69,6 +69,17 @@ function ementash_meta_boxes() {
 			'title'  => __( 'جزئیات گواهینامه', 'ementash' ),
 			'screen' => 'em_certificate',
 			'fields' => array(
+				'kind'     => array(
+					'type'        => 'select',
+					'label'       => __( 'نوع', 'ementash' ),
+					'choices'     => ementash_certificate_kinds(),
+					'default'     => 'certificate',
+					'description' => __( '«افتخار» در نوار افتخارات صفحه اصلی نمایش داده می‌شود؛ «گواهینامه» در صفحه درباره ما.', 'ementash' ),
+				),
+				'year'     => array(
+					'type'  => 'text',
+					'label' => __( 'سال', 'ementash' ),
+				),
 				'subtitle' => array(
 					'type'        => 'text',
 					'label'       => __( 'توضیح کوتاه', 'ementash' ),

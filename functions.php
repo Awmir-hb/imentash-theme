@@ -17,3 +17,4 @@ require EMENTASH_DIR . '/inc/enqueue.php';
 require EMENTASH_DIR . '/inc/customizer.php';
 require EMENTASH_DIR . '/inc/cpt.php';
 require EMENTASH_DIR . '/inc/metaboxes.php';
+require EMENTASH_DIR . '/inc/honors.php';

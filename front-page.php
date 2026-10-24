@@ -1,7 +1,7 @@
 <?php
 /**
  * صفحه اصلی. اگر برگه صفحه اصلی با المنتور ساخته شده باشد فقط محتوای آن نمایش داده می‌شود؛
- * وگرنه سکشن‌های روشن به ترتیب ementash_home_sections() از template-parts/home چاپ می‌شوند.
+ * وگرنه سکشن‌های روشن به ترتیب فهرست زیر از template-parts/home چاپ می‌شوند.
  *
  * @package ementash
  */
@@ -18,10 +18,27 @@ if ( ementash_home_is_elementor() ) {
 	return;
 }
 
-// هدر شفاف فقط وقتی معنا دارد که هیرو زیر آن باشد.
-get_header( null, array( 'variant' => ementash_section_enabled( 'hero' ) ? 'overlay' : 'grid' ) );
+// ترتیب سکشن‌ها؛ برای جابه‌جایی همین فهرست را مرتب کنید.
+// هر نام = template-parts/home/{نام}.php و کلید روشن/خاموش آن در Customizer (ementash_home_sections).
+$ementash_sections = array(
+	'hero',
+	'about',
+	'honors',
+	'industries',
+	'clients',
+	'services',
+	'products',
+	'production-line',
+	'gallery',
+	'textile',
+	'blog',
+);
 
-foreach ( array_keys( ementash_home_sections() ) as $ementash_section ) {
+// هدر شفاف فقط وقتی معنا دارد که هیرو زیر آن باشد.
+$ementash_overlay = 'hero' === $ementash_sections[0] && ementash_section_enabled( 'hero' );
+get_header( null, array( 'variant' => $ementash_overlay ? 'overlay' : 'grid' ) );
+
+foreach ( $ementash_sections as $ementash_section ) {
 	if ( ementash_section_enabled( $ementash_section ) ) {
 		get_template_part( 'template-parts/home/' . $ementash_section );
 	}
