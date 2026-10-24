@@ -410,7 +410,12 @@ function ementash_latin_pattern() {
  * @return string HTML امن برای چاپ.
  */
 function ementash_bdi( $text, $fa_digits = false ) {
-	$parts = preg_split( ementash_latin_pattern(), (string) $text, -1, PREG_SPLIT_DELIM_CAPTURE );
+	$text = (string) $text;
+	// متن تماماً لاتین (بدون حرف فارسی): یکجا، تا علامت‌هایی مثل «!» سر جایشان بمانند.
+	if ( ! preg_match( '/[\x{0600}-\x{06FF}]/u', $text ) && preg_match( '/[A-Za-z\x{00C0}-\x{024F}]/u', $text ) ) {
+		return '<bdi>' . esc_html( $text ) . '</bdi>';
+	}
+	$parts = preg_split( ementash_latin_pattern(), $text, -1, PREG_SPLIT_DELIM_CAPTURE );
 	$out   = '';
 	foreach ( (array) $parts as $i => $part ) {
 		if ( '' === $part ) {

@@ -256,6 +256,94 @@ a.em-svc:hover .em-svc__arrow{background:var(--white);color:var(--navy-800)}
   .em-pl__text{font-size:var(--fs-xs)}
 }
 
+/* ---------- گالری کارخانه ---------- */
+@media (min-width:768px){
+  .em-gallery{padding-block:calc(var(--section-y) + 20px) calc(var(--section-y) + 16px)}
+}
+.em-gal{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-areas:"a a b c" "a a d e";grid-auto-rows:var(--gallery-row);gap:16px;list-style:none;margin:0;padding:0}
+.em-gal__item{position:relative;overflow:hidden;border-radius:var(--radius-sm)}
+.em-gal__item--1{grid-area:a}
+.em-gal__item--2{grid-area:b}
+.em-gal__item--3{grid-area:c}
+.em-gal__item--4{grid-area:d}
+.em-gal__item--5{grid-area:e}
+.em-gal__img{position:absolute;inset:0;transition:transform .8s var(--ease-media)}
+.em-gal__img img{display:block;width:100%;height:100%;object-fit:cover}
+.em-gal__item:hover .em-gal__img{transform:scale(1.05)}
+
+@media (max-width:900px){
+  .em-gal{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:"a a" "b c" "d e"}
+}
+@media (max-width:767px){
+  .em-gallery__all{display:none}
+  .em-gal__item{width:300px;height:220px;border-radius:var(--radius-card)}
+}
+
+/* ---------- کمک‌نساجی ---------- */
+.em-textile__in{display:flex;flex-wrap:wrap;gap:48px;align-items:center}
+.em-textile__body{flex:1 1 420px;min-width:0}
+.em-textile__h2{margin-bottom:16px;line-height:1.35}
+.em-textile__text{max-width:480px;margin:0 0 24px;color:var(--muted)}
+.em-textile__packs{display:flex;flex-wrap:wrap;gap:10px;list-style:none;margin:0 0 32px;padding:0}
+.em-textile__packs li{padding:6px 16px;border:1px solid var(--line);border-radius:var(--radius-pill);font-size:var(--fs-nav)}
+.em-textile__media{position:relative;flex:1 1 460px;min-width:0;min-height:320px;overflow:hidden;border-radius:var(--radius-sm)}
+.em-textile__media img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover}
+/* کد بزرگ توخالی روی عکس */
+.em-textile__badge{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-weight:700;font-size:clamp(64px,8vw,130px);line-height:1;color:transparent;-webkit-text-stroke:1.5px var(--on-dark-3);pointer-events:none}
+
+@media (max-width:767px){
+  /* موبایل: عکس بالای متن (MobileHome.dc.html) */
+  .em-gallery + .em-textile{padding-top:0}
+  .em-textile__in{flex-direction:column;align-items:stretch;gap:18px}
+  .em-textile__media{order:-1;flex:0 0 auto;height:170px;min-height:0;border-radius:var(--radius-md)}
+  .em-textile__badge{font-size:64px;-webkit-text-stroke-width:1.2px}
+  .em-textile__body{flex:0 0 auto}
+  .em-textile__h2{margin-bottom:6px;font-size:24px}
+  .em-textile__text{margin-bottom:14px;font-size:var(--fs-sm)}
+  .em-textile__packs{margin-bottom:18px}
+  .em-textile__packs li{padding:4px 12px;font-size:var(--fs-xs)}
+  .em-textile__btn{display:flex;justify-content:center;width:100%;min-height:50px;padding-block:0}
+}
+
+/* ---------- مقاله‌ها ---------- */
+.em-blog__h2{margin-bottom:10px}
+.em-blog .em-head__text{max-width:520px}
+.em-posts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;list-style:none;margin:0;padding:0}
+.em-post{height:100%;display:flex;flex-direction:column;overflow:hidden;border-radius:12px;background:var(--white);color:var(--ink)}
+.em-post:hover{color:var(--ink)}
+.em-post__img{position:relative;display:block;aspect-ratio:4/3;overflow:hidden}
+.em-post__img img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease-media)}
+.em-post:hover .em-post__img img{transform:scale(1.05)}
+.em-post__body{flex:1;display:flex;flex-direction:column;padding:20px 22px 24px}
+.em-post__meta{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin-bottom:10px;font-size:var(--fs-xs);color:var(--muted)}
+.em-post__cat{padding:2px 10px;border-radius:var(--radius-pill);background:var(--chip-bg);color:var(--blue);font-weight:600}
+.em-post__title{margin:0 0 16px;font-family:var(--font-head);font-weight:600;font-size:20px;line-height:1.55;transition:color .25s ease}
+.em-post:hover .em-post__title{color:var(--blue)}
+.em-post__more{display:inline-flex;align-items:center;gap:8px;margin-top:auto;color:var(--blue);font-size:var(--fs-nav);font-weight:600}
+.em-post__more .em-btn__icon{width:16px;height:16px}
+.em-post:hover .em-btn__icon{transform:translateX(-5px)}
+
+@media (max-width:1000px){
+  .em-posts{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:767px){
+  .em-blog__all,.em-post__more{display:none}
+  .em-blog__h2{margin-bottom:0}
+  .em-posts > li{width:260px}
+  .em-post{border-radius:var(--radius-card)}
+  .em-post__body{padding:14px 16px 16px}
+  .em-post__meta{gap:4px 8px;margin-bottom:4px;font-size:12px}
+  .em-post__cat{padding:0;background:none}
+  .em-post__title{margin:0;font-size:17px}
+}
+
+/* ---------- اسلایدر افقی موبایل (گالری و مقاله‌ها؛ بعد از قواعد شبکه‌ای تا روی آن‌ها اعمال شود) ---------- */
+@media (max-width:767px){
+  .em-gal,.em-posts{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:var(--gutter);margin:0 calc(var(--gutter) * -1);padding:0 var(--gutter) 6px;scrollbar-width:none}
+  .em-gal::-webkit-scrollbar,.em-posts::-webkit-scrollbar{display:none}
+  .em-gal > li,.em-posts > li{flex:0 0 auto;scroll-snap-align:start}
+}
+
 /* ---------- کاهش حرکت ---------- */
 @media (prefers-reduced-motion: reduce){
   .em-hero__media,.em-wi,.em-rise{animation:none!important;transform:none!important;opacity:1!important}
@@ -272,4 +360,5 @@ a.em-svc:hover .em-svc__arrow{background:var(--white);color:var(--navy-800)}
   .em-pl__d,.em-pl__d2,.em-pl__lb,.em-pl__fi{animation:none!important;stroke-dashoffset:0!important;opacity:1!important}
   .em-pl__fl{animation:none!important;opacity:1!important}
   .em-pl__nd,.em-pl__bl,.em-pl__pd{animation:none!important}
+  .em-gal__img,.em-post__img img,.em-post__title{transition:none!important}
 }

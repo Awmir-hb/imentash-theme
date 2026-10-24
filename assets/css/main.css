@@ -116,6 +116,8 @@
   --white-a04:rgba(255,255,255,.04);
   --honor-img-h:180px;      /* ارتفاع ثابت تصویر تندیس */
   --honor-gap:16px;
+  --chip-bg:#DDE5F7;         /* برچسب دسته روی کارت مقاله */
+  --gallery-row:220px;
 }
 @media (max-width:767px){
   :root{
