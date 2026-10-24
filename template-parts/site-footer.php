@@ -15,7 +15,7 @@ $ementash_copy  = (string) ementash_get( 'footer_copyright' );
 		<div class="em-footer__brand">
 			<?php ementash_logo( 'em-logo--footer' ); ?>
 			<?php if ( '' !== $ementash_about ) : ?>
-				<p class="em-footer__about"><?php echo esc_html( $ementash_about ); ?></p>
+				<p class="em-footer__about"><?php echo ementash_bdi( $ementash_about ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
 			<?php endif; ?>
 			<?php ementash_social_links( 'em-footer__soc' ); ?>
 		</div>
@@ -50,9 +50,9 @@ $ementash_copy  = (string) ementash_get( 'footer_copyright' );
 				?>
 				<div class="em-footer__office">
 					<?php if ( '' !== $ementash_label ) : ?>
-						<span class="em-footer__label"><?php echo esc_html( $ementash_label ); ?>:</span>
+						<span class="em-footer__label"><?php echo ementash_bdi( $ementash_label ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>:</span>
 					<?php endif; ?>
-					<?php echo esc_html( $ementash_address ); ?><?php echo ( '' !== $ementash_address && $ementash_phones ) ? esc_html__( '، ', 'ementash' ) : ''; ?>
+					<?php echo ementash_bdi( $ementash_address ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?><?php echo ( '' !== $ementash_address && $ementash_phones ) ? esc_html__( '، ', 'ementash' ) : ''; ?>
 					<?php
 					if ( $ementash_phones ) {
 						ementash_phone_link( $ementash_phones[0] );
@@ -64,6 +64,6 @@ $ementash_copy  = (string) ementash_get( 'footer_copyright' );
 	</div>
 
 	<?php if ( '' !== $ementash_copy ) : ?>
-		<div class="em-footer__bottom"><?php echo esc_html( $ementash_copy ); ?></div>
+		<div class="em-footer__bottom"><?php echo ementash_bdi( $ementash_copy ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
 	<?php endif; ?>
 </footer>

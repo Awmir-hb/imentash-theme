@@ -22,18 +22,18 @@ $ementash_crumbs = isset( $args['crumbs'] ) && is_array( $args['crumbs'] ) ? $ar
 						<span class="em-crumbs__sep" aria-hidden="true">/</span>
 					<?php endif; ?>
 					<?php if ( ! empty( $ementash_crumb['url'] ) ) : ?>
-						<a href="<?php echo esc_url( $ementash_crumb['url'] ); ?>"><?php echo esc_html( $ementash_crumb['label'] ); ?></a>
+						<a href="<?php echo esc_url( $ementash_crumb['url'] ); ?>"><?php echo ementash_bdi( $ementash_crumb['label'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></a>
 					<?php else : ?>
-						<span aria-current="page"><?php echo esc_html( $ementash_crumb['label'] ); ?></span>
+						<span aria-current="page"><?php echo ementash_bdi( $ementash_crumb['label'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
 					<?php endif; ?>
 				<?php endforeach; ?>
 			</nav>
 		<?php endif; ?>
 
-		<h1 class="em-pagehead__title"><?php echo esc_html( $ementash_title ); ?></h1>
+		<h1 class="em-pagehead__title"><?php echo ementash_bdi( $ementash_title ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></h1>
 
 		<?php if ( '' !== $ementash_desc ) : ?>
-			<p class="em-pagehead__desc"><?php echo esc_html( $ementash_desc ); ?></p>
+			<p class="em-pagehead__desc"><?php echo ementash_bdi( $ementash_desc ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
 		<?php endif; ?>
 	</div>
 </section>

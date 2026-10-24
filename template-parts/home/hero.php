@@ -27,7 +27,8 @@ if ( $ementash_poster ) {
 	$ementash_media['data-em-poster'] = '1';
 }
 
-$ementash_lines = ementash_get_lines( 'hero_title' );
+$ementash_eyebrow = (string) ementash_get( 'hero_eyebrow' );
+$ementash_lines   = ementash_get_lines( 'hero_title' );
 if ( ! $ementash_lines ) {
 	$ementash_lines = array( get_bloginfo( 'name' ) );
 }
@@ -82,6 +83,10 @@ $ementash_buttons = array(
 
 	<div class="em-hero__in">
 		<div class="em-hero__body">
+			<?php if ( '' !== $ementash_eyebrow ) : ?>
+				<p class="em-eyebrow em-hero__eyebrow em-rise"><?php echo ementash_bdi( $ementash_eyebrow ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
+			<?php endif; ?>
+
 			<h1 class="em-hero__title" id="em-hero-title">
 				<?php
 				// تأخیر هر کلمه مطابق طراحی: ۰٫۱ ثانیه بین کلمه‌ها و ۰٫۰۵ ثانیه اضافه برای هر خط.
@@ -93,7 +98,7 @@ $ementash_buttons = array(
 						$ementash_out[] = sprintf(
 							'<span class="em-w"><span class="em-wi" style="--em-d:%1$.2Fs">%2$s</span></span>',
 							0.35 + 0.1 * $ementash_index + 0.05 * $ementash_line_no,
-							esc_html( $ementash_word )
+							ementash_bdi( $ementash_word )
 						);
 						++$ementash_index;
 					}
@@ -106,21 +111,21 @@ $ementash_buttons = array(
 			<?php if ( $ementash_words ) : ?>
 				<p class="em-hero__words em-rise">
 					<?php if ( '' !== $ementash_words_lead ) : ?>
-						<span class="em-hero__lead"><?php echo esc_html( $ementash_words_lead ); ?></span>
+						<span class="em-hero__lead"><?php echo ementash_bdi( $ementash_words_lead ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
 					<?php endif; ?>
 					<span class="em-hero__rot" aria-hidden="true">
 						<span class="em-hero__track" data-em-rotate>
 							<?php foreach ( $ementash_words as $ementash_word ) : ?>
-								<span><?php echo esc_html( $ementash_word ); ?></span>
+								<span><?php echo ementash_bdi( $ementash_word ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
 							<?php endforeach; ?>
 						</span>
 					</span>
-					<span class="screen-reader-text"><?php echo esc_html( implode( __( '، ', 'ementash' ), $ementash_words ) ); ?></span>
+					<span class="screen-reader-text"><?php echo ementash_bdi( implode( __( '، ', 'ementash' ), $ementash_words ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
 				</p>
 			<?php endif; ?>
 
 			<?php if ( '' !== $ementash_text ) : ?>
-				<p class="em-hero__text em-rise"><?php echo esc_html( $ementash_text ); ?></p>
+				<p class="em-hero__text em-rise"><?php echo ementash_bdi( $ementash_text ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
 			<?php endif; ?>
 
 			<div class="em-hero__actions em-rise">
@@ -135,7 +140,7 @@ $ementash_buttons = array(
 						esc_url( '' !== $ementash_btn['url'] ? $ementash_btn['url'] : $ementash_btn['auto'] ),
 						esc_attr( $ementash_btn['class'] ),
 						// آیکون «استعلام» قبل از متن و فلش بعد از متن، مطابق طراحی.
-						'quote' === $ementash_btn['icon'] ? $ementash_icon . esc_html( $ementash_btn['label'] ) : esc_html( $ementash_btn['label'] ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						'quote' === $ementash_btn['icon'] ? $ementash_icon . ementash_bdi( $ementash_btn['label'] ) : ementash_bdi( $ementash_btn['label'] ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 						'arrow' === $ementash_btn['icon'] ? $ementash_icon : '' // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					);
 				}

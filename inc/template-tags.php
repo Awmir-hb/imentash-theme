@@ -390,3 +390,44 @@ function ementash_get_items( $post_type, $limit = -1 ) {
 		)
 	);
 }
+
+/**
+ * الگوی توکن لاتین وسط متن فارسی: کلمه‌ای که با حرف لاتین شروع می‌شود و کلمه‌های لاتین/عددی
+ * پشت‌سرش (ISO 9001، TÜV NORD، KX-327، PO-600A). نقطه و خط تیره فقط بین دو حرف/رقم جزو توکن است
+ * تا نقطه آخر جمله داخل bdi نرود.
+ */
+function ementash_latin_pattern() {
+	$w    = '[A-Za-z0-9\x{00C0}-\x{024F}]';
+	$word = $w . '+(?:[.\-\/+&]' . $w . '+)*';
+	return '/([A-Za-z\x{00C0}-\x{024F}]' . $w . '*(?:[.\-\/+&]' . $w . '+)*(?:\s+' . $word . ')*)/u';
+}
+
+/**
+ * متن escape‌شده که توکن‌های لاتینش در <bdi> پیچیده شده‌اند تا جهت جمله فارسی به هم نریزد.
+ *
+ * @param string $text      متن خام.
+ * @param bool   $fa_digits ارقام بخش فارسی به فارسی تبدیل شوند؛ توکن‌های لاتین دست نمی‌خورند.
+ * @return string HTML امن برای چاپ.
+ */
+function ementash_bdi( $text, $fa_digits = false ) {
+	$parts = preg_split( ementash_latin_pattern(), (string) $text, -1, PREG_SPLIT_DELIM_CAPTURE );
+	$out   = '';
+	foreach ( (array) $parts as $i => $part ) {
+		if ( '' === $part ) {
+			continue;
+		}
+		if ( $i % 2 ) {
+			$out .= '<bdi>' . esc_html( $part ) . '</bdi>';
+		} else {
+			$out .= esc_html( $fa_digits ? ementash_fa_num( $part ) : $part );
+		}
+	}
+	return $out;
+}
+
+/**
+ * یک کد کامل (SKU، کد مرحله خط تولید، KX-327) در <bdi dir="ltr">؛ مثلاً «T-101 / 102» یکجا چپ‌به‌راست می‌ماند.
+ */
+function ementash_code( $code ) {
+	return '<bdi dir="ltr">' . esc_html( (string) $code ) . '</bdi>';
+}

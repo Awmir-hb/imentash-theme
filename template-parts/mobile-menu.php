@@ -38,7 +38,7 @@ $ementash_phone    = ementash_main_phone();
 	<div class="em-mmenu__foot">
 		<?php ementash_lang_switcher( 'full', 'em-lang--lg' ); ?>
 		<?php if ( $ementash_phone ) : ?>
-			<div class="em-mmenu__label"><?php echo esc_html( ementash_get( 'main_phone_label' ) ); ?></div>
+			<div class="em-mmenu__label"><?php echo ementash_bdi( ementash_get( 'main_phone_label' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
 			<?php ementash_phone_link( $ementash_phone, 'em-mmenu__phone' ); ?>
 		<?php endif; ?>
 		<?php ementash_social_links( 'em-soc--lg' ); ?>

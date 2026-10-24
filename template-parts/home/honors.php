@@ -25,10 +25,10 @@ $ementash_label = '' !== $ementash_title ? $ementash_title : __( 'افتخارا
 		<div class="em-head em-honors__head">
 			<div>
 				<?php if ( '' !== $ementash_title ) : ?>
-					<h2 class="em-h2" id="<?php echo esc_attr( $ementash_uid ); ?>-title"><?php echo esc_html( $ementash_title ); ?></h2>
+					<h2 class="em-h2" id="<?php echo esc_attr( $ementash_uid ); ?>-title"><?php echo ementash_bdi( $ementash_title ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></h2>
 				<?php endif; ?>
 				<?php if ( '' !== $ementash_text ) : ?>
-					<p class="em-head__text"><?php echo esc_html( $ementash_text ); ?></p>
+					<p class="em-head__text"><?php echo ementash_bdi( $ementash_text ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
 				<?php endif; ?>
 			</div>
 
@@ -72,9 +72,9 @@ $ementash_label = '' !== $ementash_title ? $ementash_title : __( 'افتخارا
 								?>
 							</div>
 						<?php endif; ?>
-						<h3 class="em-honor__title"><?php echo esc_html( get_the_title( $ementash_item ) ); ?></h3>
+						<h3 class="em-honor__title"><?php echo ementash_bdi( get_the_title( $ementash_item ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></h3>
 						<?php if ( '' !== $ementash_year ) : ?>
-							<p class="em-honor__year"><?php echo esc_html( ementash_fa_num( $ementash_year ) ); ?></p>
+							<p class="em-honor__year"><?php echo ementash_bdi( $ementash_year, true ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
 						<?php endif; ?>
 					</li>
 				<?php endforeach; ?>

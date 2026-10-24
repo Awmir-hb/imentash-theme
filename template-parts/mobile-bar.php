@@ -16,5 +16,5 @@ $ementash_phone = ementash_main_phone();
 			<?php esc_html_e( 'تماس', 'ementash' ); ?>
 		</a>
 	<?php endif; ?>
-	<a href="<?php echo esc_url( ementash_contact_url() ); ?>" class="em-mbar__quote"><?php echo esc_html( ementash_get( 'quote_label' ) ); ?></a>
+	<a href="<?php echo esc_url( ementash_contact_url() ); ?>" class="em-mbar__quote"><?php echo ementash_bdi( ementash_get( 'quote_label' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></a>
 </div>

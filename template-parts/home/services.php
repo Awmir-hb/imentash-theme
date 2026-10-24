@@ -19,10 +19,10 @@ $ementash_text  = (string) ementash_get( 'services_text' );
 		<?php if ( '' !== $ementash_title || '' !== $ementash_text ) : ?>
 			<div class="em-head">
 				<?php if ( '' !== $ementash_title ) : ?>
-					<h2 class="em-h2" id="em-services-title"><?php echo esc_html( $ementash_title ); ?></h2>
+					<h2 class="em-h2" id="em-services-title"><?php echo ementash_bdi( $ementash_title ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></h2>
 				<?php endif; ?>
 				<?php if ( '' !== $ementash_text ) : ?>
-					<p class="em-head__text"><?php echo esc_html( $ementash_text ); ?></p>
+					<p class="em-head__text"><?php echo ementash_bdi( $ementash_text ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
 				<?php endif; ?>
 			</div>
 		<?php endif; ?>
@@ -54,7 +54,7 @@ $ementash_text  = (string) ementash_get( 'services_text' );
 						</span>
 						<span class="em-svc__shade" aria-hidden="true"></span>
 						<span class="em-svc__icon"><?php echo ementash_icon( (string) ementash_meta( $ementash_item->ID, 'icon' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
-						<h3 class="em-svc__title"><?php echo esc_html( get_the_title( $ementash_item ) ); ?></h3>
+						<h3 class="em-svc__title"><?php echo ementash_bdi( get_the_title( $ementash_item ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></h3>
 						<?php if ( '' !== $ementash_link ) : ?>
 							<span class="em-svc__arrow"><?php echo ementash_icon( 'arrow', 'em-btn__icon' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
 						<?php endif; ?>

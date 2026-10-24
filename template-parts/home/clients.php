@@ -43,7 +43,7 @@ $ementash_print_half = static function ( $loop, $unique_count, $hidden ) {
 			);
 		}
 		echo '</span>';
-		echo '<span class="em-client__name">' . esc_html( get_the_title( $client ) ) . '</span>';
+		echo '<span class="em-client__name">' . ementash_bdi( get_the_title( $client ) ) . '</span>';
 		echo '</li>';
 	}
 	echo '</ul>';
@@ -52,7 +52,7 @@ $ementash_print_half = static function ( $loop, $unique_count, $hidden ) {
 <section class="em-section em-section--soft em-clients"<?php echo '' !== $ementash_title ? ' aria-labelledby="em-clients-title"' : ''; ?>>
 	<div class="em-container">
 		<?php if ( '' !== $ementash_title ) : ?>
-			<h2 class="em-clients__title" id="em-clients-title"><?php echo esc_html( $ementash_title ); ?></h2>
+			<h2 class="em-clients__title" id="em-clients-title"><?php echo ementash_bdi( $ementash_title ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></h2>
 		<?php endif; ?>
 
 		<div class="em-clients__wrap">

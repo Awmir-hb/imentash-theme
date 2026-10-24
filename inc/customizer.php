@@ -141,7 +141,7 @@ function ementash_customizer_schema() {
 
 	$stat_defaults = array(
 		array( '۱۳۶۷', __( 'سال تأسیس', 'ementash' ), 'calendar' ),
-		array( '۱۹٬۰۰۰', __( 'تن ظرفیت تولید در سال', 'ementash' ), 'factory' ),
+		array( '۱۹٬۰۰۰', __( 'تن در سال', 'ementash' ), 'factory' ),
 		array( '۳۶', __( 'محصول در ۷ دسته', 'ementash' ), 'grid' ),
 		array( 'ISO', __( 'و TUV NORD، گواهینامه بین‌المللی', 'ementash' ), 'shield' ),
 	);
@@ -301,11 +301,17 @@ function ementash_customizer_schema() {
 					'description' => __( 'تا بارگذاری ویدئو و برای کاربرانی که حرکت را کم کرده‌اند نمایش داده می‌شود.', 'ementash' ),
 					'default'     => 0,
 				),
+				'hero_eyebrow'      => array(
+					'type'        => 'text',
+					'label'       => __( 'برچسب کوچک بالای تیتر', 'ementash' ),
+					'description' => __( 'اگر خالی باشد نمایش داده نمی‌شود.', 'ementash' ),
+					'default'     => __( 'شرکت دانش‌بنیان ایمن تاش سپاهان (سی‌پیکو)', 'ementash' ),
+				),
 				'hero_title'        => array(
 					'type'        => 'lines',
 					'label'       => __( 'تیتر', 'ementash' ),
 					'description' => __( 'هر خط، یک خط تیتر.', 'ementash' ),
-					'default'     => __( "از کارخانه‌ی ما\nتا خط مقدم آتش", 'ementash' ),
+					'default'     => __( 'بزرگ‌ترین تولیدکننده مواد شیمیایی', 'ementash' ),
 				),
 				'hero_words_lead'   => array(
 					'type'    => 'text',
@@ -316,12 +322,12 @@ function ementash_customizer_schema() {
 					'type'        => 'lines',
 					'label'       => __( 'کلمات چرخان', 'ementash' ),
 					'description' => __( 'هر خط یک مورد.', 'ementash' ),
-					'default'     => __( "پودر آتش‌نشانی\nفوم آتش‌نشانی\nمواد حفاری\nآنتی‌فوم و دیفومر", 'ementash' ),
+					'default'     => __( "آتش‌نشانی\nحفاری\nآنتی‌فوم\nدیفومر", 'ementash' ),
 				),
 				'hero_text'         => array(
 					'type'    => 'textarea',
 					'label'   => __( 'متن', 'ementash' ),
-					'default' => __( 'ایمن تاش سپاهان (سی‌پیکو) از سال ۱۳۶۷، با ظرفیت ۱۹ هزار تن در سال، برای پالایشگاه‌ها، پتروشیمی‌ها و صنایع نفت و گاز تولید می‌کند.', 'ementash' ),
+					'default' => __( 'تولید مواد شیمیایی تخصصی متناسب با نیاز عملیاتی صنایع، با ظرفیت ۱۹ هزار تن در سال.', 'ementash' ),
 				),
 				'hero_btn1_label'   => array(
 					'type'    => 'text',
@@ -358,7 +364,7 @@ function ementash_customizer_schema() {
 				'home_about_text'      => array(
 					'type'    => 'textarea',
 					'label'   => __( 'متن', 'ementash' ),
-					'default' => __( 'ایمن تاش سپاهان از سال ۱۳۶۷ موادی می‌سازد که باید درست در لحظه‌ی حادثه کار کنند: پودر و فوم آتش‌نشانی برای پالایشگاه‌ها و پتروشیمی‌ها، و مواد حفاری و ضدکف برای صنایع نفت و گاز.', 'ementash' ),
+					'default' => __( 'شرکت دانش‌بنیان ایمن تاش سپاهان (سی‌پیکو)، عضو گروه صنعتی تاش، از سال ۱۳۶۷ با تکیه بر دانش فنی و تجربه صنعتی فعالیت می‌کند. تولید مواد شیمیایی آتش‌نشانی را آغاز کرد و پس از آن به تولید مواد شیمیایی حفاری، آنتی‌فوم و دیفومر رسید. امروز با یکی از بزرگ‌ترین مراکز تحقیق و توسعه بخش خصوصی، محصولاتش را به صنایع نفت، گاز، پتروشیمی، فولاد و هواپیمایی عرضه و به چند کشور صادر می‌کند.', 'ementash' ),
 				),
 				'home_about_image'     => array(
 					'type'    => 'image',

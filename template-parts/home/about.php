@@ -19,7 +19,7 @@ $ementash_url     = '' !== $ementash_url ? $ementash_url : ementash_about_url();
 		<div class="em-about__grid">
 			<div class="em-about__body">
 				<?php if ( '' !== $ementash_eyebrow ) : ?>
-					<h2 class="em-eyebrow" id="em-about-title"><?php echo esc_html( $ementash_eyebrow ); ?></h2>
+					<h2 class="em-eyebrow" id="em-about-title"><?php echo ementash_bdi( $ementash_eyebrow ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></h2>
 				<?php endif; ?>
 
 				<?php if ( '' !== $ementash_text ) : ?>
@@ -27,7 +27,7 @@ $ementash_url     = '' !== $ementash_url ? $ementash_url : ementash_about_url();
 						<?php
 						$ementash_out = array();
 						foreach ( ementash_words( $ementash_text ) as $ementash_word ) {
-							$ementash_out[] = '<span class="em-mw">' . esc_html( $ementash_word ) . '</span>';
+							$ementash_out[] = '<span class="em-mw">' . ementash_bdi( $ementash_word ) . '</span>';
 						}
 						echo implode( ' ', $ementash_out ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- هر کلمه escape شده.
 						?>
@@ -36,7 +36,7 @@ $ementash_url     = '' !== $ementash_url ? $ementash_url : ementash_about_url();
 
 				<?php if ( '' !== $ementash_label ) : ?>
 					<a href="<?php echo esc_url( $ementash_url ); ?>" class="em-btn em-btn--dark">
-						<?php echo esc_html( $ementash_label ); ?>
+						<?php echo ementash_bdi( $ementash_label ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 						<?php echo ementash_icon( 'arrow', 'em-btn__icon' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 					</a>
 				<?php endif; ?>

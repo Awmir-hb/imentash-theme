@@ -21,6 +21,8 @@
 .em-hero__in{position:relative;z-index:2;height:100%;max-width:var(--container);margin:0 auto;padding:110px var(--gutter) 40px;display:flex;flex-direction:column;justify-content:center}
 .em-hero__body{max-width:680px}
 
+/* برچسب کوچک بالای تیتر؛ روی زمینه تیره آبی روشن */
+.em-hero__eyebrow{margin-bottom:18px;color:var(--blue-light);animation-delay:.15s}
 .em-hero__title{margin:0 0 30px;font-family:var(--font-head);font-weight:var(--fw-display);font-size:clamp(46px,6.2vw,92px);line-height:1.28}
 .em-hero__line{display:block}
 .em-w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.12em;margin-bottom:-.12em}
@@ -40,6 +42,7 @@
   .em-hero__shade{background:var(--hero-shade-mobile)}
   /* متن پایین هیرو؛ فاصله پایین شامل نوار ثابت تماس هم هست */
   .em-hero__in{justify-content:flex-end;padding:0 var(--gutter) calc(40px + var(--mbar-space))}
+  .em-hero__eyebrow{margin-bottom:10px;font-size:var(--fs-xs)}
   .em-hero__title{margin-bottom:14px;font-size:32px;line-height:1.35}
   .em-hero__words{gap:.4em;margin-bottom:10px;font-size:15px}
   .em-hero__text{margin-bottom:20px;font-size:var(--fs-xs);line-height:1.85}

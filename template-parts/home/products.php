@@ -71,10 +71,10 @@ foreach ( $ementash_terms as $ementash_term ) {
 	<div class="em-container">
 		<div class="em-head">
 			<?php if ( '' !== $ementash_title ) : ?>
-				<h2 class="em-h2" id="em-products-title"><?php echo esc_html( $ementash_title ); ?></h2>
+				<h2 class="em-h2" id="em-products-title"><?php echo ementash_bdi( $ementash_title ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></h2>
 			<?php endif; ?>
 			<?php if ( '' !== $ementash_label ) : ?>
-				<a class="em-link em-products__all" href="<?php echo esc_url( ementash_shop_url() ); ?>"><?php echo esc_html( str_replace( '{count}', ementash_fa_num( $ementash_total ), $ementash_label ) ); ?></a>
+				<a class="em-link em-products__all" href="<?php echo esc_url( ementash_shop_url() ); ?>"><?php echo ementash_bdi( str_replace( '{count}', ementash_fa_num( $ementash_total ), $ementash_label ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></a>
 			<?php endif; ?>
 		</div>
 
@@ -90,8 +90,8 @@ foreach ( $ementash_terms as $ementash_term ) {
 								: '<span class="em-ph"></span>';
 							?>
 						</span>
-						<span class="em-pcat__name"><?php echo esc_html( $ementash_cat['name'] ); ?></span>
-						<span class="em-pcat__count"><?php echo esc_html( $ementash_cat['count'] ); ?></span>
+						<span class="em-pcat__name"><?php echo ementash_bdi( $ementash_cat['name'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
+						<span class="em-pcat__count"><?php echo ementash_bdi( $ementash_cat['count'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
 					</button>
 				<?php endforeach; ?>
 			</div>
@@ -118,15 +118,15 @@ foreach ( $ementash_terms as $ementash_term ) {
 							</span>
 							<span class="em-ppanel__shade" aria-hidden="true"></span>
 							<span class="em-ppanel__body">
-								<span class="em-ppanel__count"><?php echo esc_html( $ementash_cat['count'] ); ?></span>
-								<span class="em-ppanel__title"><?php echo esc_html( $ementash_cat['name'] ); ?></span>
+								<span class="em-ppanel__count"><?php echo ementash_bdi( $ementash_cat['count'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
+								<span class="em-ppanel__title"><?php echo ementash_bdi( $ementash_cat['name'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
 								<?php if ( '' !== $ementash_cat['desc'] ) : ?>
-									<span class="em-ppanel__desc"><?php echo esc_html( $ementash_cat['desc'] ); ?></span>
+									<span class="em-ppanel__desc"><?php echo ementash_bdi( $ementash_cat['desc'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
 								<?php endif; ?>
 								<?php if ( $ementash_cat['codes'] ) : ?>
 									<span class="em-ppanel__codes" dir="ltr">
 										<?php foreach ( $ementash_cat['codes'] as $ementash_code ) : ?>
-											<span><?php echo esc_html( $ementash_code ); ?></span>
+											<span><?php echo ementash_code( $ementash_code ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
 										<?php endforeach; ?>
 									</span>
 								<?php endif; ?>

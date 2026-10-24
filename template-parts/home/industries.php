@@ -18,7 +18,7 @@ $ementash_title = (string) ementash_get( 'industries_title' );
 	<div class="em-container">
 		<?php if ( '' !== $ementash_title ) : ?>
 			<div class="em-head">
-				<h2 class="em-h2" id="em-industries-title"><?php echo esc_html( $ementash_title ); ?></h2>
+				<h2 class="em-h2" id="em-industries-title"><?php echo ementash_bdi( $ementash_title ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></h2>
 			</div>
 		<?php endif; ?>
 
@@ -49,7 +49,7 @@ $ementash_title = (string) ementash_get( 'industries_title' );
 						</span>
 						<span class="em-card__shade" aria-hidden="true"></span>
 						<div class="em-ind__foot">
-							<h3 class="em-ind__title"><?php echo esc_html( get_the_title( $ementash_item ) ); ?></h3>
+							<h3 class="em-ind__title"><?php echo ementash_bdi( get_the_title( $ementash_item ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></h3>
 							<?php if ( '' !== $ementash_link ) : ?>
 								<span class="em-ind__arrow"><?php echo ementash_icon( 'arrow', 'em-btn__icon' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
 							<?php endif; ?>

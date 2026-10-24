@@ -28,9 +28,9 @@ if ( ! $ementash_stats ) {
 		<li class="em-stat">
 			<?php echo ementash_icon( $ementash_stat['icon'], 'em-stat__icon' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 			<div>
-				<div class="em-stat__num" dir="auto"><?php echo esc_html( ementash_fa_num( $ementash_stat['number'] ) ); ?></div>
+				<div class="em-stat__num"><?php echo ementash_bdi( $ementash_stat['number'], true ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
 				<?php if ( '' !== $ementash_stat['label'] ) : ?>
-					<div class="em-stat__label"><?php echo esc_html( $ementash_stat['label'] ); ?></div>
+					<div class="em-stat__label"><?php echo ementash_bdi( $ementash_stat['label'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
 				<?php endif; ?>
 			</div>
 		</li>

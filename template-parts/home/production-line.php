@@ -39,10 +39,10 @@ $ementash_labels = array(
 <section class="em-section em-pl"<?php echo '' !== $ementash_title ? ' aria-labelledby="em-pl-title"' : ''; ?> data-em-pl>
 	<div class="em-container">
 		<?php if ( '' !== $ementash_title ) : ?>
-			<h2 class="em-h2 em-pl__h2" id="em-pl-title"><?php echo esc_html( $ementash_title ); ?></h2>
+			<h2 class="em-h2 em-pl__h2" id="em-pl-title"><?php echo ementash_bdi( $ementash_title ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></h2>
 		<?php endif; ?>
 		<?php if ( '' !== $ementash_text ) : ?>
-			<p class="em-pl__intro"><?php echo esc_html( $ementash_text ); ?></p>
+			<p class="em-pl__intro"><?php echo ementash_bdi( $ementash_text ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
 		<?php endif; ?>
 
 		<div class="em-pl__grid">
@@ -96,11 +96,11 @@ $ementash_labels = array(
 					}
 					?>
 					<li class="em-pl__step">
-						<span class="em-pl__code" dir="ltr"><?php echo esc_html( $ementash_step['code'] ); ?></span>
+						<span class="em-pl__code"><?php echo ementash_code( $ementash_step['code'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
 						<div>
-							<h3 class="em-pl__title"><?php echo esc_html( $ementash_step['title'] ); ?></h3>
+							<h3 class="em-pl__title"><?php echo ementash_bdi( $ementash_step['title'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></h3>
 							<?php if ( '' !== $ementash_step['text'] ) : ?>
-								<p class="em-pl__text"><?php echo esc_html( $ementash_step['text'] ); ?></p>
+								<p class="em-pl__text"><?php echo ementash_bdi( $ementash_step['text'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
 							<?php endif; ?>
 						</div>
 					</li>
