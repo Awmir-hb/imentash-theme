@@ -94,15 +94,41 @@ function ementash_phone_link( $phone, $class = '' ) {
 }
 
 /**
- * شناسه برگه ویژه (contact یا about): برگه انتخاب‌شده در تنظیمات، وگرنه برگه با همان نامک.
+ * فایل قالب برگه هر برگه ویژه.
  */
-function ementash_page_id( $slug ) {
-	$id = absint( ementash_get( $slug . '_page' ) );
-	if ( $id && 'publish' === get_post_status( $id ) ) {
-		return $id;
+function ementash_page_templates() {
+	return array(
+		'about'   => 'page-about.php',
+		'contact' => 'page-contact.php',
+	);
+}
+
+/**
+ * شناسه برگه ویژه (about یا contact): برگه انتخاب‌شده در Customizer ← برگه‌ها،
+ * وگرنه اولین برگه منتشرشده‌ای که قالب «درباره ما» یا «تماس با ما» دارد. نامک مهم نیست.
+ */
+function ementash_page_id( $key ) {
+	static $cache = array();
+	if ( isset( $cache[ $key ] ) ) {
+		return $cache[ $key ];
 	}
-	$page = get_page_by_path( $slug );
-	return $page ? (int) $page->ID : 0;
+
+	$id = absint( ementash_get( $key . '_page' ) );
+	if ( ! $id || 'publish' !== get_post_status( $id ) ) {
+		$templates = ementash_page_templates();
+		$pages     = isset( $templates[ $key ] ) ? get_pages(
+			array(
+				'meta_key'    => '_wp_page_template', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+				'meta_value'  => $templates[ $key ], // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
+				'number'      => 1,
+				'sort_column' => 'menu_order,ID',
+			)
+		) : array();
+		$id = $pages ? (int) $pages[0]->ID : 0;
+	}
+
+	$cache[ $key ] = $id;
+	return $id;
 }
 
 /**

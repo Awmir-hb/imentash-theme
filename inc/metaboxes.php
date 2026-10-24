@@ -235,6 +235,9 @@ function ementash_meta_boxes() {
  * آیا این برگه، برگه درباره ما است؟
  */
 function ementash_is_about_page( $post ) {
+	if ( 'page-about.php' === get_page_template_slug( $post ) ) {
+		return true;
+	}
 	$id = ementash_page_id( 'about' );
 	return $id && (int) $post->ID === $id;
 }
@@ -581,6 +584,8 @@ function ementash_render_inquiry_box( $post ) {
 			echo esc_html( isset( $types[ $value ] ) ? $types[ $value ] : $value );
 		} elseif ( 'product' === $field && absint( $value ) && get_post( absint( $value ) ) ) {
 			printf( '<a href="%1$s">%2$s</a>', esc_url( get_edit_post_link( absint( $value ) ) ), esc_html( get_the_title( absint( $value ) ) ) );
+		} elseif ( 'mail' === $field ) {
+			echo esc_html( 'sent' === $value ? __( 'ارسال شد', 'ementash' ) : __( 'ارسال نشد (درخواست ذخیره شده است)', 'ementash' ) );
 		} elseif ( 'phone' === $field ) {
 			printf( '<a href="%1$s" dir="ltr">%2$s</a>', esc_url( ementash_tel_href( $value ), array( 'tel' ) ), esc_html( $value ) );
 		} elseif ( 'email' === $field ) {

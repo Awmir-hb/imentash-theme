@@ -123,6 +123,7 @@
   --muted-2:#6B7393;
   --ink-2:#3E4668;
   --shadow-card:0 10px 30px rgba(0,0,127,.12);
+  --radius-xl:20px;
 }
 @media (max-width:767px){
   :root{

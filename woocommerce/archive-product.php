@@ -12,7 +12,8 @@ get_header();
 
 if ( ! ementash_elementor_location( 'archive' ) ) {
 	$ementash_term = is_product_category() ? get_queried_object() : null;
-	$ementash_desc = $ementash_term ? wp_strip_all_tags( term_description( $ementash_term ) ) : (string) ementash_get( 'shop_intro' );
+	// زیرعنوان: توضیح دسته، یا خلاصه برگه فروشگاه؛ اگر خالی بود چیزی نمایش داده نمی‌شود.
+	$ementash_desc = $ementash_term ? wp_strip_all_tags( term_description( $ementash_term ) ) : ( is_shop() && ! is_search() ? ementash_page_subtitle( wc_get_page_id( 'shop' ) ) : '' );
 
 	get_template_part(
 		'template-parts/page-head',

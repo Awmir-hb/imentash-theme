@@ -198,6 +198,7 @@ function ementash_inquiry_fields() {
 		'product' => __( 'محصول', 'ementash' ),
 		'message' => __( 'محصول و مقدار مورد نیاز', 'ementash' ),
 		'ip'      => __( 'آی‌پی', 'ementash' ),
+		'mail'    => __( 'ارسال ایمیل', 'ementash' ),
 	);
 }
 
@@ -293,3 +294,31 @@ function ementash_inquiry_row_actions( $actions, $post ) {
 	return $actions;
 }
 add_filter( 'post_row_actions', 'ementash_inquiry_row_actions', 10, 2 );
+
+/**
+ * موارد em_certificate از یک نوع (certificate یا honor) به ترتیب menu_order.
+ *
+ * @return WP_Post[]
+ */
+function ementash_get_certificates( $kind ) {
+	return get_posts(
+		array(
+			'post_type'        => 'em_certificate',
+			'post_status'      => 'publish',
+			'posts_per_page'   => -1,
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- فهرست کوتاه.
+			'meta_query'       => array(
+				array(
+					'key'   => '_ementash_kind',
+					'value' => sanitize_key( $kind ),
+				),
+			),
+			'orderby'          => array(
+				'menu_order' => 'ASC',
+				'title'      => 'ASC',
+			),
+			'no_found_rows'    => true,
+			'suppress_filters' => false,
+		)
+	);
+}

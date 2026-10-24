@@ -14,26 +14,7 @@ defined( 'ABSPATH' ) || exit;
  * @return WP_Post[]
  */
 function ementash_get_honors() {
-	return get_posts(
-		array(
-			'post_type'        => 'em_certificate',
-			'post_status'      => 'publish',
-			'posts_per_page'   => -1,
-			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- فهرست کوتاه، فقط صفحه اصلی.
-			'meta_query'       => array(
-				array(
-					'key'   => '_ementash_kind',
-					'value' => 'honor',
-				),
-			),
-			'orderby'          => array(
-				'menu_order' => 'ASC',
-				'title'      => 'ASC',
-			),
-			'no_found_rows'    => true,
-			'suppress_filters' => false,
-		)
-	);
+	return ementash_get_certificates( 'honor' );
 }
 
 function ementash_honors_assets() {
@@ -55,9 +36,10 @@ function ementash_honors_assets() {
  * اگر شورت‌کد جای دیگری (مثل ویجت المنتور) بیاید، خود شورت‌کد فایل‌ها را صدا می‌زند.
  */
 function ementash_honors_enqueue() {
-	$home = is_front_page() && ! ementash_home_is_elementor() && ementash_section_enabled( 'honors' );
-	$code = is_singular() && has_shortcode( (string) get_post_field( 'post_content', get_queried_object_id() ), 'ementash_honors' );
-	if ( $home || $code ) {
+	$home  = is_front_page() && ! ementash_home_is_elementor() && ementash_section_enabled( 'honors' );
+	$about = ementash_is_about_view();
+	$code  = is_singular() && has_shortcode( (string) get_post_field( 'post_content', get_queried_object_id() ), 'ementash_honors' );
+	if ( $home || $about || $code ) {
 		ementash_honors_assets();
 	}
 }

@@ -1,0 +1,77 @@
+/* =========================================================
+   قالب ایمن تاش — صفحه درباره ما (About.dc.html)
+   فقط در برگه درباره ما بارگذاری می‌شود. توکن‌ها در :root فایل main.css.
+   ========================================================= */
+
+/* ---------- متن شرکت + عکس ---------- */
+.em-story__in{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:48px;align-items:center}
+.em-story__in--full{grid-template-columns:minmax(0,1fr)}
+.em-story__text{font-size:17px;color:var(--ink-2)}
+.em-story__text p{margin:0 0 16px}
+.em-story__text > :last-child{margin-bottom:0}
+/* تیتر داخل متن برگه مثل تیتر سکشن‌ها */
+.em-story__text h2{margin:0 0 28px;font-family:var(--font-head);font-weight:var(--fw-display);font-size:clamp(30px,3vw,44px);line-height:1.3;color:var(--ink)}
+.em-story__img{position:relative;aspect-ratio:5/4;overflow:hidden;border-radius:var(--radius-lg);background:var(--surface-2)}
+.em-story__img img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover}
+@media (max-width:1066px){
+  .em-story__text h2{font-weight:var(--fw-display-sm)}
+}
+
+.em-about-stats{padding-bottom:var(--section-y)}
+/* وقتی متن شرکت خالی است، آمار مستقیم بعد از سربرگ می‌آید */
+.em-pagehead + .em-about-stats{padding-top:var(--section-y)}
+
+/* ---------- خط زمانی ---------- */
+.em-timeline{background-color:var(--navy-900);background-image:var(--grid-lines);background-size:var(--grid-size) var(--grid-size);color:var(--white)}
+.em-timeline__h2{margin-bottom:40px}
+.em-tl{position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:28px 0;list-style:none;margin:0;padding:0}
+.em-tl::before{content:"";position:absolute;top:9px;left:0;right:0;height:2px;background:var(--line-on-dark-4)}
+.em-tl__item{position:relative;padding-inline-end:16px}
+.em-tl__dot{position:relative;display:block;width:20px;height:20px;margin-bottom:18px;border:2px solid var(--blue-light);border-radius:50%;background:var(--navy-900)}
+.em-tl__item--key .em-tl__dot{border-color:var(--white);background:var(--blue-light)}
+.em-tl__year{display:block;font-family:var(--font-head);font-weight:600;font-size:26px;line-height:1.4}
+.em-tl__title{margin:4px 0 2px;font-family:var(--font-body);font-size:var(--fs-body);font-weight:600;line-height:1.6;color:var(--white)}
+.em-tl__text{margin:0;font-size:var(--fs-sm);color:var(--on-dark-2)}
+/* وقتی رویدادها چندردیفه می‌شوند خط افقی معنا ندارد */
+@media (max-width:1000px){
+  .em-tl::before{display:none}
+}
+
+/* ---------- گواهینامه‌ها ---------- */
+.em-certs__list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;list-style:none;margin:0;padding:0}
+.em-cert{display:block;color:var(--ink)}
+.em-cert:hover{color:var(--ink)}
+a.em-cert:hover .em-cert__title{color:var(--blue)}
+.em-cert__img{position:relative;display:block;aspect-ratio:3/4;overflow:hidden;border:1px solid var(--line-soft);border-radius:var(--radius-card);background:var(--surface-2)}
+/* اسکن گواهینامه کامل دیده شود */
+.em-cert__img img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:contain}
+.em-cert__title{margin:12px 0 0;font-family:var(--font-body);font-size:var(--fs-body);font-weight:600;line-height:1.6;transition:color .2s ease}
+.em-cert__sub{display:block;font-size:var(--fs-sm);color:var(--muted)}
+.em-cert__pdf{display:inline-block;margin-top:6px;font-size:var(--fs-xs);font-weight:600;color:var(--blue)}
+
+/* ---------- کارت‌های تحقیق و توسعه و مشتری‌مداری ---------- */
+.em-acards--rd{background:var(--surface-2)}
+.em-acards__h2{margin-bottom:28px}
+.em-acards--rd .em-acards__h2{margin-bottom:10px}
+.em-acards__text{max-width:640px;margin:0 0 28px;color:var(--muted)}
+.em-acards__list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;list-style:none;margin:0;padding:0}
+.em-acards--rd .em-acards__list{grid-template-columns:repeat(3,minmax(0,1fr))}
+.em-acard{padding:24px;border:1px solid var(--line-soft);border-radius:var(--radius-md);background:var(--white)}
+.em-acard__icon{display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;margin-bottom:14px;border-radius:50%;background:var(--bg-soft);color:var(--blue)}
+.em-acard__icon svg{width:24px;height:24px}
+.em-acard__title{margin:0 0 4px;font-family:var(--font-body);font-size:var(--fs-body);font-weight:600;line-height:1.6}
+.em-acard__text{margin:0;font-size:var(--fs-sm);color:var(--muted)}
+
+@media (max-width:1000px){
+  .em-certs__list,.em-acards__list,.em-acards--rd .em-acards__list{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:900px){
+  .em-story__in{grid-template-columns:minmax(0,1fr);gap:28px}
+}
+@media (max-width:560px){
+  .em-certs__list,.em-acards__list,.em-acards--rd .em-acards__list{grid-template-columns:minmax(0,1fr)}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .em-cert__title{transition:none!important}
+}

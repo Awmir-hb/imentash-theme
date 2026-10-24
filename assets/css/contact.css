@@ -1,0 +1,81 @@
+/* =========================================================
+   قالب ایمن تاش — صفحه تماس (Contact.dc.html)
+   فقط در برگه تماس بارگذاری می‌شود. خطاها بدون قرمز: حاشیه پررنگ آبی برند + متن.
+   ========================================================= */
+
+/* ---------- دفاتر ---------- */
+.em-offices{padding-top:56px}
+.em-offices__list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;list-style:none;margin:0;padding:0}
+.em-office{padding:26px;border:1px solid var(--line-soft);border-radius:var(--radius-md);background:var(--white)}
+.em-office__icon{display:inline-flex;align-items:center;justify-content:center;width:50px;height:50px;margin-bottom:14px;border-radius:50%;background:var(--bg-soft);color:var(--blue)}
+.em-office__icon svg{width:24px;height:24px}
+.em-office__title{margin:0 0 8px;font-family:var(--font-head);font-weight:600;font-size:22px;line-height:1.5}
+.em-office__address{margin:0 0 14px;color:var(--muted);font-size:var(--fs-nav)}
+.em-office__phones{display:flex;flex-direction:column;align-items:flex-start;gap:4px;font-weight:600}
+.em-office__phones a{color:var(--ink)}
+.em-office__phones a:hover{color:var(--blue)}
+
+/* ---------- فرم + ستون کناری ---------- */
+.em-contact{padding-top:32px}
+.em-contact__in{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:32px;align-items:stretch}
+.em-contact__in--full{grid-template-columns:minmax(0,1fr)}
+
+.em-form{position:relative;display:flex;flex-wrap:wrap;gap:18px;align-content:start;padding:34px;border-radius:var(--radius-xl);background:var(--surface-2)}
+.em-form__head,.em-form__status,.em-form__product,.em-form__types,.em-field--wide,.em-form__actions{flex:1 1 100%}
+.em-form__title{margin:0 0 4px;font-family:var(--font-head);font-weight:var(--fw-display);font-size:clamp(26px,2.6vw,34px);line-height:1.35}
+.em-form__text{margin:0;color:var(--muted);font-size:var(--fs-nav)}
+/* زیر 1231px اندازه کمتر از ۳۲ پیکسل است (2.6vw < 32px) */
+@media (max-width:1230px){
+  .em-form__title{font-weight:var(--fw-display-sm)}
+}
+
+.em-form__status{padding:14px 16px;border-radius:12px;font-weight:600}
+.em-form__status[hidden]{display:none}
+.em-form__status--ok{background:var(--chip-bg);color:var(--blue)}
+.em-form__status--error{border:2px solid var(--blue);background:var(--white);color:var(--ink)}
+.em-form__product{margin:0;font-size:var(--fs-sm);color:var(--muted)}
+
+.em-form__types{display:flex;flex-wrap:wrap;gap:10px;margin:0;padding:0;border:0}
+.em-form__types legend{margin-bottom:10px;padding:0;font-size:var(--fs-sm);color:var(--muted)}
+.em-radio{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border:1px solid var(--line);border-radius:var(--radius-pill);background:var(--white);font-size:var(--fs-nav);color:var(--ink);cursor:pointer}
+.em-radio input{margin:0;accent-color:var(--blue)}
+.em-radio:has(input:checked){border-color:var(--blue)}
+.em-radio:has(input:focus-visible){outline:2px solid var(--blue);outline-offset:2px}
+
+.em-field{flex:1 1 220px;min-width:0}
+.em-field label{display:block;font-size:var(--fs-sm);color:var(--muted)}
+.em-field input,.em-field textarea{display:block;width:100%;margin-top:6px;padding:13px 14px;border:1px solid var(--line);border-radius:10px;background:var(--white);color:var(--ink);font:inherit;font-size:var(--fs-nav)}
+.em-field textarea{min-height:120px;resize:vertical}
+.em-field input:focus-visible,.em-field textarea:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
+.em-field [aria-invalid="true"]{border:2px solid var(--blue)}
+.em-field__error{margin:6px 0 0;font-size:var(--fs-xs);font-weight:600;color:var(--blue)}
+.em-field__error[hidden]{display:none}
+
+/* honeypot: پنهان با clip، نه display:none تا ربات‌ها پرش کنند؛ جابه‌جایی منفی در RTL اسکرول افقی می‌سازد */
+.em-form__hp{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);clip-path:inset(50%);white-space:nowrap;border:0}
+
+.em-form__submit{padding:14px 36px;border:0;font:inherit;font-weight:600;cursor:pointer}
+.em-form__submit:disabled{opacity:.7;cursor:wait}
+
+.em-contact__side{display:flex;flex-direction:column;gap:20px}
+.em-map{position:relative;flex:1;min-height:340px;margin:0;overflow:hidden;border-radius:var(--radius-xl);background:var(--surface-2)}
+.em-map img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover}
+.em-map figcaption{position:absolute;bottom:16px;inset-inline-start:16px}
+.em-map__link{display:inline-block;padding:10px 18px;border-radius:var(--radius-pill);background:var(--white);color:var(--blue);font-size:var(--fs-sm);font-weight:600;box-shadow:var(--shadow-card)}
+.em-map__link:hover{color:var(--blue-hover)}
+.em-cinfo{display:flex;flex-direction:column;gap:10px;list-style:none;margin:0;padding:20px 22px;border:1px solid var(--line-soft);border-radius:var(--radius-md);font-size:var(--fs-nav)}
+.em-cinfo li{display:flex;gap:10px;align-items:center}
+.em-cinfo svg{flex:0 0 auto;width:20px;height:20px;color:var(--blue)}
+
+.em-contact-extra{padding-top:0}
+
+@media (max-width:900px){
+  .em-offices__list,.em-contact__in{grid-template-columns:minmax(0,1fr)}
+  .em-map{min-height:240px}
+}
+@media (max-width:767px){
+  .em-offices{padding-top:28px}
+  .em-office{padding:20px}
+  .em-form{padding:22px}
+  .em-form__submit{width:100%}
+}

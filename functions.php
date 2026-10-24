@@ -19,3 +19,4 @@ require EMENTASH_DIR . '/inc/cpt.php';
 require EMENTASH_DIR . '/inc/metaboxes.php';
 require EMENTASH_DIR . '/inc/honors.php';
 require EMENTASH_DIR . '/inc/woocommerce.php';
+require EMENTASH_DIR . '/inc/contact-form.php';

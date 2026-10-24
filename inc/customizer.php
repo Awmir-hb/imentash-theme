@@ -61,18 +61,21 @@ function ementash_customizer_schema() {
 		'isfahan' => array(
 			'name'    => __( 'دفتر اصفهان', 'ementash' ),
 			'label'   => __( 'اصفهان', 'ementash' ),
+			'title'   => __( 'دفتر مرکزی اصفهان', 'ementash' ),
 			'address' => __( 'چهارباغ بالا، مجتمع پارک، پلاک ۵۳۸', 'ementash' ),
 			'phones'  => "031-36671919\n031-36673337",
 		),
 		'tehran'  => array(
 			'name'    => __( 'دفتر تهران', 'ementash' ),
 			'label'   => __( 'تهران', 'ementash' ),
+			'title'   => __( 'دفتر تهران', 'ementash' ),
 			'address' => __( 'یوسف‌آباد، خیابان فتحی شقاقی، خیابان جهان‌مهر، پلاک ۹۴، طبقه ۳، واحد ۵', 'ementash' ),
 			'phones'  => "021-88350547\n021-88351762",
 		),
 		'factory' => array(
 			'name'    => __( 'کارخانه', 'ementash' ),
 			'label'   => __( 'کارخانه', 'ementash' ),
+			'title'   => __( 'کارخانه', 'ementash' ),
 			'address' => '',
 			'phones'  => '',
 		),
@@ -107,6 +110,12 @@ function ementash_customizer_schema() {
 			/* translators: %s: نام دفتر */
 			'label'   => sprintf( __( '%s: برچسب کوتاه', 'ementash' ), $office['name'] ),
 			'default' => $office['label'],
+		);
+		$contact[ 'office_' . $key . '_title' ]   = array(
+			'type'    => 'text',
+			/* translators: %s: نام دفتر */
+			'label'   => sprintf( __( '%s: عنوان کارت صفحه تماس', 'ementash' ), $office['name'] ),
+			'default' => $office['title'],
 		);
 		$contact[ 'office_' . $key . '_address' ] = array(
 			'type'    => 'textarea',
@@ -269,26 +278,64 @@ function ementash_customizer_schema() {
 				'contact_page' => array(
 					'type'        => 'page',
 					'label'       => __( 'برگه تماس با ما', 'ementash' ),
-					'description' => __( 'اگر انتخاب نشود برگه با نامک contact استفاده می‌شود.', 'ementash' ),
+					'description' => __( 'اگر انتخاب نشود، برگه‌ای که قالب «تماس با ما» دارد استفاده می‌شود.', 'ementash' ),
 					'default'     => 0,
 				),
 				'about_page'   => array(
 					'type'        => 'page',
 					'label'       => __( 'برگه درباره ما', 'ementash' ),
-					'description' => __( 'اگر انتخاب نشود برگه با نامک about استفاده می‌شود.', 'ementash' ),
+					'description' => __( 'اگر انتخاب نشود، برگه‌ای که قالب «درباره ما» دارد استفاده می‌شود.', 'ementash' ),
 					'default'     => 0,
+				),
+			),
+		),
+		'contact_form'            => array(
+			'title'       => __( 'صفحه تماس و فرم', 'ementash' ),
+			'description' => __( 'دفاتر، تلفن‌ها، ایمیل و ساعات کاری از بخش «تماس و دفاتر» خوانده می‌شوند.', 'ementash' ),
+			'fields'      => array(
+				'contact_form_title' => array(
+					'type'    => 'text',
+					'label'   => __( 'تیتر فرم', 'ementash' ),
+					'default' => __( 'ارسال درخواست', 'ementash' ),
+				),
+				'contact_form_text'  => array(
+					'type'    => 'textarea',
+					'label'   => __( 'متن زیر تیتر فرم', 'ementash' ),
+					'default' => __( 'کارشناس فروش پس از بررسی درخواست با شما تماس می‌گیرد.', 'ementash' ),
+				),
+				'contact_recipient'  => array(
+					'type'        => 'email',
+					'label'       => __( 'ایمیل گیرنده درخواست‌ها', 'ementash' ),
+					'description' => __( 'اگر خالی باشد به ایمیل مدیر سایت (تنظیمات ← عمومی) فرستاده می‌شود. همه درخواست‌ها در «درخواست‌های تماس» هم ذخیره می‌شوند.', 'ementash' ),
+					'default'     => '',
+				),
+				'contact_success'    => array(
+					'type'    => 'textarea',
+					'label'   => __( 'پیام ارسال موفق', 'ementash' ),
+					'default' => __( 'درخواست شما ثبت شد. کارشناس فروش به‌زودی با شما تماس می‌گیرد.', 'ementash' ),
+				),
+				'contact_map_image'  => array(
+					'type'        => 'image',
+					'label'       => __( 'تصویر نقشه', 'ementash' ),
+					'description' => __( 'متن جایگزین از کتابخانه رسانه. اگر خالی باشد جای نقشه نمایش داده نمی‌شود.', 'ementash' ),
+					'default'     => 0,
+				),
+				'contact_map_url'    => array(
+					'type'        => 'url',
+					'label'       => __( 'لینک مسیریابی', 'ementash' ),
+					'description' => __( 'مثلاً لینک نشان، بلد یا گوگل مپ.', 'ementash' ),
+					'default'     => '',
+				),
+				'contact_map_label'  => array(
+					'type'    => 'text',
+					'label'   => __( 'متن لینک مسیریابی', 'ementash' ),
+					'default' => __( 'مسیریابی تا دفتر مرکزی', 'ementash' ),
 				),
 			),
 		),
 		'shop'                    => array(
 			'title'  => __( 'فروشگاه (کاتالوگ)', 'ementash' ),
 			'fields' => array(
-				'shop_intro'         => array(
-					'type'        => 'textarea',
-					'label'       => __( 'متن زیر تیتر فروشگاه', 'ementash' ),
-					'description' => __( 'صفحه دسته‌ها توضیح خود دسته را نشان می‌دهد.', 'ementash' ),
-					'default'     => __( 'پودر و فوم آتش‌نشانی، مواد حفاری، آنتی‌فوم و مواد شیمیایی صنعتی؛ تولید کارخانه ایمن تاش سپاهان.', 'ementash' ),
-				),
 				'shop_catalog_title' => array(
 					'type'    => 'text',
 					'label'   => __( 'کادر کاتالوگ: تیتر', 'ementash' ),

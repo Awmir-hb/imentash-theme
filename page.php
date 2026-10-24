@@ -23,6 +23,7 @@ if ( ! ementash_elementor_location( 'single' ) ) {
 			null,
 			array(
 				'title'  => get_the_title(),
+				'desc'   => ementash_page_subtitle(),
 				'crumbs' => ementash_page_crumbs(),
 			)
 		);
