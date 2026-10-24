@@ -14,3 +14,6 @@ require EMENTASH_DIR . '/inc/template-tags.php';
 require EMENTASH_DIR . '/inc/setup.php';
 require EMENTASH_DIR . '/inc/elementor.php';
 require EMENTASH_DIR . '/inc/enqueue.php';
+require EMENTASH_DIR . '/inc/customizer.php';
+require EMENTASH_DIR . '/inc/cpt.php';
+require EMENTASH_DIR . '/inc/metaboxes.php';

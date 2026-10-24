@@ -8,39 +8,40 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * مقادیر پیش‌فرض تنظیمات قالب. فقط برای دمو؛ مقدار واقعی از Customizer می‌آید.
+ * مقادیر پیش‌فرض تنظیمات قالب (از تعریف فیلدها در inc/customizer.php). فقط برای دمو.
  */
 function ementash_option_defaults() {
-	return array(
-		'office_isfahan_label'   => __( 'اصفهان', 'ementash' ),
-		'office_tehran_label'    => __( 'تهران', 'ementash' ),
-		'office_factory_label'   => __( 'کارخانه', 'ementash' ),
-		'main_phone_label'       => __( 'دفتر مرکزی اصفهان', 'ementash' ),
-		'quote_label'            => __( 'استعلام قیمت', 'ementash' ),
-		'office_isfahan_address' => __( 'چهارباغ بالا، مجتمع پارک، پلاک ۵۳۸', 'ementash' ),
-		'office_isfahan_phones'  => "031-36671919\n031-36673337",
-		'office_tehran_address'  => __( 'یوسف‌آباد، خیابان فتحی شقاقی، خیابان جهان‌مهر، پلاک ۹۴، طبقه ۳، واحد ۵', 'ementash' ),
-		'office_tehran_phones'   => "021-88350547\n021-88351762",
-		'office_factory_address' => '',
-		'office_factory_phones'  => '',
-		'email'                  => '',
-		'work_hours'             => '',
-		'social_instagram'       => '',
-		'social_linkedin'        => '',
-		'social_telegram'        => '',
-		'social_whatsapp'        => '',
-		'footer_text'            => __( 'فعال در تولید مواد شیمیایی از سال ۱۳۶۷؛ پودر و فوم آتش‌نشانی، مواد حفاری و آنتی‌فوم.', 'ementash' ),
-		'footer_copyright'       => __( 'تمامی حقوق برای شرکت ایمن تاش سپاهان محفوظ است.', 'ementash' ),
-		'contact_page'           => 0,
-	);
+	return wp_list_pluck( ementash_customizer_fields(), 'default' );
 }
 
 /**
- * خواندن یک تنظیم قالب با مقدار پیش‌فرض.
+ * خواندن یک تنظیم قالب با مقدار پیش‌فرض. متن‌ها در صورت فعال بودن Polylang ترجمه می‌شوند.
  */
 function ementash_get( $key ) {
-	$defaults = ementash_option_defaults();
-	return get_theme_mod( $key, isset( $defaults[ $key ] ) ? $defaults[ $key ] : '' );
+	$fields = ementash_customizer_fields();
+	if ( ! isset( $fields[ $key ] ) ) {
+		return get_theme_mod( $key, '' );
+	}
+	$value = get_theme_mod( $key, $fields[ $key ]['default'] );
+	if ( function_exists( 'pll__' ) && is_string( $value ) && '' !== $value && in_array( $fields[ $key ]['type'], array( 'text', 'textarea', 'lines' ), true ) ) {
+		$value = pll__( $value );
+	}
+	return $value;
+}
+
+/**
+ * تنظیمی از نوع «هر خط یک مورد» به‌صورت آرایه.
+ */
+function ementash_get_lines( $key ) {
+	// پرچم u لازم است؛ بدون آن \R بایت 0x85 داخل حروف فارسی (مثل «م») را خط جدید حساب می‌کند.
+	return array_values( array_filter( array_map( 'trim', preg_split( '/\R/u', (string) ementash_get( $key ) ) ), 'strlen' ) );
+}
+
+/**
+ * آیا سکشن صفحه اصلی در Customizer روشن است؟ (شناسه‌ها در ementash_home_sections)
+ */
+function ementash_section_enabled( $id ) {
+	return (bool) ementash_get( ementash_section_key( $id ) );
 }
 
 /**
@@ -66,8 +67,7 @@ function ementash_tel_href( $phone ) {
  * شماره‌های یک دفتر (isfahan، tehran، factory)، هر خط یک شماره.
  */
 function ementash_phones( $office ) {
-	$raw = (string) ementash_get( 'office_' . $office . '_phones' );
-	return array_values( array_filter( array_map( 'trim', preg_split( '/\R/', $raw ) ) ) );
+	return ementash_get_lines( 'office_' . $office . '_phones' );
 }
 
 /**
@@ -94,15 +94,31 @@ function ementash_phone_link( $phone, $class = '' ) {
 }
 
 /**
- * آدرس صفحه تماس: برگه انتخاب‌شده در تنظیمات، وگرنه برگه با نامک contact.
+ * شناسه برگه ویژه (contact یا about): برگه انتخاب‌شده در تنظیمات، وگرنه برگه با همان نامک.
+ */
+function ementash_page_id( $slug ) {
+	$id = absint( ementash_get( $slug . '_page' ) );
+	if ( $id && 'publish' === get_post_status( $id ) ) {
+		return $id;
+	}
+	$page = get_page_by_path( $slug );
+	return $page ? (int) $page->ID : 0;
+}
+
+/**
+ * آدرس صفحه تماس؛ اگر برگه‌ای پیدا نشد صفحه اصلی.
  */
 function ementash_contact_url() {
-	$id = absint( ementash_get( 'contact_page' ) );
-	if ( $id && 'publish' === get_post_status( $id ) ) {
-		return get_permalink( $id );
-	}
-	$page = get_page_by_path( 'contact' );
-	return $page ? get_permalink( $page ) : home_url( '/' );
+	$id = ementash_page_id( 'contact' );
+	return $id ? get_permalink( $id ) : home_url( '/' );
+}
+
+/**
+ * آدرس صفحه درباره ما؛ اگر برگه‌ای پیدا نشد صفحه اصلی.
+ */
+function ementash_about_url() {
+	$id = ementash_page_id( 'about' );
+	return $id ? get_permalink( $id ) : home_url( '/' );
 }
 
 /**
@@ -128,6 +144,42 @@ function ementash_icon( $name, $class = '' ) {
 		$cache[ $name ],
 		1
 	);
+}
+
+/**
+ * لیست ثابت آیکون‌هایی که در پنل قابل انتخاب‌اند (فایل‌ها در assets/icons).
+ *
+ * @param string $set stat (آمار)، service (خدمات) یا card (کارت‌های درباره ما).
+ */
+function ementash_icon_choices( $set ) {
+	$sets = array(
+		'stat'    => array(
+			'calendar' => __( 'تقویم', 'ementash' ),
+			'factory'  => __( 'کارخانه', 'ementash' ),
+			'grid'     => __( 'دسته‌ها', 'ementash' ),
+			'shield'   => __( 'سپر', 'ementash' ),
+		),
+		'service' => array(
+			'truck' => __( 'کامیون', 'ementash' ),
+			'lab'   => __( 'آزمایشگاه', 'ementash' ),
+			'chat'  => __( 'گفتگو', 'ementash' ),
+			'train' => __( 'آموزش', 'ementash' ),
+		),
+		'card'    => array(
+			'foam'     => __( 'فوم', 'ementash' ),
+			'powder'   => __( 'پودر (کپسول)', 'ementash' ),
+			'antifoam' => __( 'ضدکف', 'ementash' ),
+			'drill'    => __( 'حفاری', 'ementash' ),
+			'concrete' => __( 'بتن', 'ementash' ),
+			'lab'      => __( 'آزمایشگاه', 'ementash' ),
+			'message'  => __( 'گفتگو', 'ementash' ),
+			'check'    => __( 'تیک', 'ementash' ),
+			'scale'    => __( 'ترازو', 'ementash' ),
+			'lock'     => __( 'قفل', 'ementash' ),
+			'shield'   => __( 'سپر', 'ementash' ),
+		),
+	);
+	return isset( $sets[ $set ] ) ? $sets[ $set ] : array();
 }
 
 function ementash_svg_allowed() {

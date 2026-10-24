@@ -1,0 +1,66 @@
+/* قالب ایمن تاش — متاباکس‌های پیشخوان (رنگ‌ها از خود پیشخوان وردپرس) */
+:root {
+  --em-admin-line: rgb(0 0 0 / .12);
+}
+
+.em-mb__field {
+  margin: 0 0 16px;
+}
+
+.em-mb__label {
+  display: block;
+  margin: 0 0 6px;
+  font-weight: 600;
+}
+
+.em-mb__media {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.em-rep {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.em-rep__list {
+  margin: 0 0 12px;
+  padding: 0;
+  list-style: none;
+}
+
+.em-rep__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 12px;
+  margin: 0 0 8px;
+  padding: 12px;
+  border: 1px solid var(--em-admin-line);
+  border-radius: 4px;
+}
+
+.em-rep__fields {
+  display: grid;
+  flex: 1 1 420px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.em-rep__field select,
+.em-rep__field input,
+.em-rep__field textarea {
+  width: 100%;
+}
+
+.em-rep__actions {
+  display: flex;
+  gap: 12px;
+}
+
+.em-mb__table th {
+  width: 180px;
+}
