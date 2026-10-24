@@ -1,6 +1,7 @@
 <?php
 /**
- * صفحه محصول. location «single» برای Woo Builder المنتور پرو؛ طراحی کامل در فاز ۴.
+ * صفحه محصول (Product.dc.html): گالری و اطلاعات، تب‌ها، محصولات مرتبط.
+ * location «single» المنتور پرو اولویت دارد؛ محصولی که با المنتور ساخته شده فقط محتوای خودش را دارد.
  *
  * @package ementash
  */
@@ -17,13 +18,10 @@ if ( ! ementash_elementor_location( 'single' ) ) {
 			the_content();
 			continue;
 		}
-		?>
-		<div class="em-section">
-			<div class="em-container">
-				<?php wc_get_template_part( 'content', 'single-product' ); ?>
-			</div>
-		</div>
-		<?php
+
+		get_template_part( 'template-parts/product/summary' );
+		get_template_part( 'template-parts/product/tabs' );
+		get_template_part( 'template-parts/product/related' );
 	}
 }
 

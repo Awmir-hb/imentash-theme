@@ -118,6 +118,11 @@
   --honor-gap:16px;
   --chip-bg:#DDE5F7;         /* برچسب دسته روی کارت مقاله */
   --gallery-row:220px;
+  /* فروشگاه و صفحه محصول (Products.dc.html و Product.dc.html) */
+  --surface-2:#F4F6FB;
+  --muted-2:#6B7393;
+  --ink-2:#3E4668;
+  --shadow-card:0 10px 30px rgba(0,0,127,.12);
 }
 @media (max-width:767px){
   :root{
@@ -320,6 +325,8 @@ a:hover{color:var(--blue-hover)}
 .em-btn--ghost:hover .em-btn__icon{transform:none}
 .em-btn--dark{padding:14px 28px;background:var(--navy-900);color:var(--white)}
 .em-btn--dark:hover{background:var(--blue-hover);color:var(--white)}
+.em-btn--brand{padding:14px 28px;background:var(--blue);color:var(--white)}
+.em-btn--brand:hover{background:var(--blue-hover);color:var(--white)}
 
 .em-eyebrow{display:inline-flex;align-items:center;gap:10px;margin:0 0 14px;color:var(--blue);font-family:var(--font-body);font-size:var(--fs-nav);font-weight:600;line-height:1.6}
 .em-eyebrow::before{content:"";width:28px;height:2px;background:currentColor}

@@ -436,3 +436,30 @@ function ementash_bdi( $text, $fa_digits = false ) {
 function ementash_code( $code ) {
 	return '<bdi dir="ltr">' . esc_html( (string) $code ) . '</bdi>';
 }
+
+/**
+ * مثل ementash_bdi() برای HTML امن (خروجی wp_kses_post): فقط متن بین تگ‌ها پیچیده می‌شود؛
+ * تگ‌ها، entityها (&nbsp;) و متن داخل <bdi>، <code> و <pre> دست نمی‌خورند.
+ */
+function ementash_bdi_html( $html ) {
+	$parts = preg_split( '/(<[^>]*>)/u', (string) $html, -1, PREG_SPLIT_DELIM_CAPTURE );
+	$skip  = 0;
+	$out   = '';
+	foreach ( (array) $parts as $part ) {
+		if ( '' !== $part && '<' === $part[0] ) {
+			if ( preg_match( '#^<(/?)(bdi|code|pre)\b#i', $part, $m ) ) {
+				$skip = max( 0, $skip + ( '/' === $m[1] ? -1 : 1 ) );
+			}
+			$out .= $part;
+			continue;
+		}
+		if ( $skip ) {
+			$out .= $part;
+			continue;
+		}
+		foreach ( preg_split( '/(&#?[A-Za-z0-9]+;)/', $part, -1, PREG_SPLIT_DELIM_CAPTURE ) as $i => $chunk ) {
+			$out .= $i % 2 ? $chunk : preg_replace( ementash_latin_pattern(), '<bdi>$1</bdi>', $chunk );
+		}
+	}
+	return $out;
+}

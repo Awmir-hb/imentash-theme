@@ -1,0 +1,169 @@
+/* =========================================================
+   قالب ایمن تاش — فروشگاه، دسته و صفحه محصول (Products.dc.html و Product.dc.html)
+   فقط در صفحه‌های ووکامرس بارگذاری می‌شود. توکن‌ها در :root فایل main.css.
+   ========================================================= */
+
+/* ---------- چیدمان آرشیو ---------- */
+.em-shop{padding-top:48px}
+.em-shop__in{display:grid;grid-template-columns:280px minmax(0,1fr);gap:36px;align-items:start}
+.em-shop__side{display:flex;flex-direction:column;gap:20px}
+.em-shop__main{min-width:0}
+.em-shop__empty{margin:0;color:var(--muted)}
+
+/* ---------- کادرهای سایدبار ---------- */
+.em-sbox{padding:20px;border-radius:var(--radius-md)}
+.em-sbox__title{margin:0 0 4px;font-family:var(--font-body);font-size:17px;font-weight:600;line-height:1.6;color:inherit}
+.em-sbox__text{margin:0 0 14px;font-size:var(--fs-sm);color:var(--muted)}
+
+.em-sbox--cats{padding:18px;background:var(--surface-2)}
+.em-sbox--cats .em-sbox__title{margin:4px 6px 10px}
+.em-fcats{display:flex;flex-direction:column;gap:4px;list-style:none;margin:0;padding:0}
+.em-fcats + .em-fcats{margin-top:4px}
+/* زیردسته‌ها: تورفتگی با خط کناری */
+.em-fcats--sub{margin:4px 0;margin-inline-start:14px;padding-inline-start:10px;border-inline-start:2px solid var(--line)}
+.em-fcat{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 14px;border-radius:10px;color:var(--ink);transition:background-color .2s ease}
+.em-fcat:hover{background:var(--white);color:var(--ink)}
+.em-fcat__count{font-size:var(--fs-xs);color:var(--muted-2)}
+.em-fcat--open{font-weight:600}
+.em-fcat--on,.em-fcat--on:hover{background:var(--navy-900);color:var(--white);font-weight:600}
+.em-fcat--on .em-fcat__count{color:var(--on-dark-3)}
+
+.em-sbox--catalog{position:relative;overflow:hidden;padding:22px;background:var(--blue);color:var(--white)}
+.em-sbox--catalog .em-sbox__title{font-size:18px}
+.em-sbox--catalog .em-sbox__text{color:var(--on-dark)}
+.em-sbox--catalog :focus-visible{outline-color:var(--white)}
+.em-sbox__icon{display:block;width:28px;height:28px;margin-bottom:8px;color:var(--blue-light)}
+.em-sbox__btn{display:inline-block;padding:9px 18px;border-radius:var(--radius-pill);background:var(--white);color:var(--blue);font-size:var(--fs-sm);font-weight:600}
+.em-sbox__btn:hover{background:var(--bg-soft);color:var(--blue)}
+
+.em-sbox--help{border:1px solid var(--line-soft)}
+.em-sbox--help .em-sbox__title{font-size:var(--fs-body)}
+.em-sbox--help .em-sbox__text{margin-bottom:10px}
+.em-sbox__phone{font-family:var(--font-head);font-weight:600;font-size:20px;color:var(--ink)}
+
+/* ---------- نوار بالای فهرست ---------- */
+.em-shop__bar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-bottom:20px}
+.em-shop__title{margin:0;font-family:var(--font-head);font-weight:600;font-size:26px;line-height:1.4}
+.em-shop__count{margin:0;font-size:var(--fs-sm);color:var(--muted-2)}
+.em-sort{display:flex;align-items:center;gap:10px;font-size:var(--fs-sm);color:var(--muted)}
+.em-sort select,.em-sort__go{padding:8px 12px;border:1px solid var(--line-stat);border-radius:10px;background:var(--white);color:var(--ink);font:inherit;font-size:var(--fs-sm)}
+.em-sort__go{cursor:pointer}
+.em-sort__go[hidden]{display:none}
+
+/* ---------- کارت محصول (آرشیو و محصولات مرتبط) ---------- */
+.em-pgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;list-style:none;margin:0;padding:0}
+.em-pcard{height:100%;display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--line-soft);border-radius:var(--radius-card);background:var(--white);color:var(--ink);transition:border-color .25s ease,box-shadow .25s ease}
+.em-pcard:hover{border-color:var(--blue);box-shadow:var(--shadow-card);color:var(--ink)}
+.em-pcard__img{position:relative;display:block;aspect-ratio:4/3;overflow:hidden}
+.em-pcard__img img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease-media)}
+.em-pcard:hover .em-pcard__img img{transform:scale(1.05)}
+.em-pcard__body{flex:1;display:flex;flex-direction:column;padding:16px 18px 18px}
+.em-pcard__meta{display:flex;justify-content:space-between;gap:10px;margin-bottom:4px;font-size:var(--fs-xs);color:var(--muted-2)}
+.em-pcard__sku{font-weight:600;color:var(--blue)}
+.em-pcard__title{margin:0 0 14px;font-family:var(--font-head);font-weight:600;font-size:19px;line-height:1.55}
+.em-pcard__more{display:inline-flex;align-items:center;gap:8px;margin-top:auto;color:var(--blue);font-size:var(--fs-sm);font-weight:600}
+.em-pcard__more .em-btn__icon{width:16px;height:16px}
+.em-pcard:hover .em-btn__icon{transform:translateX(-5px)}
+
+/* ---------- صفحه‌بندی ---------- */
+.em-pager{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:32px}
+.em-pager .page-numbers{width:42px;height:42px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line-stat);border-radius:50%;color:var(--ink)}
+.em-pager a.page-numbers:hover{border-color:var(--blue);color:var(--blue)}
+.em-pager .page-numbers.current{border-color:var(--navy-900);background:var(--navy-900);color:var(--white);font-weight:600}
+.em-pager .page-numbers.dots{border:0}
+.em-pager svg{width:16px;height:16px}
+.em-pager__prev{transform:scaleX(-1)}
+
+@media (max-width:1000px){
+  .em-shop__in{grid-template-columns:minmax(0,1fr)}
+  .em-pgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:560px){
+  .em-pgrid{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:767px){
+  .em-shop{padding-top:28px}
+  .em-shop__title{font-size:22px}
+}
+
+/* ---------- صفحه محصول ---------- */
+.em-product{padding-block:28px 56px}
+.em-crumbs--light{margin-bottom:24px;color:var(--muted-2)}
+.em-crumbs--light a{color:var(--muted-2)}
+.em-crumbs--light a:hover{color:var(--blue)}
+.em-crumbs--light [aria-current]{color:var(--ink)}
+
+.em-pd{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:start}
+.em-pd__main{position:relative;aspect-ratio:1/1;overflow:hidden;border-radius:var(--radius-lg);background:var(--surface-2)}
+/* عکس محصول کامل دیده شود (عکس بسته‌بندی معمولاً زمینه سفید دارد) */
+.em-pd__main img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:contain}
+.em-pd__thumbs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;list-style:none;margin:12px 0 0;padding:0}
+.em-pd__thumb{position:relative;display:block;width:100%;aspect-ratio:1/1;overflow:hidden;padding:0;border:2px solid transparent;border-radius:10px;background:var(--surface-2);cursor:pointer}
+.em-pd__thumb[aria-pressed="true"]{border-color:var(--blue)}
+.em-pd__thumb img{display:block;width:100%;height:100%;object-fit:cover}
+
+.em-pd__meta{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px}
+.em-pd__cat{padding:3px 12px;border-radius:var(--radius-pill);background:var(--chip-bg);color:var(--blue);font-size:var(--fs-sm);font-weight:600}
+.em-pd__cat:hover{color:var(--blue-hover)}
+.em-pd__sku{font-weight:600;color:var(--blue)}
+.em-pd__title{margin:0 0 16px;font-family:var(--font-head);font-weight:600;font-size:clamp(30px,3vw,42px);line-height:1.4}
+.em-pd__lead{margin-bottom:24px;color:var(--ink-2);font-size:17px}
+.em-pd__lead p{margin:0 0 10px}
+.em-pd__lead p:last-child{margin-bottom:0}
+.em-pd__label{margin:0 0 10px;font-size:var(--fs-sm);color:var(--muted-2)}
+
+.em-fire{display:flex;flex-wrap:wrap;gap:10px;list-style:none;margin:0 0 28px;padding:0}
+.em-fire__item{display:flex;align-items:center;gap:10px;padding:8px 14px;border:1px solid var(--line-stat);border-radius:12px;font-size:var(--fs-sm)}
+.em-fire__code{font-family:var(--font-head);font-size:24px;line-height:1.2;color:var(--blue)}
+
+.em-pd__actions{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:28px}
+.em-pd__badges{display:flex;flex-wrap:wrap;gap:12px 28px;list-style:none;margin:0;padding:18px 20px;border-radius:var(--radius-card);background:var(--surface-2);font-size:var(--fs-sm)}
+.em-pd__badges li{display:flex;align-items:center;gap:10px}
+.em-pd__badges svg{width:20px;height:20px;color:var(--blue)}
+
+/* ---------- تب‌ها ---------- */
+.em-ptabs{padding-bottom:var(--section-y)}
+.em-ptabs__list{display:flex;flex-wrap:wrap;gap:4px 32px;margin-bottom:28px;border-bottom:1px solid var(--line-stat)}
+.em-ptabs__list[hidden]{display:none}
+.em-ptab{padding:14px 4px;border:0;background:transparent;color:var(--muted-2);font:inherit;font-size:16px;font-weight:500;cursor:pointer}
+.em-ptab:hover{color:var(--ink)}
+.em-ptab[aria-selected="true"]{color:var(--ink);font-weight:600;box-shadow:inset 0 -3px 0 var(--blue)}
+.em-ppane{max-width:880px;color:var(--ink-2);font-size:17px}
+.em-ppane + .em-ppane{margin-top:40px}
+.em-ppane p{margin:0 0 14px}
+.em-ppane__title{margin:0 0 14px;font-family:var(--font-head);font-weight:600;font-size:22px;color:var(--ink)}
+/* با JS: یک پنل در هر لحظه و عنوان پنل فقط برای صفحه‌خوان */
+.em-ptabs[data-em-ready] .em-ppane + .em-ppane{margin-top:0}
+.em-ptabs[data-em-ready] .em-ppane__title{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+.em-spec{max-width:880px;overflow:hidden;border:1px solid var(--line-soft);border-radius:var(--radius-card)}
+.em-spec table{width:100%;border-collapse:collapse;font-size:var(--fs-nav)}
+.em-spec th,.em-spec td{padding:14px 18px;border-bottom:1px solid var(--line-soft);text-align:start;vertical-align:top}
+.em-spec tr:last-child th,.em-spec tr:last-child td{border-bottom:0}
+.em-spec th{width:38%;background:var(--surface-2);color:var(--ink);font-weight:600}
+.em-spec td{color:var(--ink)}
+
+/* ---------- محصولات مرتبط ---------- */
+.em-related{padding-top:56px;background:var(--surface-2)}
+.em-related__title{margin-bottom:24px;font-size:clamp(26px,2.6vw,36px)}
+/* زیر 1231px اندازه کمتر از ۳۲ پیکسل است (2.6vw < 32px) */
+@media (max-width:1230px){
+  .em-related__title{font-weight:var(--fw-display-sm)}
+}
+
+@media (max-width:900px){
+  .em-pd{grid-template-columns:minmax(0,1fr);gap:28px}
+}
+@media (max-width:767px){
+  .em-product{padding-top:20px}
+  .em-crumbs--light{margin-bottom:16px}
+  .em-ptabs__list{gap:0 20px}
+  .em-ppane,.em-pd__lead{font-size:var(--fs-body)}
+  .em-spec th,.em-spec td{padding:12px 14px}
+  .em-related{padding-top:var(--section-y)}
+  .em-related__title{font-size:24px}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .em-pcard,.em-pcard__img img,.em-fcat,.em-btn__icon{transition:none!important}
+}

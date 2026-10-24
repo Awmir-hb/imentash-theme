@@ -280,6 +280,60 @@ function ementash_customizer_schema() {
 				),
 			),
 		),
+		'shop'                    => array(
+			'title'  => __( 'فروشگاه (کاتالوگ)', 'ementash' ),
+			'fields' => array(
+				'shop_intro'         => array(
+					'type'        => 'textarea',
+					'label'       => __( 'متن زیر تیتر فروشگاه', 'ementash' ),
+					'description' => __( 'صفحه دسته‌ها توضیح خود دسته را نشان می‌دهد.', 'ementash' ),
+					'default'     => __( 'پودر و فوم آتش‌نشانی، مواد حفاری، آنتی‌فوم و مواد شیمیایی صنعتی؛ تولید کارخانه ایمن تاش سپاهان.', 'ementash' ),
+				),
+				'shop_catalog_title' => array(
+					'type'    => 'text',
+					'label'   => __( 'کادر کاتالوگ: تیتر', 'ementash' ),
+					'default' => __( 'کاتالوگ محصولات', 'ementash' ),
+				),
+				'shop_catalog_text'  => array(
+					'type'    => 'textarea',
+					'label'   => __( 'کادر کاتالوگ: متن', 'ementash' ),
+					'default' => __( 'فهرست محصولات در یک فایل PDF.', 'ementash' ),
+				),
+				'shop_catalog_file'  => array(
+					'type'        => 'file',
+					'label'       => __( 'کادر کاتالوگ: فایل', 'ementash' ),
+					'description' => __( 'اگر خالی باشد کادر کاتالوگ نمایش داده نمی‌شود.', 'ementash' ),
+					'default'     => 0,
+				),
+				'shop_catalog_btn'   => array(
+					'type'    => 'text',
+					'label'   => __( 'کادر کاتالوگ: متن دکمه', 'ementash' ),
+					'default' => __( 'دریافت کاتالوگ', 'ementash' ),
+				),
+				'shop_help_title'    => array(
+					'type'    => 'text',
+					'label'   => __( 'کادر مشاوره: تیتر', 'ementash' ),
+					'default' => __( 'به مشاوره نیاز دارید؟', 'ementash' ),
+				),
+				'shop_help_text'     => array(
+					'type'        => 'textarea',
+					'label'       => __( 'کادر مشاوره: متن', 'ementash' ),
+					'description' => __( 'شماره تماس همان شماره اصلی سایت است.', 'ementash' ),
+					'default'     => __( 'برای انتخاب محصول مناسب با ما تماس بگیرید.', 'ementash' ),
+				),
+				'shop_inquiry_label' => array(
+					'type'    => 'text',
+					'label'   => __( 'صفحه محصول: متن دکمه استعلام', 'ementash' ),
+					'default' => __( 'استعلام قیمت این محصول', 'ementash' ),
+				),
+				'shop_badges'        => array(
+					'type'        => 'lines',
+					'label'       => __( 'صفحه محصول: نوار زیر دکمه استعلام', 'ementash' ),
+					'description' => __( 'هر خط یک مورد. اگر خالی باشد نوار نمایش داده نمی‌شود.', 'ementash' ),
+					'default'     => '',
+				),
+			),
+		),
 		'home_hero'               => array(
 			'title'  => __( 'صفحه اصلی: هیرو', 'ementash' ),
 			'fields' => ementash_toggle_field( 'hero' ) + array(
