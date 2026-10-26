@@ -97,9 +97,27 @@ add_action( 'template_redirect', 'ementash_wc_redirect_shop_pages' );
  */
 add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' );
 
+/**
+ * در حالت کاتالوگ اسکریپت‌های سبد، تسویه‌حساب و ردیابی منبع سفارش کاری ندارند. با حذف آن‌ها jQuery هم
+ * (اگر افزونه دیگری لازمش نداشته باشد) بارگذاری نمی‌شود. اسکریپت‌های قالب به jQuery وابسته نیستند.
+ * گالری محصول ووکامرس هم استفاده نمی‌شود (قالب گالری خودش را دارد).
+ */
 function ementash_wc_dequeue_scripts() {
-	wp_dequeue_script( 'wc-cart-fragments' );
-	wp_dequeue_script( 'wc-add-to-cart' );
+	$handles = array(
+		'wc-cart-fragments',
+		'wc-add-to-cart',
+		'woocommerce',
+		'wc-single-product',
+		'wc-jquery-blockui',
+		'jquery-blockui',
+		'wc-js-cookie',
+		'js-cookie',
+		'sourcebuster-js',
+		'wc-order-attribution',
+	);
+	foreach ( $handles as $handle ) {
+		wp_dequeue_script( $handle );
+	}
 }
 add_action( 'wp_enqueue_scripts', 'ementash_wc_dequeue_scripts', 99 );
 
@@ -290,7 +308,7 @@ function ementash_wc_assets() {
 	if ( ! is_woocommerce() || ( is_product() && ementash_is_elementor( get_queried_object_id() ) ) ) {
 		return;
 	}
-	wp_enqueue_style( 'ementash-shop', EMENTASH_URI . '/assets/css/shop.css', array( 'ementash-main' ), ementash_asset_ver( 'assets/css/shop.css' ) );
+	wp_enqueue_style( 'ementash-shop', EMENTASH_URI . '/assets/css/shop.css', array( 'ementash-cards' ), ementash_asset_ver( 'assets/css/shop.css' ) );
 	wp_enqueue_script(
 		'ementash-shop',
 		EMENTASH_URI . '/assets/js/shop.js',

@@ -42,7 +42,7 @@ if ( ! ementash_elementor_location( 'archive' ) ) {
 						}
 						?>
 					</ul>
-					<?php get_template_part( 'template-parts/shop/pagination' ); ?>
+					<?php get_template_part( 'template-parts/pagination', null, array( 'label' => __( 'صفحه‌بندی محصولات', 'ementash' ) ) ); ?>
 				<?php else : ?>
 					<p class="em-shop__empty"><?php esc_html_e( 'محصولی در این بخش پیدا نشد.', 'ementash' ); ?></p>
 				<?php endif; ?>

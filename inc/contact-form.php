@@ -26,11 +26,56 @@ function ementash_inquiry_limit() {
 }
 
 /**
- * IP بازدیدکننده. فقط REMOTE_ADDR؛ هدرهای قابل جعل مثل X-Forwarded-For استفاده نمی‌شوند.
+ * منبع‌های IP قابل انتخاب در Customizer (صفحه تماس و فرم ← منبع IP).
+ *
+ * چرا: محدودیت ارسال فرم بر اساس IP است. اگر سایت پشت CDN یا پروکسی معکوس باشد (Cloudflare،
+ * ابر آروان، nginx جلوی سرور و...)، REMOTE_ADDR همیشه IP همان پروکسی است و همه بازدیدکننده‌ها یک نفر
+ * حساب می‌شوند: بعد از چند ارسال، فرم برای همه بسته می‌شود. در این حالت هدری را انتخاب کنید که CDN
+ * با IP واقعی بازدیدکننده پر می‌کند.
+ *
+ * هشدار: هر هدر HTTP را خود بازدیدکننده هم می‌تواند بفرستد. فقط وقتی هدر را انتخاب کنید که همه
+ * ترافیک از CDN بگذرد (دسترسی مستقیم به IP سرور در فایروال بسته باشد)؛ وگرنه ربات با عوض کردن هدر
+ * محدودیت را دور می‌زند. بدون CDN همان پیش‌فرض REMOTE_ADDR درست است.
+ * کلیدها کوچک و با زیرخط (ementash_sanitize_select آن‌ها را با sanitize_key می‌سنجد).
+ */
+function ementash_ip_sources() {
+	return array(
+		'remote_addr'     => __( 'REMOTE_ADDR (پیش‌فرض، بدون CDN)', 'ementash' ),
+		'cloudflare'      => __( 'Cloudflare: CF-Connecting-IP', 'ementash' ),
+		'arvancloud'      => __( 'ابر آروان: AR-Real-IP', 'ementash' ),
+		'x_real_ip'       => __( 'پروکسی معکوس (nginx): X-Real-IP', 'ementash' ),
+		'x_forwarded_for' => __( 'پروکسی معکوس: آخرین مقدار X-Forwarded-For', 'ementash' ),
+	);
+}
+
+/**
+ * IP بازدیدکننده بر اساس منبع انتخاب‌شده. اگر هدر انتخابی نبود یا IP معتبر نداشت، REMOTE_ADDR.
+ * قابل تغییر با فیلتر ementash_client_ip.
  */
 function ementash_client_ip() {
-	$ip = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '';
-	return filter_var( $ip, FILTER_VALIDATE_IP ) ? $ip : '';
+	$headers = array(
+		'cloudflare'      => 'HTTP_CF_CONNECTING_IP',
+		'arvancloud'      => 'HTTP_AR_REAL_IP',
+		'x_real_ip'       => 'HTTP_X_REAL_IP',
+		'x_forwarded_for' => 'HTTP_X_FORWARDED_FOR',
+	);
+	$source  = (string) ementash_get( 'contact_ip_source' );
+	$ip      = '';
+
+	if ( isset( $headers[ $source ], $_SERVER[ $headers[ $source ] ] ) ) {
+		$value = sanitize_text_field( wp_unslash( $_SERVER[ $headers[ $source ] ] ) );
+		if ( 'x_forwarded_for' === $source ) {
+			// «client, proxy1, proxy2»: آخرین مقدار را پروکسی خودمان اضافه کرده و قابل اعتماد است.
+			$list  = array_map( 'trim', explode( ',', $value ) );
+			$value = (string) end( $list );
+		}
+		$ip = filter_var( $value, FILTER_VALIDATE_IP ) ? $value : '';
+	}
+	if ( '' === $ip && isset( $_SERVER['REMOTE_ADDR'] ) ) {
+		$value = sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) );
+		$ip    = filter_var( $value, FILTER_VALIDATE_IP ) ? $value : '';
+	}
+	return (string) apply_filters( 'ementash_client_ip', $ip, $source );
 }
 
 /**

@@ -50,36 +50,8 @@
 .em-sort__go{cursor:pointer}
 .em-sort__go[hidden]{display:none}
 
-/* ---------- کارت محصول (آرشیو و محصولات مرتبط) ---------- */
-.em-pgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;list-style:none;margin:0;padding:0}
-.em-pcard{height:100%;display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--line-soft);border-radius:var(--radius-card);background:var(--white);color:var(--ink);transition:border-color .25s ease,box-shadow .25s ease}
-.em-pcard:hover{border-color:var(--blue);box-shadow:var(--shadow-card);color:var(--ink)}
-.em-pcard__img{position:relative;display:block;aspect-ratio:4/3;overflow:hidden}
-.em-pcard__img img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease-media)}
-.em-pcard:hover .em-pcard__img img{transform:scale(1.05)}
-.em-pcard__body{flex:1;display:flex;flex-direction:column;padding:16px 18px 18px}
-.em-pcard__meta{display:flex;justify-content:space-between;gap:10px;margin-bottom:4px;font-size:var(--fs-xs);color:var(--muted-2)}
-.em-pcard__sku{font-weight:600;color:var(--blue)}
-.em-pcard__title{margin:0 0 14px;font-family:var(--font-head);font-weight:600;font-size:19px;line-height:1.55}
-.em-pcard__more{display:inline-flex;align-items:center;gap:8px;margin-top:auto;color:var(--blue);font-size:var(--fs-sm);font-weight:600}
-.em-pcard__more .em-btn__icon{width:16px;height:16px}
-.em-pcard:hover .em-btn__icon{transform:translateX(-5px)}
-
-/* ---------- صفحه‌بندی ---------- */
-.em-pager{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:32px}
-.em-pager .page-numbers{width:42px;height:42px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line-stat);border-radius:50%;color:var(--ink)}
-.em-pager a.page-numbers:hover{border-color:var(--blue);color:var(--blue)}
-.em-pager .page-numbers.current{border-color:var(--navy-900);background:var(--navy-900);color:var(--white);font-weight:600}
-.em-pager .page-numbers.dots{border:0}
-.em-pager svg{width:16px;height:16px}
-.em-pager__prev{transform:scaleX(-1)}
-
 @media (max-width:1000px){
   .em-shop__in{grid-template-columns:minmax(0,1fr)}
-  .em-pgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
-}
-@media (max-width:560px){
-  .em-pgrid{grid-template-columns:minmax(0,1fr)}
 }
 @media (max-width:767px){
   .em-shop{padding-top:28px}
@@ -169,5 +141,5 @@
 }
 
 @media (prefers-reduced-motion: reduce){
-  .em-pcard,.em-pcard__img img,.em-fcat,.em-btn__icon{transition:none!important}
+  .em-fcat,.em-btn__icon{transition:none!important}
 }

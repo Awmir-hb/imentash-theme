@@ -1,6 +1,8 @@
 <?php
 /**
- * صفحه‌بندی دایره‌ای آرشیو محصولات (ترتیب انتخاب‌شده حفظ می‌شود).
+ * صفحه‌بندی دایره‌ای کوئری اصلی (فروشگاه، وبلاگ، جستجو). پارامترهای آدرس مثل ترتیب و عبارت جستجو حفظ می‌شوند.
+ *
+ * $args: label (string، برچسب nav برای صفحه‌خوان).
  *
  * @package ementash
  */
@@ -13,6 +15,7 @@ if ( (int) $wp_query->max_num_pages < 2 ) {
 	return;
 }
 
+$ementash_label = isset( $args['label'] ) ? (string) $args['label'] : __( 'صفحه‌بندی', 'ementash' );
 $ementash_links = paginate_links(
 	array(
 		'total'     => (int) $wp_query->max_num_pages,
@@ -27,7 +30,7 @@ if ( ! $ementash_links ) {
 	return;
 }
 ?>
-<nav class="em-pager" aria-label="<?php esc_attr_e( 'صفحه‌بندی محصولات', 'ementash' ); ?>">
+<nav class="em-pager" aria-label="<?php echo esc_attr( $ementash_label ); ?>">
 	<?php
 	foreach ( $ementash_links as $ementash_link ) {
 		// اعداد فارسی؛ پیوند صفحه فعلی aria-current دارد (خروجی خود وردپرس).

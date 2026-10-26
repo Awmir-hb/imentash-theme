@@ -126,6 +126,11 @@ function ementash_page_id( $key ) {
 		) : array();
 		$id = $pages ? (int) $pages[0]->ID : 0;
 	}
+	// Polylang: برگه همان زبانِ صفحه فعلی (اگر ترجمه شده باشد).
+	if ( $id && function_exists( 'pll_get_post' ) ) {
+		$translated = (int) pll_get_post( $id );
+		$id         = $translated ? $translated : $id;
+	}
 
 	$cache[ $key ] = $id;
 	return $id;

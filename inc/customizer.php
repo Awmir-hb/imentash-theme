@@ -309,6 +309,13 @@ function ementash_customizer_schema() {
 					'description' => __( 'اگر خالی باشد به ایمیل مدیر سایت (تنظیمات ← عمومی) فرستاده می‌شود. همه درخواست‌ها در «درخواست‌های تماس» هم ذخیره می‌شوند.', 'ementash' ),
 					'default'     => '',
 				),
+				'contact_ip_source'  => array(
+					'type'        => 'select',
+					'label'       => __( 'منبع IP بازدیدکننده (محدودیت ارسال فرم)', 'ementash' ),
+					'description' => __( 'فقط اگر سایت پشت CDN یا پروکسی است و همه ترافیک از آن می‌گذرد عوض شود؛ وگرنه هدر قابل جعل است. توضیح کامل در inc/contact-form.php.', 'ementash' ),
+					'choices'     => ementash_ip_sources(),
+					'default'     => 'remote_addr',
+				),
 				'contact_success'    => array(
 					'type'    => 'textarea',
 					'label'   => __( 'پیام ارسال موفق', 'ementash' ),

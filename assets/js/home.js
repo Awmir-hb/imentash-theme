@@ -4,19 +4,17 @@
 
   /* ---------- رسانه هیرو ----------
      ویدئو یا گیف فقط برای اندازه صفحه مناسب ساخته می‌شود تا هر دو نسخه دانلود نشوند.
-     موبایل: ویدئوی عمودی؛ اگر نبود و پوستر داریم همان پوستر، وگرنه رسانه دسکتاپ. */
+     موبایل: فقط ویدئوی عمودی (اگر در پنل انتخاب شده)، وگرنه همان پوستر؛ رسانه سنگین دسکتاپ هیچ‌وقت در موبایل نمی‌آید.
+     با Save-Data (حالت کم‌مصرف مرورگر) هیچ ویدئویی بارگذاری نمی‌شود. */
   const media = document.querySelector('[data-em-hero-media]');
-  if (media && !reduce) {
+  const saveData = Boolean(navigator.connection && navigator.connection.saveData);
+  if (media && !reduce && !saveData) {
     const d = media.dataset;
     let src = d.emDesktop;
     let type = d.emDesktopType;
     if (window.matchMedia('(max-width: 767px)').matches) {
-      if (d.emMobile) {
-        src = d.emMobile;
-        type = d.emMobileType;
-      } else if (d.emPoster) {
-        src = '';
-      }
+      src = d.emMobile || '';
+      type = d.emMobileType;
     }
 
     if (src) {

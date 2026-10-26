@@ -538,7 +538,7 @@ function ementash_sanitize_meta_value( $value, $field ) {
 }
 
 function ementash_save_meta_boxes( $post_id, $post ) {
-	if ( wp_is_post_autosave( $post_id ) || wp_is_post_revision( $post_id ) ) {
+	if ( ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) || wp_is_post_autosave( $post_id ) || wp_is_post_revision( $post_id ) ) {
 		return;
 	}
 	if ( ! current_user_can( 'edit_post', $post_id ) ) {

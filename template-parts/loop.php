@@ -1,40 +1,56 @@
 <?php
 /**
- * فهرست ساده نوشته‌ها با سربرگ؛ برای index، آرشیو و جستجو تا طراحی فاز ۶.
+ * آرشیو وبلاگ (برگه نوشته‌ها، دسته، برچسب، نویسنده، تاریخ): سربرگ، دسته‌ها، کارت‌های ۴:۳ و صفحه‌بندی.
+ * index.php و archive.php همین را صدا می‌زنند. جستجو قالب جدای خودش را دارد (search.php).
  *
  * @package ementash
  */
 
 defined( 'ABSPATH' ) || exit;
 
-if ( is_home() && ! is_front_page() ) {
-	$ementash_title = single_post_title( '', false );
-} elseif ( is_search() ) {
-	/* translators: %s: عبارت جستجو */
-	$ementash_title = sprintf( __( 'نتایج جستجو برای «%s»', 'ementash' ), get_search_query() );
+$ementash_desc = '';
+if ( is_home() ) {
+	$ementash_title = ementash_blog_title();
+	$ementash_desc  = ementash_page_subtitle( absint( get_option( 'page_for_posts' ) ) );
+} elseif ( is_category() || is_tag() ) {
+	$ementash_title = single_term_title( '', false );
+	if ( is_tag() ) {
+		/* translators: %s: نام برچسب */
+		$ementash_title = sprintf( __( 'برچسب: %s', 'ementash' ), $ementash_title );
+	}
+	$ementash_desc = trim( wp_strip_all_tags( term_description() ) );
 } elseif ( is_archive() ) {
 	$ementash_title = wp_strip_all_tags( get_the_archive_title() );
 } else {
 	$ementash_title = get_bloginfo( 'name' );
 }
 
-get_template_part( 'template-parts/page-head', null, array( 'title' => $ementash_title ) );
+get_template_part(
+	'template-parts/page-head',
+	null,
+	array(
+		'title'  => $ementash_title,
+		'desc'   => $ementash_desc,
+		'crumbs' => ementash_blog_crumbs(),
+	)
+);
 ?>
-<div class="em-section">
-	<div class="em-container em-entry">
+<div class="em-section em-blogarc">
+	<div class="em-container">
+		<?php get_template_part( 'template-parts/blog/cats' ); ?>
+
 		<?php if ( have_posts() ) : ?>
-			<?php
-			while ( have_posts() ) :
-				the_post();
+			<ul class="em-posts em-posts--line">
+				<?php
+				while ( have_posts() ) {
+					the_post();
+					get_template_part( 'template-parts/blog/card', null, array( 'heading' => 'h2' ) );
+				}
 				?>
-				<article <?php post_class( 'em-entry__item' ); ?>>
-					<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-					<?php the_excerpt(); ?>
-				</article>
-			<?php endwhile; ?>
-			<?php the_posts_pagination(); ?>
+			</ul>
+			<?php get_template_part( 'template-parts/pagination', null, array( 'label' => __( 'صفحه‌بندی مقاله‌ها', 'ementash' ) ) ); ?>
 		<?php else : ?>
-			<p><?php esc_html_e( 'مطلبی پیدا نشد.', 'ementash' ); ?></p>
+			<p class="em-empty"><?php esc_html_e( 'هنوز مقاله‌ای در این بخش منتشر نشده است.', 'ementash' ); ?></p>
 		<?php endif; ?>
 	</div>
 </div>

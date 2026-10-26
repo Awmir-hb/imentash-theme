@@ -2,7 +2,8 @@
 /**
  * سربرگ سرمه‌ای صفحات داخلی: مسیر صفحه، تیتر و توضیح کوتاه.
  *
- * $args: title (string)، desc (string، اختیاری)، crumbs (آرایه‌ای از label/url، اختیاری).
+ * $args: title (string)، desc (string، اختیاری)، crumbs (آرایه‌ای از label/url، اختیاری)،
+ *        meta (آرایه‌ای از text و datetime اختیاری؛ مثل تاریخ و دسته نوشته، اختیاری).
  *
  * @package ementash
  */
@@ -12,6 +13,7 @@ defined( 'ABSPATH' ) || exit;
 $ementash_title  = isset( $args['title'] ) ? (string) $args['title'] : '';
 $ementash_desc   = isset( $args['desc'] ) ? (string) $args['desc'] : '';
 $ementash_crumbs = isset( $args['crumbs'] ) && is_array( $args['crumbs'] ) ? $args['crumbs'] : array();
+$ementash_meta   = isset( $args['meta'] ) && is_array( $args['meta'] ) ? array_filter( $args['meta'], static fn( $m ) => ! empty( $m['text'] ) ) : array();
 ?>
 <section class="em-pagehead">
 	<div class="em-pagehead__in">
@@ -34,6 +36,20 @@ $ementash_crumbs = isset( $args['crumbs'] ) && is_array( $args['crumbs'] ) ? $ar
 
 		<?php if ( '' !== $ementash_desc ) : ?>
 			<p class="em-pagehead__desc"><?php echo ementash_bdi( $ementash_desc ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
+		<?php endif; ?>
+
+		<?php if ( $ementash_meta ) : ?>
+			<ul class="em-pagehead__meta">
+				<?php foreach ( $ementash_meta as $ementash_item ) : ?>
+					<li>
+						<?php if ( ! empty( $ementash_item['datetime'] ) ) : ?>
+							<time datetime="<?php echo esc_attr( $ementash_item['datetime'] ); ?>"><?php echo ementash_bdi( $ementash_item['text'], true ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></time>
+						<?php else : ?>
+							<?php echo ementash_bdi( $ementash_item['text'], true ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+						<?php endif; ?>
+					</li>
+				<?php endforeach; ?>
+			</ul>
 		<?php endif; ?>
 	</div>
 </section>

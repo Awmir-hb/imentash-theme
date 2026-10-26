@@ -67,7 +67,7 @@
 ementash/
   style.css  functions.php  screenshot.png
   header.php  footer.php  front-page.php  page.php  page-about.php  page-contact.php
-  single.php  archive.php  index.php  404.php  search.php
+  single.php  archive.php  index.php  404.php  search.php  searchform.php
   templates/full-width.php   // قالب برگه «تمام‌عرض»
   inc/
     setup.php          // theme supports, menus, image sizes
@@ -77,12 +77,17 @@ ementash/
     cpt.php            // پست‌تایپ‌ها
     metaboxes.php      // متاباکس‌های بومی
     woocommerce.php    // حالت کاتالوگ و تب‌ها
-    contact-form.php   // هندلر فرم
+    contact-form.php   // هندلر فرم و منبع IP
+    blog.php           // وبلاگ، جستجو (نوشته + محصول)، ۴۰۴، دیدگاه خاموش
     template-tags.php  // توابع کمکی (اعداد فارسی، آیکون‌ها)
-  template-parts/  site-header.php  site-footer.php  mobile-menu.php  mobile-bar.php  page-head.php  entry-content.php  loop.php
+  template-parts/  site-header.php  site-footer.php  mobile-menu.php  mobile-bar.php  page-head.php  entry-content.php  loop.php  pagination.php
   template-parts/home/  hero.php about.php industries.php clients.php services.php products.php production-line.php gallery.php textile.php blog.php
+  template-parts/blog/  card.php cats.php article.php related.php
   woocommerce/  archive-product.php  single-product.php  content-product.php
   assets/  css/  js/  fonts/  img/  icons/ (SVG خطی)
+  assets/css/cards.css   // کارت مقاله، کارت محصول، صفحه‌بندی؛ وابستگی home، shop و blog
+  languages/ementash.pot // با wp i18n make-pot دوباره ساخته شود
+  dev/                   // اسکریپت‌های CLI داده دمو و پاک‌سازی؛ در بسته نهایی قالب نیاید
 ```
 
 ## منبع داده هر بخش

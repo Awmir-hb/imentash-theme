@@ -16,6 +16,19 @@ function ementash_register_elementor_locations( $manager ) {
 add_action( 'elementor/theme/register_locations', 'ementash_register_elementor_locations' );
 
 /**
+ * المنتور فونت‌های پیش‌فرض کیت (Roboto و...) را از Google Fonts می‌گیرد که در ایران کند یا مسدود است.
+ * قالب هیچ درخواست خارجی نمی‌فرستد؛ فونت‌های self-host قالب در فهرست فونت المنتور (گروه سیستم) می‌آیند.
+ */
+add_filter( 'elementor/frontend/print_google_fonts', '__return_false' );
+
+function ementash_elementor_fonts( $fonts ) {
+	$fonts['Vazirmatn']  = 'system';
+	$fonts['Readex Pro'] = 'system';
+	return $fonts;
+}
+add_filter( 'elementor/fonts/additional_fonts', 'ementash_elementor_fonts' );
+
+/**
  * اگر Theme Builder برای این location قالب داشته باشد آن را چاپ می‌کند و true برمی‌گرداند.
  * false یعنی قالب خودمان باید خروجی بدهد.
  */

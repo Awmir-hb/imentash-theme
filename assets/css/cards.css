@@ -1,0 +1,55 @@
+/* =========================================================
+   قالب ایمن تاش — اجزای مشترک فهرست‌ها: کارت مقاله، کارت محصول، صفحه‌بندی
+   وابستگی home.css، shop.css و blog.css؛ فقط همراه آن‌ها بارگذاری می‌شود.
+   ========================================================= */
+
+/* ---------- کارت مقاله (۴:۳) ---------- */
+.em-posts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;list-style:none;margin:0;padding:0}
+.em-post{height:100%;display:flex;flex-direction:column;overflow:hidden;border-radius:12px;background:var(--white);color:var(--ink)}
+.em-post:hover{color:var(--ink)}
+.em-post__img{position:relative;display:block;aspect-ratio:4/3;overflow:hidden}
+.em-post__img img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease-media)}
+.em-post:hover .em-post__img img{transform:scale(1.05)}
+.em-post__body{flex:1;display:flex;flex-direction:column;padding:20px 22px 24px}
+.em-post__meta{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin-bottom:10px;font-size:var(--fs-xs);color:var(--muted)}
+.em-post__cat{padding:2px 10px;border-radius:var(--radius-pill);background:var(--chip-bg);color:var(--blue);font-weight:600}
+.em-post__title{margin:0 0 16px;font-family:var(--font-head);font-weight:600;font-size:20px;line-height:1.55;transition:color .25s ease}
+.em-post:hover .em-post__title{color:var(--blue)}
+.em-post__more{display:inline-flex;align-items:center;gap:8px;margin-top:auto;color:var(--blue);font-size:var(--fs-nav);font-weight:600}
+.em-post__more .em-btn__icon{width:16px;height:16px}
+.em-post:hover .em-btn__icon{transform:translateX(-5px)}
+
+/* ---------- کارت محصول (آرشیو، محصولات مرتبط، جستجو) ---------- */
+.em-pgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;list-style:none;margin:0;padding:0}
+.em-pcard{height:100%;display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--line-soft);border-radius:var(--radius-card);background:var(--white);color:var(--ink);transition:border-color .25s ease,box-shadow .25s ease}
+.em-pcard:hover{border-color:var(--blue);box-shadow:var(--shadow-card);color:var(--ink)}
+.em-pcard__img{position:relative;display:block;aspect-ratio:4/3;overflow:hidden}
+.em-pcard__img img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease-media)}
+.em-pcard:hover .em-pcard__img img{transform:scale(1.05)}
+.em-pcard__body{flex:1;display:flex;flex-direction:column;padding:16px 18px 18px}
+.em-pcard__meta{display:flex;justify-content:space-between;gap:10px;margin-bottom:4px;font-size:var(--fs-xs);color:var(--muted-2)}
+.em-pcard__sku{font-weight:600;color:var(--blue)}
+.em-pcard__title{margin:0 0 14px;font-family:var(--font-head);font-weight:600;font-size:19px;line-height:1.55}
+.em-pcard__more{display:inline-flex;align-items:center;gap:8px;margin-top:auto;color:var(--blue);font-size:var(--fs-sm);font-weight:600}
+.em-pcard__more .em-btn__icon{width:16px;height:16px}
+.em-pcard:hover .em-btn__icon{transform:translateX(-5px)}
+
+/* ---------- صفحه‌بندی ---------- */
+.em-pager{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:32px}
+.em-pager .page-numbers{width:42px;height:42px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line-stat);border-radius:50%;color:var(--ink)}
+.em-pager a.page-numbers:hover{border-color:var(--blue);color:var(--blue)}
+.em-pager .page-numbers.current{border-color:var(--navy-900);background:var(--navy-900);color:var(--white);font-weight:600}
+.em-pager .page-numbers.dots{border:0}
+.em-pager svg{width:16px;height:16px}
+.em-pager__prev{transform:scaleX(-1)}
+
+@media (max-width:1000px){
+  .em-posts,.em-pgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:560px){
+  .em-posts,.em-pgrid{grid-template-columns:minmax(0,1fr)}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .em-post__img img,.em-post__title,.em-pcard,.em-pcard__img img,.em-post .em-btn__icon,.em-pcard .em-btn__icon{transition:none!important}
+}

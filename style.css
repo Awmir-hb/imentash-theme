@@ -2,9 +2,10 @@
 Theme Name: ایمن تاش
 Theme URI: https://ementash.com
 Author: Amirhosein Bagheri
-Description: قالب اختصاصی شرکت ایمن تاش سپاهان (سی‌پیکو). استایل‌های اصلی در assets/css/main.css است.
-Version: 0.1.0
+Description: قالب اختصاصی شرکت ایمن تاش سپاهان (سی‌پیکو): صفحه اصلی، کاتالوگ محصولات ووکامرس (بدون قیمت و سبد خرید)، درباره ما، تماس با فرم استعلام، وبلاگ، جستجو و ۴۰۴. راست‌چین، فونت‌های self-host (Vazirmatn و Readex Pro)، سازگار با Elementor و Elementor Pro و آماده ترجمه با Polylang. استایل‌ها در assets/css است.
+Version: 1.0.0
 Requires at least: 6.5
+Tested up to: 7.1
 Requires PHP: 7.4
 Text Domain: ementash
 Domain Path: /languages
