@@ -22,7 +22,7 @@
 
 /* برچسب کوچک بالای تیتر؛ روی زمینه تیره آبی روشن */
 .em-hero__eyebrow{margin-bottom:18px;color:var(--blue-light);animation-delay:.15s}
-.em-hero__title{margin:0 0 30px;font-family:var(--font-head);font-weight:var(--fw-display);font-size:clamp(46px,6.2vw,92px);line-height:1.28}
+.em-hero__title{margin:0 0 30px;font-family:var(--font-head);font-weight:var(--fw-display);font-size:clamp(40px,5vw,72px);line-height:1.28}
 .em-hero__line{display:block}
 .em-w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.12em;margin-bottom:-.12em}
 .em-wi{display:inline-block;transform:translateY(115%);animation:em-up 1s var(--ease-out) var(--em-d,0s) forwards}
