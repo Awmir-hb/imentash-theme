@@ -130,6 +130,13 @@ function ementash_customizer_schema() {
 			'description' => __( 'هر خط یک شماره.', 'ementash' ),
 			'default'     => $office['phones'],
 		);
+		$contact[ 'office_' . $key . '_fax' ]     = array(
+			'type'        => 'text',
+			/* translators: %s: نام دفتر */
+			'label'       => sprintf( __( '%s: فکس', 'ementash' ), $office['name'] ),
+			'description' => __( 'اگر خالی باشد نمایش داده نمی‌شود.', 'ementash' ),
+			'default'     => '',
+		);
 	}
 
 	$social = array();
@@ -139,6 +146,8 @@ function ementash_customizer_schema() {
 			'linkedin'  => __( 'لینکدین', 'ementash' ),
 			'telegram'  => __( 'تلگرام', 'ementash' ),
 			'whatsapp'  => __( 'واتس‌اپ', 'ementash' ),
+			'eitaa'     => __( 'ایتا', 'ementash' ),
+			'rubika'    => __( 'روبیکا', 'ementash' ),
 		) as $key => $label
 	) {
 		$social[ 'social_' . $key ] = array(
@@ -260,6 +269,35 @@ function ementash_customizer_schema() {
 		'footer'                  => array(
 			'title'  => __( 'فوتر', 'ementash' ),
 			'fields' => array(
+				'footer_cta_title' => array(
+					'type'        => 'text',
+					'label'       => __( 'نوار دعوت: تیتر', 'ementash' ),
+					'description' => __( 'اگر خالی باشد نوار دعوت بالای فوتر نمایش داده نمی‌شود.', 'ementash' ),
+					'default'     => __( 'برای انتخاب محصول مناسب راهنمایی می‌خواهید؟', 'ementash' ),
+				),
+				'footer_cta_text'  => array(
+					'type'    => 'textarea',
+					'label'   => __( 'نوار دعوت: متن', 'ementash' ),
+					'default' => __( 'کارشناسان فروش، مشاوره فنی و قیمت را برایتان ارسال می‌کنند.', 'ementash' ),
+				),
+				'footer_cta_label' => array(
+					'type'        => 'text',
+					'label'       => __( 'نوار دعوت: متن دکمه', 'ementash' ),
+					'description' => __( 'دکمه به صفحه تماس می‌رود؛ شماره کنار آن شماره اصلی سایت است.', 'ementash' ),
+					'default'     => __( 'دریافت مشاوره و استعلام قیمت', 'ementash' ),
+				),
+				'footer_badges'    => array(
+					'type'        => 'lines',
+					'label'       => __( 'برچسب گواهی‌ها', 'ementash' ),
+					'description' => __( 'هر خط یک برچسب، مثلاً ISO 9001. اگر خالی باشد نمایش داده نمی‌شود.', 'ementash' ),
+					'default'     => "ISO 9001\nISO 14001\nISO 45001\nTÜV NORD",
+				),
+				'footer_map_label' => array(
+					'type'        => 'text',
+					'label'       => __( 'متن لینک مسیریابی', 'ementash' ),
+					'description' => __( 'لینک از «صفحه تماس و فرم ← لینک مسیریابی» خوانده می‌شود؛ اگر آن خالی باشد نمایش داده نمی‌شود.', 'ementash' ),
+					'default'     => __( 'مسیریابی کارخانه', 'ementash' ),
+				),
 				'footer_text'      => array(
 					'type'    => 'textarea',
 					'label'   => __( 'متن کوتاه معرفی', 'ementash' ),

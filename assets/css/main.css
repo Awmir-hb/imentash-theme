@@ -66,6 +66,13 @@
   --footer-top:44px;
   --footer-bottom:18px;
   --footer-gap:28px 48px;
+  --footer-gap-y:36px;        /* فاصله نوار دعوت تا ستون‌ها */
+  --fcta-overlap:56px;        /* بخشی از نوار دعوت که بیرون از فوتر است */
+  --fcta-pad:24px 32px;
+  --radius-footer:24px;
+  --deco-size:640px;          /* دایره‌های محو پس‌زمینه فوتر، مرکز در گوشه پایین‌چپ */
+  --deco-x:0px;
+  --deco-y:0px;
 
   /* اندازه‌ها و گردی‌ها */
   --hbtn:44px;
@@ -137,6 +144,11 @@
     --pagehead-bottom:36px;
     --footer-top:32px;
     --footer-bottom:96px; /* فضای نوار ثابت پایین */
+    --footer-gap-y:24px;
+    --fcta-overlap:40px;
+    --fcta-pad:20px 18px;
+    --radius-footer:20px;
+    --deco-size:420px;
     --ph-size:28px;
     --radius-lg:16px;
     --mbar-space:76px;
@@ -297,30 +309,59 @@ a:hover{color:var(--blue-hover)}
   .em-entry h3{font-size:19px}
 }
 
-/* ---------- فوتر ---------- */
-.em-footer{background:var(--navy-900);color:var(--on-dark-2);padding:var(--footer-top) var(--gutter) var(--footer-bottom);font-size:var(--fs-sm);line-height:1.8}
-.em-footer__in{max-width:var(--container);margin:0 auto;display:flex;flex-wrap:wrap;gap:var(--footer-gap)}
-.em-footer__brand{flex:1.2 1 300px;min-width:0}
-.em-footer__links{flex:0 1 180px;min-width:0}
-.em-footer__contact{flex:1.6 1 380px;min-width:0}
-.em-footer__about{margin:0 0 14px;max-width:360px}
-.em-footer__title{margin:0 0 8px;font-family:var(--font-body);font-size:var(--fs-sm);font-weight:600;line-height:1.8;color:var(--white)}
-.em-footer__menu{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 20px;list-style:none;margin:0;padding:0}
+/* ---------- فوتر ----------
+   نوار دعوت نیمی بیرون از فوتر می‌نشیند (فوتر به اندازه --fcta-overlap پایین‌تر شروع می‌شود)
+   و پس‌زمینه چند دایره هم‌مرکز محو در گوشه دارد. */
+.em-footer{position:relative;background:var(--navy-900);color:var(--on-dark-2);padding:var(--footer-top) var(--gutter) var(--footer-bottom);font-size:var(--fs-sm);line-height:1.8;border-radius:var(--radius-footer) var(--radius-footer) 0 0}
+.em-footer--cta{margin-top:var(--fcta-overlap)}
+.em-footer__deco{position:absolute;inset:0;overflow:hidden;border-radius:inherit;pointer-events:none}
+.em-footer__deco span{position:absolute;left:var(--deco-x);bottom:var(--deco-y);width:var(--deco-size);aspect-ratio:1;border:1px solid var(--line-on-dark-1);border-radius:50%;transform:translate(-50%,50%)}
+.em-footer__deco span:nth-child(2){width:calc(var(--deco-size) * .8);border-color:var(--line-on-dark-2)}
+.em-footer__deco span:nth-child(3){width:calc(var(--deco-size) * .6);border-color:var(--line-on-dark-1)}
+.em-footer__deco span:nth-child(4){width:calc(var(--deco-size) * .4);border-color:var(--grid-line)}
+
+.em-fcta{position:relative;z-index:1;max-width:var(--container);margin:calc(-1 * (var(--footer-top) + var(--fcta-overlap))) auto var(--footer-gap-y);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 32px;padding:var(--fcta-pad);background:var(--blue);border-radius:var(--radius-md);color:var(--on-dark)}
+.em-fcta__title{margin:0 0 4px;font-family:var(--font-head);font-weight:var(--fw-display-sm);font-size:clamp(20px,2vw,26px);line-height:1.5;color:var(--white);text-wrap:balance}
+.em-fcta__desc{margin:0;color:var(--on-dark);text-wrap:pretty}
+.em-fcta__actions{display:flex;flex-wrap:wrap;gap:12px}
+.em-fcta__phone{font-variant-numeric:tabular-nums}
+
+.em-footer__in{position:relative;max-width:var(--container);margin:0 auto;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.8fr) minmax(0,.8fr) minmax(0,1.5fr);gap:var(--footer-gap)}
+.em-footer__about{margin:0 0 16px;max-width:360px;text-wrap:pretty}
+.em-footer__badges{display:flex;flex-wrap:wrap;gap:6px;list-style:none;margin:0;padding:0}
+.em-footer__badges li{padding:2px 10px;border:1px solid var(--line-on-dark-4);border-radius:var(--radius-pill);font-size:var(--fs-xs);color:var(--on-dark)}
+.em-footer__title{margin:0 0 10px;font-family:var(--font-body);font-size:var(--fs-sm);font-weight:600;line-height:1.8;color:var(--white)}
+.em-footer__menu{list-style:none;margin:0;padding:0}
+.em-footer__menu li + li{margin-top:4px}
 .em-footer__menu a,.em-footer__office a{color:var(--on-dark-2)}
 .em-footer__menu a:hover,.em-footer__office a:hover{color:var(--white)}
-.em-footer__office + .em-footer__office{margin-top:6px}
-.em-footer__label{color:var(--white)}
-.em-footer__bottom{max-width:var(--container);margin:28px auto 0;padding-top:14px;border-top:1px solid var(--line-on-dark-2);font-size:var(--fs-xs);color:var(--on-dark-4)}
+.em-footer__office{display:flex;flex-direction:column}
+.em-footer__office + .em-footer__office{margin-top:10px}
+.em-footer__label{color:var(--blue-light);font-size:var(--fs-xs)}
+.em-footer__nums{display:flex;flex-wrap:wrap;gap:0 14px;font-variant-numeric:tabular-nums}
+.em-footer__fax{color:var(--on-dark-3)}
+.em-footer__hours{display:flex;align-items:center;gap:8px;margin:14px 0 0}
+.em-footer__hours svg{width:18px;height:18px;color:var(--blue-light)}
+.em-footer__soc{margin-top:14px}
+.em-footer__bottom{position:relative;max-width:var(--container);margin:32px auto 0;padding-top:14px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;border-top:1px solid var(--line-on-dark-2);font-size:var(--fs-xs);color:var(--on-dark-4)}
+.em-footer__map{display:inline-flex;align-items:center;gap:6px;color:var(--blue-light)}
+.em-footer__map:hover{color:var(--white)}
+.em-footer__map svg{width:16px;height:16px}
 
+@media (max-width:1000px){
+  .em-footer__in{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
 @media (max-width:767px){
-  .em-footer__in{display:block}
-  .em-footer__about{margin-bottom:18px;max-width:none}
-  .em-footer__soc,.em-footer__title{display:none}
-  .em-footer__links{margin-bottom:18px}
-  .em-footer__menu{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px 12px}
+  .em-fcta{flex-direction:column;align-items:stretch}
+  .em-fcta__actions{flex-direction:column}
+  .em-fcta__actions .em-btn{justify-content:center}
+  .em-footer__in{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 16px}
+  .em-footer__brand,.em-footer__contact{grid-column:1 / -1}
+  .em-footer__about{max-width:none}
+  /* آدرس کامل در صفحه تماس است؛ در موبایل فقط تلفن‌ها */
+  .em-footer__addr,.em-footer__office--addr{display:none}
   .em-footer__menu a{color:var(--white)}
-  .em-footer__contact{margin-bottom:18px}
-  .em-footer__bottom{margin-top:0;padding-top:12px;font-size:12px}
+  .em-footer__bottom{margin-top:20px;padding-top:12px;font-size:12px}
 }
 
 /* ---------- نوار ثابت پایین موبایل ---------- */

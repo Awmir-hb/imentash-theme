@@ -284,6 +284,8 @@ function ementash_socials() {
 		'linkedin'  => __( 'لینکدین', 'ementash' ),
 		'telegram'  => __( 'تلگرام', 'ementash' ),
 		'whatsapp'  => __( 'واتس‌اپ', 'ementash' ),
+		'eitaa'     => __( 'ایتا', 'ementash' ),
+		'rubika'    => __( 'روبیکا', 'ementash' ),
 	);
 	$items  = array();
 	foreach ( $labels as $key => $label ) {
