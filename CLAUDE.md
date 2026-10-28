@@ -69,6 +69,7 @@ ementash/
   header.php  footer.php  front-page.php  page.php  page-about.php  page-contact.php
   single.php  archive.php  index.php  404.php  search.php  searchform.php
   templates/full-width.php   // قالب برگه «تمام‌عرض»
+  templates/industry.php     // قالب برگه «صنعت»: متن اختیاری برگه + محصولات این صنعت
   inc/
     setup.php          // theme supports, menus, image sizes
     elementor.php      // ثبت locationها، تشخیص صفحه المنتوری
@@ -79,10 +80,12 @@ ementash/
     woocommerce.php    // حالت کاتالوگ و تب‌ها
     contact-form.php   // هندلر فرم و منبع IP
     blog.php           // وبلاگ، جستجو (نوشته + محصول)، ۴۰۴، دیدگاه خاموش
+    industries.php     // برگه‌های صنعت، کادر «مناسب برای این صنایع» محصول، شورت‌کد
     template-tags.php  // توابع کمکی (اعداد فارسی، آیکون‌ها)
   template-parts/  site-header.php  site-footer.php  mobile-menu.php  mobile-bar.php  page-head.php  entry-content.php  loop.php  pagination.php
   template-parts/home/  hero.php about.php industries.php clients.php services.php products.php production-line.php gallery.php textile.php blog.php
   template-parts/blog/  card.php cats.php article.php related.php
+  template-parts/industry/  products.php
   woocommerce/  archive-product.php  single-product.php  content-product.php
   assets/  css/  js/  fonts/  img/  icons/ (SVG خطی)
   assets/css/cards.css   // کارت مقاله، کارت محصول، صفحه‌بندی؛ وابستگی home، shop و blog
@@ -102,7 +105,8 @@ ementash/
 
 **پست‌تایپ‌ها** (`show_in_rest` روشن، بدون صفحه عمومی به‌جز جایی که گفته شده)
 - `em_service`: خدمات (عنوان، تصویر شاخص، آیکون از لیست ثابت truck/lab/chat/train، لینک).
-- `em_industry`: صنایع (عنوان، تصویر، لینک). لینک‌ها به برگه‌های فعلی صنایع در سایت می‌روند.
+- `em_industry`: کارت‌های صنایع صفحه اصلی (عنوان، تصویر، لینک). لینک هر کارت به برگه همان صنعت می‌رود.
+- **برگه صنعت** = برگه با قالب «صنعت» (`templates/industry.php`). صنعت از دسته محصول جداست: هر محصول در کادر «مناسب برای این صنایع» صفحه ویرایشش برگه‌های صنعت را تیک می‌زند (متای `_ementash_industry`، یک ردیف برای هر صنعت). برگه صنعت سربرگ، متن اختیاری خودش و محصولات تیک‌خورده را نشان می‌دهد؛ اگر محصولی نباشد شبکه و عنوانش چاپ نمی‌شود. برگه المنتوری: شورت‌کد `[ementash_industry_products]`.
 - `em_client`: مشتریان (نام، لوگو) برای نوار چرخان.
 - `em_timeline`: خط زمانی درباره ما (سال، عنوان، متن).
 - `em_certificate`: گواهینامه‌ها (عنوان، تصویر، فایل PDF اختیاری).

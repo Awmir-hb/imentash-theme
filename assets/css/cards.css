@@ -34,6 +34,9 @@
 .em-pcard__more .em-btn__icon{width:16px;height:16px}
 .em-pcard:hover .em-btn__icon{transform:translateX(-5px)}
 
+/* محصولات برگه صنعت */
+.em-iproducts__title{margin-bottom:24px}
+
 /* ---------- صفحه‌بندی ---------- */
 .em-pager{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:32px}
 .em-pager .page-numbers{width:42px;height:42px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line-stat);border-radius:50%;color:var(--ink)}

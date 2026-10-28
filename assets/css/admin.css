@@ -64,3 +64,7 @@
 .em-mb__table th {
   width: 180px;
 }
+
+/* کادر «مناسب برای این صنایع» در صفحه ویرایش محصول */
+.em-mb__checks{max-height:260px;overflow:auto;margin:0;padding:0;list-style:none}
+.em-mb__checks li{margin:0 0 6px}
