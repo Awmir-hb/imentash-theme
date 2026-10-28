@@ -29,7 +29,7 @@
   .em-form__title{font-weight:var(--fw-display-sm)}
 }
 
-.em-form__status{padding:14px 16px;border-radius:12px;font-weight:600}
+.em-form__status{padding:14px 16px;border-radius:var(--radius-sm);font-weight:600}
 .em-form__status[hidden]{display:none}
 .em-form__status--ok{background:var(--chip-bg);color:var(--blue)}
 .em-form__status--error{border:2px solid var(--blue);background:var(--white);color:var(--ink)}
@@ -44,7 +44,7 @@
 
 .em-field{flex:1 1 220px;min-width:0}
 .em-field label{display:block;font-size:var(--fs-sm);color:var(--muted)}
-.em-field input,.em-field textarea{display:block;width:100%;margin-top:6px;padding:13px 14px;border:1px solid var(--line);border-radius:10px;background:var(--white);color:var(--ink);font:inherit;font-size:var(--fs-nav)}
+.em-field input,.em-field textarea{display:block;width:100%;margin-top:6px;padding:13px 14px;border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--white);color:var(--ink);font:inherit;font-size:var(--fs-nav)}
 .em-field textarea{min-height:120px;resize:vertical}
 .em-field input:focus-visible,.em-field textarea:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
 .em-field [aria-invalid="true"]{border:2px solid var(--blue)}

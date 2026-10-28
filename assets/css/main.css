@@ -82,6 +82,11 @@
 
   /* حرکت */
   --ease-out:cubic-bezier(.2,.75,.1,1);
+  --reveal-y:36px;           /* مقدار بالا آمدن هنگام ظاهر شدن */
+  --reveal-dur:.9s;
+  --reveal-x:48px;           /* ورود از کنار (کارت خدمات) */
+  --word-stagger:80ms;       /* فاصله کلمه‌های تیتر */
+  --read-from:.2;            /* شفافیت اولیه کلمه‌ها در متن معرفی */
   --grid-lines:linear-gradient(var(--grid-line) 1px,transparent 1px),linear-gradient(90deg,var(--grid-line) 1px,transparent 1px);
 
   /* صفحه اصلی (Industrial.dc.html و MobileHome.dc.html) */
@@ -97,7 +102,7 @@
   --hero-shade-x:linear-gradient(to left,rgba(8,17,63,.92) 0%,rgba(8,17,63,.6) 42%,rgba(8,17,63,.2) 100%);
   --hero-shade-y:linear-gradient(to top,rgba(8,17,63,.9),rgba(8,17,63,0));
   --hero-shade-mobile:linear-gradient(to top,rgba(8,17,63,.96) 0%,rgba(8,17,63,.7) 45%,rgba(8,17,63,.25) 100%);
-  --radius-lg:18px;
+  --radius-lg:24px;          /* مقیاس گردی: sm ۸ (برچسب، دکمه کوچک، فیلد)، card/md ۱۶ (کارت‌ها)، lg/xl ۲۴ (کادرهای بزرگ) */
   --radius-md:16px;
   --ease-swap:cubic-bezier(.7,0,.2,1);
   --ease-media:cubic-bezier(.2,.7,.1,1);
@@ -105,8 +110,9 @@
   --white-a60:rgba(255,255,255,.6);
   --line-on-dark-5:rgba(143,180,255,.55);
   --line-client:#DCE2F0;
-  --radius-sm:10px;
-  --radius-card:14px;
+  --radius-sm:8px;
+  --radius-card:16px;
+  --card-inset:6px;          /* فاصله عکس از لبه کارت؛ گردی عکس = گردی کارت منهای همین (هم‌مرکز) */
   /* سایه پایین کارت‌های تصویری (صنایع و...) */
   --card-shade:linear-gradient(to top,rgba(8,17,63,.95) 0%,rgba(8,17,63,.55) 45%,rgba(8,17,63,0) 80%);
   /* کارت خدمات: عکس سمت چپ که به رنگ کارت محو می‌شود */
@@ -130,7 +136,7 @@
   --muted-2:#656D8C;        /* کنتراست AA روی surface-2 و bg-soft (طراحی: #6B7393) */
   --ink-2:#3E4668;
   --shadow-card:0 10px 30px rgba(0,0,127,.12);
-  --radius-xl:20px;
+  --radius-xl:24px;
 }
 @media (max-width:767px){
   :root{
@@ -147,10 +153,11 @@
     --footer-gap-y:24px;
     --fcta-overlap:40px;
     --fcta-pad:20px 18px;
-    --radius-footer:20px;
+    --radius-footer:16px;
     --deco-size:420px;
     --ph-size:28px;
     --radius-lg:16px;
+    --radius-xl:16px;
     --mbar-space:76px;
     --svc-shade:linear-gradient(to left,#0B1550 42%,rgba(11,21,80,.7) 62%,rgba(11,21,80,.1) 100%);
     --svc-img-w:55%;
@@ -183,6 +190,36 @@ a:hover{color:var(--blue-hover)}
 
 @keyframes em-fade{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 @keyframes em-fadein{from{opacity:0}to{opacity:1}}
+
+/* ---------- ظاهر شدن هنگام اسکرول (assets/js/main.js) ----------
+   data-em-reveal را فقط JS می‌گذارد؛ بدون JS چیزی پنهان نیست. همه یک‌باره و فقط opacity/transform،
+   به‌جز curtain که clip-path است (فقط روی یک عکس و یک بار؛ هزینه رنگ‌آمیزی ناچیز). */
+[data-em-reveal]{opacity:0;transform:translate3d(0,var(--reveal-y),0);transition:opacity var(--reveal-dur) var(--ease-out),transform var(--reveal-dur) var(--ease-out);transition-delay:var(--reveal-delay,0ms)}
+[data-em-reveal="side"]{transform:translate3d(var(--reveal-x),0,0)}
+[data-em-reveal="pop"]{transform:scale(.94)}
+/* zoom: کارت محو می‌آید و عکسش از نزدیک به اندازه اصلی برمی‌گردد */
+[data-em-reveal="zoom"]{transform:none}
+[data-em-reveal="zoom"] .em-card__img,[data-em-reveal="zoom"] .em-gal__img{transform:scale(1.18);transition:transform calc(var(--reveal-dur) * 1.8) var(--ease-out);transition-delay:var(--reveal-delay,0ms)}
+[data-em-reveal="zoom"].is-in .em-card__img,[data-em-reveal="zoom"].is-in .em-gal__img{transform:none}
+/* curtain: پرده از پایین کنار می‌رود */
+[data-em-reveal="curtain"]{opacity:1;transform:none;clip-path:inset(100% 0 0 0);transition:clip-path calc(var(--reveal-dur) * 1.4) var(--ease-out)}
+[data-em-reveal="curtain"].is-in{clip-path:inset(0)}
+/* words: تیتر کلمه‌به‌کلمه؛ inline-block روی کل کلمه، پس حروف فارسی به هم چسبیده می‌مانند */
+[data-em-reveal="words"]{opacity:1;transform:none}
+[data-em-reveal="words"] .em-rw{display:inline-block;opacity:0;transform:translate3d(0,.6em,0);transition:opacity var(--reveal-dur) var(--ease-out),transform var(--reveal-dur) var(--ease-out);transition-delay:calc(var(--i, 0) * var(--word-stagger))}
+[data-em-reveal="words"].is-in .em-rw{opacity:1;transform:none}
+[data-em-reveal].is-in{opacity:1;transform:none}
+
+/* کلمه‌ها با اسکرول از کم‌رنگ به پررنگ؛ فقط مرورگرهایی که view() دارند، بقیه متن ثابت می‌بینند.
+   .em-mw: متن درباره ما صفحه اصلی (رنگ از خط تا متن، مطابق طراحی)
+   .em-mr: متن‌های کوتاه معرفی (read)؛ با opacity تا روی زمینه روشن و تیره هر دو درست باشد */
+@keyframes em-ink{to{color:var(--ink)}}
+@keyframes em-read{from{opacity:var(--read-from)}to{opacity:1}}
+.em-mw{color:var(--ink)}
+@supports (animation-timeline: view()){
+  .em-mw{color:var(--line);animation:em-ink linear both;animation-timeline:view();animation-range:entry 100% cover 45%}
+  .em-mr{animation:em-read linear both;animation-timeline:view();animation-range:entry 100% cover 45%}
+}
 
 /* ---------- لوگو (قرص سفید) ---------- */
 .em-logo{--logo-h:26px;display:inline-block;flex:0 0 auto;background:var(--white);border-radius:var(--radius-pill);padding:8px 18px;line-height:0}
@@ -320,7 +357,7 @@ a:hover{color:var(--blue-hover)}
 .em-footer__deco span:nth-child(3){width:calc(var(--deco-size) * .6);border-color:var(--line-on-dark-1)}
 .em-footer__deco span:nth-child(4){width:calc(var(--deco-size) * .4);border-color:var(--grid-line)}
 
-.em-fcta{position:relative;z-index:1;max-width:var(--container);margin:calc(-1 * (var(--footer-top) + var(--fcta-overlap))) auto var(--footer-gap-y);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 32px;padding:var(--fcta-pad);background:var(--blue);border-radius:var(--radius-md);color:var(--on-dark)}
+.em-fcta{position:relative;z-index:1;max-width:var(--container);margin:calc(-1 * (var(--footer-top) + var(--fcta-overlap))) auto var(--footer-gap-y);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 32px;padding:var(--fcta-pad);background:var(--blue);border-radius:var(--radius-lg);color:var(--on-dark)}
 .em-fcta__title{margin:0 0 4px;font-family:var(--font-head);font-weight:var(--fw-display-sm);font-size:clamp(20px,2vw,26px);line-height:1.5;color:var(--white);text-wrap:balance}
 .em-fcta__desc{margin:0;color:var(--on-dark);text-wrap:pretty}
 .em-fcta__actions{display:flex;flex-wrap:wrap;gap:12px}
@@ -444,4 +481,6 @@ a:hover{color:var(--blue-hover)}
 @media (prefers-reduced-motion: reduce){
   .em-header--overlay,.em-mmenu{animation:none!important;opacity:1!important;transform:none!important}
   .em-nav__list a,.em-soc a{transition:none!important}
+  [data-em-reveal],[data-em-reveal] .em-rw,[data-em-reveal] .em-card__img,[data-em-reveal] .em-gal__img{opacity:1!important;transform:none!important;clip-path:none!important;transition:none!important}
+  .em-mw,.em-mr{animation:none!important;opacity:1!important}
 }
