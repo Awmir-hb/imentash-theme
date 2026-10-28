@@ -22,7 +22,7 @@
 .em-pagehead + .em-about-stats{padding-top:var(--section-y)}
 
 /* ---------- خط زمانی ---------- */
-.em-timeline{background-color:var(--navy-900);background-image:var(--grid-lines);background-size:var(--grid-size) var(--grid-size);color:var(--white)}
+.em-timeline{--rings-at:100% 0%;background-color:var(--navy-900);color:var(--white)}
 .em-timeline__h2{margin-bottom:40px}
 .em-tl{position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:28px 0;list-style:none;margin:0;padding:0}
 .em-tl::before{content:"";position:absolute;top:9px;left:0;right:0;height:2px;background:var(--line-on-dark-4)}

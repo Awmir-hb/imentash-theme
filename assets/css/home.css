@@ -11,7 +11,7 @@
 
 /* ---------- هیرو ---------- */
 .em-hero{position:relative;overflow:hidden;height:min(100vh,920px);min-height:700px;background:var(--navy-900);color:var(--white)}
-.em-hero__media{position:absolute;inset:0;z-index:0;background-color:var(--ph-bg-color);background-image:var(--ph-bg);background-size:var(--ph-size) var(--ph-size),var(--ph-size) var(--ph-size),100% 100%;animation:em-kb 2.4s var(--ease-media) both}
+.em-hero__media{position:absolute;inset:0;z-index:0;background-color:var(--ph-bg-color);background-image:var(--ph-bg);animation:em-kb 2.4s var(--ease-media) both}
 .em-hero__media > img,.em-hero__media > video{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover}
 .em-hero__live{opacity:0;transition:opacity .6s ease}
 .em-hero__live--on{opacity:1}
@@ -208,12 +208,15 @@ a.em-svc:hover .em-svc__arrow{background:var(--white);color:var(--navy-800)}
 @keyframes em-blink{0%,100%{opacity:1}50%{opacity:.15}}
 @keyframes em-fall{from{transform:translateY(0);opacity:1}to{transform:translateY(58px);opacity:0}}
 
-.em-pl{background-color:var(--navy-800);background-image:var(--grid-lines);background-size:var(--grid-size-pl) var(--grid-size-pl);color:var(--white)}
-.em-pl__h2{margin-bottom:14px}
-.em-pl__intro{max-width:600px;margin:0 0 32px;color:var(--on-dark-2)}
-.em-pl__grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:56px;align-items:center}
+.em-pl{background-color:var(--navy-800);background-image:var(--bg-dots);background-size:var(--dots-size) var(--dots-size);color:var(--white)}
+.em-pl__h2{margin-bottom:10px}
+.em-pl__intro{max-width:600px;margin:0 0 20px;color:var(--on-dark-2)}
+/* نقشه در ستون اول (راست)، سربرگ و مراحل روی هم در ستون دوم */
+.em-pl__grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);grid-template-areas:"map head" "map steps";grid-template-rows:auto 1fr;gap:0 56px;align-items:center}
+.em-pl__head{grid-area:head;align-self:end}
+.em-pl__steps{grid-area:steps;align-self:start}
 /* برچسب‌ها از x به راست نوشته شوند؛ ویژگی dir روی svg درون‌خطی کافی نیست */
-.em-pl__map{display:block;width:100%;height:auto;direction:ltr}
+.em-pl__map{grid-area:map;display:block;width:100%;height:auto;max-height:var(--pl-map-max);direction:ltr}
 
 .em-pl__d,.em-pl__d2{fill:none;stroke-dasharray:1;stroke-dashoffset:1;animation:em-draw 2.2s cubic-bezier(.45,.05,.2,1) forwards}
 .em-pl__d{stroke:var(--blue-light);stroke-width:1.5;stroke-linejoin:round}
@@ -229,13 +232,13 @@ a.em-svc:hover .em-svc__arrow{background:var(--white);color:var(--navy-800)}
 .em-pl[data-em-pl="wait"] :is(.em-pl__d,.em-pl__d2,.em-pl__fl,.em-pl__lb,.em-pl__fi,.em-pl__nd,.em-pl__bl,.em-pl__pd){animation-play-state:paused}
 
 .em-pl__steps{list-style:none;margin:0;padding:0;border-top:1px solid var(--line-on-dark-4)}
-.em-pl__step{display:flex;gap:20px;padding:24px 0;border-bottom:1px solid var(--line-on-dark-2)}
+.em-pl__step{display:flex;gap:20px;padding:12px 0;border-bottom:1px solid var(--line-on-dark-2)}
 .em-pl__code{flex:0 0 96px;padding-top:4px;color:var(--blue-light);font-size:var(--fs-nav);font-weight:600}
-.em-pl__title{margin:0 0 4px;font-family:var(--font-head);font-weight:600;font-size:21px;line-height:1.5}
+.em-pl__title{margin:0 0 2px;font-family:var(--font-head);font-weight:600;font-size:19px;line-height:1.5}
 .em-pl__text{margin:0;color:var(--on-dark-2);font-size:var(--fs-nav)}
 
 @media (max-width:900px){
-  .em-pl__grid{grid-template-columns:minmax(0,1fr);gap:32px}
+  .em-pl__grid{grid-template-columns:minmax(0,1fr);grid-template-areas:"head" "map" "steps";grid-template-rows:auto;gap:24px}
 }
 @media (max-width:767px){
   .em-pl__h2{margin-bottom:6px}
@@ -245,7 +248,7 @@ a.em-svc:hover .em-svc__arrow{background:var(--white);color:var(--navy-800)}
   .em-pl__d2{stroke-width:1.1}
   .em-pl__fl{stroke-width:2.2}
   .em-pl__lb{font-size:22px;letter-spacing:.06em}
-  .em-pl__step{gap:14px;padding:16px 0}
+  .em-pl__step{gap:14px;padding:12px 0}
   .em-pl__code{flex-basis:74px;padding-top:3px;font-size:var(--fs-xs)}
   .em-pl__title{font-family:var(--font-body);font-size:16px}
   .em-pl__text{font-size:var(--fs-xs)}

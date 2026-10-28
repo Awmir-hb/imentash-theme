@@ -38,15 +38,20 @@ $ementash_labels = array(
 ?>
 <section class="em-section em-pl"<?php echo '' !== $ementash_title ? ' aria-labelledby="em-pl-title"' : ''; ?> data-em-pl>
 	<div class="em-container">
-		<?php if ( '' !== $ementash_title ) : ?>
-			<h2 class="em-h2 em-pl__h2" id="em-pl-title"><?php echo ementash_bdi( $ementash_title ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></h2>
-		<?php endif; ?>
-		<?php if ( '' !== $ementash_text ) : ?>
-			<p class="em-pl__intro"><?php echo ementash_bdi( $ementash_text ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
-		<?php endif; ?>
-
+		<?php // دسکتاپ: سربرگ بالای ستون مراحل کنار نقشه؛ موبایل: سربرگ، نقشه، مراحل (grid-template-areas). ?>
 		<div class="em-pl__grid">
-			<svg class="em-pl__map" dir="ltr" viewBox="0 0 900 720" data-em-viewbox-mobile="0 120 740 600" role="img" aria-label="<?php esc_attr_e( 'شمای نمادین خط تولید کارخانه', 'ementash' ); ?>">
+			<?php if ( '' !== $ementash_title || '' !== $ementash_text ) : ?>
+				<div class="em-pl__head">
+					<?php if ( '' !== $ementash_title ) : ?>
+						<h2 class="em-h2 em-pl__h2" id="em-pl-title"><?php echo ementash_bdi( $ementash_title ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></h2>
+					<?php endif; ?>
+					<?php if ( '' !== $ementash_text ) : ?>
+						<p class="em-pl__intro"><?php echo ementash_bdi( $ementash_text ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
+					<?php endif; ?>
+				</div>
+			<?php endif; ?>
+			<?php // کادر نقشه به خود شکل بریده شده (طرح ۹۰۰×۷۲۰ بود و بالا و راستش خالی). ?>
+			<svg class="em-pl__map" dir="ltr" viewBox="0 100 740 620" data-em-viewbox-mobile="0 120 740 600" role="img" aria-label="<?php esc_attr_e( 'شمای نمادین خط تولید کارخانه', 'ementash' ); ?>">
 				<path class="em-pl__d" pathLength="1" style="animation-delay:.2s" d="M10 680 H720"/>
 				<path class="em-pl__d2" pathLength="1" style="animation-delay:.4s" d="M10 698 H720 M10 710 H720"/>
 				<ellipse class="em-pl__d" pathLength="1" style="animation-delay:.3s" cx="140" cy="360" rx="90" ry="20"/>

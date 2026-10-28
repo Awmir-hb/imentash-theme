@@ -3,7 +3,7 @@
    هم‌خانواده نوار مشتریان، روی زمینه سرمه‌ای. توکن‌ها در :root فایل main.css.
    ========================================================= */
 
-.em-honors{background-color:var(--navy-900);background-image:var(--grid-lines);background-size:var(--grid-size) var(--grid-size);color:var(--white)}
+.em-honors{background-color:var(--navy-900);color:var(--white)}
 .em-honors .em-head__text{color:var(--on-dark-2)}
 
 /* دکمه‌ها مثل فلش کارت خدمات */

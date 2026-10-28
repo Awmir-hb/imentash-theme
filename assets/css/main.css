@@ -59,8 +59,6 @@
   --header-y-overlay:24px;
   --header-gap:24px;
   --nav-gap:30px;
-  --grid-size:44px;
-  --grid-size-menu:36px;
   --pagehead-top:52px;
   --pagehead-bottom:60px;
   --footer-top:44px;
@@ -70,9 +68,6 @@
   --fcta-overlap:56px;        /* بخشی از نوار دعوت که بیرون از فوتر است */
   --fcta-pad:24px 32px;
   --radius-footer:24px;
-  --deco-size:640px;          /* دایره‌های محو پس‌زمینه فوتر، مرکز در گوشه پایین‌چپ */
-  --deco-x:0px;
-  --deco-y:0px;
 
   /* اندازه‌ها و گردی‌ها */
   --hbtn:44px;
@@ -87,7 +82,13 @@
   --reveal-x:48px;           /* ورود از کنار (کارت خدمات) */
   --word-stagger:80ms;       /* فاصله کلمه‌های تیتر */
   --read-from:.2;            /* شفافیت اولیه کلمه‌ها در متن معرفی */
-  --grid-lines:linear-gradient(var(--grid-line) 1px,transparent 1px),linear-gradient(90deg,var(--grid-line) 1px,transparent 1px);
+  /* نقش برند روی زمینه‌های تیره: چهار دایره هم‌مرکز محو (شعاع ۱٫۶، ۲٫۴، ۳٫۲ و ۴ برابر --ring-r) */
+  --rings-at:0% 100%;
+  --ring-r:80px;
+  /* پس‌زمینه نقطه‌ای «کاغذ نقشه‌کشی» (خط تولید) */
+  --bg-dots:radial-gradient(var(--line-on-dark-2) 1px,transparent 1.5px);
+  --dots-size:22px;
+  --pl-map-max:500px;        /* حداکثر ارتفاع نقشه خط تولید در دسکتاپ */
 
   /* صفحه اصلی (Industrial.dc.html و MobileHome.dc.html) */
   --white-a55:rgba(255,255,255,.55);
@@ -95,9 +96,8 @@
   --line-stat:#D3DAEC;
   --shadow-photo:0 24px 50px rgba(8,17,63,.18);
   /* جای خالی عکس (وقتی هنوز تصویری انتخاب نشده) */
-  --ph-bg:linear-gradient(rgba(143,180,255,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(143,180,255,.09) 1px,transparent 1px),linear-gradient(160deg,#22389A 0%,#0B1550 100%);
+  --ph-bg:linear-gradient(160deg,#22389A 0%,#0B1550 100%);
   --ph-bg-color:#14246E;
-  --ph-size:32px;
   /* تیره‌کننده‌های هیرو برای خوانایی متن */
   --hero-shade-x:linear-gradient(to left,rgba(8,17,63,.92) 0%,rgba(8,17,63,.6) 42%,rgba(8,17,63,.2) 100%);
   --hero-shade-y:linear-gradient(to top,rgba(8,17,63,.9),rgba(8,17,63,0));
@@ -125,7 +125,6 @@
   --line-on-dark-6:rgba(143,180,255,.5);
   /* پنل تصویری دسته محصولات */
   --panel-shade:linear-gradient(to top,rgba(8,17,63,.95) 0%,rgba(8,17,63,.5) 50%,rgba(8,17,63,.05) 100%);
-  --grid-size-pl:44px;
   --white-a04:rgba(255,255,255,.04);
   --honor-img-h:180px;      /* ارتفاع ثابت تصویر تندیس */
   --honor-gap:16px;
@@ -154,15 +153,15 @@
     --fcta-overlap:40px;
     --fcta-pad:20px 18px;
     --radius-footer:16px;
-    --deco-size:420px;
-    --ph-size:28px;
+    --ring-r:52px;
+    --dots-size:18px;
+    --pl-map-max:none;
     --radius-lg:16px;
     --radius-xl:16px;
     --mbar-space:76px;
     --svc-shade:linear-gradient(to left,#0B1550 42%,rgba(11,21,80,.7) 62%,rgba(11,21,80,.1) 100%);
     --svc-img-w:55%;
     --clients-gap:32px;
-    --grid-size-pl:32px;
     --honor-img-h:150px;
     --honor-gap:12px;
   }
@@ -231,7 +230,7 @@ a:hover{color:var(--blue-hover)}
 
 /* ---------- هدر ---------- */
 .em-header{position:relative;z-index:50;color:var(--white);background-color:var(--navy-900)}
-.em-header--grid{background-image:var(--grid-lines);background-size:var(--grid-size) var(--grid-size);border-bottom:1px solid var(--line-on-dark-1)}
+.em-header--grid{border-bottom:1px solid var(--line-on-dark-1)}
 .em-header--overlay{position:absolute;top:0;left:0;right:0;background:transparent;animation:em-fade 1s var(--ease-out) .1s both}
 .em-header__in{max-width:var(--container);margin:0 auto;padding:var(--header-y) var(--gutter);display:flex;align-items:center;justify-content:space-between;gap:var(--header-gap)}
 .em-header--overlay .em-header__in{padding-block:var(--header-y-overlay)}
@@ -279,7 +278,7 @@ a:hover{color:var(--blue-hover)}
 }
 
 /* ---------- منوی تمام‌صفحه موبایل ---------- */
-.em-mmenu{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;overflow-y:auto;overscroll-behavior:contain;padding:14px 20px 28px;background-color:var(--navy-900);background-image:var(--grid-lines);background-size:var(--grid-size-menu) var(--grid-size-menu);color:var(--white);line-height:1.8;animation:em-fadein .25s ease both}
+.em-mmenu{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;overflow-y:auto;overscroll-behavior:contain;padding:14px 20px 28px;background-color:var(--navy-900);color:var(--white);line-height:1.8;animation:em-fadein .25s ease both}
 .em-mmenu[hidden]{display:none}
 .admin-bar .em-mmenu{top:var(--wp-admin--admin-bar--height,0px)}
 .em-mmenu__top{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}
@@ -304,7 +303,7 @@ a:hover{color:var(--blue-hover)}
 .em-soc--lg{--soc:var(--soc-lg)}
 
 /* ---------- سربرگ صفحات داخلی ---------- */
-.em-pagehead{background-color:var(--navy-900);background-image:var(--grid-lines);background-size:var(--grid-size) var(--grid-size);color:var(--white)}
+.em-pagehead{--rings-at:8% 130%;background-color:var(--navy-900);color:var(--white)}
 .em-pagehead__in{max-width:var(--container);margin:0 auto;padding:var(--pagehead-top) var(--gutter) var(--pagehead-bottom)}
 .em-crumbs{font-size:var(--fs-sm);color:var(--on-dark-3);margin-bottom:12px}
 .em-crumbs a{color:var(--on-dark-3)}
@@ -348,14 +347,9 @@ a:hover{color:var(--blue-hover)}
 
 /* ---------- فوتر ----------
    نوار دعوت نیمی بیرون از فوتر می‌نشیند (فوتر به اندازه --fcta-overlap پایین‌تر شروع می‌شود)
-   و پس‌زمینه چند دایره هم‌مرکز محو در گوشه دارد. */
+   و پس‌زمینه نقش دایره‌های برند را دارد (پایین‌تر، بخش نقش برند). */
 .em-footer{position:relative;background:var(--navy-900);color:var(--on-dark-2);padding:var(--footer-top) var(--gutter) var(--footer-bottom);font-size:var(--fs-sm);line-height:1.8;border-radius:var(--radius-footer) var(--radius-footer) 0 0}
 .em-footer--cta{margin-top:var(--fcta-overlap)}
-.em-footer__deco{position:absolute;inset:0;overflow:hidden;border-radius:inherit;pointer-events:none}
-.em-footer__deco span{position:absolute;left:var(--deco-x);bottom:var(--deco-y);width:var(--deco-size);aspect-ratio:1;border:1px solid var(--line-on-dark-1);border-radius:50%;transform:translate(-50%,50%)}
-.em-footer__deco span:nth-child(2){width:calc(var(--deco-size) * .8);border-color:var(--line-on-dark-2)}
-.em-footer__deco span:nth-child(3){width:calc(var(--deco-size) * .6);border-color:var(--line-on-dark-1)}
-.em-footer__deco span:nth-child(4){width:calc(var(--deco-size) * .4);border-color:var(--grid-line)}
 
 .em-fcta{position:relative;z-index:1;max-width:var(--container);margin:calc(-1 * (var(--footer-top) + var(--fcta-overlap))) auto var(--footer-gap-y);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 32px;padding:var(--fcta-pad);background:var(--blue);border-radius:var(--radius-lg);color:var(--on-dark)}
 .em-fcta__title{margin:0 0 4px;font-family:var(--font-head);font-weight:var(--fw-display-sm);font-size:clamp(20px,2vw,26px);line-height:1.5;color:var(--white);text-wrap:balance}
@@ -431,10 +425,22 @@ a:hover{color:var(--blue-hover)}
 .em-eyebrow{display:inline-flex;align-items:center;gap:10px;margin:0 0 14px;color:var(--blue);font-family:var(--font-body);font-size:var(--fs-nav);font-weight:600;line-height:1.6}
 .em-eyebrow::before{content:"";width:28px;height:2px;background:currentColor}
 
-.em-ph{position:absolute;inset:0;background-color:var(--ph-bg-color);background-image:var(--ph-bg);background-size:var(--ph-size) var(--ph-size),var(--ph-size) var(--ph-size),100% 100%}
+.em-ph{position:absolute;inset:0;background-color:var(--ph-bg-color);background-image:var(--ph-bg)}
 
 /* سکشن با زمینه روشن یکی‌درمیان */
 .em-section--soft{background:var(--bg-soft)}
+
+/* ---------- نقش برند: دایره‌های هم‌مرکز محو ----------
+   یک پس‌زمینه برای همه زمینه‌های تیره؛ هر بخش فقط --rings-at (مرکز) و در صورت نیاز --ring-r را عوض می‌کند. */
+.em-pagehead,.em-mmenu,.em-honors,.em-timeline,.em-footer{
+  background-image:radial-gradient(circle at var(--rings-at),
+    transparent 0 calc(var(--ring-r) * 1.6 - 1px), var(--line-on-dark-2) calc(var(--ring-r) * 1.6 - 1px) calc(var(--ring-r) * 1.6),
+    transparent calc(var(--ring-r) * 1.6) calc(var(--ring-r) * 2.4 - 1px), var(--line-on-dark-1) calc(var(--ring-r) * 2.4 - 1px) calc(var(--ring-r) * 2.4),
+    transparent calc(var(--ring-r) * 2.4) calc(var(--ring-r) * 3.2 - 1px), var(--line-on-dark-1) calc(var(--ring-r) * 3.2 - 1px) calc(var(--ring-r) * 3.2),
+    transparent calc(var(--ring-r) * 3.2) calc(var(--ring-r) * 4 - 1px), var(--grid-line) calc(var(--ring-r) * 4 - 1px) calc(var(--ring-r) * 4),
+    transparent calc(var(--ring-r) * 4));
+  background-repeat:no-repeat
+}
 
 /* سر سکشن: تیتر و متن کوتاه کنار هم */
 .em-head{display:flex;flex-wrap:wrap;gap:16px 40px;align-items:flex-end;justify-content:space-between;margin-bottom:28px}

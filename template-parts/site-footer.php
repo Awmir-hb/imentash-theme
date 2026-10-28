@@ -55,7 +55,6 @@ $ementash_cats = is_wp_error( $ementash_cats ) ? array() : $ementash_cats;
 		</div>
 	<?php endif; ?>
 
-	<div class="em-footer__deco" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
 
 	<div class="em-footer__in">
 		<div class="em-footer__brand">
