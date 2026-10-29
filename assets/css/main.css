@@ -107,6 +107,12 @@
   --ease-swap:cubic-bezier(.7,0,.2,1);
   --ease-media:cubic-bezier(.2,.7,.1,1);
   --mbar-space:0px;          /* ارتفاع نوار ثابت پایین موبایل */
+  /* لودر هیرو تا آماده شدن ویدئو: مرکز حلقه‌ها (کنار خالی هیرو)، دور هر موج و مهلت محو شدن بدون JS */
+  --loader-x:28%;
+  --loader-y:50%;
+  --loader-dur:2.4s;
+  --loader-fade:.6s;
+  --loader-wait:10s;
   --white-a60:rgba(255,255,255,.6);
   --line-on-dark-5:rgba(143,180,255,.55);
   --line-client:#DCE2F0;
@@ -154,6 +160,8 @@
     --fcta-pad:20px 18px;
     --radius-footer:16px;
     --ring-r:52px;
+    --loader-x:50%;
+    --loader-y:38%;
     --dots-size:18px;
     --pl-map-max:none;
     --radius-lg:16px;
@@ -432,7 +440,7 @@ a:hover{color:var(--blue-hover)}
 
 /* ---------- نقش برند: دایره‌های هم‌مرکز محو ----------
    یک پس‌زمینه برای همه زمینه‌های تیره؛ هر بخش فقط --rings-at (مرکز) و در صورت نیاز --ring-r را عوض می‌کند. */
-.em-pagehead,.em-mmenu,.em-honors,.em-timeline,.em-footer{
+.em-pagehead,.em-mmenu,.em-honors,.em-timeline,.em-footer,.em-hero__loader{
   background-image:radial-gradient(circle at var(--rings-at),
     transparent 0 calc(var(--ring-r) * 1.6 - 1px), var(--line-on-dark-2) calc(var(--ring-r) * 1.6 - 1px) calc(var(--ring-r) * 1.6),
     transparent calc(var(--ring-r) * 1.6) calc(var(--ring-r) * 2.4 - 1px), var(--line-on-dark-1) calc(var(--ring-r) * 2.4 - 1px) calc(var(--ring-r) * 2.4),

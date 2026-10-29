@@ -8,6 +8,21 @@
      با Save-Data (حالت کم‌مصرف مرورگر) هیچ ویدئویی بارگذاری نمی‌شود. */
   const media = document.querySelector('[data-em-hero-media]');
   const saveData = Boolean(navigator.connection && navigator.connection.saveData);
+
+  /* لودر با آماده شدن ویدئو، خطا یا بعد از مهلت محو و سپس حذف می‌شود تا انیمیشن بی‌نهایتش نماند */
+  const loader = document.querySelector('[data-em-hero-loader]');
+  let loaderTimer = 0;
+  const hideLoader = () => {
+    if (!loader || !loader.isConnected) return;
+    clearTimeout(loaderTimer);
+    const remove = () => loader.remove();
+    if (getComputedStyle(loader).display === 'none') return remove();
+    loader.addEventListener('transitionend', remove, { once: true });
+    setTimeout(remove, 1000);
+    loader.classList.add('em-hero__loader--done');
+  };
+  if (loader) loaderTimer = setTimeout(hideLoader, 8000);
+
   if (media && !reduce && !saveData) {
     const d = media.dataset;
     let src = d.emDesktop;
@@ -28,7 +43,14 @@
         el.playsInline = true;
         el.setAttribute('muted', '');
         el.setAttribute('playsinline', '');
-        el.addEventListener('loadeddata', show, { once: true });
+        const ready = () => {
+          show();
+          hideLoader();
+        };
+        el.addEventListener('loadeddata', ready, { once: true });
+        el.addEventListener('canplay', ready, { once: true });
+        // خطا: ویدئو پنهان می‌ماند و پوستر زیر لودر دیده می‌شود
+        el.addEventListener('error', hideLoader, { once: true });
       } else {
         el.alt = '';
         el.decoding = 'async';
@@ -39,6 +61,8 @@
       if (type === 'video') el.play().catch(() => {});
     }
   }
+  // ویدئویی در کار نیست (کاهش حرکت، Save-Data، گیف یا فقط پوستر برای این اندازه)
+  if (!media || !media.querySelector('video')) hideLoader();
 
   /* ---------- کلمات چرخان ----------
      کلمه اول در انتها تکرار می‌شود تا برگشت به ابتدا دیده نشود. */

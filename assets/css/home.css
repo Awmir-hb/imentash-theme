@@ -15,6 +15,21 @@
 .em-hero__media > img,.em-hero__media > video{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover}
 .em-hero__live{opacity:0;transition:opacity .6s ease}
 .em-hero__live--on{opacity:1}
+/* لودر: حلقه‌های ثابت برند + سه موج که از مرکز باز و محو می‌شوند؛ فقط transform و opacity.
+   فقط اندازه‌ای که ویدئو دارد نشانش می‌دهد؛ JS بعد از آماده شدن ویدئو محوش می‌کند و
+   اگر JS نرسید، بعد از --loader-wait خودش محو می‌شود تا پوستر دیده شود. */
+@keyframes em-pulse{0%{transform:scale(.2);opacity:0}15%{opacity:1}100%{transform:scale(1);opacity:0}}
+@keyframes em-breath{to{transform:scale(1.6);opacity:.5}}
+@keyframes em-loader-out{to{opacity:0;visibility:hidden}}
+.em-hero__loader{--rings-at:var(--loader-x) var(--loader-y);display:none;position:absolute;inset:0;z-index:0;pointer-events:none;background-color:var(--navy-900);animation:em-loader-out var(--loader-fade) ease var(--loader-wait) forwards;transition:opacity var(--loader-fade) ease}
+.em-hero__loader--done{opacity:0}
+.em-hero__pulse,.em-hero__core{position:absolute;left:var(--loader-x);top:var(--loader-y);border-radius:50%}
+.em-hero__pulse{width:calc(var(--ring-r) * 8);height:calc(var(--ring-r) * 8);margin:calc(var(--ring-r) * -4) 0 0 calc(var(--ring-r) * -4);border:1px solid var(--line-on-dark-5);opacity:0;will-change:transform,opacity;animation:em-pulse var(--loader-dur) var(--ease-out) infinite}
+.em-hero__pulse:nth-child(2){animation-delay:calc(var(--loader-dur) / 3)}
+.em-hero__pulse:nth-child(3){animation-delay:calc(var(--loader-dur) * 2 / 3)}
+.em-hero__core{width:10px;height:10px;margin:-5px 0 0 -5px;background:var(--blue-light);animation:em-breath calc(var(--loader-dur) / 2) ease-in-out infinite alternate}
+@media (min-width:768px){.em-hero__loader--desktop{display:block}}
+@media (max-width:767px){.em-hero__loader--mobile{display:block}}
 .em-hero__shade{position:absolute;inset:0;z-index:1;background:var(--hero-shade-y) left bottom/100% 45% no-repeat,var(--hero-shade-x)}
 
 .em-hero__in{position:relative;z-index:2;height:100%;max-width:var(--container);margin:0 auto;padding:110px var(--gutter) 40px;display:flex;flex-direction:column;justify-content:center}
@@ -332,6 +347,8 @@ a.em-svc:hover .em-svc__arrow{background:var(--white);color:var(--navy-800)}
 /* ---------- کاهش حرکت ---------- */
 @media (prefers-reduced-motion: reduce){
   .em-hero__media,.em-wi,.em-rise{animation:none!important;transform:none!important;opacity:1!important}
+  /* با کاهش حرکت ویدئویی بارگذاری نمی‌شود؛ پوستر ثابت جای لودر است */
+  .em-hero__loader{display:none!important}
   .em-hero__live,.em-hero__track,.em-btn__icon,.em-card__img,.em-svc__arrow{transition:none!important}
   .em-mw{animation:none!important;color:var(--ink)!important}
   /* نوار مشتریان ثابت و چندخطی؛ تکرارها پنهان */

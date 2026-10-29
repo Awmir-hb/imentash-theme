@@ -4,6 +4,8 @@
  *
  * پوستر در HTML است تا بدون JS و برای کاربرانی که حرکت را کم کرده‌اند دیده شود؛
  * ویدئو یا گیف در assets/js/home.js و فقط برای اندازه صفحه مناسب بارگذاری می‌شود.
+ * لودر حلقه‌ها فقط برای اندازه‌ای دیده می‌شود که ویدئو دارد (نه گیف یا فقط پوستر) و تا آماده
+ * شدن ویدئو روی پوستر می‌ماند؛ بدون JS، با خطای ویدئو یا بعد از مهلت، همان پوستر دیده می‌شود.
  *
  * @package ementash
  */
@@ -12,6 +14,7 @@ defined( 'ABSPATH' ) || exit;
 
 $ementash_poster = absint( ementash_get( 'hero_poster' ) );
 $ementash_media  = array();
+$ementash_loader = array();
 foreach ( array(
 	'desktop' => 'hero_media',
 	'mobile'  => 'hero_media_mobile',
@@ -21,6 +24,9 @@ foreach ( array(
 	if ( $ementash_kind ) {
 		$ementash_media[ 'data-em-' . $ementash_key ]           = wp_get_attachment_url( $ementash_id );
 		$ementash_media[ 'data-em-' . $ementash_key . '-type' ] = $ementash_kind;
+		if ( 'video' === $ementash_kind ) {
+			$ementash_loader[] = 'em-hero__loader--' . $ementash_key;
+		}
 	}
 }
 if ( $ementash_poster ) {
@@ -79,6 +85,11 @@ $ementash_buttons = array(
 		}
 		?>
 	</div>
+	<?php if ( $ementash_loader ) : ?>
+		<div class="em-hero__loader <?php echo esc_attr( implode( ' ', $ementash_loader ) ); ?>" aria-hidden="true" data-em-hero-loader>
+			<span class="em-hero__pulse"></span><span class="em-hero__pulse"></span><span class="em-hero__pulse"></span><span class="em-hero__core"></span>
+		</div>
+	<?php endif; ?>
 	<div class="em-hero__shade" aria-hidden="true"></div>
 
 	<div class="em-hero__in">

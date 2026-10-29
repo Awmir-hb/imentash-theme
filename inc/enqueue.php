@@ -49,6 +49,16 @@ function ementash_enqueue_assets() {
 add_action( 'wp_enqueue_scripts', 'ementash_enqueue_assets' );
 
 /**
+ * بدون JS ویدئوی هیرو بارگذاری نمی‌شود؛ لودر پنهان می‌ماند تا پوستر از همان ابتدا دیده شود.
+ */
+function ementash_hero_noscript() {
+	if ( is_front_page() && ! ementash_home_is_elementor() ) {
+		echo '<noscript><style>.em-hero__loader{display:none!important}</style></noscript>' . "\n";
+	}
+}
+add_action( 'wp_head', 'ementash_hero_noscript' );
+
+/**
  * اسکریپت ایموجی وردپرس در مرورگرهای قدیمی فایل از s.w.org می‌گیرد (درخواست خارجی، در ایران کند).
  * ایموجی‌ها با فونت سیستم نمایش داده می‌شوند.
  */
