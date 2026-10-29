@@ -113,6 +113,17 @@
   --loader-dur:2.4s;
   --loader-fade:.6s;
   --loader-wait:10s;
+  /* درباره ما: سربرگ تصویری، نوار آمار روی لبه آن، خط زمانی عمودی و نوار افتخارات */
+  --ahero-h:440px;
+  --ahero-overlap:56px;
+  --ahero-shade:linear-gradient(to top,rgba(8,17,63,.95) 0%,rgba(8,17,63,.6) 55%,rgba(8,17,63,.35) 100%);
+  --tl-sticky-top:120px;
+  --tl-dot:20px;
+  --tl-dot-y:24px;
+  --tl-year-w:120px;
+  --tl-year-fs:40px;
+  --hitem-w:260px;
+  --hitem-img:64px;
   --white-a60:rgba(255,255,255,.6);
   --line-on-dark-5:rgba(143,180,255,.55);
   --line-client:#DCE2F0;
@@ -162,6 +173,11 @@
     --ring-r:52px;
     --loader-x:50%;
     --loader-y:38%;
+    --ahero-h:340px;
+    --ahero-overlap:32px;
+    --tl-year-fs:30px;
+    --tl-dot-y:18px;
+    --hitem-w:230px;
     --dots-size:18px;
     --pl-map-max:none;
     --radius-lg:16px;

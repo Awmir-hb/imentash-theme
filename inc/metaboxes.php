@@ -112,6 +112,26 @@ function ementash_meta_boxes() {
 			'screen'    => 'page',
 			'condition' => 'ementash_is_about_page',
 			'fields'    => array(
+				'about_story_image'    => array(
+					'type'        => 'file',
+					'label'       => __( 'عکس کنار متن شرکت', 'ementash' ),
+					'mime'        => 'image',
+					'description' => __( 'متن شرکت همان محتوای برگه است. تصویر شاخص برگه پس‌زمینه سربرگ می‌شود.', 'ementash' ),
+				),
+				'about_quote'          => array(
+					'type'        => 'textarea',
+					'label'       => __( 'جمله برجسته (نقل‌قول)', 'ementash' ),
+					'description' => __( 'زیر متن شرکت با حروف درشت نمایش داده می‌شود. اگر خالی باشد نمایش داده نمی‌شود.', 'ementash' ),
+				),
+				'about_quote_name'     => array(
+					'type'  => 'text',
+					'label' => __( 'گوینده نقل‌قول', 'ementash' ),
+				),
+				'about_quote_role'     => array(
+					'type'        => 'text',
+					'label'       => __( 'سمت گوینده', 'ementash' ),
+					'description' => __( 'مثلاً «مدیرعامل».', 'ementash' ),
+				),
 				'about_timeline_title' => array(
 					'type'        => 'text',
 					'label'       => __( 'تیتر خط زمانی', 'ementash' ),
@@ -120,9 +140,9 @@ function ementash_meta_boxes() {
 				),
 				'about_cert_title'     => array(
 					'type'        => 'text',
-					'label'       => __( 'تیتر گواهینامه‌ها', 'ementash' ),
-					'description' => __( 'گواهینامه‌ها از بخش «گواهینامه‌ها» در پیشخوان خوانده می‌شوند.', 'ementash' ),
-					'default'     => __( 'گواهینامه‌ها و استانداردها', 'ementash' ),
+					'label'       => __( 'تیتر گواهینامه‌ها و افتخارات', 'ementash' ),
+					'description' => __( 'گواهینامه‌ها و افتخارات از بخش «گواهینامه‌ها» در پیشخوان خوانده می‌شوند.', 'ementash' ),
+					'default'     => __( 'اعتبار و افتخارات', 'ementash' ),
 				),
 				'about_cert_text'      => array(
 					'type'    => 'textarea',
@@ -138,6 +158,11 @@ function ementash_meta_boxes() {
 					'type'    => 'textarea',
 					'label'   => __( 'متن تحقیق و توسعه', 'ementash' ),
 					'default' => __( 'واحد تحقیق و توسعه ایمن تاش با همکاری دانشگاه‌ها و مراکز علمی، در این حوزه‌ها فعال است:', 'ementash' ),
+				),
+				'about_rd_image'       => array(
+					'type'  => 'file',
+					'label' => __( 'عکس تحقیق و توسعه', 'ementash' ),
+					'mime'  => 'image',
 				),
 				'about_rd_items'       => array(
 					'type'    => 'repeater',

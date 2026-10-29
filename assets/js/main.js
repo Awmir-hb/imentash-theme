@@ -82,13 +82,14 @@
   const single = {
     '.em-h2': 'words',
     '.em-head__text, .em-acards__text, .em-textile__text': 'read',
-    '.em-frame__img, .em-story__img, .em-textile__media': 'curtain',
+    '.em-frame__img, .em-story__img, .em-rd__img, .em-textile__media': 'curtain',
+    '.em-quote, .em-rd__text, .em-hstrip': 'up',
     '.em-fcta': 'pop',
   };
   const lists = {
     '.em-svcs': 'side',
     '.em-inds, .em-gal': 'zoom',
-    '.em-posts, .em-pgrid, .em-acards__list, .em-certs__list, .em-tl, .em-offices__list, .em-stats': 'up',
+    '.em-posts, .em-pgrid, .em-acards__list, .em-certs__list, .em-tl, .em-rd__list, .em-vals,.em-offices__list, .em-stats': 'up',
   };
 
   // همه اندازه‌گیری‌ها اول، بعد نوشتن (بدون رفت‌وبرگشت layout).

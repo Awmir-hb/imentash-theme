@@ -37,9 +37,8 @@ function ementash_honors_assets() {
  */
 function ementash_honors_enqueue() {
 	$home  = is_front_page() && ! ementash_home_is_elementor() && ementash_section_enabled( 'honors' );
-	$about = ementash_is_about_view();
 	$code  = is_singular() && has_shortcode( (string) get_post_field( 'post_content', get_queried_object_id() ), 'ementash_honors' );
-	if ( $home || $about || $code ) {
+	if ( $home || $code ) {
 		ementash_honors_assets();
 	}
 }

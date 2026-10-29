@@ -21,24 +21,13 @@ if ( ! ementash_elementor_location( 'single' ) ) {
 			continue;
 		}
 
-		get_template_part(
-			'template-parts/page-head',
-			null,
-			array(
-				'title'  => get_the_title(),
-				'desc'   => ementash_page_subtitle(),
-				'crumbs' => ementash_page_crumbs(),
-			)
-		);
-
 		// ترتیب بخش‌ها؛ برای جابه‌جایی همین فهرست را مرتب کنید.
+		get_template_part( 'template-parts/about/hero' );
 		get_template_part( 'template-parts/about/story' );
-		get_template_part( 'template-parts/about/stats' );
 		get_template_part( 'template-parts/about/timeline' );
-		get_template_part( 'template-parts/about/certificates' );
-		get_template_part( 'template-parts/home/honors' );
-		get_template_part( 'template-parts/about/cards', null, array( 'group' => 'rd' ) );
-		get_template_part( 'template-parts/about/cards', null, array( 'group' => 'values' ) );
+		get_template_part( 'template-parts/about/credentials' );
+		get_template_part( 'template-parts/about/rd' );
+		get_template_part( 'template-parts/about/values' );
 	}
 }
 

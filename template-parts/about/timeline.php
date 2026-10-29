@@ -14,7 +14,7 @@ if ( ! $ementash_items ) {
 $ementash_title = (string) ementash_meta( get_the_ID(), 'about_timeline_title' );
 ?>
 <section class="em-section em-timeline"<?php echo '' !== $ementash_title ? ' aria-labelledby="em-timeline-title"' : ''; ?>>
-	<div class="em-container">
+	<div class="em-container em-timeline__in">
 		<?php if ( '' !== $ementash_title ) : ?>
 			<h2 class="em-h2 em-timeline__h2" id="em-timeline-title"><?php echo ementash_bdi( $ementash_title ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></h2>
 		<?php endif; ?>

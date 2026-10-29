@@ -1,75 +1,125 @@
 /* =========================================================
-   قالب ایمن تاش — صفحه درباره ما (About.dc.html)
+   قالب ایمن تاش — صفحه درباره ما («داستان کارخانه»)
    فقط در برگه درباره ما بارگذاری می‌شود. توکن‌ها در :root فایل main.css.
+   ریتم زمینه‌ها: سربرگ تصویری تیره، داستان روشن، مسیر سرمه‌ای، اعتبار bg-soft، تحقیق سفید، مشتری‌مداری bg-soft.
    ========================================================= */
 
-/* ---------- متن شرکت + عکس ---------- */
-.em-story__in{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:48px;align-items:center}
+/* ---------- سربرگ تصویری + نوار آمار روی لبه پایین ---------- */
+.em-ahero{position:relative;isolation:isolate;background-color:var(--navy-900);color:var(--white)}
+.em-ahero__media{position:absolute;inset:0;z-index:-1;overflow:hidden;background:var(--ph-bg-color)}
+.em-ahero__media img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover}
+.em-ahero__media::after{content:"";position:absolute;inset:0;background:var(--ahero-shade)}
+/* با عکس، سربرگ مشترک شفاف و بلندتر است و متن پایین آن می‌نشیند */
+.em-ahero--img .em-pagehead{background:transparent}
+.em-ahero--img .em-pagehead__in{display:flex;flex-direction:column;justify-content:flex-end;min-height:var(--ahero-h)}
+.em-ahero__stats{position:relative;z-index:1;max-width:var(--container);margin:0 auto calc(var(--ahero-overlap) * -1);padding:0 var(--gutter)}
+.em-ahero__stats .em-stats{background:var(--white);box-shadow:var(--shadow-card)}
+.em-ahero:has(.em-ahero__stats) + .em-section{padding-top:calc(var(--section-y) + var(--ahero-overlap))}
+
+/* ---------- داستان شرکت + نقل‌قول + عکس ---------- */
+.em-story__in{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:56px;align-items:center}
 .em-story__in--full{grid-template-columns:minmax(0,1fr)}
+.em-story__in--full .em-story__body{max-width:820px}
 .em-story__text{font-size:17px;color:var(--ink-2)}
 .em-story__text p{margin:0 0 16px}
 .em-story__text > :last-child{margin-bottom:0}
 /* تیتر داخل متن برگه مثل تیتر سکشن‌ها */
 .em-story__text h2{margin:0 0 28px;font-family:var(--font-head);font-weight:var(--fw-display);font-size:clamp(30px,3vw,44px);line-height:1.3;color:var(--ink)}
-.em-story__img{position:relative;aspect-ratio:5/4;overflow:hidden;border-radius:var(--radius-lg);background:var(--surface-2)}
+.em-story__img{position:relative;aspect-ratio:4/3;overflow:hidden;border-radius:var(--radius-lg);background:var(--surface-2)}
 .em-story__img img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover}
+.em-quote{margin:36px 0 0;padding-inline-start:24px;border-inline-start:2px solid var(--blue)}
+.em-story__body > .em-quote:first-child{margin-top:0}
+.em-quote__text{margin:0}
+.em-quote__text p{margin:0;font-family:var(--font-head);font-weight:var(--fw-display);font-size:clamp(22px,2vw,28px);line-height:1.6;color:var(--ink)}
+.em-quote__by{display:flex;flex-wrap:wrap;gap:4px 10px;margin-top:14px;font-size:var(--fs-sm)}
+.em-quote__name{font-weight:600;color:var(--ink)}
+.em-quote__role{color:var(--muted)}
 @media (max-width:1066px){
   .em-story__text h2{font-weight:var(--fw-display-sm)}
 }
 
-.em-about-stats{padding-bottom:var(--section-y)}
-/* وقتی متن شرکت خالی است، آمار مستقیم بعد از سربرگ می‌آید */
-.em-pagehead + .em-about-stats{padding-top:var(--section-y)}
-
-/* ---------- خط زمانی ---------- */
+/* ---------- مسیر ما: تیتر چسبان کنار فهرست عمودی سال‌ها ---------- */
 .em-timeline{--rings-at:100% 0%;background-color:var(--navy-900);color:var(--white)}
-.em-timeline__h2{margin-bottom:40px}
-.em-tl{position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:28px 0;list-style:none;margin:0;padding:0}
-.em-tl::before{content:"";position:absolute;top:9px;left:0;right:0;height:2px;background:var(--line-on-dark-4)}
-.em-tl__item{position:relative;padding-inline-end:16px}
-.em-tl__dot{position:relative;display:block;width:20px;height:20px;margin-bottom:18px;border:2px solid var(--blue-light);border-radius:50%;background:var(--navy-900)}
+.em-timeline__in{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:48px;align-items:start}
+.em-timeline__h2{position:sticky;top:var(--tl-sticky-top);margin:0}
+.em-timeline__in > .em-tl:first-child{grid-column:1 / -1}
+.em-tl{position:relative;list-style:none;margin:0;padding:0}
+/* خط عمودی از مرکز اولین تا آخرین نقطه */
+.em-tl::before{content:"";position:absolute;top:var(--tl-dot-y);bottom:var(--tl-dot-y);inset-inline-start:calc(var(--tl-dot) / 2 - 1px);width:2px;background:var(--line-on-dark-4)}
+.em-tl__item{position:relative;display:grid;grid-template-columns:var(--tl-year-w) minmax(0,1fr);gap:4px 24px;padding-inline-start:calc(var(--tl-dot) + 24px);padding-bottom:36px}
+.em-tl__item:last-child{padding-bottom:0}
+.em-tl__dot{position:absolute;top:calc(var(--tl-dot-y) - var(--tl-dot) / 2);inset-inline-start:0;width:var(--tl-dot);height:var(--tl-dot);border:2px solid var(--blue-light);border-radius:50%;background:var(--navy-900)}
 .em-tl__item--key .em-tl__dot{border-color:var(--white);background:var(--blue-light)}
-.em-tl__year{display:block;font-family:var(--font-head);font-weight:600;font-size:26px;line-height:1.4}
-.em-tl__title{margin:4px 0 2px;font-family:var(--font-body);font-size:var(--fs-body);font-weight:600;line-height:1.6;color:var(--white)}
-.em-tl__text{margin:0;font-size:var(--fs-sm);color:var(--on-dark-2)}
-/* وقتی رویدادها چندردیفه می‌شوند خط افقی معنا ندارد */
-@media (max-width:1000px){
-  .em-tl::before{display:none}
+.em-tl__year{grid-row:span 2;font-family:var(--font-head);font-weight:var(--fw-display);font-size:var(--tl-year-fs);line-height:1.2;color:var(--blue-light)}
+.em-tl__item--key .em-tl__year{color:var(--white)}
+.em-tl__title{margin:6px 0 2px;font-family:var(--font-body);font-size:var(--fs-body);font-weight:600;line-height:1.6;color:var(--white)}
+.em-tl__text{grid-column:2;margin:0;font-size:var(--fs-sm);color:var(--on-dark-2)}
+@media (max-width:900px){
+  .em-timeline__in{grid-template-columns:minmax(0,1fr);gap:32px}
+  .em-timeline__h2{position:static}
+}
+@media (max-width:560px){
+  .em-tl__item{grid-template-columns:minmax(0,1fr)}
+  .em-tl__year{grid-row:auto}
+  .em-tl__text{grid-column:auto}
 }
 
-/* ---------- گواهینامه‌ها ---------- */
+/* ---------- اعتبار: گواهینامه‌ها + نوار افتخارات ---------- */
+.em-creds{background:var(--bg-soft)}
 .em-certs__list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;list-style:none;margin:0;padding:0}
 .em-cert{display:block;color:var(--ink)}
 .em-cert:hover{color:var(--ink)}
 a.em-cert:hover .em-cert__title{color:var(--blue)}
-.em-cert__img{position:relative;display:block;aspect-ratio:3/4;overflow:hidden;border:1px solid var(--line-soft);border-radius:var(--radius-card);background:var(--surface-2)}
+.em-cert__img{position:relative;display:block;aspect-ratio:3/4;overflow:hidden;border:1px solid var(--line-soft);border-radius:var(--radius-card);background:var(--white)}
 /* اسکن گواهینامه کامل دیده شود */
 .em-cert__img img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:contain}
 .em-cert__title{margin:12px 0 0;font-family:var(--font-body);font-size:var(--fs-body);font-weight:600;line-height:1.6;transition:color .2s ease}
 .em-cert__sub{display:block;font-size:var(--fs-sm);color:var(--muted)}
 .em-cert__pdf{display:inline-block;margin-top:6px;font-size:var(--fs-xs);font-weight:600;color:var(--blue)}
 
-/* ---------- کارت‌های تحقیق و توسعه و مشتری‌مداری ---------- */
-.em-acards--rd{background:var(--surface-2)}
-.em-acards__h2{margin-bottom:28px}
-.em-acards--rd .em-acards__h2{margin-bottom:10px}
-.em-acards__text{max-width:640px;margin:0 0 28px;color:var(--muted)}
-.em-acards__list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;list-style:none;margin:0;padding:0}
-.em-acards--rd .em-acards__list{grid-template-columns:repeat(3,minmax(0,1fr))}
-.em-acard{padding:24px;border:1px solid var(--line-soft);border-radius:var(--radius-md);background:var(--white)}
-.em-acard__icon{display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;margin-bottom:14px;border-radius:50%;background:var(--bg-soft);color:var(--blue)}
-.em-acard__icon svg{width:24px;height:24px}
-.em-acard__title{margin:0 0 4px;font-family:var(--font-body);font-size:var(--fs-body);font-weight:600;line-height:1.6}
-.em-acard__text{margin:0;font-size:var(--fs-sm);color:var(--muted)}
+.em-certs__list + .em-hstrip{margin-top:32px}
+.em-hstrip{overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;margin:0 calc(var(--gutter) * -1);padding:0 var(--gutter) 8px;scroll-padding-inline:var(--gutter);scrollbar-width:thin}
+.em-hstrip:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.em-hstrip__list{display:flex;gap:12px;list-style:none;margin:0;padding:0}
+.em-hitem{flex:0 0 var(--hitem-w);scroll-snap-align:start;display:flex;align-items:center;gap:14px;padding:14px;border:1px solid var(--line-soft);border-radius:var(--radius-md);background:var(--white)}
+.em-hitem__img{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:var(--hitem-img);height:var(--hitem-img);overflow:hidden;border-radius:var(--radius-sm);background:var(--bg-soft);color:var(--blue)}
+.em-hitem__img img{display:block;width:100%;height:100%;object-fit:contain}
+.em-hitem__img svg{width:28px;height:28px}
+.em-hitem__body{min-width:0}
+.em-hitem__title{display:block;font-size:var(--fs-sm);font-weight:600;line-height:1.6;color:var(--ink)}
+.em-hitem__year{display:block;font-size:var(--fs-xs);color:var(--muted)}
+
+/* ---------- تحقیق و توسعه: عکس کنار فهرست حوزه‌ها ---------- */
+.em-rd__in{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:56px;align-items:center}
+.em-rd__in--full{grid-template-columns:minmax(0,1fr)}
+.em-rd__img{position:relative;aspect-ratio:4/3;overflow:hidden;border-radius:var(--radius-lg);background:var(--surface-2)}
+.em-rd__img img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover}
+.em-rd__h2{margin-bottom:14px}
+.em-rd__text{max-width:560px;margin:0 0 24px;color:var(--muted)}
+.em-rd__list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 28px;list-style:none;margin:0;padding:0}
+.em-rd__item{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--line-soft);font-weight:600;line-height:1.6}
+.em-rd__icon{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:var(--bg-soft);color:var(--blue)}
+.em-rd__icon svg{width:20px;height:20px}
+
+/* ---------- مشتری‌مداری: فهرست شماره‌دار ---------- */
+.em-vals-sec{background:var(--bg-soft)}
+.em-vals__h2{margin-bottom:32px}
+.em-vals{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px;list-style:none;margin:0;padding:0}
+.em-val{padding-top:20px;border-top:1px solid var(--line)}
+.em-val__num{display:block;margin-bottom:12px;font-family:var(--font-head);font-weight:var(--fw-display);font-size:44px;line-height:1.1;color:var(--blue)}
+.em-val__title{margin:0 0 6px;font-family:var(--font-body);font-size:var(--fs-body);font-weight:600;line-height:1.6}
+.em-val__text{margin:0;font-size:var(--fs-sm);color:var(--muted)}
 
 @media (max-width:1000px){
-  .em-certs__list,.em-acards__list,.em-acards--rd .em-acards__list{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .em-certs__list,.em-vals{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:900px){
-  .em-story__in{grid-template-columns:minmax(0,1fr);gap:28px}
+  .em-story__in,.em-rd__in{grid-template-columns:minmax(0,1fr);gap:28px}
 }
 @media (max-width:560px){
-  .em-certs__list,.em-acards__list,.em-acards--rd .em-acards__list{grid-template-columns:minmax(0,1fr)}
+  .em-certs__list,.em-vals,.em-rd__list{grid-template-columns:minmax(0,1fr)}
+  .em-vals{gap:20px}
+  .em-val__num{font-size:36px}
 }
 
 @media (prefers-reduced-motion: reduce){
