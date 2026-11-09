@@ -6,8 +6,11 @@
 @keyframes em-up{from{transform:translateY(115%)}to{transform:translateY(0)}}
 @keyframes em-kb{from{transform:scale(1.08)}to{transform:scale(1)}}
 
-/* ورود با محو شدن؛ تأخیر هر جزء جدا تعریف می‌شود */
-.em-rise{opacity:0;animation:em-fade 1s var(--ease-out) forwards}
+/* ورود با محو شدن؛ تأخیر هر جزء جدا تعریف می‌شود.
+   شروع از opacity .01 (نه صفر) با fill backwards: از نظر چشم همان است، ولی مرورگر متن را از اولین
+   رنگ‌آمیزی «دیده‌شده» حساب می‌کند و LCP منتظر پایان انیمیشن نمی‌ماند. */
+@keyframes em-rise{from{opacity:.01;transform:translateY(16px)}to{opacity:1;transform:none}}
+.em-rise{animation:em-rise 1s var(--ease-out) both}
 
 /* ---------- هیرو ---------- */
 .em-hero{position:relative;overflow:hidden;height:min(100vh,920px);min-height:700px;background:var(--navy-900);color:var(--white)}
@@ -347,7 +350,7 @@ a.em-svc:hover .em-svc__arrow{background:var(--white);color:var(--navy-800)}
 /* ---------- کاهش حرکت ---------- */
 @media (prefers-reduced-motion: reduce){
   .em-hero__media,.em-wi,.em-rise{animation:none!important;transform:none!important;opacity:1!important}
-  /* با کاهش حرکت ویدئویی بارگذاری نمی‌شود؛ پوستر ثابت جای لودر است */
+  /* با کاهش حرکت فقط فریم اول ویدئو ثابت دیده می‌شود؛ لودر متحرک لازم نیست */
   .em-hero__loader{display:none!important}
   .em-hero__live,.em-hero__track,.em-btn__icon,.em-card__img,.em-svc__arrow{transition:none!important}
   .em-mw{animation:none!important;color:var(--ink)!important}

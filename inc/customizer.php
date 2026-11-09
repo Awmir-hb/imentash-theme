@@ -438,13 +438,7 @@ function ementash_customizer_schema() {
 				'hero_media_mobile' => array(
 					'type'        => 'video',
 					'label'       => __( 'ویدئوی عمودی موبایل', 'ementash' ),
-					'description' => __( 'اگر خالی باشد پوستر نمایش داده می‌شود.', 'ementash' ),
-					'default'     => 0,
-				),
-				'hero_poster'       => array(
-					'type'        => 'image',
-					'label'       => __( 'تصویر پوستر', 'ementash' ),
-					'description' => __( 'تا بارگذاری ویدئو و برای کاربرانی که حرکت را کم کرده‌اند نمایش داده می‌شود.', 'ementash' ),
+					'description' => __( 'اگر خالی باشد ویدئوی دسکتاپ در موبایل هم پخش می‌شود.', 'ementash' ),
 					'default'     => 0,
 				),
 				'hero_eyebrow'      => array(

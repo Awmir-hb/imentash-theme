@@ -2,24 +2,23 @@
 /**
  * صفحه اصلی: هیرو (رسانه پس‌زمینه، تیتر کلمه‌به‌کلمه، کلمات چرخان، دو دکمه).
  *
- * پوستر در HTML است تا بدون JS و برای کاربرانی که حرکت را کم کرده‌اند دیده شود؛
- * ویدئو یا گیف در assets/js/home.js و فقط برای اندازه صفحه مناسب بارگذاری می‌شود.
- * لودر حلقه‌ها فقط برای اندازه‌ای دیده می‌شود که ویدئو دارد (نه گیف یا فقط پوستر) و تا آماده
- * شدن ویدئو روی پوستر می‌ماند؛ بدون JS، با خطای ویدئو یا بعد از مهلت، همان پوستر دیده می‌شود.
+ * پس‌زمینه فقط ویدئو (یا گیف) است، بدون عکس پوستر. رسانه در assets/js/home.js و فقط برای اندازه
+ * صفحه مناسب بارگذاری می‌شود. موبایل اگر ویدئوی عمودی نداشته باشد همان رسانه دسکتاپ را می‌گیرد.
+ * لودر حلقه‌ها تا آماده شدن ویدئو روی زمینه سرمه‌ای می‌ماند؛ بدون JS، با خطا یا بعد از مهلت محو می‌شود.
  *
  * @package ementash
  */
 
 defined( 'ABSPATH' ) || exit;
 
-$ementash_poster = absint( ementash_get( 'hero_poster' ) );
 $ementash_media  = array();
 $ementash_loader = array();
-foreach ( array(
-	'desktop' => 'hero_media',
-	'mobile'  => 'hero_media_mobile',
-) as $ementash_key => $ementash_setting ) {
-	$ementash_id   = absint( ementash_get( $ementash_setting ) );
+$ementash_ids    = array( 'desktop' => absint( ementash_get( 'hero_media' ) ) );
+$ementash_ids['mobile'] = absint( ementash_get( 'hero_media_mobile' ) );
+if ( ! $ementash_ids['mobile'] || ! ementash_media_kind( $ementash_ids['mobile'] ) ) {
+	$ementash_ids['mobile'] = $ementash_ids['desktop'];
+}
+foreach ( $ementash_ids as $ementash_key => $ementash_id ) {
 	$ementash_kind = $ementash_id ? ementash_media_kind( $ementash_id ) : '';
 	if ( $ementash_kind ) {
 		$ementash_media[ 'data-em-' . $ementash_key ]           = wp_get_attachment_url( $ementash_id );
@@ -28,9 +27,6 @@ foreach ( array(
 			$ementash_loader[] = 'em-hero__loader--' . $ementash_key;
 		}
 	}
-}
-if ( $ementash_poster ) {
-	$ementash_media['data-em-poster'] = '1';
 }
 
 $ementash_eyebrow = (string) ementash_get( 'hero_eyebrow' );
@@ -66,25 +62,7 @@ $ementash_buttons = array(
 			printf( ' %s="%s"', esc_attr( $ementash_attr ), 'data-em-desktop' === $ementash_attr || 'data-em-mobile' === $ementash_attr ? esc_url( $ementash_value ) : esc_attr( $ementash_value ) );
 		}
 		?>
-	>
-		<?php
-		if ( $ementash_poster ) {
-			echo wp_get_attachment_image(
-				$ementash_poster,
-				'full',
-				false,
-				array(
-					'class'         => 'em-hero__poster',
-					'alt'           => '',
-					'loading'       => 'eager',
-					'fetchpriority' => 'high',
-					'decoding'      => 'async',
-					'sizes'         => '100vw',
-				)
-			);
-		}
-		?>
-	</div>
+	></div>
 	<?php if ( $ementash_loader ) : ?>
 		<div class="em-hero__loader <?php echo esc_attr( implode( ' ', $ementash_loader ) ); ?>" aria-hidden="true" data-em-hero-loader>
 			<span class="em-hero__pulse"></span><span class="em-hero__pulse"></span><span class="em-hero__pulse"></span><span class="em-hero__core"></span>

@@ -4,10 +4,13 @@
 
   /* ---------- رسانه هیرو ----------
      ویدئو یا گیف فقط برای اندازه صفحه مناسب ساخته می‌شود تا هر دو نسخه دانلود نشوند.
-     موبایل: فقط ویدئوی عمودی (اگر در پنل انتخاب شده)، وگرنه همان پوستر؛ رسانه سنگین دسکتاپ هیچ‌وقت در موبایل نمی‌آید.
-     با Save-Data (حالت کم‌مصرف مرورگر) هیچ ویدئویی بارگذاری نمی‌شود. */
+     موبایل: ویدئوی عمودی اگر در پنل انتخاب شده، وگرنه همان رسانه دسکتاپ (hero.php انتخاب می‌کند).
+     با کاهش حرکت، Save-Data یا اینترنت ۲G ویدئو پخش نمی‌شود و فقط فریم اولش دیده می‌شود. */
   const media = document.querySelector('[data-em-hero-media]');
-  const saveData = Boolean(navigator.connection && navigator.connection.saveData);
+  // Save-Data یا اینترنت خیلی کند (۲G): فقط فریم اول ویدئو، تا ویدئو پهنای باند صفحه را نگیرد.
+  // ۳G عمداً شامل نیست: کروم با تأخیر بالای اینترنت ایران بسیاری از اتصال‌های معمولی را ۳G تخمین می‌زند.
+  const conn = navigator.connection;
+  const saveData = Boolean(conn && (conn.saveData || /(^|-)2g$/.test(conn.effectiveType || '')));
 
   /* لودر با آماده شدن ویدئو، خطا یا بعد از مهلت محو و سپس حذف می‌شود تا انیمیشن بی‌نهایتش نماند */
   const loader = document.querySelector('[data-em-hero-loader]');
@@ -23,7 +26,9 @@
   };
   if (loader) loaderTimer = setTimeout(hideLoader, 8000);
 
-  if (media && !reduce && !saveData) {
+  // کاهش حرکت یا اینترنت کند: ویدئو پخش نمی‌شود و فقط فریم اولش ثابت دیده می‌شود (گیف اصلاً بارگذاری نمی‌شود).
+  const still = reduce || saveData;
+  if (media) {
     const d = media.dataset;
     let src = d.emDesktop;
     let type = d.emDesktopType;
@@ -31,12 +36,21 @@
       src = d.emMobile || '';
       type = d.emMobileType;
     }
+    if (still && type !== 'video') src = '';
 
     if (src) {
       const el = document.createElement(type === 'video' ? 'video' : 'img');
       el.className = 'em-hero__live';
       const show = () => el.classList.add('em-hero__live--on');
-      if (type === 'video') {
+      if (type === 'video' && still) {
+        // فقط متادیتا و فریم اول دانلود می‌شود؛ #t پرش به فریم اول را در سافاری هم اجباری می‌کند.
+        el.muted = true;
+        el.playsInline = true;
+        el.preload = 'metadata';
+        el.addEventListener('loadeddata', () => { show(); hideLoader(); }, { once: true });
+        el.addEventListener('error', hideLoader, { once: true });
+        src += '#t=0.1';
+      } else if (type === 'video') {
         el.muted = true;
         el.loop = true;
         el.autoplay = true;
@@ -58,10 +72,10 @@
       }
       el.src = src;
       media.appendChild(el);
-      if (type === 'video') el.play().catch(() => {});
+      if (type === 'video' && !still) el.play().catch(() => {});
     }
   }
-  // ویدئویی در کار نیست (کاهش حرکت، Save-Data، گیف یا فقط پوستر برای این اندازه)
+  // ویدئویی در کار نیست (گیف، یا رسانه‌ای برای این اندازه تعریف نشده)
   if (!media || !media.querySelector('video')) hideLoader();
 
   /* ---------- کلمات چرخان ----------
