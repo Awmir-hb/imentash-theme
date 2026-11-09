@@ -9,14 +9,14 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-28T21:27:06+00:00\n"
+"POT-Creation-Date: 2026-11-09T13:10:32+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: ementash\n"
 
 #. Theme Name of the theme
 #: style.css
-#: inc/customizer.php:744
+#: inc/customizer.php:738
 msgid "ایمن تاش"
 msgstr ""
 
@@ -119,50 +119,50 @@ msgstr ""
 msgid "نام شرکت طولانی‌تر از حد مجاز است."
 msgstr ""
 
-#: inc/contact-form.php:187
+#: inc/contact-form.php:195
 msgid "شماره تماس را بنویسید."
 msgstr ""
 
-#: inc/contact-form.php:189
+#: inc/contact-form.php:197
 msgid "شماره تماس معتبر نیست."
 msgstr ""
 
-#: inc/contact-form.php:192
+#: inc/contact-form.php:200
 msgid "ایمیل معتبر نیست."
 msgstr ""
 
-#: inc/contact-form.php:195
+#: inc/contact-form.php:203
 msgid "محصول و مقدار مورد نیاز را بنویسید."
 msgstr ""
 
-#: inc/contact-form.php:197
+#: inc/contact-form.php:205
 msgid "متن طولانی‌تر از حد مجاز (۲۰۰۰ نویسه) است."
 msgstr ""
 
-#: inc/contact-form.php:201
+#: inc/contact-form.php:209
 msgid "لطفاً موارد مشخص‌شده را اصلاح کنید."
 msgstr ""
 
-#: inc/contact-form.php:215
+#: inc/contact-form.php:223
 msgid "تعداد درخواست‌های ارسالی زیاد است. لطفاً چند دقیقه دیگر دوباره تلاش کنید."
 msgstr ""
 
 #. translators: 1: نوع درخواست، 2: نام
-#: inc/contact-form.php:226
+#: inc/contact-form.php:234
 #, php-format
 msgid "%1$s: %2$s"
 msgstr ""
 
-#: inc/contact-form.php:231
+#: inc/contact-form.php:239
 msgid "ثبت درخواست ممکن نشد. لطفاً دوباره تلاش کنید یا تماس بگیرید."
 msgstr ""
 
-#: inc/contact-form.php:278
+#: inc/contact-form.php:286
 msgid "مشاهده در پیشخوان:"
 msgstr ""
 
 #. translators: 1: نام سایت، 2: نوع درخواست، 3: نام
-#: inc/contact-form.php:286
+#: inc/contact-form.php:295
 #, php-format
 msgid "[%1$s] %2$s از %3$s"
 msgstr ""
@@ -218,7 +218,7 @@ msgid "گواهینامه"
 msgstr ""
 
 #: inc/cpt.php:47
-#: template-parts/site-footer.php:67
+#: template-parts/site-footer.php:66
 msgid "گواهینامه‌ها"
 msgstr ""
 
@@ -285,7 +285,7 @@ msgid "درخواست‌های تماس"
 msgstr ""
 
 #: inc/cpt.php:114
-#: inc/metaboxes.php:335
+#: inc/metaboxes.php:360
 msgid "جزئیات درخواست"
 msgstr ""
 
@@ -315,7 +315,7 @@ msgstr ""
 
 #: inc/cpt.php:182
 #: inc/customizer.php:94
-#: inc/customizer.php:492
+#: inc/customizer.php:486
 msgid "استعلام قیمت"
 msgstr ""
 
@@ -379,8 +379,8 @@ msgstr ""
 
 #: inc/cpt.php:258
 #: inc/customizer.php:219
-#: inc/metaboxes.php:148
-#: inc/metaboxes.php:194
+#: inc/metaboxes.php:173
+#: inc/metaboxes.php:219
 msgid "عنوان"
 msgstr ""
 
@@ -405,16 +405,17 @@ msgid "درباره ما و آمار"
 msgstr ""
 
 #: inc/customizer.php:21
-#: inc/customizer.php:545
+#: inc/customizer.php:539
+#: template-parts/about/credentials.php:81
 #: template-parts/home/honors.php:21
 msgid "افتخارات"
 msgstr ""
 
 #: inc/customizer.php:25
-#: inc/customizer.php:599
+#: inc/customizer.php:593
 #: inc/woocommerce.php:265
 #: search.php:66
-#: template-parts/site-footer.php:77
+#: template-parts/site-footer.php:76
 msgid "محصولات"
 msgstr ""
 
@@ -522,8 +523,8 @@ msgid "%s: فکس"
 msgstr ""
 
 #: inc/customizer.php:137
-#: inc/customizer.php:453
-#: inc/customizer.php:645
+#: inc/customizer.php:447
+#: inc/customizer.php:639
 msgid "اگر خالی باشد نمایش داده نمی‌شود."
 msgstr ""
 
@@ -589,8 +590,8 @@ msgstr ""
 
 #: inc/customizer.php:183
 #: inc/metaboxes.php:27
-#: inc/metaboxes.php:152
-#: inc/metaboxes.php:202
+#: inc/metaboxes.php:177
+#: inc/metaboxes.php:227
 msgid "آیکون"
 msgstr ""
 
@@ -628,14 +629,14 @@ msgstr ""
 
 #: inc/customizer.php:198
 #: inc/customizer.php:232
-#: inc/customizer.php:458
-#: inc/customizer.php:544
-#: inc/customizer.php:560
-#: inc/customizer.php:571
-#: inc/customizer.php:582
-#: inc/customizer.php:598
-#: inc/customizer.php:623
-#: inc/customizer.php:667
+#: inc/customizer.php:452
+#: inc/customizer.php:538
+#: inc/customizer.php:554
+#: inc/customizer.php:565
+#: inc/customizer.php:576
+#: inc/customizer.php:592
+#: inc/customizer.php:617
+#: inc/customizer.php:661
 msgid "تیتر"
 msgstr ""
 
@@ -644,13 +645,13 @@ msgid "خط تولید ما"
 msgstr ""
 
 #: inc/customizer.php:203
-#: inc/customizer.php:475
-#: inc/customizer.php:512
-#: inc/customizer.php:587
-#: inc/customizer.php:628
-#: inc/customizer.php:672
+#: inc/customizer.php:469
+#: inc/customizer.php:506
+#: inc/customizer.php:581
+#: inc/customizer.php:622
+#: inc/customizer.php:666
 #: inc/metaboxes.php:59
-#: inc/metaboxes.php:198
+#: inc/metaboxes.php:223
 msgid "متن"
 msgstr ""
 
@@ -969,47 +970,39 @@ msgid "ویدئوی عمودی موبایل"
 msgstr ""
 
 #: inc/customizer.php:441
-msgid "اگر خالی باشد پوستر نمایش داده می‌شود."
+msgid "اگر خالی باشد ویدئوی دسکتاپ در موبایل هم پخش می‌شود."
 msgstr ""
 
 #: inc/customizer.php:446
-msgid "تصویر پوستر"
-msgstr ""
-
-#: inc/customizer.php:447
-msgid "تا بارگذاری ویدئو و برای کاربرانی که حرکت را کم کرده‌اند نمایش داده می‌شود."
-msgstr ""
-
-#: inc/customizer.php:452
 msgid "برچسب کوچک بالای تیتر"
 msgstr ""
 
-#: inc/customizer.php:454
+#: inc/customizer.php:448
 msgid "شرکت دانش‌بنیان ایمن تاش سپاهان (سی‌پیکو)"
 msgstr ""
 
-#: inc/customizer.php:459
+#: inc/customizer.php:453
 msgid "هر خط، یک خط تیتر."
 msgstr ""
 
-#: inc/customizer.php:460
+#: inc/customizer.php:454
 msgid "بزرگ‌ترین تولیدکننده مواد شیمیایی"
 msgstr ""
 
-#: inc/customizer.php:464
+#: inc/customizer.php:458
 msgid "متن پیش از کلمات چرخان"
 msgstr ""
 
-#: inc/customizer.php:469
+#: inc/customizer.php:463
 msgid "کلمات چرخان"
 msgstr ""
 
-#: inc/customizer.php:470
-#: inc/customizer.php:634
+#: inc/customizer.php:464
+#: inc/customizer.php:628
 msgid "هر خط یک مورد."
 msgstr ""
 
-#: inc/customizer.php:471
+#: inc/customizer.php:465
 msgid ""
 "آتش‌نشانی\n"
 "حفاری\n"
@@ -1017,228 +1010,228 @@ msgid ""
 "دیفومر"
 msgstr ""
 
-#: inc/customizer.php:476
+#: inc/customizer.php:470
 msgid "تولید مواد شیمیایی تخصصی متناسب با نیاز عملیاتی صنایع، با ظرفیت ۱۹ هزار تن در سال."
 msgstr ""
 
-#: inc/customizer.php:480
+#: inc/customizer.php:474
 msgid "دکمه اول: متن"
 msgstr ""
 
-#: inc/customizer.php:481
+#: inc/customizer.php:475
 msgid "مشاهده محصولات"
 msgstr ""
 
-#: inc/customizer.php:485
+#: inc/customizer.php:479
 msgid "دکمه اول: لینک"
 msgstr ""
 
-#: inc/customizer.php:486
+#: inc/customizer.php:480
 msgid "اگر خالی باشد به فروشگاه (فهرست محصولات) می‌رود."
 msgstr ""
 
-#: inc/customizer.php:491
+#: inc/customizer.php:485
 msgid "دکمه دوم: متن"
 msgstr ""
 
-#: inc/customizer.php:496
+#: inc/customizer.php:490
 msgid "دکمه دوم: لینک"
 msgstr ""
 
-#: inc/customizer.php:497
+#: inc/customizer.php:491
 msgid "اگر خالی باشد به صفحه تماس می‌رود."
 msgstr ""
 
-#: inc/customizer.php:503
+#: inc/customizer.php:497
 msgid "صفحه اصلی: درباره ما"
 msgstr ""
 
-#: inc/customizer.php:507
+#: inc/customizer.php:501
 msgid "برچسب بالای متن"
 msgstr ""
 
 #. Template Name of the theme
-#: inc/customizer.php:508
+#: inc/customizer.php:502
 msgid "درباره ما"
 msgstr ""
 
-#: inc/customizer.php:513
+#: inc/customizer.php:507
 msgid "شرکت دانش‌بنیان ایمن تاش سپاهان (سی‌پیکو)، عضو گروه صنعتی تاش، از سال ۱۳۶۷ با تکیه بر دانش فنی و تجربه صنعتی فعالیت می‌کند. تولید مواد شیمیایی آتش‌نشانی را آغاز کرد و پس از آن به تولید مواد شیمیایی حفاری، آنتی‌فوم و دیفومر رسید. امروز با یکی از بزرگ‌ترین مراکز تحقیق و توسعه بخش خصوصی، محصولاتش را به صنایع نفت، گاز، پتروشیمی، فولاد و هواپیمایی عرضه و به چند کشور صادر می‌کند."
 msgstr ""
 
-#: inc/customizer.php:517
-#: inc/customizer.php:639
+#: inc/customizer.php:511
+#: inc/customizer.php:633
 msgid "عکس"
 msgstr ""
 
-#: inc/customizer.php:522
+#: inc/customizer.php:516
 msgid "متن دکمه"
 msgstr ""
 
-#: inc/customizer.php:523
+#: inc/customizer.php:517
 msgid "بیشتر درباره ما"
 msgstr ""
 
-#: inc/customizer.php:527
+#: inc/customizer.php:521
 msgid "لینک دکمه"
 msgstr ""
 
-#: inc/customizer.php:528
+#: inc/customizer.php:522
 msgid "اگر خالی باشد به برگه درباره ما می‌رود."
 msgstr ""
 
-#: inc/customizer.php:534
+#: inc/customizer.php:528
 msgid "آمار"
 msgstr ""
 
-#: inc/customizer.php:535
+#: inc/customizer.php:529
 msgid "در صفحه اصلی و صفحه درباره ما نمایش داده می‌شود. آیتم بدون عدد نمایش داده نمی‌شود."
 msgstr ""
 
-#: inc/customizer.php:539
+#: inc/customizer.php:533
 msgid "صفحه اصلی: افتخارات"
 msgstr ""
 
-#: inc/customizer.php:540
+#: inc/customizer.php:534
 msgid "کارت‌ها از «گواهینامه‌ها»یی خوانده می‌شوند که نوعشان «افتخار» است. در المنتور با شورت‌کد [ementash_honors]."
 msgstr ""
 
-#: inc/customizer.php:549
+#: inc/customizer.php:543
 msgid "متن (اختیاری)"
 msgstr ""
 
-#: inc/customizer.php:555
+#: inc/customizer.php:549
 msgid "صفحه اصلی: صنایع"
 msgstr ""
 
-#: inc/customizer.php:556
+#: inc/customizer.php:550
 msgid "کارت‌ها از بخش «صنایع» در پیشخوان خوانده می‌شوند."
 msgstr ""
 
-#: inc/customizer.php:561
+#: inc/customizer.php:555
 msgid "ما در صنایع زیر فعال هستیم"
 msgstr ""
 
-#: inc/customizer.php:566
+#: inc/customizer.php:560
 msgid "صفحه اصلی: مشتریان"
 msgstr ""
 
-#: inc/customizer.php:567
+#: inc/customizer.php:561
 msgid "لوگوها از بخش «مشتریان» در پیشخوان خوانده می‌شوند."
 msgstr ""
 
-#: inc/customizer.php:572
+#: inc/customizer.php:566
 msgid "مشتریان ما"
 msgstr ""
 
-#: inc/customizer.php:577
+#: inc/customizer.php:571
 msgid "صفحه اصلی: خدمات"
 msgstr ""
 
-#: inc/customizer.php:578
+#: inc/customizer.php:572
 msgid "کارت‌ها از بخش «خدمات» در پیشخوان خوانده می‌شوند."
 msgstr ""
 
-#: inc/customizer.php:583
+#: inc/customizer.php:577
 msgid "خدمات ما"
 msgstr ""
 
-#: inc/customizer.php:588
+#: inc/customizer.php:582
 msgid "خدمات قابل ارائه توسط شرکت ایمن تاش سپاهان"
 msgstr ""
 
-#: inc/customizer.php:593
+#: inc/customizer.php:587
 msgid "صفحه اصلی: محصولات"
 msgstr ""
 
-#: inc/customizer.php:594
+#: inc/customizer.php:588
 msgid "دسته‌های سطح اول ووکامرس با تصویر و توضیح خودشان نمایش داده می‌شوند."
 msgstr ""
 
-#: inc/customizer.php:603
+#: inc/customizer.php:597
 msgid "متن لینک فهرست کامل"
 msgstr ""
 
-#: inc/customizer.php:604
+#: inc/customizer.php:598
 msgid "{count} با تعداد محصولات منتشرشده جایگزین می‌شود."
 msgstr ""
 
-#: inc/customizer.php:606
+#: inc/customizer.php:600
 msgid "فهرست کامل {count} محصول"
 msgstr ""
 
-#: inc/customizer.php:611
+#: inc/customizer.php:605
 msgid "صفحه اصلی: خط تولید"
 msgstr ""
 
-#: inc/customizer.php:615
+#: inc/customizer.php:609
 msgid "صفحه اصلی: گالری کارخانه"
 msgstr ""
 
-#: inc/customizer.php:619
+#: inc/customizer.php:613
 msgid "صفحه اصلی: کمک‌نساجی"
 msgstr ""
 
-#: inc/customizer.php:624
+#: inc/customizer.php:618
 msgid "محصولات کمک‌نساجی"
 msgstr ""
 
-#: inc/customizer.php:629
+#: inc/customizer.php:623
 msgid "رطوبت‌دهنده سریع KX-327 برای صنایع نساجی."
 msgstr ""
 
-#: inc/customizer.php:633
+#: inc/customizer.php:627
 msgid "ظرف‌های بسته‌بندی"
 msgstr ""
 
-#: inc/customizer.php:635
+#: inc/customizer.php:629
 msgid ""
 "بشکه ۶۰ لیتری\n"
 "بشکه ۲۲۰ لیتری\n"
 "مخزن ۱۰۰۰ لیتری"
 msgstr ""
 
-#: inc/customizer.php:644
+#: inc/customizer.php:638
 msgid "کد بزرگ روی عکس"
 msgstr ""
 
-#: inc/customizer.php:650
+#: inc/customizer.php:644
 msgid "فایل کاتالوگ"
 msgstr ""
 
-#: inc/customizer.php:651
+#: inc/customizer.php:645
 msgid "اگر خالی باشد دکمه دانلود نمایش داده نمی‌شود."
 msgstr ""
 
-#: inc/customizer.php:656
+#: inc/customizer.php:650
 msgid "متن دکمه کاتالوگ"
 msgstr ""
 
-#: inc/customizer.php:657
+#: inc/customizer.php:651
 msgid "دریافت کاتالوگ KX-327"
 msgstr ""
 
-#: inc/customizer.php:662
+#: inc/customizer.php:656
 msgid "صفحه اصلی: مقاله‌ها"
 msgstr ""
 
-#: inc/customizer.php:663
+#: inc/customizer.php:657
 msgid "چهار نوشته آخر وبلاگ نمایش داده می‌شود."
 msgstr ""
 
-#: inc/customizer.php:668
+#: inc/customizer.php:662
 msgid "مقاله‌ها و دانش فنی"
 msgstr ""
 
-#: inc/customizer.php:673
+#: inc/customizer.php:667
 msgid "راهنمای انتخاب و استفاده از فوم، پودر و مواد شیمیایی صنعتی، از تیم فنی ایمن تاش."
 msgstr ""
 
-#: inc/customizer.php:677
+#: inc/customizer.php:671
 msgid "متن لینک همه مقاله‌ها"
 msgstr ""
 
-#: inc/customizer.php:678
+#: inc/customizer.php:672
 msgid "همه مقاله‌ها"
 msgstr ""
 
@@ -1324,173 +1317,205 @@ msgid "بخش‌های صفحه درباره ما"
 msgstr ""
 
 #: inc/metaboxes.php:117
-msgid "تیتر خط زمانی"
-msgstr ""
-
-#: inc/metaboxes.php:118
-msgid "رویدادها از بخش «خط زمانی» در پیشخوان خوانده می‌شوند."
+msgid "عکس کنار متن شرکت"
 msgstr ""
 
 #: inc/metaboxes.php:119
-msgid "مسیر ما"
+msgid "متن شرکت همان محتوای برگه است. تصویر شاخص برگه پس‌زمینه سربرگ می‌شود."
 msgstr ""
 
 #: inc/metaboxes.php:123
-msgid "تیتر گواهینامه‌ها"
+msgid "جمله برجسته (نقل‌قول)"
 msgstr ""
 
 #: inc/metaboxes.php:124
-msgid "گواهینامه‌ها از بخش «گواهینامه‌ها» در پیشخوان خوانده می‌شوند."
+msgid "زیر متن شرکت با حروف درشت نمایش داده می‌شود. اگر خالی باشد نمایش داده نمی‌شود."
 msgstr ""
 
-#: inc/metaboxes.php:125
-msgid "گواهینامه‌ها و استانداردها"
+#: inc/metaboxes.php:128
+msgid "گوینده نقل‌قول"
 msgstr ""
 
-#: inc/metaboxes.php:129
-msgid "متن گواهینامه‌ها"
+#: inc/metaboxes.php:132
+msgid "سمت گوینده"
 msgstr ""
 
-#: inc/metaboxes.php:130
-msgid "سیستم مدیریت یکپارچه (IMS) شرکت توسط TÜV NORD آلمان تأیید شده است."
+#: inc/metaboxes.php:133
+msgid "مثلاً «مدیرعامل»."
 msgstr ""
 
-#: inc/metaboxes.php:134
-msgid "تیتر تحقیق و توسعه"
+#: inc/metaboxes.php:137
+msgid "تیتر خط زمانی"
 msgstr ""
 
-#: inc/metaboxes.php:135
-msgid "تحقیق و توسعه"
+#: inc/metaboxes.php:138
+msgid "رویدادها از بخش «خط زمانی» در پیشخوان خوانده می‌شوند."
 msgstr ""
 
 #: inc/metaboxes.php:139
-msgid "متن تحقیق و توسعه"
+msgid "مسیر ما"
 msgstr ""
 
-#: inc/metaboxes.php:140
-msgid "واحد تحقیق و توسعه ایمن تاش با همکاری دانشگاه‌ها و مراکز علمی، در این حوزه‌ها فعال است:"
+#: inc/metaboxes.php:143
+msgid "تیتر گواهینامه‌ها و افتخارات"
 msgstr ""
 
 #: inc/metaboxes.php:144
+msgid "گواهینامه‌ها و افتخارات از بخش «گواهینامه‌ها» در پیشخوان خوانده می‌شوند."
+msgstr ""
+
+#: inc/metaboxes.php:145
+msgid "اعتبار و افتخارات"
+msgstr ""
+
+#: inc/metaboxes.php:149
+msgid "متن گواهینامه‌ها"
+msgstr ""
+
+#: inc/metaboxes.php:150
+msgid "سیستم مدیریت یکپارچه (IMS) شرکت توسط TÜV NORD آلمان تأیید شده است."
+msgstr ""
+
+#: inc/metaboxes.php:154
+msgid "تیتر تحقیق و توسعه"
+msgstr ""
+
+#: inc/metaboxes.php:155
+msgid "تحقیق و توسعه"
+msgstr ""
+
+#: inc/metaboxes.php:159
+msgid "متن تحقیق و توسعه"
+msgstr ""
+
+#: inc/metaboxes.php:160
+msgid "واحد تحقیق و توسعه ایمن تاش با همکاری دانشگاه‌ها و مراکز علمی، در این حوزه‌ها فعال است:"
+msgstr ""
+
+#: inc/metaboxes.php:164
+msgid "عکس تحقیق و توسعه"
+msgstr ""
+
+#: inc/metaboxes.php:169
 msgid "کارت‌های تحقیق و توسعه"
 msgstr ""
 
-#: inc/metaboxes.php:158
+#: inc/metaboxes.php:183
 msgid "فوم آتش‌نشانی"
 msgstr ""
 
-#: inc/metaboxes.php:162
+#: inc/metaboxes.php:187
 msgid "پودر آتش‌نشانی"
 msgstr ""
 
-#: inc/metaboxes.php:166
+#: inc/metaboxes.php:191
 msgid "مواد ضدکف"
 msgstr ""
 
-#: inc/metaboxes.php:170
+#: inc/metaboxes.php:195
 msgid "مواد حفاری"
 msgstr ""
 
-#: inc/metaboxes.php:174
+#: inc/metaboxes.php:199
 msgid "افزودنی‌های بتن"
 msgstr ""
 
-#: inc/metaboxes.php:178
+#: inc/metaboxes.php:203
 msgid "مواد شیمیایی صنایع نفت"
 msgstr ""
 
-#: inc/metaboxes.php:185
+#: inc/metaboxes.php:210
 msgid "تیتر مشتری‌مداری"
 msgstr ""
 
-#: inc/metaboxes.php:186
+#: inc/metaboxes.php:211
 msgid "مشتری‌مداری"
 msgstr ""
 
-#: inc/metaboxes.php:190
+#: inc/metaboxes.php:215
 msgid "کارت‌های مشتری‌مداری"
 msgstr ""
 
-#: inc/metaboxes.php:208
+#: inc/metaboxes.php:233
 msgid "تعامل و گفتگو"
 msgstr ""
 
-#: inc/metaboxes.php:209
+#: inc/metaboxes.php:234
 msgid "گفتگوی مستمر با مشتریان برای شناخت دقیق نیازهای آن‌ها."
 msgstr ""
 
-#: inc/metaboxes.php:213
+#: inc/metaboxes.php:238
 msgid "رسیدگی شفاف"
 msgstr ""
 
-#: inc/metaboxes.php:214
+#: inc/metaboxes.php:239
 msgid "فرایند روشن برای رسیدگی به درخواست‌ها و شکایات."
 msgstr ""
 
-#: inc/metaboxes.php:218
+#: inc/metaboxes.php:243
 msgid "رفتار منصفانه"
 msgstr ""
 
-#: inc/metaboxes.php:219
+#: inc/metaboxes.php:244
 msgid "برخورد برابر و منصفانه با همه مشتریان."
 msgstr ""
 
-#: inc/metaboxes.php:223
+#: inc/metaboxes.php:248
 msgid "حفظ اطلاعات مشتری"
 msgstr ""
 
-#: inc/metaboxes.php:224
+#: inc/metaboxes.php:249
 msgid "محرمانه ماندن اطلاعات مشتری به‌عنوان یک اصل اخلاقی."
 msgstr ""
 
-#: inc/metaboxes.php:432
-#: inc/metaboxes.php:437
+#: inc/metaboxes.php:457
+#: inc/metaboxes.php:462
 msgid "انتخاب فایل"
 msgstr ""
 
-#: inc/metaboxes.php:433
+#: inc/metaboxes.php:458
 msgid "استفاده از این فایل"
 msgstr ""
 
-#: inc/metaboxes.php:436
-#: inc/metaboxes.php:441
+#: inc/metaboxes.php:461
+#: inc/metaboxes.php:466
 msgid "فایلی انتخاب نشده است."
 msgstr ""
 
-#: inc/metaboxes.php:442
-#: inc/metaboxes.php:495
+#: inc/metaboxes.php:467
+#: inc/metaboxes.php:520
 msgid "حذف"
 msgstr ""
 
-#: inc/metaboxes.php:476
+#: inc/metaboxes.php:501
 msgid "افزودن ردیف"
 msgstr ""
 
-#: inc/metaboxes.php:493
+#: inc/metaboxes.php:518
 msgid "انتقال به بالا"
 msgstr ""
 
-#: inc/metaboxes.php:493
+#: inc/metaboxes.php:518
 msgid "بالا"
 msgstr ""
 
-#: inc/metaboxes.php:494
+#: inc/metaboxes.php:519
 msgid "انتقال به پایین"
 msgstr ""
 
-#: inc/metaboxes.php:494
+#: inc/metaboxes.php:519
 msgid "پایین"
 msgstr ""
 
-#: inc/metaboxes.php:588
+#: inc/metaboxes.php:613
 msgid "ارسال شد"
 msgstr ""
 
-#: inc/metaboxes.php:588
+#: inc/metaboxes.php:613
 msgid "ارسال نشد (درخواست ذخیره شده است)"
 msgstr ""
 
-#: inc/metaboxes.php:598
+#: inc/metaboxes.php:623
 msgid "تاریخ ارسال"
 msgstr ""
 
@@ -1658,7 +1683,7 @@ msgstr ""
 msgid "نام محصول، کد یا موضوع مقاله…"
 msgstr ""
 
-#: template-parts/about/certificates.php:69
+#: template-parts/about/credentials.php:71
 msgid "مشاهده فایل گواهینامه (PDF)"
 msgstr ""
 
@@ -1737,7 +1762,7 @@ msgstr ""
 msgid "دفاتر و کارخانه"
 msgstr ""
 
-#: template-parts/home/hero.php:123
+#: template-parts/home/hero.php:112
 #: template-parts/product/tabs.php:39
 msgid "، "
 msgstr ""
@@ -1762,7 +1787,7 @@ msgstr ""
 msgid "برای دیدن همه صنایع، کارت‌ها را به چپ بکشید."
 msgstr ""
 
-#: template-parts/home/production-line.php:49
+#: template-parts/home/production-line.php:54
 msgid "شمای نمادین خط تولید کارخانه"
 msgstr ""
 
@@ -1798,7 +1823,7 @@ msgid "هنوز مقاله‌ای در این بخش منتشر نشده است.
 msgstr ""
 
 #: template-parts/mobile-bar.php:16
-#: template-parts/site-footer.php:104
+#: template-parts/site-footer.php:103
 msgid "تماس"
 msgstr ""
 
@@ -1889,11 +1914,11 @@ msgstr ""
 msgid "اعمال"
 msgstr ""
 
-#: template-parts/site-footer.php:88
+#: template-parts/site-footer.php:87
 msgid "دسترسی سریع"
 msgstr ""
 
-#: template-parts/site-footer.php:132
+#: template-parts/site-footer.php:131
 msgid "فکس"
 msgstr ""
 

@@ -181,8 +181,16 @@ function ementash_handle_inquiry( $raw ) {
 	} elseif ( mb_strlen( $values['company'] ) > 150 ) {
 		$errors['em_company'] = __( 'نام شرکت طولانی‌تر از حد مجاز است.', 'ementash' );
 	}
-	// شماره با ارقام فارسی هم پذیرفته می‌شود.
-	$digits = preg_replace( '/[^0-9+]/', '', strtr( $values['phone'], array_combine( array( '۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹' ), range( 0, 9 ) ) ) );
+	// شماره با ارقام فارسی (۰-۹) و عربی (٠-٩) هم پذیرفته می‌شود.
+	$digits = preg_replace(
+		'/[^0-9+]/',
+		'',
+		strtr(
+			$values['phone'],
+			array_combine( array( '۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹' ), range( 0, 9 ) )
+			+ array_combine( array( '٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩' ), range( 0, 9 ) )
+		)
+	);
 	if ( '' === $values['phone'] ) {
 		$errors['em_phone'] = __( 'شماره تماس را بنویسید.', 'ementash' );
 	} elseif ( strlen( $digits ) < 7 || strlen( $digits ) > 15 ) {
@@ -279,7 +287,8 @@ function ementash_inquiry_mail( $post_id, $values, $product ) {
 
 	$headers = array( 'Content-Type: text/plain; charset=UTF-8' );
 	if ( '' !== $values['email'] && is_email( $values['email'] ) ) {
-		$headers[] = 'Reply-To: ' . str_replace( array( '"', "\r", "\n" ), '', $values['name'] ) . ' <' . $values['email'] . '>';
+		// wp_mail این هدر را با ویرگول به چند آدرس می‌شکند؛ ویرگول و <> در نام یعنی آدرس اضافه.
+		$headers[] = 'Reply-To: ' . str_replace( array( '"', ',', ';', '<', '>', "\r", "\n" ), '', $values['name'] ) . ' <' . $values['email'] . '>';
 	}
 
 	/* translators: 1: نام سایت، 2: نوع درخواست، 3: نام */
