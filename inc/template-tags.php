@@ -18,6 +18,13 @@ function ementash_option_defaults() {
  * خواندن یک تنظیم قالب با مقدار پیش‌فرض. متن‌ها در صورت فعال بودن Polylang ترجمه می‌شوند.
  */
 function ementash_get( $key ) {
+	// بازنویسی موقت (ویجت المنتور): فقط برای همان سکشنی که در حال چاپ است.
+	if ( ! empty( $GLOBALS['ementash_overrides'] ) ) {
+		$top = end( $GLOBALS['ementash_overrides'] );
+		if ( isset( $top[ $key ] ) ) {
+			return $top[ $key ];
+		}
+	}
 	$fields = ementash_customizer_fields();
 	if ( ! isset( $fields[ $key ] ) ) {
 		return get_theme_mod( $key, '' );
@@ -27,6 +34,21 @@ function ementash_get( $key ) {
 		$value = pll__( $value );
 	}
 	return $value;
+}
+
+/**
+ * شروع و پایان بازنویسی موقت تنظیم‌ها؛ تا pop، ementash_get() این مقادیر را به‌جای Customizer برمی‌گرداند.
+ *
+ * @param array $values کلید تنظیم ← مقدار پاک‌شده.
+ */
+function ementash_override_push( array $values ) {
+	$GLOBALS['ementash_overrides'][] = $values;
+}
+
+function ementash_override_pop() {
+	if ( ! empty( $GLOBALS['ementash_overrides'] ) ) {
+		array_pop( $GLOBALS['ementash_overrides'] );
+	}
 }
 
 /**

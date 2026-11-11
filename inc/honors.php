@@ -17,9 +17,12 @@ function ementash_get_honors() {
 	return ementash_get_certificates( 'honor' );
 }
 
-function ementash_honors_assets() {
-	wp_enqueue_style( 'ementash-honors', EMENTASH_URI . '/assets/css/honors.css', array( 'ementash-main' ), ementash_asset_ver( 'assets/css/honors.css' ) );
-	wp_enqueue_script(
+/**
+ * ثبت فایل‌ها (برای وابستگی ویجت المنتور)؛ ementash_honors_assets() بارگذاری هم می‌کند.
+ */
+function ementash_honors_register() {
+	wp_register_style( 'ementash-honors', EMENTASH_URI . '/assets/css/honors.css', array( 'ementash-main' ), ementash_asset_ver( 'assets/css/honors.css' ) );
+	wp_register_script(
 		'ementash-honors',
 		EMENTASH_URI . '/assets/js/honors.js',
 		array(),
@@ -29,6 +32,13 @@ function ementash_honors_assets() {
 			'strategy'  => 'defer',
 		)
 	);
+}
+add_action( 'wp_enqueue_scripts', 'ementash_honors_register', 5 );
+
+function ementash_honors_assets() {
+	ementash_honors_register();
+	wp_enqueue_style( 'ementash-honors' );
+	wp_enqueue_script( 'ementash-honors' );
 }
 
 /**

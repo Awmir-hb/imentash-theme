@@ -31,22 +31,25 @@ function ementash_enqueue_assets() {
 		)
 	);
 
-	// صفحه اصلی خود قالب (نه برگه المنتوری).
+	// سکشن‌های صفحه اصلی؛ ثبت همیشه (ویجت‌های المنتور هرجا آمدند صدایش می‌زنند)، بارگذاری فقط در صفحه اصلی خود قالب.
+	wp_register_style( 'ementash-home', EMENTASH_URI . '/assets/css/home.css', array( 'ementash-cards' ), ementash_asset_ver( 'assets/css/home.css' ) );
+	wp_register_script(
+		'ementash-home',
+		EMENTASH_URI . '/assets/js/home.js',
+		array(),
+		ementash_asset_ver( 'assets/js/home.js' ),
+		array(
+			'in_footer' => true,
+			'strategy'  => 'defer',
+		)
+	);
 	if ( is_front_page() && ! ementash_home_is_elementor() ) {
-		wp_enqueue_style( 'ementash-home', EMENTASH_URI . '/assets/css/home.css', array( 'ementash-cards' ), ementash_asset_ver( 'assets/css/home.css' ) );
-		wp_enqueue_script(
-			'ementash-home',
-			EMENTASH_URI . '/assets/js/home.js',
-			array(),
-			ementash_asset_ver( 'assets/js/home.js' ),
-			array(
-				'in_footer' => true,
-				'strategy'  => 'defer',
-			)
-		);
+		wp_enqueue_style( 'ementash-home' );
+		wp_enqueue_script( 'ementash-home' );
 	}
 }
-add_action( 'wp_enqueue_scripts', 'ementash_enqueue_assets' );
+// اولویت ۵: فایل‌های ثبت‌شده قبل از اینکه المنتور وابستگی ویجت‌ها را بارگذاری کند آماده باشند.
+add_action( 'wp_enqueue_scripts', 'ementash_enqueue_assets', 5 );
 
 /**
  * بدون JS ویدئوی هیرو بارگذاری نمی‌شود؛ لودر پنهان می‌ماند تا پوستر از همان ابتدا دیده شود.

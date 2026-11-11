@@ -29,6 +29,31 @@ function ementash_elementor_fonts( $fonts ) {
 add_filter( 'elementor/fonts/additional_fonts', 'ementash_elementor_fonts' );
 
 /**
+ * گروه «ایمن تاش» در پنل ویجت‌های المنتور.
+ */
+function ementash_elementor_category( $elements_manager ) {
+	$elements_manager->add_category(
+		'ementash',
+		array(
+			'title' => __( 'ایمن تاش', 'ementash' ),
+			'icon'  => 'eicon-site-identity',
+		)
+	);
+}
+add_action( 'elementor/elements/categories_registered', 'ementash_elementor_category' );
+
+/**
+ * ویجت سکشن‌های صفحه اصلی (inc/elementor-widgets.php).
+ */
+function ementash_register_elementor_widgets( $widgets_manager ) {
+	require_once EMENTASH_DIR . '/inc/elementor-widgets.php';
+	foreach ( ementash_widget_classes() as $class ) {
+		$widgets_manager->register( new $class() );
+	}
+}
+add_action( 'elementor/widgets/register', 'ementash_register_elementor_widgets' );
+
+/**
  * اگر Theme Builder برای این location قالب داشته باشد آن را چاپ می‌کند و true برمی‌گرداند.
  * false یعنی قالب خودمان باید خروجی بدهد.
  */

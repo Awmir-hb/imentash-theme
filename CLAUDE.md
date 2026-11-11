@@ -72,7 +72,8 @@ ementash/
   templates/industry.php     // قالب برگه «صنعت»: متن اختیاری برگه + محصولات این صنعت
   inc/
     setup.php          // theme supports, menus, image sizes
-    elementor.php      // ثبت locationها، تشخیص صفحه المنتوری
+    elementor.php      // ثبت locationها، تشخیص صفحه المنتوری، گروه و ویجت‌ها
+    elementor-widgets.php // ویجت هر سکشن صفحه اصلی (فقط وقتی المنتور فعال است)
     enqueue.php        // css/js، فقط هرجا لازم است
     customizer.php     // تنظیمات عمومی و صفحه اصلی
     cpt.php            // پست‌تایپ‌ها
@@ -132,6 +133,8 @@ ementash/
   - `woocommerce/single-product.php` ← `single`، `woocommerce/archive-product.php` ← `archive` (تا Woo Builder المنتور پرو بتواند جایگزین کند)
 - اگر هدر قالب با هدر المنتور جایگزین شد، منوی تمام‌صفحه موبایل قالب هم چاپ نشود. اگر فوتر جایگزین شد، نوار ثابت پایین موبایل هم چاپ نشود.
 - **هر صفحه‌ای که با المنتور ساخته شده** (حتی صفحه اصلی، نوشته، محصول) فقط `the_content()` را نشان بدهد، نه template-partهای قالب (حتی سربرگ صفحه). تشخیص با `ementash_is_elementor()` که `is_built_with_elementor()` سند المنتور را چک می‌کند. `front-page.php` هم باید همین چک را اول انجام بدهد.
+- **ویجت سکشن‌ها:** هر سکشن صفحه اصلی یک ویجت در گروه «ایمن تاش» دارد که همان template-part را چاپ می‌کند. کنترل‌ها خودکار از فیلدهای Customizer همان سکشن ساخته می‌شوند؛ فیلد خالی = مقدار پنل، پر = فقط برای همان ویجت (`ementash_override_push/pop`). سکشن جدید = کلاس کوچک جدید در `inc/elementor-widgets.php`.
+- رنگ‌ها و فونت‌های Global المنتور با `dev/elementor-kit.php` از `:root` فایل `main.css` نوشته می‌شوند؛ بعد از تغییر توکن‌ها دوباره اجرا شود.
 - قالب برگه «تمام‌عرض» (`templates/full-width.php`): header و footer قالب + محتوای بدون کانتینر.
 - استایل‌های قالب نباید ویجت‌های المنتور را بشکنند: selectorها محدود به کلاس‌های `em-`. استایل سراسری فقط برای `body` و موارد خیلی پایه.
 
