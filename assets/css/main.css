@@ -118,6 +118,8 @@
   --ahero-h:440px;
   --ahero-overlap:56px;
   --ahero-shade:linear-gradient(to top,rgba(8,17,63,.95) 0%,rgba(8,17,63,.6) 55%,rgba(8,17,63,.35) 100%);
+  /* ویدئوی سربرگ خودش زمینه سرمه‌ای دارد؛ فقط پایین کادر برای خوانایی تیتر تیره می‌شود */
+  --ahero-shade-video:linear-gradient(to top,rgba(8,17,63,.9) 0%,rgba(8,17,63,.45) 30%,rgba(8,17,63,0) 60%);
   --tl-sticky-top:120px;
   --tl-dot:20px;
   --tl-dot-y:24px;

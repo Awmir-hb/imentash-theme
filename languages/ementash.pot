@@ -3,13 +3,13 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ایمن تاش 1.0.0\n"
-"Report-Msgid-Bugs-To: https://ementash.com\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/ementash\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: ementash\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-11T09:08:50+00:00\n"
+"POT-Creation-Date: 2026-11-11T10:46:01+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: ementash\n"
@@ -286,7 +286,7 @@ msgid "درخواست‌های تماس"
 msgstr ""
 
 #: inc/cpt.php:114
-#: inc/metaboxes.php:377
+#: inc/metaboxes.php:410
 msgid "جزئیات درخواست"
 msgstr ""
 
@@ -380,8 +380,8 @@ msgstr ""
 
 #: inc/cpt.php:258
 #: inc/customizer.php:219
-#: inc/metaboxes.php:173
-#: inc/metaboxes.php:236
+#: inc/metaboxes.php:185
+#: inc/metaboxes.php:248
 msgid "عنوان"
 msgstr ""
 
@@ -591,8 +591,8 @@ msgstr ""
 
 #: inc/customizer.php:183
 #: inc/metaboxes.php:27
-#: inc/metaboxes.php:177
-#: inc/metaboxes.php:244
+#: inc/metaboxes.php:189
+#: inc/metaboxes.php:256
 msgid "آیکون"
 msgstr ""
 
@@ -652,7 +652,7 @@ msgstr ""
 #: inc/customizer.php:622
 #: inc/customizer.php:666
 #: inc/metaboxes.php:59
-#: inc/metaboxes.php:240
+#: inc/metaboxes.php:252
 msgid "متن"
 msgstr ""
 
@@ -1336,225 +1336,241 @@ msgid "بخش‌های صفحه درباره ما"
 msgstr ""
 
 #: inc/metaboxes.php:117
-msgid "عکس کنار متن شرکت"
+msgid "ویدئوی سربرگ (دسکتاپ)"
 msgstr ""
 
 #: inc/metaboxes.php:119
-msgid "متن شرکت همان محتوای برگه است. تصویر شاخص برگه پس‌زمینه سربرگ می‌شود."
+msgid "اختیاری، بدون صدا و کوتاه (لوپ). پیشنهاد: MP4 با ابعاد 1920×640. اگر انتخاب شود، به‌جای تصویر شاخص پشت سربرگ پخش می‌شود."
 msgstr ""
 
 #: inc/metaboxes.php:123
+msgid "ویدئوی سربرگ (موبایل)"
+msgstr ""
+
+#: inc/metaboxes.php:125
+msgid "پیشنهاد: MP4 با ابعاد 1080×960. اگر خالی باشد، همان ویدئوی دسکتاپ پخش می‌شود."
+msgstr ""
+
+#: inc/metaboxes.php:129
+msgid "عکس کنار متن شرکت"
+msgstr ""
+
+#: inc/metaboxes.php:131
+msgid "متن شرکت همان محتوای برگه است. تصویر شاخص برگه پس‌زمینه سربرگ می‌شود."
+msgstr ""
+
+#: inc/metaboxes.php:135
 msgid "جمله برجسته (نقل‌قول)"
 msgstr ""
 
-#: inc/metaboxes.php:124
+#: inc/metaboxes.php:136
 msgid "زیر متن شرکت با حروف درشت نمایش داده می‌شود. اگر خالی باشد نمایش داده نمی‌شود."
 msgstr ""
 
-#: inc/metaboxes.php:128
+#: inc/metaboxes.php:140
 msgid "گوینده نقل‌قول"
 msgstr ""
 
-#: inc/metaboxes.php:132
+#: inc/metaboxes.php:144
 msgid "سمت گوینده"
 msgstr ""
 
-#: inc/metaboxes.php:133
+#: inc/metaboxes.php:145
 msgid "مثلاً «مدیرعامل»."
 msgstr ""
 
-#: inc/metaboxes.php:137
+#: inc/metaboxes.php:149
 msgid "تیتر خط زمانی"
 msgstr ""
 
-#: inc/metaboxes.php:138
+#: inc/metaboxes.php:150
 msgid "رویدادها از بخش «خط زمانی» در پیشخوان خوانده می‌شوند."
 msgstr ""
 
-#: inc/metaboxes.php:139
+#: inc/metaboxes.php:151
 msgid "مسیر ما"
 msgstr ""
 
-#: inc/metaboxes.php:143
+#: inc/metaboxes.php:155
 msgid "تیتر گواهینامه‌ها و افتخارات"
 msgstr ""
 
-#: inc/metaboxes.php:144
+#: inc/metaboxes.php:156
 msgid "گواهینامه‌ها و افتخارات از بخش «گواهینامه‌ها» در پیشخوان خوانده می‌شوند."
 msgstr ""
 
-#: inc/metaboxes.php:145
+#: inc/metaboxes.php:157
 msgid "اعتبار و افتخارات"
 msgstr ""
 
-#: inc/metaboxes.php:149
+#: inc/metaboxes.php:161
 msgid "متن گواهینامه‌ها"
 msgstr ""
 
-#: inc/metaboxes.php:150
+#: inc/metaboxes.php:162
 msgid "سیستم مدیریت یکپارچه (IMS) شرکت توسط TÜV NORD آلمان تأیید شده است."
 msgstr ""
 
-#: inc/metaboxes.php:154
+#: inc/metaboxes.php:166
 msgid "تیتر تحقیق و توسعه"
 msgstr ""
 
-#: inc/metaboxes.php:155
+#: inc/metaboxes.php:167
 msgid "تحقیق و توسعه"
 msgstr ""
 
-#: inc/metaboxes.php:159
+#: inc/metaboxes.php:171
 msgid "متن تحقیق و توسعه"
 msgstr ""
 
-#: inc/metaboxes.php:160
+#: inc/metaboxes.php:172
 msgid "واحد تحقیق و توسعه ایمن تاش با همکاری دانشگاه‌ها و مراکز علمی، در این حوزه‌ها فعال است:"
 msgstr ""
 
-#: inc/metaboxes.php:164
+#: inc/metaboxes.php:176
 msgid "عکس تحقیق و توسعه"
 msgstr ""
 
-#: inc/metaboxes.php:169
+#: inc/metaboxes.php:181
 msgid "کارت‌های تحقیق و توسعه"
 msgstr ""
 
-#: inc/metaboxes.php:183
+#: inc/metaboxes.php:195
 msgid "فوم آتش‌نشانی"
 msgstr ""
 
-#: inc/metaboxes.php:187
+#: inc/metaboxes.php:199
 msgid "پودر آتش‌نشانی"
 msgstr ""
 
-#: inc/metaboxes.php:191
+#: inc/metaboxes.php:203
 msgid "مواد ضدکف"
 msgstr ""
 
-#: inc/metaboxes.php:195
+#: inc/metaboxes.php:207
 msgid "مواد حفاری"
 msgstr ""
 
-#: inc/metaboxes.php:199
+#: inc/metaboxes.php:211
 msgid "افزودنی‌های بتن"
 msgstr ""
 
-#: inc/metaboxes.php:203
+#: inc/metaboxes.php:215
 msgid "مواد شیمیایی صنایع نفت"
 msgstr ""
 
-#: inc/metaboxes.php:210
+#: inc/metaboxes.php:222
 msgid "متن لینک زیر تحقیق و توسعه"
 msgstr ""
 
-#: inc/metaboxes.php:211
+#: inc/metaboxes.php:223
 msgid "مثلاً «خدمات آزمایشگاهی». اگر متن یا آدرس خالی باشد نمایش داده نمی‌شود."
 msgstr ""
 
-#: inc/metaboxes.php:216
+#: inc/metaboxes.php:228
 msgid "آدرس لینک زیر تحقیق و توسعه"
 msgstr ""
 
-#: inc/metaboxes.php:221
+#: inc/metaboxes.php:233
 msgid "تیتر ارزش‌ها"
 msgstr ""
 
-#: inc/metaboxes.php:222
+#: inc/metaboxes.php:234
 msgid "مشتری‌مداری"
 msgstr ""
 
-#: inc/metaboxes.php:226
+#: inc/metaboxes.php:238
 msgid "متن زیر تیتر ارزش‌ها (مثلاً مأموریت شرکت)"
 msgstr ""
 
-#: inc/metaboxes.php:227
+#: inc/metaboxes.php:239
 msgid "اگر خالی باشد نمایش داده نمی‌شود. با یک خط خالی پاراگراف جدید شروع می‌شود."
 msgstr ""
 
-#: inc/metaboxes.php:232
+#: inc/metaboxes.php:244
 msgid "کارت‌های ارزش‌ها"
 msgstr ""
 
-#: inc/metaboxes.php:250
+#: inc/metaboxes.php:262
 msgid "تعامل و گفتگو"
 msgstr ""
 
-#: inc/metaboxes.php:251
+#: inc/metaboxes.php:263
 msgid "گفتگوی مستمر با مشتریان برای شناخت دقیق نیازهای آن‌ها."
 msgstr ""
 
-#: inc/metaboxes.php:255
+#: inc/metaboxes.php:267
 msgid "رسیدگی شفاف"
 msgstr ""
 
-#: inc/metaboxes.php:256
+#: inc/metaboxes.php:268
 msgid "فرایند روشن برای رسیدگی به درخواست‌ها و شکایات."
 msgstr ""
 
-#: inc/metaboxes.php:260
+#: inc/metaboxes.php:272
 msgid "رفتار منصفانه"
 msgstr ""
 
-#: inc/metaboxes.php:261
+#: inc/metaboxes.php:273
 msgid "برخورد برابر و منصفانه با همه مشتریان."
 msgstr ""
 
-#: inc/metaboxes.php:265
+#: inc/metaboxes.php:277
 msgid "حفظ اطلاعات مشتری"
 msgstr ""
 
-#: inc/metaboxes.php:266
+#: inc/metaboxes.php:278
 msgid "محرمانه ماندن اطلاعات مشتری به‌عنوان یک اصل اخلاقی."
 msgstr ""
 
-#: inc/metaboxes.php:474
-#: inc/metaboxes.php:479
+#: inc/metaboxes.php:507
+#: inc/metaboxes.php:512
 msgid "انتخاب فایل"
 msgstr ""
 
-#: inc/metaboxes.php:475
+#: inc/metaboxes.php:508
 msgid "استفاده از این فایل"
 msgstr ""
 
-#: inc/metaboxes.php:478
-#: inc/metaboxes.php:483
+#: inc/metaboxes.php:511
+#: inc/metaboxes.php:516
 msgid "فایلی انتخاب نشده است."
 msgstr ""
 
-#: inc/metaboxes.php:484
-#: inc/metaboxes.php:537
+#: inc/metaboxes.php:517
+#: inc/metaboxes.php:570
 msgid "حذف"
 msgstr ""
 
-#: inc/metaboxes.php:518
+#: inc/metaboxes.php:551
 msgid "افزودن ردیف"
 msgstr ""
 
-#: inc/metaboxes.php:535
+#: inc/metaboxes.php:568
 msgid "انتقال به بالا"
 msgstr ""
 
-#: inc/metaboxes.php:535
+#: inc/metaboxes.php:568
 msgid "بالا"
 msgstr ""
 
-#: inc/metaboxes.php:536
+#: inc/metaboxes.php:569
 msgid "انتقال به پایین"
 msgstr ""
 
-#: inc/metaboxes.php:536
+#: inc/metaboxes.php:569
 msgid "پایین"
 msgstr ""
 
-#: inc/metaboxes.php:630
+#: inc/metaboxes.php:663
 msgid "ارسال شد"
 msgstr ""
 
-#: inc/metaboxes.php:630
+#: inc/metaboxes.php:663
 msgid "ارسال نشد (درخواست ذخیره شده است)"
 msgstr ""
 
-#: inc/metaboxes.php:640
+#: inc/metaboxes.php:673
 msgid "تاریخ ارسال"
 msgstr ""
 
@@ -1730,6 +1746,14 @@ msgstr ""
 msgid "مشاهده فایل گواهینامه (PDF)"
 msgstr ""
 
+#: template-parts/about/hero.php:32
+msgid "توقف ویدئو"
+msgstr ""
+
+#: template-parts/about/hero.php:32
+msgid "پخش ویدئو"
+msgstr ""
+
 #: template-parts/blog/article.php:35
 msgid "صفحه‌های نوشته"
 msgstr ""
@@ -1830,7 +1854,7 @@ msgstr ""
 msgid "برای دیدن همه صنایع، کارت‌ها را به چپ بکشید."
 msgstr ""
 
-#: template-parts/home/production-line.php:54
+#: template-parts/home/production-line.php:63
 msgid "شمای نمادین خط تولید کارخانه"
 msgstr ""
 

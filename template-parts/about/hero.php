@@ -1,7 +1,10 @@
 <?php
 /**
- * درباره ما: سربرگ تصویری. پس‌زمینه = تصویر شاخص برگه، آمار Customizer روی لبه پایین.
- * بدون تصویر شاخص همان زمینه سرمه‌ای با حلقه‌های برند می‌ماند.
+ * درباره ما: سربرگ تصویری. پس‌زمینه = ویدئوی متاباکس برگه، وگرنه تصویر شاخص برگه؛ آمار Customizer روی لبه پایین.
+ * بدون ویدئو و تصویر شاخص همان زمینه سرمه‌ای با حلقه‌های برند می‌ماند.
+ *
+ * ویدئو در assets/js/about.js و فقط برای اندازه صفحه مناسب ساخته می‌شود (مثل هیروی صفحه اصلی).
+ * بدون JS تصویر شاخص (اگر باشد) از داخل noscript نمایش داده می‌شود.
  *
  * @package ementash
  */
@@ -9,9 +12,30 @@
 defined( 'ABSPATH' ) || exit;
 
 $ementash_image = get_post_thumbnail_id();
+$ementash_video = ementash_about_hero_videos( get_the_ID() );
+
+$ementash_class = 'em-ahero';
+if ( $ementash_image || $ementash_video ) {
+	$ementash_class .= ' em-ahero--img';
+}
+if ( $ementash_video ) {
+	$ementash_class .= ' em-ahero--video';
+}
 ?>
-<section class="em-ahero<?php echo $ementash_image ? ' em-ahero--img' : ''; ?>">
-	<?php if ( $ementash_image ) : ?>
+<section class="<?php echo esc_attr( $ementash_class ); ?>">
+	<?php if ( $ementash_video ) : ?>
+		<div class="em-ahero__media" aria-hidden="true" data-em-ahero-video data-em-desktop="<?php echo esc_url( $ementash_video['desktop'] ); ?>"<?php echo isset( $ementash_video['mobile'] ) ? ' data-em-mobile="' . esc_url( $ementash_video['mobile'] ) . '"' : ''; ?>>
+			<?php if ( $ementash_image ) : ?>
+				<noscript><?php echo wp_get_attachment_image( $ementash_image, 'full', false, array( 'alt' => '', 'sizes' => '100vw' ) ); ?></noscript>
+			<?php endif; ?>
+		</div>
+		<button type="button" class="em-ahero__toggle" data-em-ahero-toggle hidden aria-label="<?php esc_attr_e( 'توقف ویدئو', 'ementash' ); ?>" data-em-label-pause="<?php esc_attr_e( 'توقف ویدئو', 'ementash' ); ?>" data-em-label-play="<?php esc_attr_e( 'پخش ویدئو', 'ementash' ); ?>">
+			<?php
+			echo ementash_icon( 'pause', 'em-ahero__ic-pause' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG فیلترشده با kses.
+			echo ementash_icon( 'play', 'em-ahero__ic-play' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			?>
+		</button>
+	<?php elseif ( $ementash_image ) : ?>
 		<div class="em-ahero__media" aria-hidden="true">
 			<?php
 			// تصویر بالای صفحه و احتمالاً LCP: بدون lazy.

@@ -112,6 +112,18 @@ function ementash_meta_boxes() {
 			'screen'    => 'page',
 			'condition' => 'ementash_is_about_page',
 			'fields'    => array(
+				'about_hero_video'        => array(
+					'type'        => 'file',
+					'label'       => __( 'ویدئوی سربرگ (دسکتاپ)', 'ementash' ),
+					'mime'        => 'video',
+					'description' => __( 'اختیاری، بدون صدا و کوتاه (لوپ). پیشنهاد: MP4 با ابعاد 1920×640. اگر انتخاب شود، به‌جای تصویر شاخص پشت سربرگ پخش می‌شود.', 'ementash' ),
+				),
+				'about_hero_video_mobile' => array(
+					'type'        => 'file',
+					'label'       => __( 'ویدئوی سربرگ (موبایل)', 'ementash' ),
+					'mime'        => 'video',
+					'description' => __( 'پیشنهاد: MP4 با ابعاد 1080×960. اگر خالی باشد، همان ویدئوی دسکتاپ پخش می‌شود.', 'ementash' ),
+				),
 				'about_story_image'    => array(
 					'type'        => 'file',
 					'label'       => __( 'عکس کنار متن شرکت', 'ementash' ),
@@ -316,6 +328,27 @@ function ementash_meta( $post_id, $name ) {
  */
 function ementash_about_meta( $name ) {
 	return ementash_meta( ementash_page_id( 'about' ), $name );
+}
+
+/**
+ * آدرس ویدئوهای سربرگ درباره ما: array( 'desktop' => url, 'mobile' => url ) یا آرایه خالی.
+ * بدون ویدئوی دسکتاپ ویدئویی نمایش داده نمی‌شود؛ موبایل اختیاری است.
+ */
+function ementash_about_hero_videos( $post_id ) {
+	$urls = array();
+	foreach ( array(
+		'desktop' => 'about_hero_video',
+		'mobile'  => 'about_hero_video_mobile',
+	) as $key => $field ) {
+		$id = absint( ementash_meta( $post_id, $field ) );
+		if ( $id && 'video' === ementash_media_kind( $id ) ) {
+			$url = wp_get_attachment_url( $id );
+			if ( $url ) {
+				$urls[ $key ] = $url;
+			}
+		}
+	}
+	return isset( $urls['desktop'] ) ? $urls : array();
 }
 
 /**

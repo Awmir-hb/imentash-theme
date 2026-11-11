@@ -330,6 +330,19 @@ add_action( 'wp_ajax_nopriv_ementash_inquiry', 'ementash_inquiry_ajax_handler' )
 function ementash_page_assets() {
 	if ( ementash_is_about_view() ) {
 		wp_enqueue_style( 'ementash-about', EMENTASH_URI . '/assets/css/about.css', array( 'ementash-main' ), ementash_asset_ver( 'assets/css/about.css' ) );
+		// ویدئوی سربرگ؛ فقط وقتی در متاباکس انتخاب شده.
+		if ( ementash_about_hero_videos( get_queried_object_id() ) ) {
+			wp_enqueue_script(
+				'ementash-about',
+				EMENTASH_URI . '/assets/js/about.js',
+				array(),
+				ementash_asset_ver( 'assets/js/about.js' ),
+				array(
+					'in_footer' => true,
+					'strategy'  => 'defer',
+				)
+			);
+		}
 	}
 	if ( ementash_is_contact_view() ) {
 		wp_enqueue_style( 'ementash-contact', EMENTASH_URI . '/assets/css/contact.css', array( 'ementash-main' ), ementash_asset_ver( 'assets/css/contact.css' ) );
