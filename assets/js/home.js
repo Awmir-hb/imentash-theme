@@ -169,13 +169,62 @@
 
     if (!reduce && 'IntersectionObserver' in window) {
       line.dataset.emPl = 'wait';
+      // در حالت روایت، سکشن چند برابر صفحه بلند است؛ پس آستانه با rootMargin است نه درصد سکشن.
       const io = new IntersectionObserver((entries) => {
         if (entries.some((en) => en.isIntersecting)) {
           line.dataset.emPl = 'on';
           io.disconnect();
         }
-      }, { threshold: 0.25 });
+      }, { rootMargin: '0px 0px -25% 0px' });
       io.observe(line);
     }
+
+    /* روایت اسکرولی (دسکتاپ با ارتفاع کافی، بدون کاهش حرکت): هر بخش مساوی از اسکرول سکشن یک مرحله است.
+       فقط کلاس، data-em-step و --em-pl-p نوشته می‌شود؛ ظاهر همه در home.css. */
+    const steps = [...line.querySelectorAll('.em-pl__step')];
+    const now = line.querySelector('[data-em-pl-now]');
+    const digits = (line.querySelector('[data-em-digits]') || {}).dataset;
+    const fmt = (n) => String(n).padStart(2, '0').replace(/\d/g, (d) => (digits && digits.emDigits ? digits.emDigits[d] : d));
+    const roomy = window.matchMedia('(min-width: 901px) and (min-height: 700px)');
+    let story = false;
+    let frame = 0;
+
+    const update = () => {
+      frame = 0;
+      const r = line.getBoundingClientRect();
+      const run = r.height - window.innerHeight;
+      const p = run > 0 ? Math.min(1, Math.max(0, -r.top / run)) : 0;
+      const i = Math.min(steps.length - 1, Math.floor(p * steps.length));
+      line.style.setProperty('--em-pl-p', p.toFixed(4));
+      if (line.dataset.emStep === String(steps[i].dataset.emStage)) return;
+      line.dataset.emStep = steps[i].dataset.emStage;
+      steps.forEach((s, k) => {
+        s.classList.toggle('is-active', k === i);
+        s.classList.toggle('is-done', k < i);
+      });
+      if (now) now.textContent = fmt(i + 1);
+    };
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    const toggle = () => {
+      const want = !reduce && roomy.matches && steps.length > 1;
+      if (want === story) return;
+      story = want;
+      line.classList.toggle('em-pl--story', story);
+      if (story) {
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', onScroll);
+        update();
+      } else {
+        window.removeEventListener('scroll', onScroll);
+        window.removeEventListener('resize', onScroll);
+        delete line.dataset.emStep;
+        line.style.removeProperty('--em-pl-p');
+        steps.forEach((s) => s.classList.remove('is-active', 'is-done'));
+      }
+    };
+    toggle();
+    roomy.addEventListener('change', toggle);
   }
 })();

@@ -232,7 +232,7 @@ a.em-svc:hover .em-svc__arrow{background:var(--white);color:var(--navy-800)}
 /* نقشه در ستون اول (راست)، سربرگ و مراحل روی هم در ستون دوم */
 .em-pl__grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);grid-template-areas:"map head" "map steps";grid-template-rows:auto 1fr;gap:0 56px;align-items:center}
 .em-pl__head{grid-area:head;align-self:end}
-.em-pl__steps{grid-area:steps;align-self:start}
+.em-pl__side{grid-area:steps;align-self:start}
 /* برچسب‌ها از x به راست نوشته شوند؛ ویژگی dir روی svg درون‌خطی کافی نیست */
 .em-pl__map{grid-area:map;display:block;width:100%;height:auto;max-height:var(--pl-map-max);direction:ltr}
 
@@ -254,6 +254,43 @@ a.em-svc:hover .em-svc__arrow{background:var(--white);color:var(--navy-800)}
 .em-pl__code{flex:0 0 96px;padding-top:4px;color:var(--blue-light);font-size:var(--fs-nav);font-weight:600}
 .em-pl__title{margin:0 0 2px;font-family:var(--font-head);font-weight:600;font-size:19px;line-height:1.5}
 .em-pl__text{margin:0;color:var(--on-dark-2);font-size:var(--fs-nav)}
+
+/* روایت اسکرولی: فقط دسکتاپ با ارتفاع کافی و فقط وقتی home.js کلاس em-pl--story را گذاشته
+   (بدون JS، با کاهش حرکت و در موبایل همان چیدمان ثابت بالا). محتوا می‌چسبد، سکشن به‌اندازه
+   هر مرحله یک --pl-step-scroll بلندتر می‌شود و مرحله فعال روی نقشه روشن می‌ماند. */
+.em-pl__count{display:none}
+@media (min-width:901px) and (min-height:700px){
+  .em-pl--story{height:calc(100vh + var(--em-pl-n) * var(--pl-step-scroll));padding-block:0}
+  .em-pl--story > .em-container{position:sticky;top:0;display:flex;align-items:center;min-height:100vh;padding-block:var(--section-y)}
+  .em-pl--story .em-pl__grid{width:100%}
+
+  .em-pl--story .em-pl__count{display:flex;align-items:baseline;gap:8px;margin:0 0 14px;font-family:var(--font-head);font-weight:var(--fw-display);color:var(--on-dark-4)}
+  .em-pl--story .em-pl__now{font-size:44px;line-height:1;color:var(--white)}
+
+  /* ریل پیشرفت کنار مراحل؛ پر شدنش از --em-pl-p (۰ تا ۱) که JS با اسکرول می‌نویسد */
+  .em-pl--story .em-pl__steps{position:relative;padding-inline-start:22px;border-top:0}
+  .em-pl--story .em-pl__steps::before,.em-pl--story .em-pl__steps::after{content:"";position:absolute;inset-block:0;inset-inline-start:0;width:2px;border-radius:2px;background:var(--line-on-dark-2)}
+  .em-pl--story .em-pl__steps::after{background:var(--blue-light);transform:scaleY(var(--em-pl-p,0));transform-origin:top}
+  .em-pl--story .em-pl__step{opacity:.4;transition:opacity .45s ease}
+  .em-pl--story .em-pl__step.is-done{opacity:.65}
+  .em-pl--story .em-pl__step.is-active{opacity:1}
+  .em-pl--story .em-pl__step.is-active .em-pl__code{color:var(--white)}
+
+  /* نقشه: بقیه مراحل کم‌رنگ، مرحله فعال سفید. stroke/fill-opacity چون opacity در انیمیشن ورود است. */
+  .em-pl--story .em-pl__map [data-em-stage]{stroke-opacity:.28;fill-opacity:.28;transition:stroke-opacity .5s ease,fill-opacity .5s ease,stroke .5s ease,fill .5s ease}
+  .em-pl--story[data-em-step="1"] .em-pl__map [data-em-stage="1"],
+  .em-pl--story[data-em-step="2"] .em-pl__map [data-em-stage="2"],
+  .em-pl--story[data-em-step="3"] .em-pl__map [data-em-stage="3"],
+  .em-pl--story[data-em-step="4"] .em-pl__map [data-em-stage="4"]{stroke-opacity:1;fill-opacity:1}
+  .em-pl--story[data-em-step="1"] .em-pl__map .em-pl__d[data-em-stage="1"],
+  .em-pl--story[data-em-step="2"] .em-pl__map .em-pl__d[data-em-stage="2"],
+  .em-pl--story[data-em-step="3"] .em-pl__map .em-pl__d[data-em-stage="3"],
+  .em-pl--story[data-em-step="4"] .em-pl__map .em-pl__d[data-em-stage="4"]{stroke:var(--white)}
+  .em-pl--story[data-em-step="1"] .em-pl__map .em-pl__lb[data-em-stage="1"],
+  .em-pl--story[data-em-step="2"] .em-pl__map .em-pl__lb[data-em-stage="2"],
+  .em-pl--story[data-em-step="3"] .em-pl__map .em-pl__lb[data-em-stage="3"],
+  .em-pl--story[data-em-step="4"] .em-pl__map .em-pl__lb[data-em-stage="4"]{fill:var(--white)}
+}
 
 @media (max-width:900px){
   .em-pl__grid{grid-template-columns:minmax(0,1fr);grid-template-areas:"head" "map" "steps";grid-template-rows:auto;gap:24px}

@@ -89,6 +89,7 @@
   --bg-dots:radial-gradient(var(--line-on-dark-2) 1px,transparent 1.5px);
   --dots-size:22px;
   --pl-map-max:500px;        /* حداکثر ارتفاع نقشه خط تولید در دسکتاپ */
+  --pl-step-scroll:70vh;     /* مقدار اسکرول برای هر مرحله در روایت اسکرولی خط تولید */
 
   /* صفحه اصلی (Industrial.dc.html و MobileHome.dc.html) */
   --white-a55:rgba(255,255,255,.55);
