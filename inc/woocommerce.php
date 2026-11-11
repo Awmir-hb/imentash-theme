@@ -163,7 +163,7 @@ function ementash_wc_current_orderby() {
 /* ---------- کلاس آتش (ویژگی سراسری pa_fire_class) ---------- */
 
 /**
- * ساخت ویژگی «کلاس آتش» با مقادیر A تا D، فقط اگر وجود نداشته باشد (هنگام فعال‌سازی قالب).
+ * ساخت ویژگی «کلاس آتش» با مقادیر A تا D و K، فقط اگر وجود نداشته باشد (هنگام فعال‌سازی قالب).
  * برچسب هر کلاس (جامدات، مایعات...) توضیح همان مقدار است و در پیشخوان قابل ویرایش است.
  */
 function ementash_wc_ensure_fire_class() {
@@ -192,6 +192,7 @@ function ementash_wc_ensure_fire_class() {
 		'B' => __( 'مایعات', 'ementash' ),
 		'C' => __( 'گازها', 'ementash' ),
 		'D' => __( 'فلزات', 'ementash' ),
+		'K' => __( 'روغن آشپزخانه', 'ementash' ),
 	);
 	foreach ( $classes as $name => $label ) {
 		if ( ! term_exists( strtolower( $name ), 'pa_fire_class' ) ) {

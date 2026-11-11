@@ -12,6 +12,8 @@ $ementash_items = (array) ementash_meta( $ementash_page, 'about_rd_items' );
 $ementash_title = (string) ementash_meta( $ementash_page, 'about_rd_title' );
 $ementash_text  = (string) ementash_meta( $ementash_page, 'about_rd_text' );
 $ementash_image = absint( ementash_meta( $ementash_page, 'about_rd_image' ) );
+$ementash_label = (string) ementash_meta( $ementash_page, 'about_rd_link_label' );
+$ementash_url   = (string) ementash_meta( $ementash_page, 'about_rd_link_url' );
 if ( ! $ementash_items && '' === $ementash_text ) {
 	return;
 }
@@ -52,6 +54,9 @@ if ( ! $ementash_items && '' === $ementash_text ) {
 						</li>
 					<?php endforeach; ?>
 				</ul>
+			<?php endif; ?>
+			<?php if ( '' !== $ementash_label && '' !== $ementash_url ) : ?>
+				<p class="em-rd__more"><a class="em-link" href="<?php echo esc_url( $ementash_url ); ?>"><?php echo ementash_bdi( $ementash_label ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></a></p>
 			<?php endif; ?>
 		</div>
 	</div>

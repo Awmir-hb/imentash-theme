@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-11T08:46:52+00:00\n"
+"POT-Creation-Date: 2026-11-11T09:08:50+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: ementash\n"
@@ -51,7 +51,7 @@ msgstr ""
 #: 404.php:42
 #: inc/blog.php:177
 #: inc/template-tags.php:386
-#: inc/woocommerce.php:260
+#: inc/woocommerce.php:261
 #: search.php:47
 msgid "صفحه اصلی"
 msgstr ""
@@ -286,7 +286,7 @@ msgid "درخواست‌های تماس"
 msgstr ""
 
 #: inc/cpt.php:114
-#: inc/metaboxes.php:360
+#: inc/metaboxes.php:377
 msgid "جزئیات درخواست"
 msgstr ""
 
@@ -381,7 +381,7 @@ msgstr ""
 #: inc/cpt.php:258
 #: inc/customizer.php:219
 #: inc/metaboxes.php:173
-#: inc/metaboxes.php:219
+#: inc/metaboxes.php:236
 msgid "عنوان"
 msgstr ""
 
@@ -414,7 +414,7 @@ msgstr ""
 
 #: inc/customizer.php:25
 #: inc/customizer.php:593
-#: inc/woocommerce.php:265
+#: inc/woocommerce.php:266
 #: search.php:66
 #: template-parts/site-footer.php:76
 msgid "محصولات"
@@ -592,7 +592,7 @@ msgstr ""
 #: inc/customizer.php:183
 #: inc/metaboxes.php:27
 #: inc/metaboxes.php:177
-#: inc/metaboxes.php:227
+#: inc/metaboxes.php:244
 msgid "آیکون"
 msgstr ""
 
@@ -652,7 +652,7 @@ msgstr ""
 #: inc/customizer.php:622
 #: inc/customizer.php:666
 #: inc/metaboxes.php:59
-#: inc/metaboxes.php:223
+#: inc/metaboxes.php:240
 msgid "متن"
 msgstr ""
 
@@ -1444,97 +1444,117 @@ msgid "مواد شیمیایی صنایع نفت"
 msgstr ""
 
 #: inc/metaboxes.php:210
-msgid "تیتر مشتری‌مداری"
+msgid "متن لینک زیر تحقیق و توسعه"
 msgstr ""
 
 #: inc/metaboxes.php:211
+msgid "مثلاً «خدمات آزمایشگاهی». اگر متن یا آدرس خالی باشد نمایش داده نمی‌شود."
+msgstr ""
+
+#: inc/metaboxes.php:216
+msgid "آدرس لینک زیر تحقیق و توسعه"
+msgstr ""
+
+#: inc/metaboxes.php:221
+msgid "تیتر ارزش‌ها"
+msgstr ""
+
+#: inc/metaboxes.php:222
 msgid "مشتری‌مداری"
 msgstr ""
 
-#: inc/metaboxes.php:215
-msgid "کارت‌های مشتری‌مداری"
+#: inc/metaboxes.php:226
+msgid "متن زیر تیتر ارزش‌ها (مثلاً مأموریت شرکت)"
 msgstr ""
 
-#: inc/metaboxes.php:233
+#: inc/metaboxes.php:227
+msgid "اگر خالی باشد نمایش داده نمی‌شود. با یک خط خالی پاراگراف جدید شروع می‌شود."
+msgstr ""
+
+#: inc/metaboxes.php:232
+msgid "کارت‌های ارزش‌ها"
+msgstr ""
+
+#: inc/metaboxes.php:250
 msgid "تعامل و گفتگو"
 msgstr ""
 
-#: inc/metaboxes.php:234
+#: inc/metaboxes.php:251
 msgid "گفتگوی مستمر با مشتریان برای شناخت دقیق نیازهای آن‌ها."
 msgstr ""
 
-#: inc/metaboxes.php:238
+#: inc/metaboxes.php:255
 msgid "رسیدگی شفاف"
 msgstr ""
 
-#: inc/metaboxes.php:239
+#: inc/metaboxes.php:256
 msgid "فرایند روشن برای رسیدگی به درخواست‌ها و شکایات."
 msgstr ""
 
-#: inc/metaboxes.php:243
+#: inc/metaboxes.php:260
 msgid "رفتار منصفانه"
 msgstr ""
 
-#: inc/metaboxes.php:244
+#: inc/metaboxes.php:261
 msgid "برخورد برابر و منصفانه با همه مشتریان."
 msgstr ""
 
-#: inc/metaboxes.php:248
+#: inc/metaboxes.php:265
 msgid "حفظ اطلاعات مشتری"
 msgstr ""
 
-#: inc/metaboxes.php:249
+#: inc/metaboxes.php:266
 msgid "محرمانه ماندن اطلاعات مشتری به‌عنوان یک اصل اخلاقی."
 msgstr ""
 
-#: inc/metaboxes.php:457
-#: inc/metaboxes.php:462
+#: inc/metaboxes.php:474
+#: inc/metaboxes.php:479
 msgid "انتخاب فایل"
 msgstr ""
 
-#: inc/metaboxes.php:458
+#: inc/metaboxes.php:475
 msgid "استفاده از این فایل"
 msgstr ""
 
-#: inc/metaboxes.php:461
-#: inc/metaboxes.php:466
+#: inc/metaboxes.php:478
+#: inc/metaboxes.php:483
 msgid "فایلی انتخاب نشده است."
 msgstr ""
 
-#: inc/metaboxes.php:467
-#: inc/metaboxes.php:520
+#: inc/metaboxes.php:484
+#: inc/metaboxes.php:537
 msgid "حذف"
 msgstr ""
 
-#: inc/metaboxes.php:501
+#: inc/metaboxes.php:518
 msgid "افزودن ردیف"
 msgstr ""
 
-#: inc/metaboxes.php:518
+#: inc/metaboxes.php:535
 msgid "انتقال به بالا"
 msgstr ""
 
-#: inc/metaboxes.php:518
+#: inc/metaboxes.php:535
 msgid "بالا"
 msgstr ""
 
-#: inc/metaboxes.php:519
+#: inc/metaboxes.php:536
 msgid "انتقال به پایین"
 msgstr ""
 
-#: inc/metaboxes.php:519
+#: inc/metaboxes.php:536
 msgid "پایین"
 msgstr ""
 
-#: inc/metaboxes.php:613
+#: inc/metaboxes.php:630
 msgid "ارسال شد"
 msgstr ""
 
-#: inc/metaboxes.php:613
+#: inc/metaboxes.php:630
 msgid "ارسال نشد (درخواست ذخیره شده است)"
 msgstr ""
 
-#: inc/metaboxes.php:623
+#: inc/metaboxes.php:640
 msgid "تاریخ ارسال"
 msgstr ""
 
@@ -1648,6 +1668,10 @@ msgstr ""
 
 #: inc/woocommerce.php:194
 msgid "فلزات"
+msgstr ""
+
+#: inc/woocommerce.php:195
+msgid "روغن آشپزخانه"
 msgstr ""
 
 #. translators: %s: عبارت جستجو

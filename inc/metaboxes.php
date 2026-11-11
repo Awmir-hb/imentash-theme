@@ -205,14 +205,31 @@ function ementash_meta_boxes() {
 						),
 					),
 				),
+				'about_rd_link_label'  => array(
+					'type'        => 'text',
+					'label'       => __( 'متن لینک زیر تحقیق و توسعه', 'ementash' ),
+					'description' => __( 'مثلاً «خدمات آزمایشگاهی». اگر متن یا آدرس خالی باشد نمایش داده نمی‌شود.', 'ementash' ),
+					'default'     => '',
+				),
+				'about_rd_link_url'    => array(
+					'type'    => 'url',
+					'label'   => __( 'آدرس لینک زیر تحقیق و توسعه', 'ementash' ),
+					'default' => '',
+				),
 				'about_values_title'   => array(
 					'type'    => 'text',
-					'label'   => __( 'تیتر مشتری‌مداری', 'ementash' ),
+					'label'   => __( 'تیتر ارزش‌ها', 'ementash' ),
 					'default' => __( 'مشتری‌مداری', 'ementash' ),
+				),
+				'about_values_text'    => array(
+					'type'        => 'textarea',
+					'label'       => __( 'متن زیر تیتر ارزش‌ها (مثلاً مأموریت شرکت)', 'ementash' ),
+					'description' => __( 'اگر خالی باشد نمایش داده نمی‌شود. با یک خط خالی پاراگراف جدید شروع می‌شود.', 'ementash' ),
+					'default'     => '',
 				),
 				'about_values_items'   => array(
 					'type'    => 'repeater',
-					'label'   => __( 'کارت‌های مشتری‌مداری', 'ementash' ),
+					'label'   => __( 'کارت‌های ارزش‌ها', 'ementash' ),
 					'fields'  => array(
 						'title' => array(
 							'type'  => 'text',
