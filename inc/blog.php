@@ -159,6 +159,34 @@ function ementash_blog_title() {
 }
 
 /**
+ * تاریخ شمسی برای زبان فارسی (مثل «۱۶ اردیبهشت ۱۴۰۵»)، با تقویم persian افزونه intl.
+ * فقط قالب پیش‌فرض تاریخ عوض می‌شود؛ قالب‌های صریح مثل 'c' (برای datetime) میلادی می‌مانند.
+ * بدون intl یا در زبان دیگر (نسخه انگلیسی Polylang) همان تاریخ وردپرس برمی‌گردد.
+ */
+function ementash_jalali_date( $the_date, $format, $post ) {
+	if ( '' !== $format || ! class_exists( 'IntlDateFormatter' ) || 0 !== strpos( determine_locale(), 'fa' ) ) {
+		return $the_date;
+	}
+	$timestamp = get_post_timestamp( $post );
+	if ( ! $timestamp ) {
+		return $the_date;
+	}
+	// منطقه زمانی عددی وردپرس (مثل +03:30) برای ICU باید GMT+03:30 باشد.
+	$tz = wp_timezone_string();
+	if ( '+' === $tz[0] || '-' === $tz[0] ) {
+		$tz = 'GMT' . $tz;
+	}
+	try {
+		$formatter = new IntlDateFormatter( 'fa_IR@calendar=persian', IntlDateFormatter::NONE, IntlDateFormatter::NONE, $tz, IntlDateFormatter::TRADITIONAL, 'd MMMM y' );
+		$out       = $formatter->format( $timestamp );
+	} catch ( Exception $e ) {
+		$out = false;
+	}
+	return false === $out ? $the_date : $out;
+}
+add_filter( 'get_the_date', 'ementash_jalali_date', 10, 3 );
+
+/**
  * دسته اصلی نوشته (اولین دسته).
  *
  * @return WP_Term|null
@@ -287,3 +315,128 @@ function ementash_blog_assets() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'ementash_blog_assets' );
+
+/* ---------- محصولات مرتبط با مقاله ----------
+   هر مقاله در کادر «محصولات مرتبط» صفحه ویرایشش چند محصول را تیک می‌زند (متای آرایه‌ای
+   _ementash_products). زیر متن مقاله کارت همان محصولات با دکمه استعلام قیمت می‌آید. */
+
+/**
+ * بیشترین تعداد کارت محصول زیر مقاله.
+ */
+function ementash_post_products_limit() {
+	return 3;
+}
+
+/**
+ * محصولات منتشرشده و قابل نمایش انتخاب‌شده برای مقاله، به ترتیب انتخاب.
+ *
+ * @return WP_Post[]
+ */
+function ementash_post_products( $post_id ) {
+	$ids = array_filter( array_map( 'absint', (array) get_post_meta( $post_id, '_ementash_products', true ) ) );
+	if ( ! $ids || ! post_type_exists( 'product' ) ) {
+		return array();
+	}
+	$args = array(
+		'post_type'      => 'product',
+		'post_status'    => 'publish',
+		'post__in'       => $ids,
+		'orderby'        => 'post__in',
+		'posts_per_page' => ementash_post_products_limit(),
+		'no_found_rows'  => true,
+	);
+	if ( function_exists( 'wc_get_product_visibility_term_ids' ) ) {
+		$hidden            = wc_get_product_visibility_term_ids();
+		$args['tax_query'] = array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
+			array(
+				'taxonomy' => 'product_visibility',
+				'field'    => 'term_taxonomy_id',
+				'terms'    => array( $hidden['exclude-from-catalog'] ),
+				'operator' => 'NOT IN',
+			),
+		);
+	}
+	return get_posts( $args );
+}
+
+function ementash_post_products_add_meta_box() {
+	if ( post_type_exists( 'product' ) ) {
+		add_meta_box( 'ementash-post-products', __( 'محصولات مرتبط', 'ementash' ), 'ementash_post_products_render_meta_box', 'post', 'side', 'default' );
+	}
+}
+add_action( 'add_meta_boxes_post', 'ementash_post_products_add_meta_box' );
+
+/**
+ * فهرست تیک‌دار همه محصولات، گروه‌بندی‌شده با دسته سطح اول.
+ */
+function ementash_post_products_render_meta_box( $post ) {
+	wp_nonce_field( 'ementash_post_products', 'ementash_post_products_nonce' );
+	$selected = array_map( 'absint', (array) get_post_meta( $post->ID, '_ementash_products', true ) );
+	$products = get_posts(
+		array(
+			'post_type'      => 'product',
+			'post_status'    => array( 'publish', 'draft', 'pending', 'private' ),
+			'posts_per_page' => -1,
+			'orderby'        => 'title',
+			'order'          => 'ASC',
+		)
+	);
+	if ( ! $products ) {
+		echo '<p class="description">' . esc_html__( 'هنوز محصولی ثبت نشده است.', 'ementash' ) . '</p>';
+		return;
+	}
+
+	$groups = array();
+	foreach ( $products as $product ) {
+		$cat = function_exists( 'ementash_product_main_cat' ) ? ementash_product_main_cat( $product->ID ) : null;
+		if ( $cat && $cat->parent ) {
+			$top = get_ancestors( $cat->term_id, 'product_cat', 'taxonomy' );
+			$cat = get_term( (int) end( $top ), 'product_cat' );
+		}
+		$groups[ $cat && ! is_wp_error( $cat ) ? $cat->name : '' ][] = $product;
+	}
+	ksort( $groups );
+
+	echo '<ul class="em-mb__checks">';
+	foreach ( $groups as $name => $items ) {
+		if ( '' !== $name ) {
+			echo '<li class="em-mb__group">' . esc_html( $name ) . '</li>';
+		}
+		foreach ( $items as $product ) {
+			printf(
+				'<li><label><input type="checkbox" name="ementash_post_products[]" value="%1$d"%2$s> %3$s</label></li>',
+				(int) $product->ID,
+				checked( in_array( (int) $product->ID, $selected, true ), true, false ),
+				esc_html( get_the_title( $product ) )
+			);
+		}
+	}
+	echo '</ul>';
+	/* translators: %s: بیشترین تعداد کارت */
+	echo '<p class="description">' . esc_html( sprintf( __( 'کارت این محصولات با دکمه استعلام قیمت زیر مقاله می‌آید (حداکثر %s محصول).', 'ementash' ), ementash_fa_num( ementash_post_products_limit() ) ) ) . '</p>';
+}
+
+function ementash_post_products_save( $post_id ) {
+	if ( ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) || wp_is_post_autosave( $post_id ) || wp_is_post_revision( $post_id ) ) {
+		return;
+	}
+	$nonce = isset( $_POST['ementash_post_products_nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['ementash_post_products_nonce'] ) ) : '';
+	if ( ! $nonce || ! wp_verify_nonce( $nonce, 'ementash_post_products' ) || ! current_user_can( 'edit_post', $post_id ) ) {
+		return;
+	}
+	$posted = isset( $_POST['ementash_post_products'] ) ? array_map( 'absint', (array) wp_unslash( $_POST['ementash_post_products'] ) ) : array();
+	$valid  = array_values(
+		array_filter(
+			array_unique( $posted ),
+			function ( $id ) {
+				return 'product' === get_post_type( $id );
+			}
+		)
+	);
+	if ( $valid ) {
+		update_post_meta( $post_id, '_ementash_products', $valid );
+	} else {
+		delete_post_meta( $post_id, '_ementash_products' );
+	}
+}
+add_action( 'save_post_post', 'ementash_post_products_save' );

@@ -1,6 +1,6 @@
 <?php
 /**
- * صفحه اصلی: چهار نوشته آخر وبلاگ (کارت‌های هم‌اندازه با عکس ۴:۳). موبایل: اسلایدر افقی.
+ * صفحه اصلی: چهار نوشته آخر وبلاگ که تصویر شاخص دارند (کارت‌های هم‌اندازه با عکس ۴:۳). موبایل: اسلایدر افقی.
  *
  * @package ementash
  */
@@ -15,6 +15,13 @@ $ementash_posts = get_posts(
 		'ignore_sticky_posts' => true,
 		'no_found_rows'       => true,
 		'suppress_filters'    => false,
+		// فقط نوشته‌های دارای تصویر شاخص، تا کارت بی‌عکس در صفحه اصلی نیاید.
+		'meta_query'          => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+			array(
+				'key'     => '_thumbnail_id',
+				'compare' => 'EXISTS',
+			),
+		),
 	)
 );
 if ( ! $ementash_posts ) {

@@ -33,6 +33,8 @@ if ( 'post' === $ementash_post->post_type ) {
 		<span class="em-post__img">
 			<?php
 			if ( has_post_thumbnail( $ementash_post ) ) {
+				// ته‌رنگ سرمه‌ای: عکس مقاله‌ها ممکن است آتش یا رنگ تند داشته باشند (قانون .em-duo).
+				echo '<span class="em-duo">';
 				echo get_the_post_thumbnail(
 					$ementash_post,
 					'ementash-card',
@@ -42,6 +44,7 @@ if ( 'post' === $ementash_post->post_type ) {
 						'sizes'   => $ementash_sizes,
 					)
 				);
+				echo '</span>';
 			} else {
 				echo '<span class="em-ph" aria-hidden="true"></span>';
 			}

@@ -87,7 +87,7 @@ ementash/
     template-tags.php  // توابع کمکی (اعداد فارسی، آیکون‌ها)
   template-parts/  site-header.php  site-footer.php  mobile-menu.php  mobile-bar.php  page-head.php  entry-content.php  loop.php  pagination.php
   template-parts/home/  hero.php about.php honors.php industries.php clients.php services.php banner.php products.php production-line.php gallery.php textile.php blog.php
-  template-parts/blog/  card.php cats.php article.php related.php
+  template-parts/blog/  card.php cats.php article.php products.php related.php
   template-parts/industry/  products.php
   woocommerce/  archive-product.php  single-product.php  content-product.php
   assets/  css/  js/  fonts/  img/  icons/ (SVG خطی)
@@ -128,6 +128,10 @@ ementash/
 - **دیتاشیت ندارد.** دکمه دانلود دیتاشیت نساز.
 
 **وبلاگ**: نوشته‌های بومی وردپرس، کارت‌های هم‌اندازه با نسبت 4/3.
+- عکس کارت‌ها و عکس بالای مقاله داخل `.em-duo` (ممکن است آتش داشته باشند). صفحه اصلی فقط مقاله‌های دارای تصویر شاخص.
+- تاریخ شمسی با فیلتر `get_the_date` و intl (فقط قالب پیش‌فرض تاریخ، فقط زبان فارسی).
+- دسته‌ها: داده اولیه `dev/seed-post-categories.php` (سایت قدیمی دسته نداشت).
+- **محصولات مرتبط مقاله** = کادر «محصولات مرتبط» در ویرایش نوشته (متای آرایه‌ای `_ementash_products`)؛ تا ۳ کارت زیر متن با دکمه استعلام قیمت (`template-parts/blog/products.php`). داده اولیه: `dev/seed-post-products.php`.
 
 ## سازگاری با المنتور (Elementor و Elementor Pro)
 - **Theme Builder:** locationهای اصلی (`header`، `footer`، `single`، `archive`) در `inc/elementor.php` ثبت می‌شوند. هر قالب اول `elementor_theme_do_location()` را صدا می‌زند (از طریق `ementash_elementor_location()`). فقط اگر Theme Builder آن location را نگرفته بود، خروجی خود قالب چاپ شود:

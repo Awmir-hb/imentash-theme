@@ -682,7 +682,7 @@ function ementash_admin_assets( $hook ) {
 		return;
 	}
 	$screen = get_current_screen();
-	if ( ! $screen || ! in_array( $screen->post_type, array_merge( wp_list_pluck( ementash_meta_boxes(), 'screen' ), array( 'em_inquiry' ) ), true ) ) {
+	if ( ! $screen || ! in_array( $screen->post_type, array_merge( wp_list_pluck( ementash_meta_boxes(), 'screen' ), array( 'em_inquiry', 'post' ) ), true ) ) {
 		return;
 	}
 

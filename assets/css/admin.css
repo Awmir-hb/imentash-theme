@@ -68,3 +68,6 @@
 /* کادر «مناسب برای این صنایع» در صفحه ویرایش محصول */
 .em-mb__checks{max-height:260px;overflow:auto;margin:0;padding:0;list-style:none}
 .em-mb__checks li{margin:0 0 6px}
+/* عنوان گروه در کادر «محصولات مرتبط» مقاله */
+.em-mb__checks .em-mb__group{margin:12px 0 6px;font-weight:600}
+.em-mb__checks .em-mb__group:first-child{margin-top:0}

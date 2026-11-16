@@ -12,7 +12,7 @@ $ementash_tags = get_the_tags();
 <article <?php post_class( 'em-section em-article' ); ?>>
 	<div class="em-container">
 		<?php if ( has_post_thumbnail() ) : ?>
-			<figure class="em-article__img">
+			<figure class="em-article__img em-duo em-duo--flow">
 				<?php
 				// alt از کتابخانه رسانه؛ width/height خود وردپرس جای عکس را از قبل نگه می‌دارد.
 				the_post_thumbnail(

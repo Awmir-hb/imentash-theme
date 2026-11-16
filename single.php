@@ -1,7 +1,7 @@
 <?php
 /**
  * نوشته تکی. location «single» المنتور اولویت دارد؛ نوشته ساخته‌شده با المنتور فقط محتوای خودش را دارد.
- * نوشته وبلاگ: سربرگ با تاریخ و دسته، ستون خواندن، برچسب‌ها و نوشته‌های مرتبط. بقیه نوع‌ها (مثل پیوست): سربرگ و محتوا.
+ * نوشته وبلاگ: سربرگ با تاریخ و دسته، ستون خواندن، برچسب‌ها، محصولات مرتبط و نوشته‌های مرتبط. بقیه نوع‌ها (مثل پیوست): سربرگ و محتوا.
  *
  * @package ementash
  */
@@ -49,6 +49,7 @@ if ( ! ementash_elementor_location( 'single' ) ) {
 			)
 		);
 		get_template_part( 'template-parts/blog/article' );
+		get_template_part( 'template-parts/blog/products' );
 		get_template_part( 'template-parts/blog/related' );
 	}
 }
