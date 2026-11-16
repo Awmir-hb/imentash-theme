@@ -33,7 +33,7 @@ $ementash_sku = $product->get_sku();
 					)
 				);
 			} else {
-				echo '<span class="em-ph" aria-hidden="true"></span>';
+				echo ementash_product_placeholder( $product->get_id(), 'ementash-card', array( 'sizes' => '(max-width: 560px) 100vw, (max-width: 1000px) 50vw, 340px' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- عکس دسته یا آیکون SVG فیلترشده.
 			}
 			?>
 		</span>

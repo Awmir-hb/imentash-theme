@@ -3,7 +3,8 @@
  * سربرگ سرمه‌ای صفحات داخلی: مسیر صفحه، تیتر و توضیح کوتاه.
  *
  * $args: title (string)، desc (string، اختیاری)، crumbs (آرایه‌ای از label/url، اختیاری)،
- *        meta (آرایه‌ای از text و datetime اختیاری؛ مثل تاریخ و دسته نوشته، اختیاری).
+ *        meta (آرایه‌ای از text و datetime اختیاری؛ مثل تاریخ و دسته نوشته، اختیاری)،
+ *        photo (bool، پیش‌فرض true: عکس سربرگ Customizer اگر انتخاب شده باشد).
  *
  * @package ementash
  */
@@ -14,8 +15,14 @@ $ementash_title  = isset( $args['title'] ) ? (string) $args['title'] : '';
 $ementash_desc   = isset( $args['desc'] ) ? (string) $args['desc'] : '';
 $ementash_crumbs = isset( $args['crumbs'] ) && is_array( $args['crumbs'] ) ? $args['crumbs'] : array();
 $ementash_meta   = isset( $args['meta'] ) && is_array( $args['meta'] ) ? array_filter( $args['meta'], static fn( $m ) => ! empty( $m['text'] ) ) : array();
+// photo => false: سربرگ پس‌زمینه خودش را دارد (مثل ویدئوی سربرگ درباره ما) و عکس عمومی نمی‌خواهد.
+$ementash_photo  = ! isset( $args['photo'] ) || $args['photo'] ? absint( ementash_get( 'pagehead_image' ) ) : 0;
 ?>
-<section class="em-pagehead">
+<section class="em-pagehead<?php echo $ementash_photo ? ' em-pagehead--photo' . ( ementash_get( 'pagehead_flip' ) ? ' em-pagehead--flip' : '' ) : ''; ?>">
+	<?php if ( $ementash_photo ) : ?>
+		<?php // بالای صفحه است؛ lazy نمی‌شود. ?>
+		<div class="em-duo" aria-hidden="true"><?php echo wp_get_attachment_image( $ementash_photo, 'full', false, array( 'alt' => '', 'sizes' => '100vw', 'loading' => 'eager', 'decoding' => 'async' ) ); ?></div>
+	<?php endif; ?>
 	<div class="em-pagehead__in">
 		<?php if ( $ementash_crumbs ) : ?>
 			<nav class="em-crumbs" aria-label="<?php esc_attr_e( 'مسیر صفحه', 'ementash' ); ?>">

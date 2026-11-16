@@ -194,6 +194,9 @@ class Ementash_Widget_Clients extends Ementash_Section_Widget {
 class Ementash_Widget_Services extends Ementash_Section_Widget {
 	protected $section = 'services';
 }
+class Ementash_Widget_Banner extends Ementash_Section_Widget {
+	protected $section = 'banner';
+}
 class Ementash_Widget_Products extends Ementash_Section_Widget {
 	protected $section = 'products';
 }
@@ -222,6 +225,7 @@ function ementash_widget_classes() {
 		'industries'      => 'Ementash_Widget_Industries',
 		'clients'         => 'Ementash_Widget_Clients',
 		'services'        => 'Ementash_Widget_Services',
+		'banner'          => 'Ementash_Widget_Banner',
 		'products'        => 'Ementash_Widget_Products',
 		'production-line' => 'Ementash_Widget_Production_Line',
 		'gallery'         => 'Ementash_Widget_Gallery',

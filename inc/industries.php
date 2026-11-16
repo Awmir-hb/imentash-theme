@@ -42,14 +42,16 @@ function ementash_industry_pages() {
 /**
  * محصولات منتشرشده و قابل نمایش در فهرست که برای این صنعت تیک خورده‌اند.
  *
- * @return WP_Post[]
+ * @param string $fields '' برای پست کامل، 'ids' فقط شناسه‌ها (برای شمارش).
+ * @return WP_Post[]|int[]
  */
-function ementash_industry_products( $page_id ) {
+function ementash_industry_products( $page_id, $fields = '' ) {
 	$page_id = absint( $page_id );
 	if ( ! $page_id || ! post_type_exists( 'product' ) ) {
 		return array();
 	}
 	$args = array(
+		'fields'         => $fields,
 		'post_type'      => 'product',
 		'post_status'    => 'publish',
 		'posts_per_page' => -1,
@@ -78,6 +80,17 @@ function ementash_industry_products( $page_id ) {
 		);
 	}
 	return get_posts( $args );
+}
+
+/**
+ * تعداد محصولات یک برگه صنعت؛ برای کارت‌های صنایع صفحه اصلی. ورودی آدرس یا شناسه برگه.
+ */
+function ementash_industry_product_count( $page ) {
+	$page_id = is_numeric( $page ) ? absint( $page ) : url_to_postid( (string) $page );
+	if ( ! $page_id || 'page' !== get_post_type( $page_id ) ) {
+		return 0;
+	}
+	return count( ementash_industry_products( $page_id, 'ids' ) );
 }
 
 /* ---------- کادر «مناسب برای این صنایع» در صفحه ویرایش محصول ---------- */

@@ -3,53 +3,71 @@
    هم‌خانواده نوار مشتریان، روی زمینه سرمه‌ای. توکن‌ها در :root فایل main.css.
    ========================================================= */
 
-.em-honors{background-color:var(--navy-900);color:var(--white)}
+.em-honors{padding-block:var(--honors-y);background-color:var(--navy-900);color:var(--white)}
+.em-honors .em-head{margin-bottom:var(--honors-head-gap)}
 .em-honors .em-head__text{color:var(--on-dark-2)}
 
-/* دکمه‌ها مثل فلش کارت خدمات */
-.em-honors__nav{display:flex;gap:10px}
-.em-honors__nav[hidden]{display:none}
-.em-honors__btn{width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;padding:0;border:1px solid var(--white-a55);border-radius:50%;background:transparent;color:var(--white);font:inherit;cursor:pointer;transition:background-color .25s ease,color .25s ease,opacity .25s ease}
-.em-honors__btn:hover{background:var(--white);color:var(--navy-900)}
-.em-honors__btn[aria-disabled="true"]{opacity:.35;cursor:default}
-.em-honors__btn[aria-disabled="true"]:hover{background:transparent;color:var(--white)}
-.em-honors__btn[hidden]{display:none}
-.em-honors__btn svg{width:18px;height:18px}
-.em-honors__prev svg{transform:scaleX(-1)}
-.em-honors__ic-play,.em-honors__pause[data-em-paused] .em-honors__ic-pause{display:none}
-.em-honors__pause[data-em-paused] .em-honors__ic-play{display:block}
+/* نوار پیوسته تمام‌عرض: دو نسخه فهرست پشت هم، به اندازه یک نسخه جابه‌جا و تکرار.
+   سرعت با تعداد افتخارات (--em-honors-n از قالب) تنظیم می‌شود تا هر کارت همان مدت در دید بماند. */
+@keyframes em-honors-loop{from{transform:translateX(0)}to{transform:translateX(50%)}}
+.em-honors__view{overflow:hidden;padding-block:6px;-webkit-mask-image:var(--mask-edges);mask-image:var(--mask-edges)}
+.em-honors__track{display:flex;width:max-content;animation:em-honors-loop calc(var(--em-honors-n, 10) * var(--honor-loop-step)) linear infinite}
+.em-honors__view:hover .em-honors__track,.em-honors__view:focus-within .em-honors__track{animation-play-state:paused}
+/* فاصله انتهای هر نسخه = فاصله کارت‌ها، تا محل اتصال دو نسخه دیده نشود */
+.em-honors__list{display:flex;gap:var(--honor-gap);list-style:none;margin:0;padding:0;padding-inline-end:var(--honor-gap)}
 
-/* ناحیه اسکرول: کشیدن با لمس و توقف روی هر کارت */
-.em-honors__view{overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none;border-radius:var(--radius-card)}
-.em-honors__view::-webkit-scrollbar{display:none}
-.em-honors__list{display:flex;gap:var(--honor-gap);list-style:none;margin:0;padding:0}
+.em-honor{flex:0 0 var(--honor-w);min-width:0;display:flex;flex-direction:column;align-items:center;padding:14px 12px 14px;border:1px solid var(--line-on-dark-1);border-radius:var(--radius-card);background:var(--honor-card);text-align:center;transition:border-color .4s ease}
+.em-honor:hover{border-color:var(--line-on-dark-4)}
 
-/* تعداد کارت در دید: ۵، ۴، ۳ و در موبایل یکی و نیم */
-.em-honor{--per-view:5;flex:0 0 calc((100% - (var(--per-view) - 1) * var(--honor-gap)) / var(--per-view));min-width:0;display:flex;flex-direction:column;align-items:center;padding:20px 18px 18px;border:1px solid var(--line-on-dark-3);border-radius:var(--radius-card);background:var(--white-a04);text-align:center;scroll-snap-align:start}
-.em-honor__img{width:100%;height:var(--honor-img-h);margin-bottom:16px}
+/* ویترین: باریکه نور از بالا، هاله پشت تندیس و سایه بیضی پایه */
+.em-honor__stage{position:relative;display:flex;align-items:flex-end;justify-content:center;width:100%;height:var(--honor-img-h);margin-bottom:14px;border-radius:var(--radius-sm);background:var(--honor-beam);color:var(--white)}
+.em-honor__stage::before{content:"";position:absolute;inset:6% 4% 4%;background:var(--honor-spot);opacity:.75;transition:opacity .5s ease,transform .5s var(--ease-out)}
+.em-honor__stage::after{content:"";position:absolute;inset:auto 18% -8px;height:16px;background:var(--honor-base)}
 /* تندیس با پس‌زمینه شفاف: کامل دیده شود، بدون برش */
-.em-honor__img img{display:block;width:100%;height:100%;object-fit:contain}
-.em-honor__title{margin:auto 0 4px;font-family:var(--font-head);font-weight:600;font-size:17px;line-height:1.5;color:var(--white)}
-.em-honor__year{margin:0;color:var(--blue-light);font-size:var(--fs-sm);font-weight:600}
-/* بدون تصویر: کارت متنی ساده با همان ارتفاع */
-.em-honor--text{justify-content:center;min-height:calc(var(--honor-img-h) + 110px)}
-.em-honor--text .em-honor__title{margin-top:0}
+.em-honor__img{position:relative;z-index:1;display:block;width:100%;height:100%;object-fit:contain;object-position:50% 100%;filter:drop-shadow(var(--honor-shadow));transition:transform .6s var(--ease-out)}
+a.em-honor__stage:hover .em-honor__img,a.em-honor__stage:focus-visible .em-honor__img{transform:translateY(-8px) scale(1.04)}
+a.em-honor__stage:hover::before,a.em-honor__stage:focus-visible::before{opacity:1;transform:scale(1.08)}
+a.em-honor__stage:focus-visible{outline-color:var(--blue-light)}
+/* رنگ لینک سراسری روی هاور آبی است؛ اینجا آیکون ذره‌بین سفید می‌ماند */
+a.em-honor__stage,a.em-honor__stage:hover,a.em-honor__stage:focus-visible{color:var(--white)}
+/* نشانه بزرگ‌نمایی گوشه ویترین */
+.em-honor__zoom{position:absolute;z-index:2;top:8px;inset-inline-end:8px;width:30px;height:30px;padding:7px;border:1px solid var(--white-a35);border-radius:50%;background:var(--navy-a25);opacity:0;transition:opacity .3s ease}
+a.em-honor__stage:hover .em-honor__zoom,a.em-honor__stage:focus-visible .em-honor__zoom{opacity:1}
+@media (hover:none){
+  .em-honor__zoom{opacity:.8}
+}
+/* بدون عکس: نشان خطی در همان ویترین */
+.em-honor__stage--emblem{align-items:center}
+.em-honor__emblem{position:relative;z-index:1;width:60px;height:60px;color:var(--blue-light);stroke-width:1}
 
-@media (max-width:1100px){
-  .em-honor{--per-view:4}
-}
-@media (max-width:900px){
-  .em-honor{--per-view:3}
-}
+/* حداکثر دو خط تا کارت‌ها هم‌قد و بی‌جای خالی بمانند؛ عنوان کامل در پنجره بزرگ‌نمایی و برای صفحه‌خوان هست */
+.em-honor__title{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;margin:0 0 2px;font-family:var(--font-head);font-weight:600;font-size:15px;line-height:1.5;color:var(--white)}
+.em-honor__year{margin:0;color:var(--blue-light);font-size:var(--fs-sm);font-weight:600}
+.em-honor__sub{margin:0 0 4px;color:var(--on-dark-4);font-size:var(--fs-xs);line-height:1.6}
+
+/* پنجره عکس بزرگ */
+.em-hzoom{width:min(92vw,880px);max-height:92vh;padding:20px 20px 16px;border:1px solid var(--line-on-dark-3);border-radius:var(--radius-lg);background:var(--navy-900);color:var(--white)}
+.em-hzoom::backdrop{background:var(--hzoom-backdrop)}
+.em-hzoom__img{display:block;width:auto;max-width:100%;height:auto;max-height:72vh;margin:0 auto;object-fit:contain}
+.em-hzoom__caption{margin:12px 0 0;text-align:center;font-family:var(--font-head);font-weight:500;font-size:18px}
+.em-hzoom__close{position:absolute;top:12px;inset-inline-end:12px;z-index:1;width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;padding:0;border:1px solid var(--white-a55);border-radius:50%;background:var(--navy-900);color:var(--white);cursor:pointer}
+.em-hzoom__close:hover{background:var(--white);color:var(--navy-900)}
+.em-hzoom__close svg{width:18px;height:18px}
+.em-hzoom :focus-visible{outline-color:var(--blue-light)}
+
 @media (max-width:767px){
-  .em-honors__head{display:flex;align-items:flex-end}
-  .em-honors__btn{width:40px;height:40px}
-  .em-honors__view{margin:0 calc(var(--gutter) * -1);padding:0 var(--gutter);scroll-padding-inline:var(--gutter);border-radius:0}
-  .em-honor{--per-view:1.5;padding:16px 14px 14px}
-  .em-honor__title{font-size:16px}
+  .em-honor{padding:12px 10px 12px}
+  .em-honor__title{font-size:14px}
+  .em-honor__stage{margin-bottom:12px}
+  .em-hzoom{padding:16px 12px 12px}
+  .em-hzoom__caption{font-size:16px}
 }
 
 @media (prefers-reduced-motion: reduce){
-  .em-honors__view{scroll-behavior:auto}
-  .em-honors__btn{transition:none!important}
+  /* بدون حرکت: نوار ثابت با اسکرول افقی؛ نسخه تکراری پنهان */
+  .em-honors__view{overflow-x:auto;-webkit-mask-image:none;mask-image:none}
+  .em-honors__track{animation:none!important}
+  .em-honors__list[data-em-copy]{display:none}
+  .em-honor,.em-honor__img,.em-honor__stage::before,.em-honor__zoom{transition:none!important}
+  a.em-honor__stage:hover .em-honor__img,a.em-honor__stage:focus-visible .em-honor__img,a.em-honor__stage:hover::before{transform:none}
 }

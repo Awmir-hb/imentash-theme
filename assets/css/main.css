@@ -99,6 +99,7 @@
   /* جای خالی عکس (وقتی هنوز تصویری انتخاب نشده) */
   --ph-bg:linear-gradient(160deg,#22389A 0%,#0B1550 100%);
   --ph-bg-color:#14246E;
+  --ph-icon:120px;          /* اندازه آیکون دسته در جای خالی عکس */
   /* تیره‌کننده‌های هیرو برای خوانایی متن */
   --hero-shade-x:linear-gradient(to left,rgba(8,17,63,.92) 0%,rgba(8,17,63,.6) 42%,rgba(8,17,63,.2) 100%);
   --hero-shade-y:linear-gradient(to top,rgba(8,17,63,.9),rgba(8,17,63,0));
@@ -116,7 +117,9 @@
   --loader-wait:10s;
   /* درباره ما: سربرگ تصویری، نوار آمار روی لبه آن، خط زمانی عمودی و نوار افتخارات */
   --ahero-h:440px;
-  --ahero-overlap:56px;
+  --ahero-stats-bottom:40px;  /* فاصله نوار آمار شیشه‌ای تا لبه پایین سربرگ */
+  --glass-bg:rgba(8,17,63,.45);
+  --glass-edge:linear-gradient(to left,rgba(143,180,255,0),rgba(143,180,255,.6),rgba(143,180,255,0));
   --ahero-shade:linear-gradient(to top,rgba(8,17,63,.95) 0%,rgba(8,17,63,.6) 55%,rgba(8,17,63,.35) 100%);
   /* ویدئوی سربرگ خودش زمینه سرمه‌ای دارد؛ فقط پایین کادر برای خوانایی تیتر تیره می‌شود */
   --ahero-shade-video:linear-gradient(to top,rgba(8,17,63,.9) 0%,rgba(8,17,63,.45) 30%,rgba(8,17,63,0) 60%);
@@ -146,7 +149,21 @@
   /* پنل تصویری دسته محصولات */
   --panel-shade:linear-gradient(to top,rgba(8,17,63,.95) 0%,rgba(8,17,63,.5) 50%,rgba(8,17,63,.05) 100%);
   --white-a04:rgba(255,255,255,.04);
-  --honor-img-h:180px;      /* ارتفاع ثابت تصویر تندیس */
+  --ind-row:240px;          /* ارتفاع هر ردیف شبکه بنتو صنایع */
+  --ind-tint:.3;            /* ته‌رنگ سرمه‌ای روی عکس کارت صنایع */
+  --ind-sat:.75;            /* رنگ عکس کارت صنایع (۱ = کامل)؛ با هاور کامل می‌شود */
+  --honor-img-h:170px;      /* ارتفاع ثابت ویترین تندیس */
+  --honor-w:196px;          /* عرض هر کارت در نوار پیوسته */
+  --honors-y:48px;          /* فاصله بالا و پایین سکشن افتخارات (جمع‌وجورتر از بقیه سکشن‌ها) */
+  --honors-head-gap:20px;   /* فاصله تیتر تا نوار */
+  --honor-loop-step:3.5s;   /* مدت عبور هر کارت؛ سرعت کل نوار = تعداد × این مقدار */
+  /* ویترین افتخارات: نور سرد برند پشت تندیس، سایه بیضی پایه و سایه خود تندیس */
+  --honor-spot:radial-gradient(closest-side,rgba(143,180,255,.34),rgba(143,180,255,.1) 55%,rgba(143,180,255,0));
+  --honor-beam:linear-gradient(to bottom,rgba(220,227,250,.10),rgba(220,227,250,0) 70%);
+  --honor-base:radial-gradient(closest-side,rgba(143,180,255,.45),rgba(143,180,255,0));
+  --honor-shadow:0 14px 18px rgba(0,0,0,.45);
+  --honor-card:linear-gradient(to bottom,rgba(255,255,255,.07),rgba(255,255,255,.015));
+  --hzoom-backdrop:rgba(8,17,63,.85);
   --honor-gap:16px;
   --chip-bg:#DDE5F7;         /* برچسب دسته روی کارت مقاله */
   --gallery-row:220px;
@@ -156,6 +173,30 @@
   --ink-2:#3E4668;
   --shadow-card:0 10px 30px rgba(0,0,127,.12);
   --radius-xl:24px;
+
+  /* طوسی فولادی خنثی: ریتم سکشن‌ها کنار سرمه‌ای (روشن: --section--steel، تیره: --section--graphite) */
+  --steel-50:#F3F4F6;
+  --steel-100:#E7E9ED;
+  --steel-200:#D3D7DE;
+  --steel-500:#5F6672;       /* متن فرعی روی steel-50 (کنتراست AA) */
+  --steel-800:#2A2F37;
+  --steel-900:#1C2027;       /* سکشن تیره گرافیتی */
+  --on-steel:#E6E8EC;        /* متن روشن روی گرافیتی */
+  --on-steel-2:#A9B0BB;
+  --line-on-steel:rgba(255,255,255,.16);
+
+  /* عکس با ته‌رنگ سرمه‌ای: رنگ واقعی عکس دیده می‌شود، فقط کمی خاموش‌تر و هم‌خانواده برند */
+  --duo-dark:var(--navy-900);
+  --duo-gray:0;              /* ۰ = رنگ کامل عکس، ۱ = سیاه‌وسفید */
+  --duo-tint:.12;            /* شدت لایه سرمه‌ای روی کل عکس؛ خوانایی متن با سایه‌های --banner-shade و --pagehead-shade */
+  --duo-contrast:1.05;
+
+  /* بنر تصویری تمام‌عرض صفحه اصلی و سربرگ عکس‌دار صفحات داخلی */
+  --banner-h:560px;
+  --banner-shade:linear-gradient(to left,rgba(8,17,63,.88) 0%,rgba(8,17,63,.55) 45%,rgba(8,17,63,.05) 100%);
+  --banner-parallax:8%;
+  --pagehead-shade:linear-gradient(to left,rgba(8,17,63,.9) 0%,rgba(8,17,63,.55) 45%,rgba(8,17,63,0) 100%);
+  --pagehead-photo-pos:50% 22%;  /* سربرگ کوتاه است؛ کدام بخش عکس دیده شود */
 }
 @media (max-width:767px){
   :root{
@@ -177,7 +218,7 @@
     --loader-x:50%;
     --loader-y:38%;
     --ahero-h:340px;
-    --ahero-overlap:32px;
+    --ahero-stats-bottom:24px;
     --tl-year-fs:30px;
     --tl-dot-y:18px;
     --hitem-w:230px;
@@ -189,8 +230,14 @@
     --svc-shade:linear-gradient(to left,#0B1550 42%,rgba(11,21,80,.7) 62%,rgba(11,21,80,.1) 100%);
     --svc-img-w:55%;
     --clients-gap:32px;
-    --honor-img-h:150px;
+    --honor-img-h:140px;
+    --honor-w:160px;
+    --honors-y:36px;
+    --honors-head-gap:14px;
     --honor-gap:12px;
+    --banner-h:480px;
+    --banner-shade:linear-gradient(to top,rgba(8,17,63,.95) 0%,rgba(8,17,63,.7) 50%,rgba(8,17,63,.2) 100%);
+    --pagehead-shade:linear-gradient(to top,rgba(8,17,63,.95) 0%,rgba(8,17,63,.7) 60%,rgba(8,17,63,.45) 100%);
   }
 }
 
@@ -344,6 +391,13 @@ a:hover{color:var(--blue-hover)}
 }
 .em-pagehead__title:last-child{margin-bottom:0}
 .em-pagehead__desc{margin:0;color:var(--on-dark-2);max-width:620px}
+/* سربرگ با عکس دوتون (Customizer ← برگه‌ها ← عکس سربرگ صفحات داخلی) */
+.em-pagehead--photo{position:relative;overflow:hidden;background-image:none}
+.em-pagehead--photo .em-duo > img{object-position:var(--pagehead-photo-pos)}
+.em-pagehead--flip .em-duo > img{transform:scaleX(-1)}
+.em-pagehead--photo::after{content:"";position:absolute;inset:0;z-index:1;background:var(--pagehead-shade)}
+.em-pagehead--photo .em-pagehead__in{position:relative;z-index:2;padding-block:calc(var(--pagehead-top) + 24px) calc(var(--pagehead-bottom) + 24px)}
+.em-pagehead--photo .em-pagehead__desc{color:var(--on-dark)}
 
 /* ---------- محتوای ویرایشگر ---------- */
 .em-entry > :first-child{margin-top:0}
@@ -453,9 +507,25 @@ a:hover{color:var(--blue-hover)}
 .em-eyebrow::before{content:"";width:28px;height:2px;background:currentColor}
 
 .em-ph{position:absolute;inset:0;background-color:var(--ph-bg-color);background-image:var(--ph-bg)}
+/* جای عکس با آیکون خطی دسته (inc/woocommerce.php → ementash_placeholder) */
+.em-ph--icon{display:flex;align-items:center;justify-content:center;color:var(--blue-light)}
+.em-ph__icon{width:var(--ph-icon);height:var(--ph-icon);max-width:40%;max-height:40%;stroke-width:1;opacity:.85}
 
-/* سکشن با زمینه روشن یکی‌درمیان */
+/* سکشن با زمینه روشن یکی‌درمیان: آبی روشن (soft) یا طوسی فولادی (steel) */
 .em-section--soft{background:var(--bg-soft)}
+.em-section--steel{--muted:var(--steel-500);background:var(--steel-50)}
+/* سکشن تیره گرافیتی */
+.em-section--graphite{--muted:var(--on-steel-2);--line:var(--line-on-steel);background:var(--steel-900);color:var(--on-steel)}
+.em-section--graphite :focus-visible{outline-color:var(--blue-light)}
+
+/* ---------- عکس با ته‌رنگ سرمه‌ای ----------
+   ظرف .em-duo با یک img یا video داخلش. رنگ عکس کمی کم می‌شود (--duo-gray) و یک لایه سرمه‌ای
+   (--duo-tint) رویش می‌نشیند؛ رنگ واقعی (آتش، لباس) دیده می‌شود ولی با برند هم‌خانواده است.
+   فایل اصلی عکس دست نمی‌خورد. */
+.em-duo{position:absolute;inset:0;overflow:hidden;isolation:isolate;background:var(--navy-900)}
+.em-duo > img,.em-duo > video{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;filter:grayscale(var(--duo-gray)) contrast(var(--duo-contrast))}
+/* لایه سرمه‌ای با ترکیب عادی؛ multiply نارنجی آتش را زیتونی می‌کرد */
+.em-duo::after{content:"";position:absolute;inset:0;background:var(--duo-dark);opacity:var(--duo-tint);pointer-events:none}
 
 /* ---------- نقش برند: دایره‌های هم‌مرکز محو ----------
    یک پس‌زمینه برای همه زمینه‌های تیره؛ هر بخش فقط --rings-at (مرکز) و در صورت نیاز --ring-r را عوض می‌کند. */

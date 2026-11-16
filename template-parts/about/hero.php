@@ -63,6 +63,7 @@ if ( $ementash_video ) {
 			'title'  => get_the_title(),
 			'desc'   => ementash_page_subtitle(),
 			'crumbs' => ementash_page_crumbs(),
+			'photo'  => false, // پس‌زمینه این سربرگ انیمیشن لوگو یا تصویر شاخص خود برگه است.
 		)
 	);
 	?>

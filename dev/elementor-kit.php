@@ -33,7 +33,7 @@ $system = array(
 	'text'      => array( 'ink', 'متن (ink)' ),
 	'accent'    => array( 'blue-light', 'آبی روی تیره (blue-light)' ),
 );
-$custom = array( 'navy-800', 'blue-hover', 'bg-soft', 'muted', 'line', 'white', 'on-dark' );
+$custom = array( 'navy-800', 'blue-hover', 'bg-soft', 'muted', 'line', 'white', 'on-dark', 'steel-50', 'steel-200', 'steel-500', 'steel-900' );
 
 $colors = array();
 foreach ( $system as $id => $def ) {

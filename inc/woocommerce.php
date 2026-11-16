@@ -252,6 +252,128 @@ function ementash_product_main_cat( $product_id ) {
 	return $terms[0];
 }
 
+/* ---------- آیکون دسته محصول (جای عکس محصول یا دسته‌ای که عکس ندارد) ---------- */
+
+/**
+ * آیکون یک دسته؛ اگر خودش ندارد از نزدیک‌ترین والد. خالی = بدون آیکون.
+ */
+function ementash_cat_icon( $term_id ) {
+	$term_id = absint( $term_id );
+	$choices = ementash_icon_choices( 'card' );
+	foreach ( array_merge( array( $term_id ), get_ancestors( $term_id, 'product_cat', 'taxonomy' ) ) as $id ) {
+		$icon = (string) get_term_meta( $id, 'ementash_icon', true );
+		if ( isset( $choices[ $icon ] ) ) {
+			return $icon;
+		}
+	}
+	return '';
+}
+
+/**
+ * جای خالی عکس: زمینه سرمه‌ای + آیکون خطی دسته (اگر تعیین شده).
+ *
+ * @param int $term_id دسته محصول یا خود دسته؛ ۰ = بدون آیکون.
+ */
+function ementash_placeholder( $term_id = 0 ) {
+	$icon = $term_id ? ementash_cat_icon( $term_id ) : '';
+	if ( '' === $icon ) {
+		return '<span class="em-ph" aria-hidden="true"></span>';
+	}
+	return '<span class="em-ph em-ph--icon" aria-hidden="true">' . ementash_icon( $icon, 'em-ph__icon' ) . '</span>';
+}
+
+/**
+ * عکس دسته (یا نزدیک‌ترین والدی که عکس دارد)؛ ۰ = هیچ‌کدام.
+ */
+function ementash_cat_image( $term_id ) {
+	$term_id = absint( $term_id );
+	foreach ( array_merge( array( $term_id ), get_ancestors( $term_id, 'product_cat', 'taxonomy' ) ) as $id ) {
+		$image = absint( get_term_meta( $id, 'thumbnail_id', true ) );
+		if ( $image ) {
+			return $image;
+		}
+	}
+	return 0;
+}
+
+/**
+ * جای عکس محصولی که عکس ندارد: عکس دسته‌اش (تصویر بندانگشتی دسته در پیشخوان)،
+ * وگرنه آیکون دسته روی زمینه سرمه‌ای.
+ *
+ * @param string $size سایز ثبت‌شده عکس دسته.
+ * @param array  $attr ویژگی‌های img (sizes، loading و...).
+ */
+function ementash_product_placeholder( $product_id, $size = 'ementash-card', $attr = array() ) {
+	$cat = ementash_product_main_cat( $product_id );
+	if ( ! $cat ) {
+		return ementash_placeholder( 0 );
+	}
+	$image = ementash_cat_image( $cat->term_id );
+	if ( $image ) {
+		return wp_get_attachment_image( $image, $size, false, $attr + array( 'alt' => '', 'loading' => 'lazy' ) );
+	}
+	return ementash_placeholder( $cat->term_id );
+}
+
+/**
+ * فیلد «آیکون» در فرم افزودن و ویرایش دسته محصول.
+ */
+function ementash_cat_icon_field_add() {
+	wp_nonce_field( 'ementash_cat_icon', 'ementash_cat_icon_nonce' );
+	?>
+	<div class="form-field">
+		<label for="ementash_icon"><?php esc_html_e( 'آیکون (وقتی عکس نیست)', 'ementash' ); ?></label>
+		<?php ementash_cat_icon_select( '' ); ?>
+		<p class="description"><?php esc_html_e( 'برای محصولات این دسته که عکس ندارند و خود دسته اگر عکس ندارد. زیردسته‌ها اگر آیکون نداشته باشند از والد می‌گیرند.', 'ementash' ); ?></p>
+	</div>
+	<?php
+}
+add_action( 'product_cat_add_form_fields', 'ementash_cat_icon_field_add', 20 );
+
+function ementash_cat_icon_field_edit( $term ) {
+	?>
+	<tr class="form-field">
+		<th scope="row"><label for="ementash_icon"><?php esc_html_e( 'آیکون (وقتی عکس نیست)', 'ementash' ); ?></label></th>
+		<td>
+			<?php
+			wp_nonce_field( 'ementash_cat_icon', 'ementash_cat_icon_nonce' );
+			ementash_cat_icon_select( (string) get_term_meta( $term->term_id, 'ementash_icon', true ) );
+			?>
+			<p class="description"><?php esc_html_e( 'برای محصولات این دسته که عکس ندارند و خود دسته اگر عکس ندارد. زیردسته‌ها اگر آیکون نداشته باشند از والد می‌گیرند.', 'ementash' ); ?></p>
+		</td>
+	</tr>
+	<?php
+}
+add_action( 'product_cat_edit_form_fields', 'ementash_cat_icon_field_edit', 20 );
+
+function ementash_cat_icon_select( $current ) {
+	?>
+	<select name="ementash_icon" id="ementash_icon">
+		<option value=""><?php esc_html_e( '(بدون آیکون / از دسته والد)', 'ementash' ); ?></option>
+		<?php foreach ( ementash_icon_choices( 'card' ) as $key => $label ) : ?>
+			<option value="<?php echo esc_attr( $key ); ?>"<?php selected( $current, $key ); ?>><?php echo esc_html( $label ); ?></option>
+		<?php endforeach; ?>
+	</select>
+	<?php
+}
+
+function ementash_cat_icon_save( $term_id ) {
+	if ( ! isset( $_POST['ementash_cat_icon_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['ementash_cat_icon_nonce'] ) ), 'ementash_cat_icon' ) ) {
+		return;
+	}
+	if ( ! current_user_can( 'manage_product_terms' ) ) {
+		return;
+	}
+	$icon = isset( $_POST['ementash_icon'] ) ? sanitize_key( wp_unslash( $_POST['ementash_icon'] ) ) : '';
+	if ( '' !== $icon && isset( ementash_icon_choices( 'card' )[ $icon ] ) ) {
+		update_term_meta( $term_id, 'ementash_icon', $icon );
+	} else {
+		delete_term_meta( $term_id, 'ementash_icon' );
+	}
+}
+add_action( 'created_product_cat', 'ementash_cat_icon_save' );
+add_action( 'edited_product_cat', 'ementash_cat_icon_save' );
+
 /**
  * مسیر صفحه برای فروشگاه، دسته و محصول: صفحه اصلی / محصولات / دسته‌های والد / فعلی.
  */

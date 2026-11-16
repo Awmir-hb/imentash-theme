@@ -27,7 +27,7 @@ $ementash_label = (string) ementash_get( 'blog_link_label' );
 // «همه مقاله‌ها» فقط وقتی برگه نوشته‌ها تعیین شده باشد.
 $ementash_all_url = ementash_blog_url();
 ?>
-<section class="em-section em-section--soft em-blog"<?php echo '' !== $ementash_title ? ' aria-labelledby="em-blog-title"' : ''; ?>>
+<section class="em-section em-section--steel em-blog"<?php echo '' !== $ementash_title ? ' aria-labelledby="em-blog-title"' : ''; ?>>
 	<div class="em-container">
 		<div class="em-head">
 			<div>

@@ -22,6 +22,7 @@ function ementash_home_sections() {
 		'industries'      => __( 'صنایع', 'ementash' ),
 		'clients'         => __( 'مشتریان', 'ementash' ),
 		'services'        => __( 'خدمات', 'ementash' ),
+		'banner'          => __( 'بنر تصویری', 'ementash' ),
 		'products'        => __( 'محصولات', 'ementash' ),
 		'production-line' => __( 'خط تولید', 'ementash' ),
 		'gallery'         => __( 'گالری کارخانه', 'ementash' ),
@@ -313,17 +314,29 @@ function ementash_customizer_schema() {
 		'pages'                   => array(
 			'title'  => __( 'برگه‌ها', 'ementash' ),
 			'fields' => array(
-				'contact_page' => array(
+				'contact_page'   => array(
 					'type'        => 'page',
 					'label'       => __( 'برگه تماس با ما', 'ementash' ),
 					'description' => __( 'اگر انتخاب نشود، برگه‌ای که قالب «تماس با ما» دارد استفاده می‌شود.', 'ementash' ),
 					'default'     => 0,
 				),
-				'about_page'   => array(
+				'about_page'     => array(
 					'type'        => 'page',
 					'label'       => __( 'برگه درباره ما', 'ementash' ),
 					'description' => __( 'اگر انتخاب نشود، برگه‌ای که قالب «درباره ما» دارد استفاده می‌شود.', 'ementash' ),
 					'default'     => 0,
+				),
+				'pagehead_image' => array(
+					'type'        => 'image',
+					'label'       => __( 'عکس سربرگ صفحات داخلی', 'ementash' ),
+					'description' => __( 'پشت تیتر برگه‌ها، وبلاگ، فروشگاه و جستجو، با ته‌رنگ سرمه‌ای (به‌جز درباره ما). اگر خالی باشد سربرگ ساده سرمه‌ای است.', 'ementash' ),
+					'default'     => 0,
+				),
+				'pagehead_flip'  => array(
+					'type'        => 'checkbox',
+					'label'       => __( 'آینه کردن عکس سربرگ', 'ementash' ),
+					'description' => __( 'وقتی سوژه عکس سمت راست است و زیر تیتر می‌افتد. برای عکس‌هایی که نوشته دارند روشن نکنید.', 'ementash' ),
+					'default'     => false,
 				),
 			),
 		),
@@ -580,6 +593,46 @@ function ementash_customizer_schema() {
 					'type'    => 'textarea',
 					'label'   => __( 'متن', 'ementash' ),
 					'default' => __( 'خدمات قابل ارائه توسط شرکت ایمن تاش سپاهان', 'ementash' ),
+				),
+			),
+		),
+		'home_banner'             => array(
+			'title'       => __( 'صفحه اصلی: بنر تصویری', 'ementash' ),
+			'description' => __( 'عکس تمام‌عرض با رنگ واقعی و ته‌رنگ سرمه‌ای برند نمایش داده می‌شود؛ عکس افقی با عرض حداقل ۱۹۲۰ پیکسل.', 'ementash' ),
+			'fields'      => ementash_toggle_field( 'banner' ) + array(
+				'banner_image'     => array(
+					'type'    => 'image',
+					'label'   => __( 'عکس', 'ementash' ),
+					'default' => 0,
+				),
+				'banner_eyebrow'   => array(
+					'type'        => 'text',
+					'label'       => __( 'برچسب کوچک بالای تیتر', 'ementash' ),
+					'description' => __( 'اگر خالی باشد نمایش داده نمی‌شود.', 'ementash' ),
+					'default'     => __( 'ایمنی در شرایط واقعی', 'ementash' ),
+				),
+				'banner_title'     => array(
+					'type'        => 'lines',
+					'label'       => __( 'تیتر', 'ementash' ),
+					'description' => __( 'هر خط، یک خط تیتر.', 'ementash' ),
+					'default'     => __( "وقتی ثانیه‌ها\nتعیین‌کننده‌اند", 'ementash' ),
+				),
+				'banner_text'      => array(
+					'type'    => 'textarea',
+					'label'   => __( 'متن', 'ementash' ),
+					'default' => __( 'فوم و پودر آتش‌نشانی ایمن تاش برای لحظه‌هایی ساخته شده که خطا جایی ندارد.', 'ementash' ),
+				),
+				'banner_btn_label' => array(
+					'type'        => 'text',
+					'label'       => __( 'متن دکمه', 'ementash' ),
+					'description' => __( 'اگر خالی باشد دکمه نمایش داده نمی‌شود.', 'ementash' ),
+					'default'     => __( 'دریافت مشاوره فنی', 'ementash' ),
+				),
+				'banner_btn_url'   => array(
+					'type'        => 'url',
+					'label'       => __( 'لینک دکمه', 'ementash' ),
+					'description' => __( 'اگر خالی باشد به صفحه تماس می‌رود.', 'ementash' ),
+					'default'     => '',
 				),
 			),
 		),

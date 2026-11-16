@@ -49,7 +49,7 @@ $ementash_print_half = static function ( $loop, $unique_count, $hidden ) {
 	echo '</ul>';
 };
 ?>
-<section class="em-section em-section--soft em-clients"<?php echo '' !== $ementash_title ? ' aria-labelledby="em-clients-title"' : ''; ?>>
+<section class="em-section em-section--steel em-clients"<?php echo '' !== $ementash_title ? ' aria-labelledby="em-clients-title"' : ''; ?>>
 	<div class="em-container">
 		<?php if ( '' !== $ementash_title ) : ?>
 			<h2 class="em-clients__title" id="em-clients-title"><?php echo ementash_bdi( $ementash_title ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></h2>

@@ -24,9 +24,16 @@
 .em-ahero__ic-play,.em-ahero__toggle[data-em-paused] .em-ahero__ic-pause{display:none}
 .em-ahero__toggle[data-em-paused] .em-ahero__ic-play{display:block}
 .em-ahero__toggle:focus-visible{outline-color:var(--blue-light)}
-.em-ahero__stats{position:relative;z-index:1;max-width:var(--container);margin:0 auto calc(var(--ahero-overlap) * -1);padding:0 var(--gutter)}
-.em-ahero__stats .em-stats{background:var(--white);box-shadow:var(--shadow-card)}
-.em-ahero:has(.em-ahero__stats) + .em-section{padding-top:calc(var(--section-y) + var(--ahero-overlap))}
+/* نوار آمار شیشه‌ای داخل پایین سربرگ، روی انیمیشن؛ رنگ‌ها با بازنویسی توکن‌ها برای زمینه تیره */
+.em-ahero__stats{--line-stat:var(--line-on-dark-2);--ink:var(--white);--muted:var(--on-dark-2);--blue:var(--blue-light);position:relative;z-index:1;max-width:var(--container);margin:0 auto;padding:0 var(--gutter) var(--ahero-stats-bottom)}
+.em-ahero__stats .em-stats{position:relative;overflow:hidden;background:var(--glass-bg);border:1px solid var(--line-on-dark-3);-webkit-backdrop-filter:blur(14px) saturate(1.3);backdrop-filter:blur(14px) saturate(1.3)}
+/* خط نور بالای شیشه */
+.em-ahero__stats .em-stats::before{content:"";position:absolute;inset:0 0 auto;height:1px;background:var(--glass-edge);pointer-events:none}
+.em-ahero__stats .em-stat__num{font-weight:var(--fw-display);font-size:clamp(34px,3.2vw,48px)}
+.em-ahero__stats .em-stat__icon{stroke-width:1.2}
+@media (max-width:767px){
+  .em-ahero__stats .em-stat__num{font-size:30px}
+}
 
 /* ---------- داستان شرکت + نقل‌قول + عکس ---------- */
 .em-story__in{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:56px;align-items:center}
@@ -100,6 +107,7 @@ a.em-cert:hover .em-cert__title{color:var(--blue)}
 .em-hitem__body{min-width:0}
 .em-hitem__title{display:block;font-size:var(--fs-sm);font-weight:600;line-height:1.6;color:var(--ink)}
 .em-hitem__year{display:block;font-size:var(--fs-xs);color:var(--muted)}
+.em-hitem__sub{display:block;font-size:var(--fs-xs);color:var(--ink-2)}
 
 /* ---------- تحقیق و توسعه: عکس کنار فهرست حوزه‌ها ---------- */
 .em-rd__in{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:56px;align-items:center}

@@ -16,7 +16,7 @@ $ementash_catalog = absint( ementash_get( 'textile_catalog' ) );
 $ementash_btn     = (string) ementash_get( 'textile_btn_label' );
 $ementash_file    = $ementash_catalog ? wp_get_attachment_url( $ementash_catalog ) : '';
 ?>
-<section class="em-section em-textile"<?php echo '' !== $ementash_title ? ' aria-labelledby="em-textile-title"' : ''; ?>>
+<section class="em-section em-section--graphite em-textile"<?php echo '' !== $ementash_title ? ' aria-labelledby="em-textile-title"' : ''; ?>>
 	<div class="em-container em-textile__in">
 		<div class="em-textile__body">
 			<?php if ( '' !== $ementash_title ) : ?>
@@ -33,7 +33,7 @@ $ementash_file    = $ementash_catalog ? wp_get_attachment_url( $ementash_catalog
 				</ul>
 			<?php endif; ?>
 			<?php if ( $ementash_file && '' !== $ementash_btn ) : ?>
-				<a class="em-btn em-btn--dark em-textile__btn" href="<?php echo esc_url( $ementash_file ); ?>" download><?php echo ementash_bdi( $ementash_btn ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></a>
+				<a class="em-btn em-btn--light em-textile__btn" href="<?php echo esc_url( $ementash_file ); ?>" download><?php echo ementash_bdi( $ementash_btn ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></a>
 			<?php endif; ?>
 		</div>
 

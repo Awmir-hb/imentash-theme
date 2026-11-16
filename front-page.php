@@ -27,6 +27,7 @@ $ementash_sections = array(
 	'industries',
 	'clients',
 	'services',
+	'banner',
 	'products',
 	'production-line',
 	'gallery',

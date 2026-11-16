@@ -63,7 +63,7 @@ $ementash_alt = static function ( $id ) use ( $ementash_name ) {
 							)
 						);
 					} else {
-						echo '<span class="em-ph" aria-hidden="true"></span>';
+						echo ementash_product_placeholder( $product->get_id(), 'ementash-square', array( 'loading' => 'eager', 'sizes' => '(max-width: 900px) 100vw, 620px' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- عکس دسته یا آیکون SVG فیلترشده.
 					}
 					?>
 				</div>

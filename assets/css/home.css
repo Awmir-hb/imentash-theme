@@ -74,9 +74,11 @@
 
 .em-frame{position:relative;padding:0 0 22px 22px}
 .em-frame::before{content:"";position:absolute;left:0;bottom:0;width:calc(100% - 22px);height:calc(100% - 22px);border:2px solid var(--blue);border-radius:var(--radius-md)}
-.em-frame__img{position:relative;aspect-ratio:4/3;overflow:hidden;border-radius:var(--radius-md);box-shadow:var(--shadow-photo)}
+.em-frame__img{position:relative;aspect-ratio:var(--em-ratio,4/3);overflow:hidden;border-radius:var(--radius-md);box-shadow:var(--shadow-photo)}
 .em-frame__img img{display:block;width:100%;height:100%;object-fit:cover}
 
+/* عکس پهن: دو ستون هم‌عرض تا عکس کامل و بزرگ‌تر دیده شود */
+.em-about__grid--wide{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px}
 @media (max-width:900px){
   .em-about__grid{grid-template-columns:minmax(0,1fr);gap:36px}
 }
@@ -98,12 +100,36 @@ a.em-card:hover .em-btn__icon{transform:translateX(-5px)}
 .em-card__shade{position:absolute;inset:0;background:var(--card-shade)}
 
 /* ---------- صنایع ---------- */
-.em-inds{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;list-style:none;margin:0;padding:0}
+.em-inds{display:grid;grid-template-columns:repeat(var(--em-ind-cols,4),minmax(0,1fr));gap:16px;list-style:none;margin:0;padding:0}
 .em-ind{height:100%;min-height:280px;flex-direction:column;justify-content:flex-end;padding:24px;border-radius:var(--radius-sm)}
 .em-ind__foot{position:relative;z-index:2;display:flex;align-items:flex-end;justify-content:space-between;gap:14px}
 .em-ind__title{margin:0;font-family:var(--font-head);font-weight:600;font-size:22px;line-height:1.45;color:var(--white)}
 .em-ind__arrow{flex:0 0 auto;width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--white-a60);border-radius:50%}
 .em-ind__arrow .em-btn__icon{width:16px;height:16px}
+.em-ind__text{min-width:0}
+.em-ind__count{margin:2px 0 0;color:var(--blue-light);font-size:var(--fs-sm);font-weight:600;line-height:1.6}
+/* «مشاهده محصولات» با هاور از پایین بالا می‌آید */
+.em-ind__more{display:block;max-height:0;overflow:hidden;opacity:0;transform:translateY(8px);color:var(--white);font-size:var(--fs-sm);font-weight:600;transition:max-height .4s var(--ease-out),opacity .4s ease,transform .4s var(--ease-out),margin .4s var(--ease-out)}
+a.em-ind:hover .em-ind__more,a.em-ind:focus-visible .em-ind__more{max-height:2em;margin-top:6px;opacity:1;transform:none}
+a.em-ind:hover .em-ind__arrow{background:var(--white);color:var(--navy-900);border-color:var(--white)}
+.em-ind__arrow{transition:background-color .3s ease,color .3s ease,border-color .3s ease}
+
+/* عکس‌ها (از منابع مختلف) با ته‌رنگ سرمه‌ای و رنگ کمتر یکدست می‌شوند؛ با هاور رنگ کامل برمی‌گردد */
+.em-ind .em-card__img img{filter:saturate(var(--ind-sat));transition:filter .6s ease}
+.em-ind .em-card__img::after{content:"";position:absolute;inset:0;background:var(--navy-900);opacity:var(--ind-tint);transition:opacity .6s ease}
+a.em-ind:hover .em-card__img img{filter:none}
+a.em-ind:hover .em-card__img::after{opacity:0}
+
+/* بنتو: کارت اول (صنعت اصلی) دو ستون و دو ردیف؛ فقط دسکتاپ */
+@media (min-width:901px){
+  .em-inds--bento{grid-auto-rows:var(--ind-row)}
+  .em-inds--bento .em-ind{min-height:0}
+  .em-inds__item--big{grid-column:span 2;grid-row:span 2}
+  .em-inds__item--big .em-ind{padding:32px}
+  .em-inds__item--big .em-ind__title{font-weight:var(--fw-display-sm);font-size:clamp(26px,2.4vw,36px);line-height:1.35}
+  .em-inds__item--big .em-ind__count{font-size:var(--fs-body)}
+  .em-inds__item--big .em-ind__arrow{width:52px;height:52px}
+}
 .em-rail-hint{display:none}
 
 @media (max-width:900px){
@@ -164,6 +190,29 @@ a.em-svc:hover .em-svc__arrow{background:var(--white);color:var(--navy-800)}
   .em-svc__icon svg{width:22px;height:22px}
   .em-svc__title{max-width:60%;margin:12px 0 0;font-size:18px;line-height:1.55}
   .em-svc__arrow{display:none}
+}
+
+/* ---------- بنر تصویری تمام‌عرض ---------- */
+@keyframes em-parallax{from{transform:translate3d(0,calc(var(--banner-parallax) * -1),0) scale(1.18)}to{transform:translate3d(0,var(--banner-parallax),0) scale(1.18)}}
+
+.em-banner{position:relative;overflow:hidden;display:flex;align-items:center;min-height:var(--banner-h);background:var(--navy-900);color:var(--white)}
+.em-banner__shade{position:absolute;inset:0;z-index:1;background:var(--banner-shade)}
+.em-banner__in{position:relative;z-index:2;width:100%;padding-block:var(--section-y)}
+.em-banner__body{max-width:620px}
+.em-banner__eyebrow{color:var(--blue-light)}
+.em-banner__title{margin-bottom:18px;font-size:clamp(34px,4.2vw,60px);line-height:1.25}
+/* هر خط تیتر یک سطر کامل؛ بعد از تقسیم کلمه‌ها (main.js) هم */
+.em-banner__line,.em-banner__title > .em-rw{display:block}
+.em-banner__text{max-width:520px;margin:0 0 30px;font-size:18px;color:var(--on-dark)}
+@supports (animation-timeline: view()){
+  .em-banner__img{animation:em-parallax linear both;animation-timeline:view(block)}
+}
+
+@media (max-width:767px){
+  .em-banner{align-items:flex-end}
+  .em-banner__title{margin-bottom:10px;font-size:30px;line-height:1.35}
+  .em-banner__text{margin-bottom:20px;font-size:var(--fs-sm)}
+  .em-banner__btn{display:flex;justify-content:center;width:100%;min-height:48px;padding-block:0}
 }
 
 /* ---------- محصولات: تب دسته‌ها + پنل تصویری ---------- */
@@ -339,6 +388,7 @@ a.em-svc:hover .em-svc__arrow{background:var(--white);color:var(--navy-800)}
 .em-textile__text{max-width:480px;margin:0 0 24px;color:var(--muted)}
 .em-textile__packs{display:flex;flex-wrap:wrap;gap:10px;list-style:none;margin:0 0 32px;padding:0}
 .em-textile__packs li{padding:6px 16px;border:1px solid var(--line);border-radius:var(--radius-pill);font-size:var(--fs-nav)}
+.em-textile.em-section--graphite .em-h2{color:var(--white)}
 .em-textile__media{position:relative;flex:1 1 460px;min-width:0;min-height:320px;overflow:hidden;border-radius:var(--radius-sm)}
 .em-textile__media img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover}
 /* کد بزرگ توخالی روی عکس */
@@ -389,7 +439,7 @@ a.em-svc:hover .em-svc__arrow{background:var(--white);color:var(--navy-800)}
   .em-hero__media,.em-wi,.em-rise{animation:none!important;transform:none!important;opacity:1!important}
   /* با کاهش حرکت فقط فریم اول ویدئو ثابت دیده می‌شود؛ لودر متحرک لازم نیست */
   .em-hero__loader{display:none!important}
-  .em-hero__live,.em-hero__track,.em-btn__icon,.em-card__img,.em-svc__arrow{transition:none!important}
+  .em-hero__live,.em-hero__track,.em-btn__icon,.em-card__img,.em-svc__arrow,.em-ind__more,.em-ind__arrow,.em-ind .em-card__img img,.em-ind .em-card__img::after{transition:none!important}
   .em-mw{animation:none!important;color:var(--ink)!important}
   /* نوار مشتریان ثابت و چندخطی؛ تکرارها پنهان */
   .em-clients__wrap{-webkit-mask-image:none;mask-image:none}
@@ -403,4 +453,5 @@ a.em-svc:hover .em-svc__arrow{background:var(--white);color:var(--navy-800)}
   .em-pl__fl{animation:none!important;opacity:1!important}
   .em-pl__nd,.em-pl__bl,.em-pl__pd{animation:none!important}
   .em-gal__img{transition:none!important}
+  .em-banner__img{animation:none!important;transform:none!important}
 }

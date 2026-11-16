@@ -87,7 +87,7 @@ foreach ( $ementash_terms as $ementash_term ) {
 							<?php
 							echo $ementash_cat['image']
 								? wp_get_attachment_image( $ementash_cat['image'], 'thumbnail', false, array( 'alt' => '', 'loading' => 'lazy' ) )
-								: '<span class="em-ph"></span>';
+								: ementash_placeholder( $ementash_cat['id'] );
 							?>
 						</span>
 						<span class="em-pcat__name"><?php echo ementash_bdi( $ementash_cat['name'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
@@ -113,7 +113,7 @@ foreach ( $ementash_terms as $ementash_term ) {
 											'sizes'   => '(max-width: 900px) 100vw, 760px',
 										)
 									)
-									: '<span class="em-ph"></span>';
+									: ementash_placeholder( $ementash_cat['id'] );
 								?>
 							</span>
 							<span class="em-ppanel__shade" aria-hidden="true"></span>

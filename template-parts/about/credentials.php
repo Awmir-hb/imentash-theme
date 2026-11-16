@@ -106,6 +106,10 @@ $ementash_text  = (string) ementash_meta( $ementash_page, 'about_cert_text' );
 							</span>
 							<span class="em-hitem__body">
 								<span class="em-hitem__title"><?php echo ementash_bdi( get_the_title( $ementash_item ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
+								<?php $ementash_hsub = (string) ementash_meta( $ementash_item->ID, 'subtitle' ); ?>
+								<?php if ( '' !== $ementash_hsub ) : ?>
+									<span class="em-hitem__sub"><?php echo ementash_bdi( $ementash_hsub ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
+								<?php endif; ?>
 								<?php if ( '' !== $ementash_year ) : ?>
 									<span class="em-hitem__year"><?php echo ementash_bdi( $ementash_year, true ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
 								<?php endif; ?>
