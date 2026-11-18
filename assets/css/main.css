@@ -90,6 +90,10 @@
   --dots-size:22px;
   --pl-map-max:500px;        /* حداکثر ارتفاع نقشه خط تولید در دسکتاپ */
   --pl-step-scroll:70vh;     /* مقدار اسکرول برای هر مرحله در روایت اسکرولی خط تولید */
+  --pl-stroke:2.6;           /* ضخامت خطوط نقشه خط تولید (مخزن، لوله، دستگاه) */
+  --pl-stroke-2:1.8;         /* خطوط فرعی نقشه */
+  --pl-stroke-flow:3;        /* جریان متحرک و عقربه */
+  --pl-dim:.4;               /* شفافیت مراحل غیرفعال در روایت اسکرولی */
 
   /* صفحه اصلی (Industrial.dc.html و MobileHome.dc.html) */
   --white-a55:rgba(255,255,255,.55);
@@ -224,6 +228,9 @@
     --tl-dot-y:18px;
     --dots-size:18px;
     --pl-map-max:none;
+    --pl-stroke:2.8;
+    --pl-stroke-2:2;
+    --pl-stroke-flow:3.2;
     --radius-lg:16px;
     --radius-xl:16px;
     --mbar-space:76px;

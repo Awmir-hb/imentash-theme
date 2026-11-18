@@ -288,13 +288,13 @@ a.em-svc:hover .em-svc__arrow{background:var(--white);color:var(--navy-800)}
 .em-pl__map{grid-area:map;display:block;width:100%;height:auto;max-height:var(--pl-map-max);direction:ltr}
 
 .em-pl__d,.em-pl__d2{fill:none;stroke-dasharray:1;stroke-dashoffset:1;animation:em-draw 2.2s cubic-bezier(.45,.05,.2,1) forwards}
-.em-pl__d{stroke:var(--blue-light);stroke-width:1.5;stroke-linejoin:round}
-.em-pl__d2{stroke:var(--line-on-dark-6);stroke-width:1}
-.em-pl__fl{fill:none;stroke:var(--white);stroke-width:2;stroke-linecap:round;stroke-dasharray:4 16;opacity:0;animation:em-fadein .6s ease 2.6s forwards,em-flow 1.4s linear infinite}
+.em-pl__d{stroke:var(--blue-light);stroke-width:var(--pl-stroke);stroke-linejoin:round;stroke-linecap:round}
+.em-pl__d2{stroke:var(--line-on-dark-6);stroke-width:var(--pl-stroke-2)}
+.em-pl__fl{fill:none;stroke:var(--white);stroke-width:var(--pl-stroke-flow);stroke-linecap:round;stroke-dasharray:4 16;opacity:0;animation:em-fadein .6s ease 2.6s forwards,em-flow 1.4s linear infinite}
 .em-pl__fl--dim{stroke-opacity:.6}
 .em-pl__lb{fill:var(--blue-light);font-family:var(--font-body);font-size:13px;letter-spacing:.08em;opacity:0;animation:em-fadein .8s ease forwards}
 .em-pl__fi{opacity:0;animation:em-fadein .8s ease forwards}
-.em-pl__nd{fill:none;stroke:var(--white);stroke-width:2;stroke-linecap:round;transform-box:view-box;transform-origin:330px 210px;animation:em-needle 5s ease-in-out infinite}
+.em-pl__nd{fill:none;stroke:var(--white);stroke-width:var(--pl-stroke-flow);stroke-linecap:round;transform-box:view-box;transform-origin:330px 210px;animation:em-needle 5s ease-in-out infinite}
 .em-pl__bl{fill:var(--white);animation:em-blink 1.4s ease-in-out infinite}
 .em-pl__pd{fill:var(--white);animation:em-fall 1.6s ease-in infinite}
 /* تا وقتی سکشن دیده نشده (home.js) */
@@ -328,7 +328,7 @@ a.em-svc:hover .em-svc__arrow{background:var(--white);color:var(--navy-800)}
   .em-pl--story .em-pl__step.is-active .em-pl__code{color:var(--white)}
 
   /* نقشه: بقیه مراحل کم‌رنگ، مرحله فعال سفید. stroke/fill-opacity چون opacity در انیمیشن ورود است. */
-  .em-pl--story .em-pl__map [data-em-stage]{stroke-opacity:.28;fill-opacity:.28;transition:stroke-opacity .5s ease,fill-opacity .5s ease,stroke .5s ease,fill .5s ease}
+  .em-pl--story .em-pl__map [data-em-stage]{stroke-opacity:var(--pl-dim);fill-opacity:var(--pl-dim);transition:stroke-opacity .5s ease,fill-opacity .5s ease,stroke .5s ease,fill .5s ease}
   .em-pl--story[data-em-step="1"] .em-pl__map [data-em-stage="1"],
   .em-pl--story[data-em-step="2"] .em-pl__map [data-em-stage="2"],
   .em-pl--story[data-em-step="3"] .em-pl__map [data-em-stage="3"],
@@ -350,9 +350,6 @@ a.em-svc:hover .em-svc__arrow{background:var(--white);color:var(--navy-800)}
   .em-pl__h2{margin-bottom:6px}
   .em-pl__intro{margin-bottom:18px;font-size:var(--fs-sm)}
   .em-pl__grid{gap:10px}
-  .em-pl__d{stroke-width:1.6}
-  .em-pl__d2{stroke-width:1.1}
-  .em-pl__fl{stroke-width:2.2}
   .em-pl__lb{font-size:22px;letter-spacing:.06em}
   .em-pl__step{gap:14px;padding:12px 0}
   .em-pl__code{flex-basis:74px;padding-top:3px;font-size:var(--fs-xs)}
