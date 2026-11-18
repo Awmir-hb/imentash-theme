@@ -26,7 +26,7 @@ $ementash_phone    = ementash_main_phone();
 					'theme_location' => $ementash_location,
 					'container'      => false,
 					'menu_class'     => 'em-mmenu__list',
-					'depth'          => 1,
+					'depth'          => 2,
 					'fallback_cb'    => false,
 					'link_after'     => ementash_icon( 'chevron' ),
 				)

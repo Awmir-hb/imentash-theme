@@ -15,6 +15,9 @@ if ( ! ementash_elementor_location( 'footer' ) ) {
 	get_template_part( 'template-parts/mobile-bar' );
 }
 
+// بازگشت به بالا: مستقل از هدر و فوتر (با Theme Builder المنتور هم).
+get_template_part( 'template-parts/scroll-top' );
+
 // منوی موبایل فقط همراه هدر قالب معنا دارد.
 if ( ementash_own_header() ) {
 	get_template_part( 'template-parts/mobile-menu' );

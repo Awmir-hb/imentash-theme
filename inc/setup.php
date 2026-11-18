@@ -138,3 +138,76 @@ function ementash_is_about_view() {
 function ementash_is_contact_view() {
 	return ementash_is_special_view( 'contact' );
 }
+
+/* ---------- آپلود SVG (فقط مدیر سایت؛ برای آیکون شبکه‌های اجتماعی و مانند آن) ----------
+   SVG می‌تواند اسکریپت داشته باشد؛ پس فقط کاربر manage_options، و فایل هنگام آپلود با فهرست سفید
+   تگ و ویژگی پاک‌سازی می‌شود (script، foreignObject، on*، href خارجی و style حذف). قالب SVG آپلودی را
+   فقط با <img> نمایش می‌دهد که در آن اسکریپت اجرا نمی‌شود. */
+
+function ementash_svg_upload_mimes( $mimes ) {
+	if ( current_user_can( 'manage_options' ) ) {
+		$mimes['svg'] = 'image/svg+xml';
+	}
+	return $mimes;
+}
+add_filter( 'upload_mimes', 'ementash_svg_upload_mimes' );
+
+/**
+ * تشخیص نوع SVG (وردپرس پسوند svg را بدون این فیلتر رد می‌کند).
+ */
+function ementash_svg_filetype( $data, $file, $filename, $mimes ) {
+	if ( current_user_can( 'manage_options' ) && 'svg' === strtolower( pathinfo( (string) $filename, PATHINFO_EXTENSION ) ) ) {
+		$data['ext']  = 'svg';
+		$data['type'] = 'image/svg+xml';
+	}
+	return $data;
+}
+add_filter( 'wp_check_filetype_and_ext', 'ementash_svg_filetype', 10, 4 );
+
+/**
+ * تگ‌ها و ویژگی‌های مجاز SVG آپلودی (شکل، رنگ، گرادیان؛ بدون اسکریپت و لینک).
+ */
+function ementash_svg_upload_allowed() {
+	$attrs = array_fill_keys(
+		array( 'id', 'class', 'd', 'x', 'y', 'cx', 'cy', 'r', 'rx', 'ry', 'width', 'height', 'points', 'x1', 'x2', 'y1', 'y2', 'fx', 'fy', 'transform', 'fill', 'fill-rule', 'fill-opacity', 'stroke', 'stroke-width', 'stroke-linecap', 'stroke-linejoin', 'stroke-miterlimit', 'stroke-opacity', 'opacity', 'clip-rule', 'clip-path', 'mask', 'offset', 'stop-color', 'stop-opacity', 'gradientunits', 'gradienttransform', 'viewbox', 'xmlns', 'version', 'preserveaspectratio' ),
+		true
+	);
+	$tags  = array( 'svg', 'g', 'path', 'circle', 'ellipse', 'rect', 'line', 'polyline', 'polygon', 'defs', 'lineargradient', 'radialgradient', 'stop', 'clippath', 'mask', 'title', 'desc' );
+	return array_fill_keys( $tags, $attrs );
+}
+
+/**
+ * پاک‌سازی فایل SVG پیش از ذخیره؛ اگر چیزی از آن نماند، آپلود رد می‌شود.
+ */
+function ementash_svg_sanitize_upload( $file ) {
+	$is_svg = 'image/svg+xml' === ( $file['type'] ?? '' ) || 'svg' === strtolower( pathinfo( (string) ( $file['name'] ?? '' ), PATHINFO_EXTENSION ) );
+	if ( ! $is_svg ) {
+		return $file;
+	}
+	if ( ! current_user_can( 'manage_options' ) ) {
+		$file['error'] = __( 'فقط مدیر سایت می‌تواند فایل SVG آپلود کند.', 'ementash' );
+		return $file;
+	}
+	$raw = (string) file_get_contents( $file['tmp_name'] ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+	// اعلان XML، DOCTYPE (با بخش داخلی [...] و entityها) و توضیحات حذف؛
+	// script، style و foreignObject با محتوایشان (wp_kses فقط تگ را برمی‌دارد و متن داخلش می‌ماند).
+	$raw   = preg_replace( '/<\?xml.*?\?>|<!DOCTYPE[^\[>]*(\[.*?\])?\s*>|<!--.*?-->/is', '', $raw );
+	$raw   = preg_replace( '#<(script|style|foreignObject)\b[^>]*>.*?</\1\s*>#is', '', $raw );
+	$clean = trim( wp_kses( $raw, ementash_svg_upload_allowed() ) );
+	if ( ! preg_match( '/^<svg\b/i', $clean ) ) {
+		$file['error'] = __( 'فایل SVG معتبر نیست یا بعد از پاک‌سازی چیزی از آن نماند.', 'ementash' );
+		return $file;
+	}
+	// wp_kses نام ویژگی‌ها را کوچک می‌کند؛ SVG به بزرگی حروف حساس است.
+	$clean = str_replace(
+		array( ' viewbox=', ' preserveaspectratio=', '<lineargradient', '</lineargradient>', '<radialgradient', '</radialgradient>', ' gradientunits=', ' gradienttransform=', '<clippath', '</clippath>' ),
+		array( ' viewBox=', ' preserveAspectRatio=', '<linearGradient', '</linearGradient>', '<radialGradient', '</radialGradient>', ' gradientUnits=', ' gradientTransform=', '<clipPath', '</clipPath>' ),
+		$clean
+	);
+	if ( false === strpos( $clean, 'xmlns=' ) ) {
+		$clean = preg_replace( '/^<svg\b/i', '<svg xmlns="http://www.w3.org/2000/svg"', $clean );
+	}
+	file_put_contents( $file['tmp_name'], $clean ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_put_contents_file_put_contents
+	return $file;
+}
+add_filter( 'wp_handle_upload_prefilter', 'ementash_svg_sanitize_upload' );

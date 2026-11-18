@@ -140,21 +140,27 @@ function ementash_customizer_schema() {
 		);
 	}
 
+	// شبکه‌های اجتماعی: جایگاه آزاد؛ هر شبکه‌ای (ایتا، بله، روبیکا…) بدون تغییر کد.
 	$social = array();
-	foreach (
-		array(
-			'instagram' => __( 'اینستاگرام', 'ementash' ),
-			'linkedin'  => __( 'لینکدین', 'ementash' ),
-			'telegram'  => __( 'تلگرام', 'ementash' ),
-			'whatsapp'  => __( 'واتس‌اپ', 'ementash' ),
-			'eitaa'     => __( 'ایتا', 'ementash' ),
-			'rubika'    => __( 'روبیکا', 'ementash' ),
-		) as $key => $label
-	) {
-		$social[ 'social_' . $key ] = array(
-			'type'    => 'url',
-			'label'   => $label,
+	for ( $ementash_i = 1; $ementash_i <= ementash_social_slots(); $ementash_i++ ) {
+		$social[ 'social_' . $ementash_i . '_label' ] = array(
+			'type'    => 'text',
+			/* translators: %s: شماره جایگاه شبکه اجتماعی */
+			'label'   => sprintf( __( 'شبکه %s: نام', 'ementash' ), ementash_fa_num( $ementash_i ) ),
 			'default' => '',
+		);
+		$social[ 'social_' . $ementash_i . '_url' ]   = array(
+			'type'    => 'url',
+			/* translators: %s: شماره جایگاه شبکه اجتماعی */
+			'label'   => sprintf( __( 'شبکه %s: لینک', 'ementash' ), ementash_fa_num( $ementash_i ) ),
+			'default' => '',
+		);
+		$social[ 'social_' . $ementash_i . '_icon' ]  = array(
+			'type'        => 'image',
+			/* translators: %s: شماره جایگاه شبکه اجتماعی */
+			'label'       => sprintf( __( 'شبکه %s: آیکون', 'ementash' ), ementash_fa_num( $ementash_i ) ),
+			'description' => __( 'PNG، WebP یا SVG مربعی و شفاف. آیکون تک‌رنگ (سفید) نمایش داده می‌شود.', 'ementash' ),
+			'default'     => 0,
 		);
 	}
 
@@ -264,7 +270,7 @@ function ementash_customizer_schema() {
 		),
 		'social'                  => array(
 			'title'       => __( 'شبکه‌های اجتماعی', 'ementash' ),
-			'description' => __( 'فقط شبکه‌هایی که لینک دارند نمایش داده می‌شوند.', 'ementash' ),
+			'description' => __( 'هر جایگاه: نام شبکه، لینک و آیکون. فقط جایگاه‌هایی که لینک دارند در فوتر و منوی موبایل نمایش داده می‌شوند.', 'ementash' ),
 			'fields'      => $social,
 		),
 		'footer'                  => array(

@@ -24,7 +24,7 @@ $ementash_phone   = ementash_main_phone();
 						'theme_location' => 'primary',
 						'container'      => false,
 						'menu_class'     => 'em-nav__list',
-						'depth'          => 1,
+						'depth'          => 2,
 						'fallback_cb'    => false,
 					)
 				);

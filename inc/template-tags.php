@@ -299,26 +299,48 @@ function ementash_logo( $class = '' ) {
 }
 
 /**
- * شبکه‌های اجتماعی پرشده در تنظیمات.
+ * تعداد جایگاه‌های شبکه اجتماعی در Customizer.
+ */
+function ementash_social_slots() {
+	return 6;
+}
+
+/**
+ * شبکه‌های اجتماعی پرشده در Customizer (جایگاه‌هایی که لینک دارند، به ترتیب).
+ * هر مورد: url، label (نام شبکه؛ خالی = دامنه لینک)، icon (شناسه پیوست آیکون آپلودی یا ۰)،
+ * builtin (آیکون SVG داخلی قالب بر اساس دامنه، وقتی آیکون آپلود نشده).
  */
 function ementash_socials() {
-	$labels = array(
-		'instagram' => __( 'اینستاگرام', 'ementash' ),
-		'linkedin'  => __( 'لینکدین', 'ementash' ),
-		'telegram'  => __( 'تلگرام', 'ementash' ),
-		'whatsapp'  => __( 'واتس‌اپ', 'ementash' ),
-		'eitaa'     => __( 'ایتا', 'ementash' ),
-		'rubika'    => __( 'روبیکا', 'ementash' ),
+	$known = array(
+		'instagram' => 'instagram.com',
+		'linkedin'  => 'linkedin.com',
+		'telegram'  => array( 't.me', 'telegram.me' ),
+		'whatsapp'  => array( 'wa.me', 'whatsapp.com' ),
+		'eitaa'     => 'eitaa.com',
+		'rubika'    => 'rubika.ir',
 	);
-	$items  = array();
-	foreach ( $labels as $key => $label ) {
-		$url = (string) ementash_get( 'social_' . $key );
-		if ( '' !== $url ) {
-			$items[ $key ] = array(
-				'url'   => $url,
-				'label' => $label,
-			);
+	$items = array();
+	for ( $i = 1; $i <= ementash_social_slots(); $i++ ) {
+		$url = trim( (string) ementash_get( 'social_' . $i . '_url' ) );
+		if ( '' === $url ) {
+			continue;
 		}
+		$host    = (string) wp_parse_url( $url, PHP_URL_HOST );
+		$host    = preg_replace( '/^www\./', '', strtolower( $host ) );
+		$builtin = '';
+		foreach ( $known as $key => $domains ) {
+			if ( in_array( $host, (array) $domains, true ) ) {
+				$builtin = $key;
+				break;
+			}
+		}
+		$label   = trim( (string) ementash_get( 'social_' . $i . '_label' ) );
+		$items[] = array(
+			'url'     => $url,
+			'label'   => '' !== $label ? $label : $host,
+			'icon'    => absint( ementash_get( 'social_' . $i . '_icon' ) ),
+			'builtin' => $builtin,
+		);
 	}
 	return $items;
 }
@@ -329,12 +351,22 @@ function ementash_social_links( $class = '' ) {
 		return;
 	}
 	echo '<ul class="' . esc_attr( trim( 'em-soc ' . $class ) ) . '">';
-	foreach ( $items as $key => $item ) {
+	foreach ( $items as $item ) {
+		$src = $item['icon'] ? wp_get_attachment_url( $item['icon'] ) : '';
+		if ( $src ) {
+			// آیکون آپلودی (PNG/WebP/SVG) با img؛ SVG داخل img اسکریپت اجرا نمی‌کند.
+			$icon = '<img class="em-soc__img" src="' . esc_url( $src ) . '" alt="" width="18" height="18" loading="lazy" decoding="async">';
+		} elseif ( '' !== $item['builtin'] ) {
+			$icon = ementash_icon( $item['builtin'] );
+		} else {
+			// بدون آیکون: حرف اول نام شبکه
+			$icon = '<span class="em-soc__letter" aria-hidden="true">' . esc_html( mb_substr( $item['label'], 0, 1 ) ) . '</span>';
+		}
 		printf(
 			'<li><a href="%1$s" aria-label="%2$s" target="_blank" rel="noopener">%3$s</a></li>',
 			esc_url( $item['url'] ),
 			esc_attr( $item['label'] ),
-			ementash_icon( $key ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG با wp_kses پاک‌سازی شده.
+			$icon // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- img و span بالا escape شده‌اند؛ SVG داخلی با wp_kses.
 		);
 	}
 	echo '</ul>';

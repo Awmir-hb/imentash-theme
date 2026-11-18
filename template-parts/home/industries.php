@@ -14,7 +14,7 @@ if ( ! $ementash_items ) {
 }
 $ementash_title = (string) ementash_get( 'industries_title' );
 ?>
-<section class="em-section em-section--steel em-industries"<?php echo '' !== $ementash_title ? ' aria-labelledby="em-industries-title"' : ''; ?>>
+<section class="em-section em-section--steel em-industries" id="em-industries"<?php echo '' !== $ementash_title ? ' aria-labelledby="em-industries-title"' : ''; ?>>
 	<div class="em-container">
 		<?php if ( '' !== $ementash_title ) : ?>
 			<div class="em-head">

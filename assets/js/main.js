@@ -210,3 +210,125 @@
     io.observe(el);
   });
 })();
+
+/* بازگشت به بالا: بعد از حدود یک صفحه اسکرول ظاهر می‌شود؛ حلقه دور دکمه پیشرفت اسکرول را نشان می‌دهد.
+   با کاهش حرکت، پرش فوری به بالا. فوکوس کیبورد به لینک «رفتن به محتوای اصلی» بالای صفحه برمی‌گردد. */
+(() => {
+  const btn = document.querySelector('[data-em-totop]');
+  if (!btn) return;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let ticking = false;
+
+  const update = () => {
+    ticking = false;
+    const y = window.scrollY;
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    btn.classList.toggle('is-on', y > window.innerHeight * 0.8);
+    btn.style.setProperty('--em-totop-p', max > 0 ? Math.min(1, y / max).toFixed(3) : '0');
+  };
+
+  window.addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  }, { passive: true });
+  window.addEventListener('resize', update, { passive: true });
+  update();
+
+  btn.addEventListener('click', (e) => {
+    window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+    // فقط با کیبورد (Enter/Space: detail صفر) فوکوس جابه‌جا شود؛ با موس لینک پرش ظاهر نشود.
+    if (e.detail === 0) {
+      const first = document.querySelector('.em-skip') || document.body;
+      first.focus({ preventScroll: true });
+    } else {
+      btn.blur();
+    }
+  });
+})();
+
+/* منوی اصلی (inc/menu.php):
+   - مگامنو: با هاور یا فوکوس روی هر دسته، محصولات همان دسته نمایش داده می‌شود (باز شدن خود پنل با CSS است).
+   - Esc کشو یا مگامنو را می‌بندد و فوکوس به آیتم منو برمی‌گردد.
+   - صفحه لمسی بدون هاور: لمس اول آیتم دارای زیرمنو آن را باز می‌کند، لمس دوم لینک را باز می‌کند.
+   - منوی موبایل: دکمه‌های [data-em-acc] زیرمنو یا فهرست محصولات را باز و بسته می‌کنند. */
+(() => {
+  const nav = document.querySelector('.em-nav__list');
+  if (nav) {
+    nav.querySelectorAll('[data-em-mega]').forEach((mega) => {
+      const cats = mega.querySelectorAll('[data-em-mega-cat]');
+      const panes = mega.querySelectorAll('[data-em-mega-pane]');
+      const activate = (i) => {
+        cats.forEach((c) => c.classList.toggle('is-active', c.dataset.emMegaCat === i));
+        panes.forEach((p) => p.classList.toggle('is-active', p.dataset.emMegaPane === i));
+      };
+      // عکس‌ها فقط بار اول که منو باز می‌شود (هاور، فوکوس یا لمس)
+      const li = mega.closest('li');
+      const loadImages = () => {
+        mega.querySelectorAll('img[data-src]').forEach((img) => {
+          img.src = img.dataset.src;
+          img.removeAttribute('data-src');
+        });
+      };
+      ['mouseenter', 'focusin', 'touchstart'].forEach((ev) => li.addEventListener(ev, loadImages, { once: true, passive: true }));
+      cats.forEach((c) => {
+        c.addEventListener('mouseenter', () => activate(c.dataset.emMegaCat));
+        c.addEventListener('focusin', () => activate(c.dataset.emMegaCat));
+      });
+    });
+
+    const tops = [...nav.children].filter((li) => li.querySelector(':scope > a[aria-haspopup]'));
+
+    // Esc: بستن و برگشت فوکوس به آیتم؛ تا خروج موس یا فوکوس بسته می‌ماند.
+    nav.addEventListener('keydown', (e) => {
+      if (e.key !== 'Escape') return;
+      const li = e.target.closest('.em-nav__list > li');
+      if (!li) return;
+      li.classList.remove('is-open');
+      li.classList.add('is-off');
+      li.querySelector(':scope > a').focus();
+    });
+    tops.forEach((li) => {
+      const reset = () => li.classList.remove('is-off');
+      li.addEventListener('mouseleave', reset);
+      li.addEventListener('focusout', (e) => {
+        if (!li.contains(e.relatedTarget)) {
+          reset();
+          li.classList.remove('is-open');
+        }
+      });
+    });
+
+    // لمسی بدون هاور (مثل تبلت افقی)
+    if (window.matchMedia('(hover: none)').matches) {
+      tops.forEach((li) => {
+        li.querySelector(':scope > a').addEventListener('click', (e) => {
+          if (li.classList.contains('is-open')) return;
+          e.preventDefault();
+          tops.forEach((o) => o.classList.remove('is-open'));
+          li.classList.add('is-open');
+        });
+      });
+      document.addEventListener('click', (e) => {
+        if (!nav.contains(e.target)) tops.forEach((o) => o.classList.remove('is-open'));
+      });
+    }
+  }
+
+  // آکاردئون منوی موبایل
+  document.querySelectorAll('[data-em-acc]').forEach((btn, n) => {
+    let target = document.getElementById(btn.getAttribute('aria-controls'));
+    if (!target) {
+      // زیرمنوی وردپرس شناسه ندارد: فهرست بعدی همان آیتم
+      target = btn.closest('li') && btn.closest('li').querySelector(':scope > ul');
+      if (!target) return;
+      target.id = target.id || 'em-acc-' + n;
+      btn.setAttribute('aria-controls', target.id);
+    }
+    btn.addEventListener('click', () => {
+      const open = btn.getAttribute('aria-expanded') !== 'true';
+      btn.setAttribute('aria-expanded', String(open));
+      target.hidden = !open;
+    });
+  });
+})();

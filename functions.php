@@ -22,3 +22,4 @@ require EMENTASH_DIR . '/inc/woocommerce.php';
 require EMENTASH_DIR . '/inc/contact-form.php';
 require EMENTASH_DIR . '/inc/blog.php';
 require EMENTASH_DIR . '/inc/industries.php';
+require EMENTASH_DIR . '/inc/menu.php';

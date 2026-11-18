@@ -113,6 +113,13 @@
   --ease-swap:cubic-bezier(.7,0,.2,1);
   --ease-media:cubic-bezier(.2,.7,.1,1);
   --mbar-space:0px;          /* ارتفاع نوار ثابت پایین موبایل */
+  --totop-size:48px;         /* دکمه بازگشت به بالا */
+  --totop-side:24px;
+  --menu-gap:14px;           /* فاصله کشو و مگامنو تا آیتم منو */
+  --menu-pad:8px;
+  --mega-cats:270px;         /* ستون دسته‌های مگامنو */
+  --mega-promo:240px;        /* ستون کاتالوگ مگامنو */
+  --shadow-menu:0 18px 40px rgba(8,17,63,.14);
   /* لودر هیرو تا آماده شدن ویدئو: مرکز حلقه‌ها (کنار خالی هیرو)، دور هر موج و مهلت محو شدن بدون JS */
   --loader-x:28%;
   --loader-y:50%;
@@ -234,6 +241,8 @@
     --radius-lg:16px;
     --radius-xl:16px;
     --mbar-space:76px;
+    --totop-size:44px;
+    --totop-side:14px;
     --svc-shade:linear-gradient(to left,#0B1550 42%,rgba(11,21,80,.7) 62%,rgba(11,21,80,.1) 100%);
     --svc-img-w:55%;
     --client-w:116px;
@@ -319,11 +328,11 @@ a:hover{color:var(--blue-hover)}
 .em-header--overlay .em-header__in{padding-block:var(--header-y-overlay)}
 
 .em-nav__list{display:flex;gap:var(--nav-gap);list-style:none;margin:0;padding:0;font-size:var(--fs-nav);font-weight:500}
-.em-nav__list a{color:var(--on-dark);transition:color .2s ease}
-.em-nav__list a:hover{color:var(--white)}
-.em-nav__list .current-menu-item > a,
-.em-nav__list .current-menu-ancestor > a,
-.em-nav__list .current_page_parent > a{color:var(--white);box-shadow:inset 0 -2px 0 var(--blue-light);padding-bottom:4px}
+.em-nav__list > li > a{color:var(--on-dark);transition:color .2s ease}
+.em-nav__list > li > a:hover{color:var(--white)}
+.em-nav__list > .current-menu-item > a,
+.em-nav__list > .current-menu-ancestor > a,
+.em-nav__list > .current_page_parent > a{color:var(--white);box-shadow:inset 0 -2px 0 var(--blue-light);padding-bottom:4px}
 
 .em-header__tools{display:flex;gap:12px;align-items:center}
 
@@ -383,6 +392,10 @@ a:hover{color:var(--blue-hover)}
 .em-soc a{width:var(--soc);height:var(--soc);display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line-on-dark-4);border-radius:50%;color:var(--on-dark);transition:background-color .2s ease,color .2s ease}
 .em-soc a:hover{background:var(--blue-light);color:var(--navy-900)}
 .em-soc svg{width:18px;height:18px}
+/* آیکون آپلودی (Customizer): هر رنگی باشد سفید تک‌رنگ؛ روی hover سرمه‌ای (قانون بدون قرمز و نارنجی) */
+.em-soc__img{display:block;width:18px;height:18px;object-fit:contain;filter:brightness(0) invert(1)}
+.em-soc a:hover .em-soc__img{filter:brightness(0)}
+.em-soc__letter{font-family:var(--font-head);font-size:15px;font-weight:600;line-height:1}
 .em-soc--lg{--soc:var(--soc-lg)}
 
 /* ---------- سربرگ صفحات داخلی ---------- */
@@ -595,7 +608,102 @@ a:hover{color:var(--blue-hover)}
 /* ---------- کاهش حرکت ---------- */
 @media (prefers-reduced-motion: reduce){
   .em-header--overlay,.em-mmenu{animation:none!important;opacity:1!important;transform:none!important}
-  .em-nav__list a,.em-soc a{transition:none!important}
+  .em-nav__list > li > a,.em-soc a{transition:none!important}
   [data-em-reveal],[data-em-reveal] .em-rw,[data-em-reveal] .em-card__img,[data-em-reveal] .em-gal__img{opacity:1!important;transform:none!important;clip-path:none!important;transition:none!important}
   .em-mw,.em-mr{animation:none!important;opacity:1!important}
+}
+
+/* ---------- بازگشت به بالا: دایره سرمه‌ای + حلقه پیشرفت اسکرول (template-parts/scroll-top.php) ---------- */
+.em-totop{position:fixed;inset-inline-end:var(--totop-side);bottom:calc(var(--mbar-space) + var(--totop-side) + env(safe-area-inset-bottom,0px));z-index:39;display:inline-flex;align-items:center;justify-content:center;width:var(--totop-size);height:var(--totop-size);padding:0;border:0;border-radius:50%;background:var(--navy-900);color:var(--white);box-shadow:var(--shadow-card);cursor:pointer;opacity:0;visibility:hidden;transform:translateY(12px) scale(.9);transition:opacity .3s ease,transform .3s ease,visibility 0s linear .3s,background-color .2s ease}
+.em-totop.is-on{opacity:1;visibility:visible;transform:none;transition-delay:0s}
+.em-totop:hover{background:var(--blue)}
+.em-totop:focus-visible{outline:2px solid var(--blue-light);outline-offset:3px}
+.em-totop__ring{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg);pointer-events:none}
+.em-totop__ring circle{fill:none;stroke-width:2.5}
+.em-totop__track{stroke:var(--white-a08)}
+/* --em-totop-p از ۰ تا ۱ (main.js) */
+.em-totop__bar{stroke:var(--blue-light);stroke-linecap:round;stroke-dasharray:100;stroke-dashoffset:calc(100 - var(--em-totop-p, 0) * 100)}
+/* آیکون فلش چپ، ۹۰ درجه ← بالا */
+.em-totop__icon{position:relative;width:20px;height:20px;transform:rotate(90deg);transition:transform .25s ease}
+.em-totop:hover .em-totop__icon{transform:translateY(-2px) rotate(90deg)}
+@media (prefers-reduced-motion: reduce){
+  .em-totop,.em-totop__icon{transition:none!important}
+  .em-totop{transform:none}
+}
+@media print{.em-totop{display:none}}
+
+/* ---------- منوی اصلی: زیرمنوی کشویی و مگامنوی محصولات (inc/menu.php) ---------- */
+.em-nav__list > li{position:relative}
+.em-nav__list > li.em-has-mega{position:static}
+/* فلش کوچک کنار آیتم‌های دارای زیرمنو */
+.em-nav__list > li > a[aria-haspopup]::after{content:"";display:inline-block;width:6px;height:6px;margin-inline-start:7px;border:solid currentColor;border-width:0 1.5px 1.5px 0;transform:translateY(-3px) rotate(45deg);transition:transform .2s ease}
+.em-nav__list > li:hover > a[aria-haspopup]::after,.em-nav__list > li:focus-within > a[aria-haspopup]::after,.em-nav__list > li.is-open > a[aria-haspopup]::after{transform:translateY(0) rotate(-135deg)}
+
+/* زیرمنوی کشویی (مثل صنایع) */
+.em-nav__list .sub-menu{position:absolute;top:calc(100% + var(--menu-gap));inset-inline-start:calc(var(--menu-pad) * -1);z-index:60;min-width:270px;margin:0;padding:var(--menu-pad);list-style:none;border:1px solid var(--line-soft);border-radius:var(--radius-md);background:var(--white);box-shadow:var(--shadow-menu);opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .2s ease,transform .2s ease,visibility 0s linear .2s}
+/* پل نامرئی بین آیتم و کشو تا هاور قطع نشود */
+.em-nav__list .sub-menu::before,.em-mega::before{content:"";position:absolute;left:0;right:0;bottom:100%;height:calc(var(--menu-gap) + 6px)}
+.em-nav__list > li:hover > .sub-menu,.em-nav__list > li:focus-within > .sub-menu,.em-nav__list > li.is-open > .sub-menu{opacity:1;visibility:visible;transform:none;transition-delay:0s}
+.em-nav__list > li.is-off > .sub-menu{opacity:0;visibility:hidden}
+.em-nav__list .sub-menu a{display:block;padding:9px 12px;border-radius:var(--radius-sm);color:var(--ink);font-size:var(--fs-sm);font-weight:500;line-height:1.6;white-space:nowrap}
+.em-nav__list .sub-menu a:hover,.em-nav__list .sub-menu .current-menu-item > a{background:var(--bg-soft);color:var(--blue)}
+.em-nav__list .sub-menu :focus-visible,.em-mega :focus-visible{outline-color:var(--blue)}
+
+/* مگامنو: تمام‌عرض زیر هدر */
+.em-mega{position:absolute;left:0;right:0;top:100%;z-index:60;border-top:1px solid var(--line-soft);background:var(--white);color:var(--ink);box-shadow:var(--shadow-menu);opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .2s ease,transform .2s ease,visibility 0s linear .2s}
+.em-nav__list > li.em-has-mega:hover > .em-mega,.em-nav__list > li.em-has-mega:focus-within > .em-mega,.em-nav__list > li.em-has-mega.is-open > .em-mega{opacity:1;visibility:visible;transform:none;transition-delay:0s}
+.em-nav__list > li.em-has-mega.is-off > .em-mega{opacity:0;visibility:hidden}
+.em-mega__in{display:grid;grid-template-columns:var(--mega-cats) minmax(0,1fr) var(--mega-promo);gap:28px;max-width:var(--container);max-height:calc(100vh - 110px);max-height:calc(100dvh - 110px);margin:0 auto;padding:26px var(--gutter) 30px;overflow-y:auto;overscroll-behavior:contain}
+.em-mega__cats{list-style:none;margin:0;padding:0;padding-inline-end:20px;border-inline-end:1px solid var(--line-soft)}
+.em-mega__cat > a{display:flex;align-items:center;gap:12px;padding:9px 10px;border-radius:var(--radius-sm);color:var(--ink);font-size:var(--fs-sm);font-weight:600;line-height:1.5;transition:background-color .15s ease,color .15s ease}
+.em-mega__cat.is-active > a,.em-mega__cat > a:hover{background:var(--bg-soft);color:var(--blue)}
+.em-mega__ico{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:var(--radius-sm);background:var(--bg-soft);color:var(--blue)}
+.em-mega__cat.is-active .em-mega__ico{background:var(--blue);color:var(--white)}
+.em-mega__ico svg{width:18px;height:18px}
+.em-mega__cname{flex:1;min-width:0}
+.em-mega__count{flex:0 0 auto;min-width:24px;padding:1px 8px;border-radius:var(--radius-pill);background:var(--chip-bg);color:var(--blue);font-size:var(--fs-xs);text-align:center}
+.em-mega__pane{display:none}
+.em-mega__pane.is-active{display:block;animation:em-fadein .2s ease both}
+.em-mega__head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--line-soft)}
+.em-mega__title{font-family:var(--font-head);font-weight:var(--fw-display);font-size:24px;line-height:1.4}
+.em-mega__all{display:inline-flex;align-items:center;gap:6px;color:var(--blue);font-size:var(--fs-sm);font-weight:600;white-space:nowrap}
+.em-mega__all svg{width:16px;height:16px}
+.em-mega__group + .em-mega__group{margin-top:14px}
+.em-mega__sub{display:inline-block;margin-bottom:6px;color:var(--muted);font-size:var(--fs-xs);font-weight:700;letter-spacing:.02em}
+.em-mega__sub:hover{color:var(--blue)}
+.em-mega__products{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 16px;list-style:none;margin:0;padding:0}
+.em-mega__product{display:flex;align-items:center;gap:10px;padding:6px;border-radius:var(--radius-sm);color:var(--ink);font-size:var(--fs-sm);line-height:1.5;transition:background-color .15s ease,color .15s ease}
+.em-mega__product:hover{background:var(--bg-soft);color:var(--blue)}
+.em-mega__thumb{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;overflow:hidden;border-radius:var(--radius-sm);background:var(--navy-900);color:var(--blue-light)}
+.em-mega__thumb img{display:block;width:100%;height:100%;object-fit:cover}
+.em-mega__thumb img:not([src]){visibility:hidden}
+/* محصول بدون عکس: نشان ساده CSS به‌جای SVG تکراری */
+.em-mega__thumb--ph::after{content:"";width:16px;height:16px;border:2px solid var(--blue-light);border-radius:4px;opacity:.6}
+.em-mega__pname{min-width:0}
+.em-mega__promo{display:flex;flex-direction:column;align-items:flex-start;gap:10px;align-self:start;padding:22px;border-radius:var(--radius-card);background:var(--navy-900);color:var(--white)}
+.em-mega__ptitle{font-family:var(--font-head);font-size:19px;font-weight:600;line-height:1.5}
+.em-mega__ptext{margin:0 0 4px;color:var(--on-dark-2);font-size:var(--fs-sm);line-height:1.7}
+.em-mega__pbtn{width:100%;justify-content:center}
+.em-mega__quote{color:var(--blue-light);font-size:var(--fs-sm);font-weight:600}
+.em-mega__quote:hover{color:var(--white)}
+.em-mega__promo :focus-visible{outline-color:var(--blue-light)}
+
+/* منوی موبایل: ردیف لینک + دکمه باز/بسته و آکاردئون */
+.em-mmenu__row{display:flex;align-items:stretch;border-bottom:1px solid var(--line-on-dark-3)}
+.em-mmenu__list .em-mmenu__row > a{flex:1;min-width:0;border-bottom:0}
+.em-mmenu__row > a svg{display:none}
+.em-mmenu__toggle{flex:0 0 48px;display:inline-flex;align-items:center;justify-content:center;padding:0;border:0;background:none;color:var(--blue-light);cursor:pointer}
+.em-mmenu__toggle svg{width:18px;height:18px;transform:rotate(-90deg);transition:transform .2s ease}
+.em-mmenu__toggle[aria-expanded="true"] svg{transform:rotate(90deg)}
+.em-mmenu__list .sub-menu,.em-mmenu__sub,.em-mmenu__products{list-style:none;margin:0;padding:4px 0 10px;padding-inline-start:14px}
+.em-mmenu__list .sub-menu a,.em-mmenu__sub a{padding:11px 2px;font-size:17px;border-bottom-color:var(--line-on-dark-1)}
+.em-mmenu__cat .em-mmenu__row{border-bottom-color:var(--line-on-dark-1)}
+.em-mmenu__count{display:inline-block;margin-inline-start:6px;padding:0 8px;border-radius:var(--radius-pill);background:var(--white-a08);color:var(--blue-light);font-family:var(--font-body);font-size:12px;line-height:1.8}
+/* بلوک ساده (نه flex): واژه‌های لاتین داخل bdi از هم جدا نیفتند */
+.em-mmenu__list .em-mmenu__products a,.em-mmenu__list .em-mmenu__cat .em-mmenu__row > a{display:block}
+.em-mmenu__list .em-mmenu__products a{padding:8px 2px;border-bottom:0;font-family:var(--font-body);font-size:15px;font-weight:400;color:var(--on-dark)}
+.em-mmenu__list .em-mmenu__group a{color:var(--blue-light);font-size:13px;font-weight:700}
+
+@media (prefers-reduced-motion: reduce){
+  .em-nav__list .sub-menu,.em-mega,.em-mega__pane.is-active,.em-mmenu__toggle svg,.em-nav__list > li > a[aria-haspopup]::after{transition:none!important;animation:none!important}
 }
