@@ -109,5 +109,11 @@ $ementash_id    = isset( $args['id'] ) ? sanitize_html_class( $args['id'] ) : ''
 		<button type="button" class="em-hzoom__close" data-em-hzoom-close aria-label="<?php esc_attr_e( 'بستن', 'ementash' ); ?>"><?php echo ementash_icon( 'close' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></button>
 		<img class="em-hzoom__img" src="data:," alt="">
 		<p class="em-hzoom__caption" data-em-hzoom-caption></p>
+		<?php // قبلی/بعدی بین همه افتخارات؛ در موبایل کشیدن انگشت هم کار می‌کند (honors.js). ?>
+		<div class="em-hzoom__nav">
+			<button type="button" class="em-hzoom__btn em-hzoom__prev" data-em-hzoom-prev aria-label="<?php esc_attr_e( 'افتخار قبلی', 'ementash' ); ?>"><?php echo ementash_icon( 'chevron' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></button>
+			<span class="em-hzoom__pos" data-em-hzoom-pos aria-live="polite"></span>
+			<button type="button" class="em-hzoom__btn em-hzoom__next" data-em-hzoom-next aria-label="<?php esc_attr_e( 'افتخار بعدی', 'ementash' ); ?>"><?php echo ementash_icon( 'chevron' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></button>
+		</div>
 	</dialog>
 </section>

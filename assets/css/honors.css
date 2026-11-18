@@ -46,9 +46,18 @@ a.em-honor__stage:hover .em-honor__zoom,a.em-honor__stage:focus-visible .em-hono
 .em-honor__sub{margin:0 0 4px;color:var(--on-dark-4);font-size:var(--fs-xs);line-height:1.6}
 
 /* پنجره عکس بزرگ */
-.em-hzoom{width:min(92vw,880px);max-height:92vh;padding:20px 20px 16px;border:1px solid var(--line-on-dark-3);border-radius:var(--radius-lg);background:var(--navy-900);color:var(--white)}
+/* dvh: ارتفاع واقعی صفحه موبایل با نوار آدرس مرورگر (vh آن را حساب نمی‌کند و پنجره بیرون می‌زد) */
+.em-hzoom{width:min(92vw,880px);max-height:92vh;max-height:92dvh;padding:20px 20px 16px;border:1px solid var(--line-on-dark-3);border-radius:var(--radius-lg);background:var(--navy-900);color:var(--white);overflow:hidden}
+.em-hzoom[open]{display:flex;flex-direction:column}
 .em-hzoom::backdrop{background:var(--hzoom-backdrop)}
-.em-hzoom__img{display:block;width:auto;max-width:100%;height:auto;max-height:72vh;margin:0 auto;object-fit:contain}
+.em-hzoom__img{display:block;width:auto;max-width:100%;height:auto;max-height:calc(92vh - 170px);max-height:calc(92dvh - 170px);margin:0 auto;object-fit:contain;touch-action:pan-y}
+.em-hzoom__nav{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px}
+.em-hzoom__nav[hidden]{display:none}
+.em-hzoom__pos{font-size:var(--fs-sm);color:var(--on-dark-2)}
+.em-hzoom__btn{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;padding:0;border:1px solid var(--white-a55);border-radius:50%;background:var(--navy-900);color:var(--white);cursor:pointer;transition:background-color .2s ease,color .2s ease}
+.em-hzoom__btn:hover{background:var(--white);color:var(--navy-900)}
+.em-hzoom__btn svg{width:20px;height:20px}
+.em-hzoom__prev svg{transform:scaleX(-1)}
 .em-hzoom__caption{margin:12px 0 0;text-align:center;font-family:var(--font-head);font-weight:500;font-size:18px}
 .em-hzoom__close{position:absolute;top:12px;inset-inline-end:12px;z-index:1;width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;padding:0;border:1px solid var(--white-a55);border-radius:50%;background:var(--navy-900);color:var(--white);cursor:pointer}
 .em-hzoom__close:hover{background:var(--white);color:var(--navy-900)}
@@ -59,7 +68,8 @@ a.em-honor__stage:hover .em-honor__zoom,a.em-honor__stage:focus-visible .em-hono
   .em-honor{padding:12px 10px 12px}
   .em-honor__title{font-size:14px}
   .em-honor__stage{margin-bottom:12px}
-  .em-hzoom{padding:16px 12px 12px}
+  .em-hzoom{width:calc(100vw - 24px);padding:16px 12px 12px}
+  .em-hzoom__img{max-height:calc(92vh - 150px);max-height:calc(92dvh - 150px)}
   .em-hzoom__caption{font-size:16px}
 }
 
@@ -68,6 +78,6 @@ a.em-honor__stage:hover .em-honor__zoom,a.em-honor__stage:focus-visible .em-hono
   .em-honors__view{overflow-x:auto;-webkit-mask-image:none;mask-image:none}
   .em-honors__track{animation:none!important}
   .em-honors__list[data-em-copy]{display:none}
-  .em-honor,.em-honor__img,.em-honor__stage::before,.em-honor__zoom{transition:none!important}
+  .em-honor,.em-honor__img,.em-honor__stage::before,.em-honor__zoom,.em-hzoom__btn{transition:none!important}
   a.em-honor__stage:hover .em-honor__img,a.em-honor__stage:focus-visible .em-honor__img,a.em-honor__stage:hover::before{transform:none}
 }
