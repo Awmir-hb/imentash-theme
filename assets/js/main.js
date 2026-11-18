@@ -83,13 +83,13 @@
     '.em-h2': 'words',
     '.em-head__text, .em-acards__text, .em-textile__text, .em-banner__text': 'read',
     '.em-frame__img, .em-story__img, .em-rd__img, .em-textile__media': 'curtain',
-    '.em-quote, .em-rd__text, .em-hstrip': 'up',
+    '.em-quote, .em-rd__text': 'up',
     '.em-fcta': 'pop',
   };
   const lists = {
     '.em-svcs': 'side',
     '.em-inds, .em-gal': 'zoom',
-    '.em-posts, .em-pgrid, .em-acards__list, .em-certs__list, .em-tl, .em-rd__list, .em-vals,.em-offices__list, .em-stats': 'up',
+    '.em-posts, .em-pgrid, .em-acards__list, .em-certs__list, .em-tl, .em-rd__list, .em-vals,.em-offices__list, .em-stats, .em-creds__stats': 'up',
   };
 
   // همه اندازه‌گیری‌ها اول، بعد نوشتن (بدون رفت‌وبرگشت layout).
@@ -182,8 +182,9 @@
       const el = en.target;
       io.unobserve(el);
       el.classList.add('is-in');
-      el.querySelectorAll('.em-stat__num').forEach(countUp);
-      if (el.matches('.em-stat__num')) countUp(el);
+      // شمارنده‌ها: آمار صفحه اصلی و شمارنده‌های گواهینامه درباره ما
+      el.querySelectorAll('.em-stat__num, .em-creds__num').forEach(countUp);
+      if (el.matches('.em-stat__num, .em-creds__num')) countUp(el);
       // بعد از ظاهر شدن، تأخیر و ویژگی پاک می‌شود تا روی hover و بقیه حرکت‌ها اثری نماند.
       const done = (ev) => {
         if (ev.target !== el) return; // transitionend فرزندها (مثل hover عکس) بالا می‌آید

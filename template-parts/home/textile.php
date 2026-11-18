@@ -1,6 +1,7 @@
 <?php
 /**
- * صفحه اصلی: محصولات کمک‌نساجی (KX-327): متن، ظرف‌های بسته‌بندی، دکمه کاتالوگ و عکس با کد بزرگ.
+ * صفحه اصلی: محصولات کمک‌نساجی (KX-327) روی زمینه روشن: متن، ظرف‌های بسته‌بندی، دکمه کاتالوگ و عکس.
+ * کد محصول: بدون عکس، کد بزرگ توخالی روی جای خالی؛ با عکس، برچسب کوچک گوشه عکس.
  *
  * @package ementash
  */
@@ -16,7 +17,7 @@ $ementash_catalog = absint( ementash_get( 'textile_catalog' ) );
 $ementash_btn     = (string) ementash_get( 'textile_btn_label' );
 $ementash_file    = $ementash_catalog ? wp_get_attachment_url( $ementash_catalog ) : '';
 ?>
-<section class="em-section em-section--graphite em-textile"<?php echo '' !== $ementash_title ? ' aria-labelledby="em-textile-title"' : ''; ?>>
+<section class="em-section em-section--steel em-textile"<?php echo '' !== $ementash_title ? ' aria-labelledby="em-textile-title"' : ''; ?>>
 	<div class="em-container em-textile__in">
 		<div class="em-textile__body">
 			<?php if ( '' !== $ementash_title ) : ?>
@@ -33,11 +34,11 @@ $ementash_file    = $ementash_catalog ? wp_get_attachment_url( $ementash_catalog
 				</ul>
 			<?php endif; ?>
 			<?php if ( $ementash_file && '' !== $ementash_btn ) : ?>
-				<a class="em-btn em-btn--light em-textile__btn" href="<?php echo esc_url( $ementash_file ); ?>" download><?php echo ementash_bdi( $ementash_btn ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></a>
+				<a class="em-btn em-btn--brand em-textile__btn" href="<?php echo esc_url( $ementash_file ); ?>" download><?php echo ementash_bdi( $ementash_btn ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></a>
 			<?php endif; ?>
 		</div>
 
-		<div class="em-textile__media">
+		<div class="em-textile__media<?php echo $ementash_image ? ' em-textile__media--photo' : ''; ?>">
 			<?php
 			if ( $ementash_image ) {
 				echo wp_get_attachment_image(

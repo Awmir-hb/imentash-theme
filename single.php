@@ -45,6 +45,7 @@ if ( ! ementash_elementor_location( 'single' ) ) {
 						'datetime' => get_the_date( 'c' ),
 					),
 					array( 'text' => $ementash_cat ? $ementash_cat->name : '' ),
+					array( 'text' => ementash_reading_time( get_the_ID() ) ),
 				),
 			)
 		);

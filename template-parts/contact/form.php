@@ -65,9 +65,11 @@ $ementash_title = (string) ementash_get( 'contact_form_title' );
 $ementash_text  = (string) ementash_get( 'contact_form_text' );
 $ementash_map   = absint( ementash_get( 'contact_map_image' ) );
 $ementash_route = (string) ementash_get( 'contact_map_url' );
+// نقشه زنده فقط وقتی تصویر نقشه انتخاب نشده.
+$ementash_embed = $ementash_map ? '' : ementash_map_embed_url( ementash_get( 'contact_map_coords' ) );
 $ementash_hours = (string) ementash_get( 'work_hours' );
 $ementash_email = (string) ementash_get( 'email' );
-$ementash_aside = $ementash_map || '' !== $ementash_hours || '' !== $ementash_email;
+$ementash_aside = $ementash_map || '' !== $ementash_embed || '' !== $ementash_hours || '' !== $ementash_email;
 $ementash_type  = '' !== $ementash_val( 'type' ) ? $ementash_val( 'type' ) : (string) key( $ementash_types );
 
 if ( $ementash_sent ) {
@@ -135,19 +137,23 @@ if ( $ementash_sent ) {
 
 		<?php if ( $ementash_aside ) : ?>
 			<aside class="em-contact__side">
-				<?php if ( $ementash_map ) : ?>
+				<?php if ( $ementash_map || '' !== $ementash_embed ) : ?>
 					<figure class="em-map">
-						<?php
-						echo wp_get_attachment_image(
-							$ementash_map,
-							'large',
-							false,
-							array(
-								'loading' => 'lazy',
-								'sizes'   => '(max-width: 900px) 100vw, 540px',
-							)
-						);
-						?>
+						<?php if ( $ementash_map ) : ?>
+							<?php
+							echo wp_get_attachment_image(
+								$ementash_map,
+								'large',
+								false,
+								array(
+									'loading' => 'lazy',
+									'sizes'   => '(max-width: 900px) 100vw, 540px',
+								)
+							);
+							?>
+						<?php else : ?>
+							<iframe class="em-map__frame" src="<?php echo esc_url( $ementash_embed ); ?>" title="<?php esc_attr_e( 'نقشه محل دفتر', 'ementash' ); ?>" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+						<?php endif; ?>
 						<?php if ( '' !== $ementash_route && '' !== (string) ementash_get( 'contact_map_label' ) ) : ?>
 							<figcaption>
 								<a class="em-map__link" href="<?php echo esc_url( $ementash_route ); ?>" target="_blank" rel="noopener"><?php echo ementash_bdi( ementash_get( 'contact_map_label' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?><span class="screen-reader-text"><?php esc_html_e( '(در پنجره جدید)', 'ementash' ); ?></span></a>

@@ -48,16 +48,34 @@ add_action( 'after_setup_theme', 'ementash_setup' );
 /**
  * سایزهای ساخته‌شده از JPEG و PNG به WebP ذخیره می‌شوند (حدود ۳۰٪ سبک‌تر با همان کیفیت).
  * فایل اصلی آپلودشده دست نمی‌خورد. فقط اگر سرور WebP را پشتیبانی کند.
+ * PNG پالت‌دار (۸ بیتی، مثل لوگوهای کوچک) PNG می‌ماند: GD آن را به WebP تبدیل نمی‌کند و فایل خالی می‌سازد.
+ *
+ * @param array  $formats  نگاشت نوع ورودی ← نوع خروجی.
+ * @param string $filename مسیر فایل در حال پردازش.
+ * @param string $mime     نوع فایل.
  */
-function ementash_webp_subsizes( $formats ) {
+function ementash_webp_subsizes( $formats, $filename = '', $mime = '' ) {
 	if ( ! wp_image_editor_supports( array( 'mime_type' => 'image/webp' ) ) ) {
 		return $formats;
 	}
 	$formats['image/jpeg'] = 'image/webp';
-	$formats['image/png']  = 'image/webp';
+	if ( 'image/png' !== $mime || ! ementash_is_palette_png( $filename ) ) {
+		$formats['image/png'] = 'image/webp';
+	}
 	return $formats;
 }
-add_filter( 'image_editor_output_format', 'ementash_webp_subsizes' );
+add_filter( 'image_editor_output_format', 'ementash_webp_subsizes', 10, 3 );
+
+/**
+ * PNG پالت‌دار؟ (بایت نوع رنگ در سرآیند IHDR = ۳).
+ */
+function ementash_is_palette_png( $filename ) {
+	if ( '' === $filename || ! is_readable( $filename ) ) {
+		return false;
+	}
+	$head = file_get_contents( $filename, false, null, 0, 26 ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+	return is_string( $head ) && 26 === strlen( $head ) && 3 === ord( $head[25] );
+}
 
 /**
  * کیفیت WebP: ۷۵ (پیش‌فرض وردپرس ۸۶). در عکس‌های پرجزئیات حدود ۴۰٪ سبک‌تر از JPEG وردپرس، بدون افت دیدنی.

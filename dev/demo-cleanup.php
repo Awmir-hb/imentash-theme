@@ -2,6 +2,8 @@
 /**
  * حذف داده دمو (فقط CLI). فقط مواردی که نامکشان با em-demo- شروع می‌شود یا متای _em_demo دارند.
  * بدون --confirm فقط فهرست چیزهایی که حذف می‌شوند چاپ می‌شود و چیزی پاک نمی‌شود.
+ * پست‌ها، محصولات و پیوست‌ها به زباله‌دان می‌روند؛ دسته‌ها و برچسب‌ها زباله‌دان ندارند و حذف می‌شوند.
+ * گزینه --keep=12,34 شناسه‌هایی را که نباید دست بخورند کنار می‌گذارد.
  *
  * php -c <php.ini سایت Local> dev/demo-cleanup.php            ← فقط فهرست
  * php -c <php.ini سایت Local> dev/demo-cleanup.php --confirm  ← حذف و برگرداندن تنظیمات صفحه اول
@@ -42,6 +44,15 @@ foreach ( $by_slug as $id ) {
 	}
 }
 $post_ids = array_unique( array_map( 'intval', $post_ids ) );
+$keep     = array();
+foreach ( $argv as $arg ) {
+	if ( 0 === strpos( $arg, '--keep=' ) ) {
+		$keep = array_map( 'intval', explode( ',', substr( $arg, 7 ) ) );
+	}
+}
+$post_ids = array_diff( $post_ids, $keep );
+// پست‌هایی که قبلاً در زباله‌دان هستند دوباره فهرست نشوند.
+$post_ids = array_filter( $post_ids, static fn( $id ) => 'trash' !== get_post_status( $id ) );
 
 $terms = array();
 foreach ( array( 'category', 'post_tag', 'product_cat' ) as $tax ) {
@@ -73,14 +84,9 @@ if ( is_array( $backup ) ) {
 	}
 	delete_option( 'em_demo_backup' );
 }
+// زباله‌دان، نه حذف دائمی (پیوست‌ها هم وضعیت trash می‌گیرند و فایلشان می‌ماند).
 foreach ( $post_ids as $id ) {
-	if ( 'attachment' === get_post_type( $id ) ) {
-		wp_delete_attachment( $id, true );
-	} elseif ( 'product' === get_post_type( $id ) && function_exists( 'wc_get_product' ) && wc_get_product( $id ) ) {
-		wc_get_product( $id )->delete( true );
-	} else {
-		wp_delete_post( $id, true );
-	}
+	wp_trash_post( $id );
 }
 foreach ( $terms as $t ) {
 	wp_delete_term( $t->term_id, $t->taxonomy );

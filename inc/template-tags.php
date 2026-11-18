@@ -287,7 +287,8 @@ function ementash_logo( $class = '' ) {
 			array(
 				'class'    => 'em-logo__img',
 				'alt'      => $name,
-				'loading'  => 'eager',
+				// لوگوی فوتر پایین صفحه است؛ لوگوی هدر فوراً.
+				'loading'  => false !== strpos( $class, 'footer' ) ? 'lazy' : 'eager',
 				'decoding' => 'async',
 			)
 		);
@@ -517,4 +518,31 @@ function ementash_bdi_html( $html ) {
 		}
 	}
 	return $out;
+}
+
+/**
+ * آدرس نقشه زنده (iframe گوگل، بدون کلید API؛ مثل سایت قدیمی) از مختصات «عرض,طول».
+ * ارقام فارسی هم پذیرفته می‌شود. مختصات نامعتبر = رشته خالی.
+ *
+ * @param string $coords مثلاً «32.6323,51.6665».
+ */
+function ementash_map_embed_url( $coords ) {
+	$coords = strtr( (string) $coords, array_combine( array( '۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹', '٫', '،' ), array( '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', ',' ) ) );
+	if ( ! preg_match( '/^\s*(-?\d{1,2}(?:\.\d+)?)\s*,\s*(-?\d{1,3}(?:\.\d+)?)\s*$/', $coords, $m ) ) {
+		return '';
+	}
+	$lat = (float) $m[1];
+	$lng = (float) $m[2];
+	if ( abs( $lat ) > 90 || abs( $lng ) > 180 ) {
+		return '';
+	}
+	return add_query_arg(
+		array(
+			'q'      => rawurlencode( round( $lat, 6 ) . ',' . round( $lng, 6 ) ),
+			'z'      => 16,
+			'hl'     => 'fa',
+			'output' => 'embed',
+		),
+		'https://maps.google.com/maps'
+	);
 }

@@ -148,6 +148,52 @@ function ementash_certificate_kinds() {
 }
 
 /**
+ * دسته گواهینامه برای شمارنده‌های سربرگ بخش اعتبار (برگه درباره ما).
+ */
+function ementash_certificate_categories() {
+	return array(
+		'national'      => __( 'استاندارد و مجوز ملی', 'ementash' ),
+		'international' => __( 'گواهی بین‌المللی', 'ementash' ),
+		'membership'    => __( 'عضویت', 'ementash' ),
+	);
+}
+
+/**
+ * نحوه نمایش گواهینامه: کارت ویترین (اسکن) یا نشان کوچک.
+ */
+function ementash_certificate_displays() {
+	return array(
+		'showcase' => __( 'ویترین (اسکن گواهینامه)', 'ementash' ),
+		'badge'    => __( 'نشان کوچک (لوگو)', 'ementash' ),
+	);
+}
+
+/**
+ * گواهینامه‌های ویترین، گروه‌شده: هم‌گروه‌ها یک کارت با چند سند می‌شوند (به ترتیب menu_order).
+ * خروجی: [ ['title' => string, 'items' => WP_Post[]], ... ]
+ *
+ * @param WP_Post[] $certs گواهینامه‌ها.
+ */
+function ementash_certificate_cards( $certs ) {
+	$cards = array();
+	foreach ( $certs as $cert ) {
+		if ( 'badge' === ementash_meta( $cert->ID, 'display' ) ) {
+			continue;
+		}
+		$group = trim( (string) ementash_meta( $cert->ID, 'group' ) );
+		$key   = '' !== $group ? 'g:' . $group : 'p:' . $cert->ID;
+		if ( ! isset( $cards[ $key ] ) ) {
+			$cards[ $key ] = array(
+				'title' => '' !== $group ? $group : get_the_title( $cert ),
+				'items' => array(),
+			);
+		}
+		$cards[ $key ]['items'][] = $cert;
+	}
+	return array_values( $cards );
+}
+
+/**
  * ستون «نوع» در فهرست گواهینامه‌ها.
  */
 function ementash_certificate_columns( $columns ) {

@@ -440,3 +440,16 @@ function ementash_post_products_save( $post_id ) {
 	}
 }
 add_action( 'save_post_post', 'ementash_post_products_save' );
+
+/**
+ * متن «N دقیقه مطالعه» یک نوشته (حدود ۲۰۰ کلمه در دقیقه؛ کمینه ۱).
+ *
+ * @param int|WP_Post $post نوشته.
+ */
+function ementash_reading_time( $post ) {
+	$text    = wp_strip_all_tags( strip_shortcodes( (string) get_post_field( 'post_content', $post ) ) );
+	$words   = count( preg_split( '/\s+/u', trim( $text ), -1, PREG_SPLIT_NO_EMPTY ) );
+	$minutes = max( 1, (int) ceil( $words / 200 ) );
+	/* translators: %s: تعداد دقیقه */
+	return sprintf( _n( '%s دقیقه مطالعه', '%s دقیقه مطالعه', $minutes, 'ementash' ), ementash_fa_num( $minutes ) );
+}

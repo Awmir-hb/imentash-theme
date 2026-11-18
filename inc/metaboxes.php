@@ -91,6 +91,24 @@ function ementash_meta_boxes() {
 					'mime'        => 'application/pdf',
 					'description' => __( 'اگر انتخاب شود، کارت گواهینامه به این فایل لینک می‌شود.', 'ementash' ),
 				),
+				'display'  => array(
+					'type'        => 'select',
+					'label'       => __( 'نمایش (فقط نوع گواهینامه)', 'ementash' ),
+					'choices'     => ementash_certificate_displays(),
+					'default'     => 'showcase',
+					'description' => __( 'ویترین: کارت بزرگ با اسکن که با کلیک بزرگ می‌شود. نشان: ردیف نشان‌های کوچک زیر ویترین.', 'ementash' ),
+				),
+				'group'    => array(
+					'type'        => 'text',
+					'label'       => __( 'گروه ویترین (اختیاری)', 'ementash' ),
+					'description' => __( 'گواهینامه‌های ویترین با گروه یکسان یک کارت می‌شوند و این متن عنوان کارت است؛ مثلاً «TÜV NORD آلمان».', 'ementash' ),
+				),
+				'category' => array(
+					'type'        => 'select',
+					'label'       => __( 'دسته (شمارنده سربرگ)', 'ementash' ),
+					'choices'     => ementash_certificate_categories(),
+					'default'     => 'national',
+				),
 			),
 		),
 		'product_applications' => array(
@@ -152,9 +170,9 @@ function ementash_meta_boxes() {
 				),
 				'about_cert_title'     => array(
 					'type'        => 'text',
-					'label'       => __( 'تیتر گواهینامه‌ها و افتخارات', 'ementash' ),
-					'description' => __( 'گواهینامه‌ها و افتخارات از بخش «گواهینامه‌ها» در پیشخوان خوانده می‌شوند.', 'ementash' ),
-					'default'     => __( 'اعتبار و افتخارات', 'ementash' ),
+					'label'       => __( 'تیتر گواهینامه‌ها', 'ementash' ),
+					'description' => __( 'گواهینامه‌ها از بخش «گواهینامه‌ها» در پیشخوان خوانده می‌شوند. افتخارات بخش جدای بعدی است و تیترش از Customizer (صفحه اصلی: افتخارات) می‌آید.', 'ementash' ),
+					'default'     => __( 'گواهینامه‌ها و استانداردها', 'ementash' ),
 				),
 				'about_cert_text'      => array(
 					'type'    => 'textarea',

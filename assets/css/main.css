@@ -119,6 +119,7 @@
   --ahero-h:440px;
   --ahero-stats-bottom:40px;  /* فاصله نوار آمار شیشه‌ای تا لبه پایین سربرگ */
   --glass-bg:rgba(8,17,63,.45);
+  --lb-backdrop:rgba(8,17,63,.88);   /* پس‌زمینه لایت‌باکس گواهینامه */
   --glass-edge:linear-gradient(to left,rgba(143,180,255,0),rgba(143,180,255,.6),rgba(143,180,255,0));
   --ahero-shade:linear-gradient(to top,rgba(8,17,63,.95) 0%,rgba(8,17,63,.6) 55%,rgba(8,17,63,.35) 100%);
   /* ویدئوی سربرگ خودش زمینه سرمه‌ای دارد؛ فقط پایین کادر برای خوانایی تیتر تیره می‌شود */
@@ -128,11 +129,8 @@
   --tl-dot-y:24px;
   --tl-year-w:120px;
   --tl-year-fs:40px;
-  --hitem-w:260px;
-  --hitem-img:64px;
   --white-a60:rgba(255,255,255,.6);
   --line-on-dark-5:rgba(143,180,255,.55);
-  --line-client:#DCE2F0;
   --radius-sm:8px;
   --radius-card:16px;
   --card-inset:6px;          /* فاصله عکس از لبه کارت؛ گردی عکس = گردی کارت منهای همین (هم‌مرکز) */
@@ -143,7 +141,10 @@
   --svc-img-w:62%;
   /* محو شدن دو لبه نوار مشتریان (رنگ ماسک فقط شفافیت را تعیین می‌کند) */
   --mask-edges:linear-gradient(to left,transparent 0,#000 6%,#000 94%,transparent 100%);
-  --clients-gap:44px;
+  --client-w:150px;            /* کارت لوگوی مشتری (لوگوها بیشتر عمودی‌اند) */
+  --client-h:108px;
+  --client-gap:14px;
+  --client-card-bg:linear-gradient(180deg,rgba(255,255,255,.09) 0%,rgba(255,255,255,.03) 100%);
   --white-a45:rgba(255,255,255,.45);
   --line-on-dark-6:rgba(143,180,255,.5);
   /* پنل تصویری دسته محصولات */
@@ -221,7 +222,6 @@
     --ahero-stats-bottom:24px;
     --tl-year-fs:30px;
     --tl-dot-y:18px;
-    --hitem-w:230px;
     --dots-size:18px;
     --pl-map-max:none;
     --radius-lg:16px;
@@ -229,7 +229,9 @@
     --mbar-space:76px;
     --svc-shade:linear-gradient(to left,#0B1550 42%,rgba(11,21,80,.7) 62%,rgba(11,21,80,.1) 100%);
     --svc-img-w:55%;
-    --clients-gap:32px;
+    --client-w:116px;
+    --client-h:86px;
+    --client-gap:10px;
     --honor-img-h:140px;
     --honor-w:160px;
     --honors-y:36px;

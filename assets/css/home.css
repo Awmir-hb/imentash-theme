@@ -134,6 +134,8 @@ a.em-ind:hover .em-card__img::after{opacity:0}
 
 @media (max-width:900px){
   .em-inds{grid-template-columns:repeat(2,minmax(0,1fr))}
+  /* تعداد فرد: کارت اول تمام‌عرض تا کارت آخر تنها نماند (۹ = ۱ + ۴×۲) */
+  .em-inds__item:first-child:nth-last-child(odd){grid-column:1 / -1}
 }
 /* موبایل: اسلایدر افقی با اسکرول بومی (MobileHome.dc.html) */
 @media (max-width:767px){
@@ -146,27 +148,27 @@ a.em-ind:hover .em-card__img::after{opacity:0}
   .em-rail-hint{display:block;margin:10px 0 0;font-size:var(--fs-xs);color:var(--muted)}
 }
 
-/* ---------- مشتریان ---------- */
-/* بعد از صنایع، در ادامه همان زمینه روشن و با فاصله کمتر */
-.em-industries + .em-clients{padding-top:0;margin-top:calc(var(--clients-gap) - var(--section-y))}
-.em-clients__title{margin:0 0 18px;font-family:var(--font-head);font-weight:600;font-size:22px;line-height:1.5}
+/* ---------- مشتریان: زمینه سرمه‌ای، دو ردیف خلاف هم، لوگوی سفید روی کارت تیره ---------- */
+.em-clients{background-color:var(--navy-900);color:var(--white)}
+.em-clients__title{margin:0 0 28px;text-align:center;font-family:var(--font-head);font-weight:var(--fw-display);font-size:28px;line-height:1.5;color:var(--white)}
+.em-clients__rows{display:grid;row-gap:var(--client-gap)}
 .em-clients__wrap{overflow:hidden;-webkit-mask-image:var(--mask-edges);mask-image:var(--mask-edges)}
-.em-clients__track{display:flex;width:max-content;animation:em-marquee 40s linear infinite}
+/* سرعت ثابت برای هر لوگو، هرچقدر تعداد */
+.em-clients__track{display:flex;width:max-content;animation:em-marquee calc(var(--em-clients-n, 10) * 3.2s) linear infinite}
+.em-clients__track--rev{animation-direction:reverse}
 .em-clients__wrap:hover .em-clients__track{animation-play-state:paused}
 @keyframes em-marquee{from{transform:translateX(0)}to{transform:translateX(50%)}}
 .em-clients__list{display:flex;list-style:none;margin:0;padding:0}
-.em-client{flex:0 0 auto;width:210px;margin-left:16px;text-align:center}
-.em-client__logo{display:flex;align-items:center;justify-content:center;height:112px;padding:16px;background:var(--white);border:1px solid var(--line-client);border-radius:var(--radius-card)}
-.em-client__logo img{width:auto;height:auto;max-width:100%;max-height:100%;object-fit:contain}
-.em-client__name{display:block;margin-top:10px;font-size:var(--fs-sm);font-weight:500;line-height:1.6;color:var(--ink)}
+.em-client{flex:0 0 auto;margin-left:var(--client-gap)}
+.em-client__logo{display:flex;align-items:center;justify-content:center;width:var(--client-w);height:var(--client-h);padding:12px 16px;border:1px solid var(--white-a08);border-radius:var(--radius-card);background:var(--client-card-bg)}
+/* لوگوی رنگی ← سفید یک‌رنگ (بدون قرمز و نارنجی روی زمینه تیره) */
+.em-client__logo img{display:block;width:auto;height:auto;max-width:100%;max-height:100%;object-fit:contain;filter:brightness(0) invert(1);opacity:.78;transition:opacity .2s ease}
+.em-client:hover .em-client__logo img{opacity:1}
 
 @media (max-width:767px){
-  .em-clients__title{margin-bottom:12px;font-size:19px}
+  .em-clients__title{margin-bottom:18px;font-size:22px}
   .em-clients__wrap{margin:0 calc(var(--gutter) * -1);-webkit-mask-image:none;mask-image:none}
-  .em-clients__track{animation-duration:30s}
-  .em-client{width:150px;margin-left:12px}
-  .em-client__logo{height:84px;padding:12px;border-radius:var(--radius-sm)}
-  .em-client__name{margin-top:6px;font-size:12px}
+  .em-client__logo{padding:8px 10px;border-radius:var(--radius-sm)}
 }
 
 /* ---------- خدمات ---------- */
@@ -388,10 +390,10 @@ a.em-svc:hover .em-svc__arrow{background:var(--white);color:var(--navy-800)}
 .em-textile__text{max-width:480px;margin:0 0 24px;color:var(--muted)}
 .em-textile__packs{display:flex;flex-wrap:wrap;gap:10px;list-style:none;margin:0 0 32px;padding:0}
 .em-textile__packs li{padding:6px 16px;border:1px solid var(--line);border-radius:var(--radius-pill);font-size:var(--fs-nav)}
-.em-textile.em-section--graphite .em-h2{color:var(--white)}
 .em-textile__media{position:relative;flex:1 1 460px;min-width:0;min-height:320px;overflow:hidden;border-radius:var(--radius-sm)}
 .em-textile__media img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover}
 /* کد بزرگ توخالی روی عکس */
+.em-textile__media--photo .em-textile__badge{inset:auto;inset-block-end:16px;inset-inline-start:16px;padding:6px 14px;border-radius:var(--radius-pill);background:var(--navy-900);font-size:var(--fs-sm);font-weight:700;color:var(--white);-webkit-text-stroke:0}
 .em-textile__badge{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-weight:700;font-size:clamp(64px,8vw,130px);line-height:1;color:transparent;-webkit-text-stroke:1.5px var(--on-dark-3);pointer-events:none}
 
 @media (max-width:767px){
@@ -423,7 +425,7 @@ a.em-svc:hover .em-svc__arrow{background:var(--white);color:var(--navy-800)}
   .em-post{border-radius:var(--radius-card)}
   .em-post__body{padding:14px 16px 16px}
   .em-post__meta{gap:4px 8px;margin-bottom:4px;font-size:12px}
-  .em-post__cat{padding:0;background:none}
+  .em-post__cat{inset-block-start:8px;inset-inline-start:8px;padding:2px 10px}
   .em-post__title{margin:0;font-size:17px}
 }
 
@@ -444,7 +446,8 @@ a.em-svc:hover .em-svc__arrow{background:var(--white);color:var(--navy-800)}
   /* نوار مشتریان ثابت و چندخطی؛ تکرارها پنهان */
   .em-clients__wrap{-webkit-mask-image:none;mask-image:none}
   .em-clients__track{width:auto;animation:none!important}
-  .em-clients__list{flex-wrap:wrap;row-gap:16px}
+  .em-clients__list{flex-wrap:wrap;justify-content:center;row-gap:var(--client-gap)}
+  .em-client__logo img{transition:none!important}
   .em-clients__list[aria-hidden],.em-client[data-em-copy]{display:none}
   /* محصولات و خط تولید: بدون جابه‌جایی؛ نقشه کامل و ثابت */
   .em-ppanel__img{animation:none!important}

@@ -21,7 +21,7 @@ $ementash_photo  = ! isset( $args['photo'] ) || $args['photo'] ? absint( ementas
 <section class="em-pagehead<?php echo $ementash_photo ? ' em-pagehead--photo' . ( ementash_get( 'pagehead_flip' ) ? ' em-pagehead--flip' : '' ) : ''; ?>">
 	<?php if ( $ementash_photo ) : ?>
 		<?php // بالای صفحه است؛ lazy نمی‌شود. ?>
-		<div class="em-duo" aria-hidden="true"><?php echo wp_get_attachment_image( $ementash_photo, 'full', false, array( 'alt' => '', 'sizes' => '100vw', 'loading' => 'eager', 'decoding' => 'async' ) ); ?></div>
+		<div class="em-duo" aria-hidden="true"><?php echo wp_get_attachment_image( $ementash_photo, 'full', false, array( 'alt' => '', 'sizes' => '100vw', 'loading' => 'eager', 'fetchpriority' => 'high', 'decoding' => 'async' ) ); ?></div>
 	<?php endif; ?>
 	<div class="em-pagehead__in">
 		<?php if ( $ementash_crumbs ) : ?>

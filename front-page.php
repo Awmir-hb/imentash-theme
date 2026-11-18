@@ -19,6 +19,7 @@ if ( ementash_home_is_elementor() ) {
 }
 
 // ترتیب سکشن‌ها؛ برای جابه‌جایی همین فهرست را مرتب کنید.
+// ریتم: بخش‌های تیره (هیرو، افتخارات، مشتریان، بنر، خط تولید) و روشن یکی‌درمیان.
 // هر نام = template-parts/home/{نام}.php و کلید روشن/خاموش آن در Customizer (ementash_home_sections).
 $ementash_sections = array(
 	'hero',
@@ -26,12 +27,12 @@ $ementash_sections = array(
 	'honors',
 	'industries',
 	'clients',
+	'products',
 	'services',
 	'banner',
-	'products',
+	'textile',
 	'production-line',
 	'gallery',
-	'textile',
 	'blog',
 );
 

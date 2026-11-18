@@ -372,10 +372,16 @@ function ementash_customizer_schema() {
 					'label'   => __( 'پیام ارسال موفق', 'ementash' ),
 					'default' => __( 'درخواست شما ثبت شد. کارشناس فروش به‌زودی با شما تماس می‌گیرد.', 'ementash' ),
 				),
+				'contact_map_coords' => array(
+					'type'        => 'text',
+					'label'       => __( 'مختصات نقشه', 'ementash' ),
+					'description' => __( 'عرض و طول جغرافیایی با ویرگول، مثلاً 32.6323,51.6665. نقشه زنده در صفحه تماس نمایش داده می‌شود (اگر تصویر نقشه انتخاب نشده باشد).', 'ementash' ),
+					'default'     => '',
+				),
 				'contact_map_image'  => array(
 					'type'        => 'image',
-					'label'       => __( 'تصویر نقشه', 'ementash' ),
-					'description' => __( 'متن جایگزین از کتابخانه رسانه. اگر خالی باشد جای نقشه نمایش داده نمی‌شود.', 'ementash' ),
+					'label'       => __( 'تصویر نقشه (به‌جای نقشه زنده)', 'ementash' ),
+					'description' => __( 'اختیاری. اگر انتخاب شود به‌جای نقشه زنده نمایش داده می‌شود. متن جایگزین از کتابخانه رسانه.', 'ementash' ),
 					'default'     => 0,
 				),
 				'contact_map_url'    => array(
@@ -673,7 +679,7 @@ function ementash_customizer_schema() {
 				'textile_text'      => array(
 					'type'    => 'textarea',
 					'label'   => __( 'متن', 'ementash' ),
-					'default' => __( 'رطوبت‌دهنده سریع KX-327 برای صنایع نساجی.', 'ementash' ),
+					'default' => __( 'وتینگ ایجنت تخصصی صنایع نساجی KX-327؛ ترکننده سریع برای رنگرزی، سفیدگری، چاپ و تکمیل.', 'ementash' ),
 				),
 				'textile_packs'     => array(
 					'type'        => 'lines',

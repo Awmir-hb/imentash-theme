@@ -90,3 +90,17 @@ function ementash_preload_fonts() {
 	}
 }
 add_action( 'wp_head', 'ementash_preload_fonts', 1 );
+
+/**
+ * CSS بلوک‌های وردپرس (block-library حدود ۱۴۰ کیلوبایت، global-styles و classic-theme-styles) فقط جایی که
+ * محتوای صفحه واقعاً بلوک دارد. قالب کلاسیک است و بقیه صفحه‌ها (صفحه اصلی، فروشگاه، آرشیوها) به آن نیاز ندارند.
+ */
+function ementash_trim_block_styles() {
+	if ( is_singular() && has_blocks( get_queried_object_id() ) ) {
+		return;
+	}
+	foreach ( array( 'wp-block-library', 'wp-block-library-theme', 'global-styles', 'classic-theme-styles' ) as $handle ) {
+		wp_dequeue_style( $handle );
+	}
+}
+add_action( 'wp_enqueue_scripts', 'ementash_trim_block_styles', 100 );

@@ -17,7 +17,7 @@ if ( ! $ementash_post ) {
 $ementash_tag   = isset( $args['heading'] ) && 'h2' === $args['heading'] ? 'h2' : 'h3';
 $ementash_sizes = isset( $args['sizes'] ) ? (string) $args['sizes'] : '(max-width: 560px) 100vw, (max-width: 1000px) 50vw, 420px';
 
-// نوشته: دسته و تاریخ. برگه (در جستجو): فقط برچسب «برگه».
+// نوشته: دسته (برچسب روی عکس)، تاریخ و زمان مطالعه. برگه (در جستجو): فقط برچسب «برگه».
 if ( 'post' === $ementash_post->post_type ) {
 	$ementash_cat  = ementash_post_main_cat( $ementash_post->ID );
 	$ementash_chip = $ementash_cat ? $ementash_cat->name : '';
@@ -49,15 +49,16 @@ if ( 'post' === $ementash_post->post_type ) {
 				echo '<span class="em-ph" aria-hidden="true"></span>';
 			}
 			?>
+			<?php if ( '' !== $ementash_chip ) : ?>
+				<span class="em-post__cat"><?php echo ementash_bdi( $ementash_chip ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
+			<?php endif; ?>
 		</span>
 		<div class="em-post__body">
-			<?php if ( '' !== $ementash_chip || $ementash_date ) : ?>
+			<?php if ( $ementash_date ) : ?>
 				<span class="em-post__meta">
-					<?php if ( '' !== $ementash_chip ) : ?>
-						<span class="em-post__cat"><?php echo ementash_bdi( $ementash_chip ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
-					<?php endif; ?>
 					<?php if ( $ementash_date ) : ?>
 						<time datetime="<?php echo esc_attr( get_the_date( 'c', $ementash_post ) ); ?>"><?php echo ementash_bdi( get_the_date( '', $ementash_post ), true ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></time>
+						<span class="em-post__read"><?php echo esc_html( ementash_reading_time( $ementash_post ) ); ?></span>
 					<?php endif; ?>
 				</span>
 			<?php endif; ?>

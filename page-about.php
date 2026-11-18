@@ -26,6 +26,8 @@ if ( ! ementash_elementor_location( 'single' ) ) {
 		get_template_part( 'template-parts/about/story' );
 		get_template_part( 'template-parts/about/timeline' );
 		get_template_part( 'template-parts/about/credentials' );
+		// همان نوار افتخارات صفحه اصلی (تیتر و متن از Customizer).
+		get_template_part( 'template-parts/home/honors', null, array( 'id' => 'em-honors' ) );
 		get_template_part( 'template-parts/about/rd' );
 		get_template_part( 'template-parts/about/values' );
 	}

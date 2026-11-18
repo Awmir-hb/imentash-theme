@@ -3,7 +3,7 @@
  * نوار افتخارات (em_certificate با نوع «افتخار») روی زمینه سرمه‌ای.
  * در صفحه اصلی و شورت‌کد [ementash_honors] استفاده می‌شود؛ رفتار اسلایدر در assets/js/honors.js.
  *
- * $args (اختیاری، از شورت‌کد): title و text؛ null یعنی مقدار Customizer.
+ * $args (اختیاری): title و text (null یعنی مقدار Customizer)، id (شناسه بخش برای لینک #، مثل برگه درباره ما).
  *
  * @package ementash
  */
@@ -19,8 +19,9 @@ $ementash_title = isset( $args['title'] ) ? (string) $args['title'] : (string) e
 $ementash_text  = isset( $args['text'] ) ? (string) $args['text'] : (string) ementash_get( 'honors_text' );
 $ementash_uid   = wp_unique_id( 'em-honors-' );
 $ementash_label = '' !== $ementash_title ? $ementash_title : __( 'افتخارات', 'ementash' );
+$ementash_id    = isset( $args['id'] ) ? sanitize_html_class( $args['id'] ) : '';
 ?>
-<section class="em-section em-honors" data-em-honors<?php echo '' !== $ementash_title ? ' aria-labelledby="' . esc_attr( $ementash_uid ) . '-title"' : ' aria-label="' . esc_attr( $ementash_label ) . '"'; ?>>
+<section class="em-section em-honors"<?php echo '' !== $ementash_id ? ' id="' . esc_attr( $ementash_id ) . '"' : ''; ?> data-em-honors<?php echo '' !== $ementash_title ? ' aria-labelledby="' . esc_attr( $ementash_uid ) . '-title"' : ' aria-label="' . esc_attr( $ementash_label ) . '"'; ?>>
 	<div class="em-container">
 		<div class="em-head em-honors__head">
 			<div>
