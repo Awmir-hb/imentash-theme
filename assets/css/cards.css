@@ -27,6 +27,8 @@
 .em-pcard__img{position:relative;display:block;aspect-ratio:4/3;overflow:hidden;border-radius:calc(var(--radius-card) - var(--card-inset))}
 .em-pcard__img img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease-media)}
 .em-pcard:hover .em-pcard__img img{transform:scale(1.05)}
+/* عکس دسته به‌جای عکس محصول: بالای عکس (لوگو) دیده شود، پایینش بریده شود */
+.em-pcard__img img.em-cat-fallback{object-position:50% 0;transform-origin:50% 0}
 .em-pcard__body{flex:1;display:flex;flex-direction:column;padding:16px 18px 18px}
 .em-pcard__meta{display:flex;justify-content:space-between;gap:10px;margin-bottom:4px;font-size:var(--fs-xs);color:var(--muted-2)}
 .em-pcard__sku{font-weight:600;color:var(--blue)}

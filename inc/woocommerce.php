@@ -310,6 +310,12 @@ function ementash_product_placeholder( $product_id, $size = 'ementash-card', $at
 	}
 	$image = ementash_cat_image( $cat->term_id );
 	if ( $image ) {
+		// عکس دسته معمولاً مربع است و لوگو بالایش؛ سایز بریده‌شده ۴:۳ کارت لوگو را می‌برد،
+		// پس در کارت نسخه نبریده می‌آید و CSS بالای عکس را نگه می‌دارد (.em-cat-fallback).
+		if ( 'ementash-card' === $size ) {
+			$size = 'medium_large';
+		}
+		$attr['class'] = trim( ( isset( $attr['class'] ) ? $attr['class'] : '' ) . ' em-cat-fallback' );
 		return wp_get_attachment_image( $image, $size, false, $attr + array( 'alt' => '', 'loading' => 'lazy' ) );
 	}
 	return ementash_placeholder( $cat->term_id );
